@@ -22,7 +22,7 @@ namespace imgui {
 		void update() override;
 		bool getIsConnected() const override;
 
-		virtual void OnMessage(OpCode opcode, const void *data, int size);
+		virtual void OnMessage(OpCode opcode, const void *data, int size) override;
 
 	protected:
 		virtual void _sendFrame(const Frame& frame) override;

@@ -8,9 +8,9 @@
 #include "RemoteImGuiServer.h"
 
 #include "RemoteImGuiFrameBuilder.h"
+#include <cstdio>
 
 namespace imgui {
-
 	RemoteImGuiServer::~RemoteImGuiServer() {
 	}
 
@@ -54,37 +54,37 @@ namespace imgui {
 			}
 			else if (strstr((char *)data, "ImMouseMove")) {
 				int x, y, mouse_left, mouse_right;
-				if (sscanf_s((char *)data, "ImMouseMove=%d,%d,%d,%d", &x, &y, &mouse_left, &mouse_right) == 4) {
+				if (sscanf((char *)data, "ImMouseMove=%d,%d,%d,%d", &x, &y, &mouse_left, &mouse_right) == 4) {
 					_onImMouseMove(x, y, mouse_left, mouse_right);
 				}
 			}
 			else if (strstr((char *)data, "ImMousePress")) {
 				int l, r;
-				if (sscanf_s((char *)data, "ImMousePress=%d,%d", &l, &r) == 2) {
+				if (sscanf((char *)data, "ImMousePress=%d,%d", &l, &r) == 2) {
 					_onImMousePress(l, r);
 				}
 			}
 			else if (strstr((char *)data, "ImMouseWheelDelta")) {
 				float mouseWheelDelta;
-				if (sscanf_s((char *)data, "ImMouseWheelDelta=%f", &mouseWheelDelta) == 1) {
+				if (sscanf((char *)data, "ImMouseWheelDelta=%f", &mouseWheelDelta) == 1) {
 					_onImMouseWheelDelta(mouseWheelDelta);
 				}
 			}
 			else if (strstr((char *)data, "ImKeyDown")) {
 				int key, shift, ctrl;
-				if (sscanf_s((char *)data, "ImKeyDown=%d,%d,%d", &key, &shift, &ctrl) == 3) {
+				if (sscanf((char *)data, "ImKeyDown=%d,%d,%d", &key, &shift, &ctrl) == 3) {
 					_onImKeyDown(key, shift, ctrl);
 				}
 			}
 			else if (strstr((char *)data, "ImKeyUp")) {
 				int key;
-				if (sscanf_s((char *)data, "ImKeyUp=%d", &key) == 1) {
+				if (sscanf((char *)data, "ImKeyUp=%d", &key) == 1) {
 					_onImKeyUp(key);
 				}
 			}
 			else if (strstr((char *)data, "ImKeyPress")) {
 				unsigned int key;
-				if (sscanf_s((char *)data, "ImKeyPress=%d", &key) == 1)
+				if (sscanf((char *)data, "ImKeyPress=%d", &key) == 1)
 					_onImKeyPress(key);
 			}
 			else if (strstr((char *)data, "ImClipboard=")) {
