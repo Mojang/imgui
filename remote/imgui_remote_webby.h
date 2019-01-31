@@ -177,7 +177,7 @@ static int onDispatch(struct WebbyConnection *connection)
 		htmlStr += imgui_html[i];
 	}
 
-	WebbyBeginResponse(connection, 200, htmlStr.size(), NULL, 0);
+	WebbyBeginResponse(connection, 200, static_cast<int>(htmlStr.size()), NULL, 0);
 	WebbyWrite(connection, htmlStr.data(), htmlStr.size());
 	WebbyEndResponse(connection);
 
