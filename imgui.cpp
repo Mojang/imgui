@@ -6380,7 +6380,9 @@ void ImGui::PopStyleColor(int count)
     while (count > 0)
     {
         ImGuiColorMod& backup = g.ColorModifiers.back();
-        g.Style.Colors[backup.Col] = backup.BackupValue;
+        if (backup.Col >= 0 && backup.Col < ImGuiCol_COUNT) {
+            g.Style.Colors[backup.Col] = backup.BackupValue;
+        }
         g.ColorModifiers.pop_back();
         count--;
     }
