@@ -1288,7 +1288,7 @@ parseWebsocketFrame:
             connection->io_buf.used -= dataToSkip;
             connection->io_buf.max  -= dataToSkip;
             connection->io_data_left-= dataToSkip;
-            if (0 != scan_websocket_frame(&connection->io_buf, &connection->ws_frame))
+            if (0 == scan_websocket_frame(&connection->io_buf, &connection->ws_frame))
             {
                 goto parseWebsocketFrame;
             }

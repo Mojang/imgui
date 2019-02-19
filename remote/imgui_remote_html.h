@@ -1,4 +1,4 @@
-static const char *imgui_html[] = {R"imgui(<!DOCTYPE html>
+static const char *imgui_html[] = { R"imgui(<!DOCTYPE html>
 <html><head>
 <title>Remote ImGui</title>
 <meta charset="UTF-8">
@@ -7995,9 +7995,6 @@ R"imgui(on StartImgui( element, serveruri, targetwidth, targetheight, compressed
     if( !Detector.webgl ) Detector.addGetWebGLMessage();
 
     var gui = new dat.GUI();
-    var datgui = new ImguiGui();
-    var datgui_window = gui.add( datgui, 'window', datgui.windows );
-    datgui_window.onChange( onFocusWindow );
     var websocket, connecting, connected;
     var server;
 
@@ -8010,6 +8007,7 @@ R"imgui(on StartImgui( element, serveruri, targetwidth, targetheight, compressed
     var mouse = { x: 0, y: 0, l: 0, r: 0, w: 0, update: false };
     var curElem;
     var prev_data;
+    var readyToRender = false
 
     var camera_offset = { x: 0, y: 0 };
     var mouse_left = 0;
@@ -8024,12 +8022,12 @@ R"imgui(on StartImgui( element, serveruri, targetwidth, targetheight, compressed
 
     // camera
     var camera = new THREE.OrthographicCamera( 0, width, 0, height, -1, 1 );
-    camera.positi)imgui",
-R"imgui(on.z = 1;
+    camera.position.z = 1;
 
     // plane
     var scene_background = new THREE.Scene();
-    var plane = new THREE.Mesh( new THREE.PlaneBufferGeometry( targetwidth, targetheight ), new THREE.MeshBasicMaterial( { color: 0x72909A, side: THREE.DoubleSide }));
+    var plane = new THREE.Mesh( new THREE.Plane)imgui",
+R"imgui(BufferGeometry( targetwidth, targetheight ), new THREE.MeshBasicMaterial( { color: 0x72909A, side: THREE.DoubleSide }));
     plane.position.x = targetwidth/2;
     plane.position.y = targetheight/2;
     scene_background.add( plane );
@@ -8056,13 +8054,13 @@ R"imgui(on.z = 1;
     var MAX_DRAW_LISTS= 20;
     var geometries = [];
     var scenes = [];
-    var )imgui",
-R"imgui(scene;
+    var scene;
     var geometry;
     for(var i = 0; i < MAX_DRAW_LISTS; i++)
     {
         // scene
-        scene = new THREE.Scene();
+        scene = new THREE)imgui",
+R"imgui(.Scene();
         scenes.push(scene);
         geometry = new THREE.BufferGeometry();
         var MAX_TRIANGLES = 21844; // *3 ~= 65536
@@ -8075,13 +8073,16 @@ R"imgui(scene;
         geometry.offsets = [ { start: 0, index: 0, count: 0 } ];
         geometries.push(geometry);
 
-        var mesh = new THREE.Mesh( geometr)imgui",
-R"imgui(y, material );
+        var mesh = new THREE.Mesh( geometry, material );
         mesh.frustumCulled = false;
         scene.add( mesh );
     }
     geometry = null;
-    scene = null;
+    scene = )imgui",
+R"imgui(null;
+
+    let currentDrawList = []
+
     // geometry shortcuts
     var gindices;
     var gpositions;
@@ -8109,10 +8110,10 @@ R"imgui(y, material );
 
     elem.addEventListener( 'touchmove', onTouchMove, false );
     elem.addEventListener( 'touchstart', onTouchStart, false );
-    elem.)imgui",
-R"imgui(addEventListener( 'touchend', onTouchEnd, false );
+    elem.addEventListener( 'touchend', onTouchEnd, false );
 
-    window.addEventListener( 'keydown', onKeyDown, false );
+    window.addEventListener( 'keyd)imgui",
+R"imgui(own', onKeyDown, false );
     window.addEventListener( 'keyup', onKeyUp, false );
     window.addEventListener( 'keypress', onKeyPress, false );
     
@@ -8137,14 +8138,13 @@ R"imgui(addEventListener( 'touchend', onTouchEnd, false );
         websocket = new WebSocket( serveruri );
         websocket.binaryType = "arraybuffer";
         websocket.onopen = function( evt ) {
-    )imgui",
-R"imgui(        console.log( "Remote ImGui: Connected" );
+            console.log( "Remote ImGui: Connected" );
             clientactive = false;
-            connecting = false;
+  )imgui",
+R"imgui(          connecting = false;
             connected = true;
             websocket.send("ImInit")
             gclips.length = 0;
-            onRender();
         };
         websocket.onclose = function( evt ) {
             console.log( "Remote ImGui: Disconnected" );
@@ -8152,7 +8152,6 @@ R"imgui(        console.log( "Remote ImGui: Connected" );
             connecting = false;
             connected = false;
             gclips.length = 0;
-            onRender();
         };
         websocket.onmessage = function( evt ) {
             if( typeof evt.data == "string" ) {
@@ -8168,10 +8167,10 @@ R"imgui(        console.log( "Remote ImGui: Connected" );
                 var data;
                 if( compressed ) {
                     // log decompress time
-                   )imgui",
-R"imgui( //var t = performance.now();
+                    var t = performance.now();
                     data = lz4.decompress( new Uint8Array( evt.data ) ).buffer;
-                    //console.log("Decompress: " + (performance.now() - t));
+                    //cons)imgui",
+R"imgui(ole.log("Decompress: " + (performance.now() - t));
                 }
                 else
                     data = evt.data;
@@ -8191,10 +8190,10 @@ R"imgui( //var t = performance.now();
                         canvas.id     = "CursorLayer";
                         canvas.width  = w;
                         canvas.height = h;
- )imgui",
-R"imgui(                       var ctx = canvas.getContext( '2d' );
+                        var ctx = canvas.getContext( '2d' );
                         var imageData = ctx.getImageData( 0, 0, w,h );
-                        var buf = new ArrayBuffer( imageData.data.length );
+     )imgui",
+R"imgui(                   var buf = new ArrayBuffer( imageData.data.length );
                         var buf8 = new Uint8ClampedArray( buf );
                         var data = new Uint32Array( buf );
                         for( var i = 0; i < w*h; i++ )
@@ -8209,12 +8208,16 @@ R"imgui(                       var ctx = canvas.getContext( '2d' );
                         break;
                     // full frame data
                     case type.FRAME_KEY:
+                        var t = performance.now();
                         onMessage( stream );
-                       )imgui",
-R"imgui( prev_data = data;
+                        //console.log("Framekey: " + (performance.now() - t));
+                        prev_)imgui",
+R"imgui(data = data;
                         break;                    
                     // use previous frame to compose current frame
                     case type.FRAME_DIFF:
+                        var t = performance.now();
+                        
                         var buffer = new Uint8Array( data );
                         var prev_buffer = new Uint8Array( prev_data );
                         for( var i = 1; i < buffer.length; i++ ) {
@@ -8223,6 +8226,8 @@ R"imgui( prev_data = data;
                             }
                         }
                         onMessage( stream );
+
+                        //console.log("FrameDiff: " + (performance.now() - t));
                         prev_data = data;
                         break;
                 }
@@ -8232,15 +8237,14 @@ R"imgui( prev_data = data;
         websocket.onerror = function( evt ) {
             console.log( "ERROR: " + evt.data );
             clientactive = false;
-            connecting = false;
+           )imgui",
+R"imgui( connecting = false;
             connected = false;
             gclips.length = 0;
-            onRender();
         };
     }
 
-    function onWindowResiz)imgui",
-R"imgui(e() {
+    function onWindowResize() {
         width = window.innerWidth;
         height = window.innerHeight; 
         renderer.setSize( window.innerWidth, window.innerHeight );
@@ -8264,14 +8268,14 @@ R"imgui(e() {
         if( event.button == 2 ) mouse_right = 1;
         if( clientactive )
         {
-                websocket.send("ImMousePress=" + mouse_left + "," + mouse_right);
+                websocket.send("ImMousePress=" + mouse_left + "," + mo)imgui",
+R"imgui(use_right);
         }
     }    
 
     function onMouseUp( event ) {
         if( !event ) event = window.event;
-        event.pre)imgui",
-R"imgui(ventDefault();
+        event.preventDefault();
         if( event.button == 0 ) mouse_left = 0;
         if( event.button == 2 ) mouse_right = 0;
         if (clientactive)
@@ -8302,12 +8306,12 @@ var touchStarted = false, // detect if a touch event is sarted
             clearInterval(ticker);
             touchInertial = false;
         }
-        // caching the current x
+        // caching the )imgui",
+R"imgui(current x
         cachedX = currX = pointer.pageX;
         // caching the current y
         cachedY = currY = pointer.pageY;
-  )imgui",
-R"imgui(      // a touch event is detected      
+        // a touch event is detected      
         websocket.send("ImMouseMove=" + currX + "," + currY + ",0,0");
 
         setTimeout(function (){
@@ -8330,11 +8334,11 @@ R"imgui(      // a touch event is detected
       
     
     }    
-    var amplitude,initialVelocity, step,ticker,position,timeConstant = 325,scaleFactor = 2, updateInterval = 20;
+    var amplitude,initialVe)imgui",
+R"imgui(locity, step,ticker,position,timeConstant = 325,scaleFactor = 2, updateInterval = 20;
     function onTouchEnd( event ) 
     {
- )imgui",
-R"imgui(       if( !event ) event = window.event;
+        if( !event ) event = window.event;
         event.preventDefault();
         // here we can consider finished the touch event
         if(touchDragging)
@@ -8359,10 +8363,10 @@ R"imgui(       if( !event ) event = window.event;
         }
         else if(touchStarted)
         {
-            clearTimeout(touchPressTimeout);
+)imgui",
+R"imgui(            clearTimeout(touchPressTimeout);
             //console.log("ontouchend ImMousePress=0,0");
-            websocket.se)imgui",
-R"imgui(nd("ImMousePress=0,0");
+            websocket.send("ImMousePress=0,0");
         }
         touchStarted = false;
         touchDragging = false;
@@ -8384,8 +8388,7 @@ R"imgui(nd("ImMousePress=0,0");
                 var diffY = (currY - cachedY) * 5;
                 cachedY = currY;
                 initialVelocity = diffY;
-                //websocket.send("ImMouseMove=" + currX + "," + currY + ",1,0");        
-                console.log("ImMouseWheelDelta=" + diffY);
+                //websocket.send("ImMouseMove=" + currX + "," + currY + ",1,0");
                 websocket.send("ImMouseWheelDelta=" + diffY);
              }
         }   
@@ -8393,9 +8396,9 @@ R"imgui(nd("ImMousePress=0,0");
 
     function onMouseWheel( event ) {
         if( !event ) event = window.event;
-        event.preventDefault();
-        //if( event.which == 1 ) mouse_wheel += event)imgui",
-R"imgui(.wheelDelta;
+        event.preventDefa)imgui",
+R"imgui(ult();
+        //if( event.which == 1 ) mouse_wheel += event.wheelDelta;
         if( clientactive )
         {
             var delta=event.detail? event.detail*(-120)/4 : event.wheelDelta
@@ -8425,28 +8428,18 @@ R"imgui(.wheelDelta;
         if(key == 65 || key == 67 || key == 88 || key == 86) // 'A', 'C', 'X', 'V'
         {
             if(osxCommandKey || event.ctrlKey)
-                return true;
+                retu)imgui",
+R"imgui(rn true;
         }
     }
     
-    function onKeyDown( event )imgui",
-R"imgui() {
+    function onKeyDown( event ) {
         if( !event ) event = window.event;
         
-        // do not prevent paste
-        if( event.which == 86 && (event.ctrlKey || osxCommandKey )) // CTRL+V
+        event.preventDefault();
+        if( clientactive )
         {
-            return;
-        }
-        // prevent special keys
-        if(isSpecialKey(event))
-        {
-            event.preventDefault();
-            if( clientactive )
-            {
-                var isCtrl =  (osxCommandKey || event.ctrlKey)?1:0;
-                websocket.send( "ImKeyDown=" + event.which + "," + ( event.shiftKey?1:0 ) + "," + isCtrl );
-            }
+            websocket.send( "ImKeyDown=" + event.which);
         }
     }
 
@@ -8454,20 +8447,15 @@ R"imgui() {
         if( !event ) event = window.event;
         if( event.which != 0 )
         {
-            if(osxCommandKey || isSpecialKey(event))
+            if( clientactive )
             {
-                osxCommandKey = false;
-                if( clientactive )
-                {
-                    websocket.send( "ImKeyUp=" + event.which );
-                }
+                websocket.send( "ImKeyUp=" + event.which );
             }
         }
     }
 
     function onKeyPress( event ) {
-        if( !event ) event = wind)imgui",
-R"imgui(ow.event;
+        if( !event ) event = window.event;
         if( clientactive )
         {
             websocket.send( "ImKeyPress=" + event.charCode);
@@ -8481,88 +8469,112 @@ R"imgui(ow.event;
             if( clientactive ) {
                 websocket.send( "ImClipboard=" + event.clipboardData.getData('Text') );
                 setTimeout(function(){
-                websocket.send( "ImKeyDown=86,0,1" )}, 100);
+                websoc)imgui",
+R"imgui(ket.send( "ImKeyDown=86,0,1" )}, 100);
             }
         }
     }
 
     function onMessage( data ) {
-        if(!onRenderBackground())
-            return;
-        glistcount= data.readUint32();
+        if (!clientactive) {
+            return
+        }
+        
+        glistcount = data.readUint32();
+
+        let newDrawList = []
+
         for(var l = 0 ; l < glistcount; l++)
         {
-            geometry = geometries[l];
-            gcmdcount = data.readUint32();
-            gvtxcount = data.readUint32();
-            gidxcount = data.readUint32();
-            gindices = geometry.attributes.index.array;
-            gpositions = geometry.attributes.position.array;
-            guvs = geometry.attributes.uv.ar)imgui",
-R"imgui(ray;
-            gcolors = geometry.attributes.color.array;
-            galphas = geometry.attributes.alpha.array;
-            gclips.length = 0;
-            curElem = 0;
+            let drawCommand = {}
+            geometry = geometries[l]
+            drawCommand.gcmdcount = data.readUint32();
+            drawCommand.gvtxcount = data.readUint32();
+            drawCommand.gidxcount = data.readUint32();
+            drawCommand.gindices = geometry.attributes.index.array;
+            drawCommand.gpositions = geometry.attributes.position.array;
+            drawCommand.guvs = geometry.attributes.uv.array;
+            drawCommand.gcolors = geometry.attributes.color.array;
+            drawCommand.galphas = geometry.attributes.alpha.array;
+            drawCommand.gclips = []
+            drawCommand.gclips.length = 0;
+            drawCommand.curElem = 0;
             // command lists
-            for( var i = 0; i < gcmdcount; i++ ) {
+            )imgui",
+R"imgui(for( var i = 0; i < drawCommand.gcmdcount; i++ ) {
                 var num = data.readUint32();
                 var x = data.readFloat32();
                 var y = data.readFloat32();
                 var w = data.readFloat32();
                 var h = data.readFloat32();
-                gclips.push( { start: curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
-                curElem+= num;
+                drawCommand.gclips.push( { start: drawCommand.curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
+                drawCommand.curElem+= num;
             }
             // all vertices
-            for( var i = 0; i < gvtxcount; i++ ) {
-                addVtx( data, i )
+            for( var i = 0; i < drawCommand.gvtxcount; i++ ) {
+                addVtx( drawCommand, data, i )
             }
-            for( var i = 0; i < gidxcount; i++ ) {
-                addIdx( data, i )
+            for( var i = 0; i < drawCommand.gidxcount; i++ ) {
+                addIdx( drawCommand, data, i )
             }
             geometry.attributes.position.needsUpdate = true;
             geometry.attributes.uv.needsUpdate = true;
-            geometry.attributes.color.needsUpdate = t)imgui",
-R"imgui(rue;
+            geometry.attributes.color.needsUpdate = true;
             geometry.attributes.alpha.needsUpdate = true;
-            geometry.attributes.index.needsUpdate = true;
-            // update render and dat.gui
-            onRenderTriangles(scenes[l]);
+            geometry.attributes.index.needsUpdate =)imgui",
+R"imgui( true;
+
+            newDrawList.push(drawCommand)
         }
-        onUpdateGui();
+
+        currentDrawList = newDrawList.slice()
+        readyToRender = true
     }
 
-    function addVtx( data, idx ) {
+    function addVtx( drawCommand, data, idx ) {
         var vidx = idx*3;
         var uidx = idx*2;
         var cidx = idx*3;
         var aidx = idx;
-        gpositions[ vidx+0 ] = data.readInt16AsFloat32();
-        gpositions[ vidx+1 ] = data.readInt16AsFloat32();
-        gpositions[ vidx+2 ] = 0;
-        guvs      [ uidx+0 ] = data.readInt16pAsFloat32();
-        guvs      [ uidx+1 ] = 1 - data.readInt16pAsFloat32();
-        gcolors   [ cidx+0 ] = data.readUint8AsFloat32();
-        gcolors   [ cidx+1 ] = data.readUint8AsFloat32();
-        gcolors   [ cidx+2 ] = data.readUint8AsFloat32();
-        galphas   [ aidx   ] = data.readUint8AsFloat32();
+        drawCommand.gpositions[ vidx+0 ] = data.readInt16AsFloat32();
+        drawCommand.gpositions[ vidx+1 ] = data.readInt16AsFloat32();
+        drawCommand.gpositions[ vidx+2 ] = 0;
+        drawCommand.guvs      [ uidx+0 ] = data.readInt16pAsFloat32();
+        drawCommand.guvs      [ uidx+1 ] = 1 - data.readInt16pAsFloat32();
+        drawCommand.gcolors   [ cidx+0 ] = data.readUint8AsFloat32();
+        drawCommand.gcolors   [ cidx+1 ] = data.readUint8AsFloat32();
+        drawCommand.gcolors   [ cidx+2 ] = data.readUint8AsFloat32();
+        drawCommand.galphas   [ aidx   ] = data.readUint8AsFloat32();
     }    
 
-    function addIdx(data, idx)
+    function addIdx(drawCommand, data, idx)
     {
-        gindices [ idx ] = data.readUint16();         
+        drawCommand.gindices [ idx ] = data.readUint16(); )imgui",
+R"imgui(        
     }
 
     function onRender() {
-
-  )imgui",
-R"imgui(      // Use this to only render selected window
-        //var idx = ( datgui.window == 'All' ) ? -1 : parseInt( datgui.window ) - 1;
         if(onRenderBackground())
         {
-            //onRenderTriangles();            
+            for(var l in currentDrawList)
+            {
+                var drawCommand = currentDrawList[l]
+                gcmdcount =  drawCommand.gcmdcount
+                gvtxcount =  drawCommand.gvtxcount
+                gidxcount =  drawCommand.gidxcount
+                gindices =  drawCommand.gindices
+                gpositions =  drawCommand.gpositions
+                guvs =  drawCommand.guvs
+                gcolors =  drawCommand.gcolors
+                galphas =  drawCommand.galphas
+                gclips =  drawCommand.gclips
+                curElem = drawCommand.curElem
+                geometry = geometries[l]
+                onRenderTriangles(scenes[l]);
+            }
         }
+
+        requestAnimationFrame(onRender);
     }
 
     function onRenderBackground()
@@ -8570,7 +8582,8 @@ R"imgui(      // Use this to only render selected window
         if (clientactive) {
             renderer.enableScissorTest(false);
             renderer.setClearColor( 0x72909A );
-            renderer.clear( true, true, false );
+            renderer.clear)imgui",
+R"imgui(( true, true, false );
             // render background (visual reference of device canvas)
             renderer.render( scene_background, camera );
             return true;
@@ -8589,8 +8602,7 @@ R"imgui(      // Use this to only render selected window
     {
         camera.position.x = camera_offset.x;
         camera.position.y = camera_offset.y;
-        renderer.enableScissor)imgui",
-R"imgui(Test(true);
+        renderer.enableScissorTest(true);
         // render command lists (or selected one)
         for( var i = 0; i < gclips.length; i++ )
         {
@@ -8600,7 +8612,8 @@ R"imgui(Test(true);
 
             renderer.setScissor(gclips[ i ].clip.x,
                                 (height - gclips[ i ].clip.w) ,
-                                (gclips[ i ].clip.z - gclips[ i ].clip.x),
+         )imgui",
+R"imgui(                       (gclips[ i ].clip.z - gclips[ i ].clip.x),
                                 (gclips[ i ].clip.w - gclips[ i ].clip.y)
                            );
             
@@ -8610,15 +8623,7 @@ R"imgui(Test(true);
     }
 
     function onUpdateGui() {
-        if( datgui.windows.length != ( gcmdcount+1 ) ) {
-            datgui.windows = [ 'Origin' ];
-            for ( var i = 0; i < gcmdcount; i++ )
-                datgui.windows[ i+1 ] = i+1;
-            gui.remove( datgui_window );
-            datgui_window = gui.add( datgui, 'wind)imgui",
-R"imgui(ow', datgui.windows );
-            datgui_window.onChange( onFocusWindow );
-        }
+
     }
 
     function onFocusWindow( value ) {
@@ -8652,7 +8657,8 @@ body {
     padding: 16px;
     background: #F7F7F7;
 }
-.form-style-6 h1{
+.)imgui",
+R"imgui(form-style-6 h1{
     background: #409FC1;
     padding: 15px 0;
     font-size: 100%;
@@ -8662,8 +8668,7 @@ body {
     margin: -16px -16px 16px -16px;
 }
 .form-style-6 input[type="text"],
-.for)imgui",
-R"imgui(m-style-6 input[type="date"],
+.form-style-6 input[type="date"],
 .form-style-6 input[type="datetime"],
 .form-style-6 input[type="email"],
 .form-style-6 input[type="number"],
@@ -8690,13 +8695,13 @@ R"imgui(m-style-6 input[type="date"],
     text-align: center;
     font: 100% Arial, Helvetica, sans-serif;
 }
-.form-style-6 input[type="text"]:focus,
+.form-style-6 input[type)imgui",
+R"imgui(="text"]:focus,
 .form-style-6 input[type="date"]:focus,
 .form-style-6 input[type="datetime"]:focus,
 .form-style-6 input[type="email"]:focus,
 .form-style-6 input[type="number"]:focus,
-.form-style-6 input[type="search"]:focus)imgui",
-R"imgui(,
+.form-style-6 input[type="search"]:focus,
 .form-style-6 input[type="time"]:focus,
 .form-style-6 input[type="url"]:focus,
 .form-style-6 textarea:focus,
@@ -8733,7 +8738,8 @@ R"imgui(,
 <style>
     #imgui_container
     {
-        touch-action: none; /* Disable touch behaviors, like pan and zoom */
+        touch-a)imgui",
+R"imgui(ction: none; /* Disable touch behaviors, like pan and zoom */
     }
     body 
     {
@@ -8745,13 +8751,11 @@ R"imgui(,
 
 </head>
 <body>
-    <div id="imgui_container"></d)imgui",
-R"imgui(iv>
+    <div id="imgui_container"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-			setTimeout(function(){ StartImgui( document.getElementById( 'imgui_container' ), "ws://" + window.location.hostname + ":" + window.location.port, 1920, 1080, true ); }, 1000);
-            
+            StartImgui( document.getElementById( 'imgui_container' ), "ws://" + window.location.hostname + ":" + window.location.port, 1920, 1080, true );
         });
 
         document.ontouchmove = function(event)
@@ -8762,4 +8766,4 @@ R"imgui(iv>
 
 </body>
 </html>
-)imgui"};
+)imgui" };
