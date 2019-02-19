@@ -15,7 +15,6 @@
 #include <streambuf>
 
 #define IMGUI_REMOTE_KEY_FRAME    60  // send keyframe every 30 frames
-#define IMGUI_REMOTE_INPUT_FRAMES 60 // input valid during 120 frames
 
 namespace ImGui {
 
@@ -76,6 +75,7 @@ struct WebSocketServer : public IWebSocketServer
 	std::vector<unsigned char> Packet;
 	std::vector<unsigned char> PrevPacket;
 	RemoteInput Input;
+	std::atomic<uint8_t> ClearInput = { 0 };
 
 	WebSocketServer()
 	{
@@ -116,6 +116,11 @@ struct WebSocketServer : public IWebSocketServer
     }
 	virtual void OnMessage(OpCode opcode, const void *data, int size)
 	{
+		if(ClearInput == 1) {
+			Input.MouseWheelDelta = 0;
+			ClearInput = 0;
+		}
+
 		switch (opcode)
 		{
 			// Text message
@@ -167,14 +172,11 @@ struct WebSocketServer : public IWebSocketServer
 				}
 				else if (strstr((char *)data, "ImKeyDown"))
 				{
-					int key, shift, ctrl;
-					if (sscanf((char *)data, "ImKeyDown=%d,%d,%d", &key, &shift, &ctrl) == 3)
+					int key;
+					if (sscanf((char *)data, "ImKeyDown=%d", &key) == 1)
 					{
 						//update key states
 						FrameReceived = Frame;
-						Input.KeyShift = shift > 0;
-						Input.KeyCtrl = ctrl > 0;
-                        mapRemoteKey(&key, Input.KeyCtrl);
 						Input.KeysDown[key] = true;
 					}
 				}
@@ -186,8 +188,6 @@ struct WebSocketServer : public IWebSocketServer
 						//update key states
 						FrameReceived = Frame;
 						Input.KeysDown[key] = false;
-						Input.KeyShift = false;
-						Input.KeyCtrl = false;
 					}
 				}
 				else if (strstr((char *)data, "ImKeyPress"))
@@ -379,15 +379,13 @@ bool RemoteGetInput(RemoteInput & input)
     bool res = false;
 	if (GServer.ClientActive)
 	{
-        
-		if (GServer.Frame - GServer.FrameReceived < IMGUI_REMOTE_INPUT_FRAMES)
+		if (GServer.ClearInput == 0)
 		{
 			input = GServer.Input;
-            res = true;
+			GServer.ClearInput = 1;
+			res = true;
 		}
 	}
-	memset(GServer.Input.KeysDown, 0, 256*sizeof(bool));
-	GServer.Input.MouseWheelDelta = 0;
 	return res;
 }
 
