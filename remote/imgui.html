@@ -7287,7 +7287,6 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 
     if( !Detector.webgl ) Detector.addGetWebGLMessage();
 
-    var gui = new dat.GUI();
     var websocket, connecting, connected;
     var server;
 
@@ -7712,24 +7711,9 @@ var touchStarted = false, // detect if a touch event is sarted
     }
 
     function translateKey(keyCode) {
-        //Backspace
-        if(keyCode == 8) {
-            return 11; //ImGuiKey_Backspace
-        }
-        
-        //Delete
-        else if(keyCode == 46) {
-            return 10; //ImGuiKey_Delete
-        }
-
-        //End
-        else if(keyCode == 35) {
-            return 8; //ImGuiKey_End
-        }
-
-        //Home
-        else if(keyCode == 36) {
-            return 7; //ImGuiKey_Home
+        //Tab
+        if(keyCode == 9) {
+            return 0; //ImGuiKey_Tab
         }
 
         //Left
@@ -7737,14 +7721,14 @@ var touchStarted = false, // detect if a touch event is sarted
             return 1; //ImGuiKey_LeftArrow
         }
 
-        //Up
-        else if(keyCode == 38) {
-            return 3; //ImGuiKey_UpArrow
-        }
-
         //Right
         else if(keyCode == 39) {
             return 2; //ImGuiKey_RightArrow
+        }
+
+        //Up
+        else if(keyCode == 38) {
+            return 3; //ImGuiKey_UpArrow
         }
 
         //Down
@@ -7752,9 +7736,54 @@ var touchStarted = false, // detect if a touch event is sarted
             return 4; //ImGuiKey_DownArrow
         }
 
-        //Tab
-        else if(keyCode == 9) {
-            return 0; //ImGuiKey_Tab
+        //PageUp
+        else if(keyCode == 33) {
+            return 5; //ImGuiKey_PageUp
+        }
+
+        //PageDown
+        else if(keyCode == 34) {
+            return 6; //ImGuiKey_PageDown
+        }
+
+        //Home
+        else if(keyCode == 36) {
+            return 7; //ImGuiKey_Home
+        }
+
+        //End
+        else if(keyCode == 35) {
+            return 8; //ImGuiKey_End
+        }
+
+        //Insert
+        else if(keyCode == 45) {
+            return 9; //ImGuiKey_Insert
+        }
+
+        //Delete
+        else if(keyCode == 46) {
+            return 10; //ImGuiKey_Delete
+        }
+
+        //Backspace
+        else if(keyCode == 8) {
+            return 11; //ImGuiKey_Backspace
+        }
+
+        //Space
+        else if(keyCode == 32) {
+            return 12; //ImGuiKey_Space
+        }
+
+        //Enter
+        else if(keyCode == 13) {
+            return 13; //ImGuiKey_Enter
+        }
+
+        //Escape
+        else if(keyCode == 27) {
+            return 14; //ImGuiKey_Escape
         }
 
         //A
@@ -7787,17 +7816,21 @@ var touchStarted = false, // detect if a touch event is sarted
             return 20; //ImGuiKey_Z
         }
 
-        //Ctrl
-        else if(keyCode == 16) {
+        //Shift
+        else if(keyCode == 17) {
             return 21;
         }
 
-        //Shift
-        else if(keyCode == 17) {
+        //Ctrl
+        else if(keyCode == 16) {
             return 22;
         }
 
         else {
+            if(keyCode <= 22) {
+                return 23; //Invalid Key
+            }
+
             return keyCode;
         }
     }
