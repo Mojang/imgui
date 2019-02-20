@@ -7287,7 +7287,6 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 
     if( !Detector.webgl ) Detector.addGetWebGLMessage();
 
-    var gui = new dat.GUI();
     var websocket, connecting, connected;
     var server;
 
@@ -7710,24 +7709,154 @@ var touchStarted = false, // detect if a touch event is sarted
                 return true;
         }
     }
+
+    function translateKey(keyCode) {
+        //Tab
+        if(keyCode == 9) {
+            return 0; //ImGuiKey_Tab
+        }
+
+        //Left
+        else if(keyCode == 37) {
+            return 1; //ImGuiKey_LeftArrow
+        }
+
+        //Right
+        else if(keyCode == 39) {
+            return 2; //ImGuiKey_RightArrow
+        }
+
+        //Up
+        else if(keyCode == 38) {
+            return 3; //ImGuiKey_UpArrow
+        }
+
+        //Down
+        else if(keyCode == 40) {
+            return 4; //ImGuiKey_DownArrow
+        }
+
+        //PageUp
+        else if(keyCode == 33) {
+            return 5; //ImGuiKey_PageUp
+        }
+
+        //PageDown
+        else if(keyCode == 34) {
+            return 6; //ImGuiKey_PageDown
+        }
+
+        //Home
+        else if(keyCode == 36) {
+            return 7; //ImGuiKey_Home
+        }
+
+        //End
+        else if(keyCode == 35) {
+            return 8; //ImGuiKey_End
+        }
+
+        //Insert
+        else if(keyCode == 45) {
+            return 9; //ImGuiKey_Insert
+        }
+
+        //Delete
+        else if(keyCode == 46) {
+            return 10; //ImGuiKey_Delete
+        }
+
+        //Backspace
+        else if(keyCode == 8) {
+            return 11; //ImGuiKey_Backspace
+        }
+
+        //Space
+        else if(keyCode == 32) {
+            return 12; //ImGuiKey_Space
+        }
+
+        //Enter
+        else if(keyCode == 13) {
+            return 13; //ImGuiKey_Enter
+        }
+
+        //Escape
+        else if(keyCode == 27) {
+            return 14; //ImGuiKey_Escape
+        }
+
+        //A
+        else if(keyCode == 65) {
+            return 15; //ImGuiKey_A
+        }
+
+        //C
+        else if(keyCode == 67) {
+            return 16; //ImGuiKey_C
+        }
+
+        //V
+        else if(keyCode == 86) {
+            return 17; //ImGuiKey_V
+        }
+
+        //X
+        else if(keyCode == 88) {
+            return 18; //ImGuiKey_X
+        }
+
+        //Y
+        else if(keyCode == 89) {
+            return 19; //ImGuiKey_Y
+        }
+
+        //Z
+        else if(keyCode == 90) {
+            return 20; //ImGuiKey_Z
+        }
+
+        //Shift
+        else if(keyCode == 17) {
+            return 21;
+        }
+
+        //Ctrl
+        else if(keyCode == 16) {
+            return 22;
+        }
+
+        else {
+            if(keyCode <= 22) {
+                return 23; //Invalid Key
+            }
+
+            return keyCode;
+        }
+    }
     
     function onKeyDown( event ) {
         if( !event ) event = window.event;
-        
-        event.preventDefault();
+
+        //Prevent special keys
+        if(event.which == 9) {
+            event.preventDefault();
+        }
+
         if( clientactive )
         {
-            websocket.send( "ImKeyDown=" + event.which);
+            websocket.send( "ImKeyDown=" + translateKey(event.which));
         }
     }
 
     function onKeyUp( event ) {
         if( !event ) event = window.event;
+        event.preventDefault();
         if( event.which != 0 )
         {
             if( clientactive )
             {
-                websocket.send( "ImKeyUp=" + event.which );
+                websocket.send( "ImKeyUp=" + translateKey(event.which) );
             }
         }
     }

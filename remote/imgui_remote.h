@@ -16,6 +16,12 @@
 
 #define IMGUI_REMOTE_KEY_FRAME    60  // send keyframe every 30 frames
 
+//Keys set in KeysDown to represent special keys
+enum class ImGuiKeyCode : size_t {
+	Control = 21,
+	Shift = 22
+};
+
 namespace ImGui {
 
 //------------------
