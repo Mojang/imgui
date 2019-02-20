@@ -7710,24 +7710,120 @@ var touchStarted = false, // detect if a touch event is sarted
                 return true;
         }
     }
+
+    function translateKey(keyCode) {
+        //Backspace
+        if(keyCode == 8) {
+            return 11; //ImGuiKey_Backspace
+        }
+        
+        //Delete
+        else if(keyCode == 46) {
+            return 10; //ImGuiKey_Delete
+        }
+
+        //End
+        else if(keyCode == 35) {
+            return 8; //ImGuiKey_End
+        }
+
+        //Home
+        else if(keyCode == 36) {
+            return 7; //ImGuiKey_Home
+        }
+
+        //Left
+        else if(keyCode == 37) {
+            return 1; //ImGuiKey_LeftArrow
+        }
+
+        //Up
+        else if(keyCode == 38) {
+            return 3; //ImGuiKey_UpArrow
+        }
+
+        //Right
+        else if(keyCode == 39) {
+            return 2; //ImGuiKey_RightArrow
+        }
+
+        //Down
+        else if(keyCode == 40) {
+            return 4; //ImGuiKey_DownArrow
+        }
+
+        //Tab
+        else if(keyCode == 9) {
+            return 0; //ImGuiKey_Tab
+        }
+
+        //A
+        else if(keyCode == 65) {
+            return 15; //ImGuiKey_A
+        }
+
+        //C
+        else if(keyCode == 67) {
+            return 16; //ImGuiKey_C
+        }
+
+        //V
+        else if(keyCode == 86) {
+            return 17; //ImGuiKey_V
+        }
+
+        //X
+        else if(keyCode == 88) {
+            return 18; //ImGuiKey_X
+        }
+
+        //Y
+        else if(keyCode == 89) {
+            return 19; //ImGuiKey_Y
+        }
+
+        //Z
+        else if(keyCode == 90) {
+            return 20; //ImGuiKey_Z
+        }
+
+        //Ctrl
+        else if(keyCode == 16) {
+            return 21;
+        }
+
+        //Shift
+        else if(keyCode == 17) {
+            return 22;
+        }
+
+        else {
+            return keyCode;
+        }
+    }
     
     function onKeyDown( event ) {
         if( !event ) event = window.event;
-        
-        event.preventDefault();
+
+        //Prevent special keys
+        if(event.which == 9) {
+            event.preventDefault();
+        }
+
         if( clientactive )
         {
-            websocket.send( "ImKeyDown=" + event.which);
+            websocket.send( "ImKeyDown=" + translateKey(event.which));
         }
     }
 
     function onKeyUp( event ) {
         if( !event ) event = window.event;
+        event.preventDefault();
         if( event.which != 0 )
         {
             if( clientactive )
             {
-                websocket.send( "ImKeyUp=" + event.which );
+                websocket.send( "ImKeyUp=" + translateKey(event.which) );
             }
         }
     }

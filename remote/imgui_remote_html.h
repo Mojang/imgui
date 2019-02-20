@@ -8432,24 +8432,122 @@ R"imgui(ult();
 R"imgui(rn true;
         }
     }
+
+    function translateKey(keyCode) {
+        //Backspace
+        if(keyCode == 8) {
+            return 11; //ImGuiKey_Backspace
+        }
+        
+        //Delete
+        else if(keyCode == 46) {
+            return 10; //ImGuiKey_Delete
+        }
+
+        //End
+        else if(keyCode == 35) {
+            return 8; //ImGuiKey_End
+        }
+
+        //Home
+        else if(keyCode == 36) {
+            return 7; //ImGuiKey_Home
+        }
+
+        //Left
+        else if(keyCode == 37) {
+            return 1; //ImGuiKey_LeftArrow
+        }
+
+        //Up
+        else if(keyCode == 38) {
+            return 3; //ImGuiKey_UpArrow
+        }
+
+        //Right
+        else if(keyCode == 39) {
+            return 2; //ImGuiKey_RightArrow
+        }
+
+        //Down
+        else if(keyCode == 40) {
+            return 4; //ImGuiKey_DownArrow
+        }
+
+        //Tab
+        else if(keyCode == 9) {
+            return 0; //ImGuiKey_Tab
+        }
+
+        //A
+        else if(keyCode == 65) {
+            )imgui",
+R"imgui(return 15; //ImGuiKey_A
+        }
+
+        //C
+        else if(keyCode == 67) {
+            return 16; //ImGuiKey_C
+        }
+
+        //V
+        else if(keyCode == 86) {
+            return 17; //ImGuiKey_V
+        }
+
+        //X
+        else if(keyCode == 88) {
+            return 18; //ImGuiKey_X
+        }
+
+        //Y
+        else if(keyCode == 89) {
+            return 19; //ImGuiKey_Y
+        }
+
+        //Z
+        else if(keyCode == 90) {
+            return 20; //ImGuiKey_Z
+        }
+
+        //Ctrl
+        else if(keyCode == 16) {
+            return 21;
+        }
+
+        //Shift
+        else if(keyCode == 17) {
+            return 22;
+        }
+
+        else {
+            return keyCode;
+        }
+    }
     
     function onKeyDown( event ) {
         if( !event ) event = window.event;
-        
-        event.preventDefault();
+
+        //Prevent special keys
+        if(event.which == 9) {
+            event.preventDefault();
+        }
+
         if( clientactive )
         {
-            websocket.send( "ImKeyDown=" + event.which);
-        }
+            websocket.send( "ImKeyDown=" + translateKey(event.which));
+     )imgui",
+R"imgui(   }
     }
 
     function onKeyUp( event ) {
         if( !event ) event = window.event;
+        event.preventDefault();
         if( event.which != 0 )
         {
             if( clientactive )
             {
-                websocket.send( "ImKeyUp=" + event.which );
+                websocket.send( "ImKeyUp=" + translateKey(event.which) );
             }
         }
     }
@@ -8469,8 +8567,7 @@ R"imgui(rn true;
             if( clientactive ) {
                 websocket.send( "ImClipboard=" + event.clipboardData.getData('Text') );
                 setTimeout(function(){
-                websoc)imgui",
-R"imgui(ket.send( "ImKeyDown=86,0,1" )}, 100);
+                websocket.send( "ImKeyDown=86,0,1" )}, 100);
             }
         }
     }
@@ -8480,7 +8577,8 @@ R"imgui(ket.send( "ImKeyDown=86,0,1" )}, 100);
             return
         }
         
-        glistcount = data.readUint32();
+        glistcount = data.readU)imgui",
+R"imgui(int32();
 
         let newDrawList = []
 
@@ -8500,12 +8598,12 @@ R"imgui(ket.send( "ImKeyDown=86,0,1" )}, 100);
             drawCommand.gclips.length = 0;
             drawCommand.curElem = 0;
             // command lists
-            )imgui",
-R"imgui(for( var i = 0; i < drawCommand.gcmdcount; i++ ) {
+            for( var i = 0; i < drawCommand.gcmdcount; i++ ) {
                 var num = data.readUint32();
                 var x = data.readFloat32();
                 var y = data.readFloat32();
-                var w = data.readFloat32();
+                v)imgui",
+R"imgui(ar w = data.readFloat32();
                 var h = data.readFloat32();
                 drawCommand.gclips.push( { start: drawCommand.curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
                 drawCommand.curElem+= num;
@@ -8521,8 +8619,7 @@ R"imgui(for( var i = 0; i < drawCommand.gcmdcount; i++ ) {
             geometry.attributes.uv.needsUpdate = true;
             geometry.attributes.color.needsUpdate = true;
             geometry.attributes.alpha.needsUpdate = true;
-            geometry.attributes.index.needsUpdate =)imgui",
-R"imgui( true;
+            geometry.attributes.index.needsUpdate = true;
 
             newDrawList.push(drawCommand)
         }
@@ -8532,7 +8629,8 @@ R"imgui( true;
     }
 
     function addVtx( drawCommand, data, idx ) {
-        var vidx = idx*3;
+        va)imgui",
+R"imgui(r vidx = idx*3;
         var uidx = idx*2;
         var cidx = idx*3;
         var aidx = idx;
@@ -8549,8 +8647,7 @@ R"imgui( true;
 
     function addIdx(drawCommand, data, idx)
     {
-        drawCommand.gindices [ idx ] = data.readUint16(); )imgui",
-R"imgui(        
+        drawCommand.gindices [ idx ] = data.readUint16();         
     }
 
     function onRender() {
@@ -8559,7 +8656,8 @@ R"imgui(
             for(var l in currentDrawList)
             {
                 var drawCommand = currentDrawList[l]
-                gcmdcount =  drawCommand.gcmdcount
+       )imgui",
+R"imgui(         gcmdcount =  drawCommand.gcmdcount
                 gvtxcount =  drawCommand.gvtxcount
                 gidxcount =  drawCommand.gidxcount
                 gindices =  drawCommand.gindices
@@ -8582,14 +8680,14 @@ R"imgui(
         if (clientactive) {
             renderer.enableScissorTest(false);
             renderer.setClearColor( 0x72909A );
-            renderer.clear)imgui",
-R"imgui(( true, true, false );
+            renderer.clear( true, true, false );
             // render background (visual reference of device canvas)
             renderer.render( scene_background, camera );
             return true;
           
         }
-        else {
+      )imgui",
+R"imgui(  else {
             // darken background
             renderer.enableScissorTest(false);
             renderer.setClearColor( 0x444444 );
@@ -8612,12 +8710,12 @@ R"imgui(( true, true, false );
 
             renderer.setScissor(gclips[ i ].clip.x,
                                 (height - gclips[ i ].clip.w) ,
-         )imgui",
-R"imgui(                       (gclips[ i ].clip.z - gclips[ i ].clip.x),
+                                (gclips[ i ].clip.z - gclips[ i ].clip.x),
                                 (gclips[ i ].clip.w - gclips[ i ].clip.y)
                            );
             
-                                
+                  )imgui",
+R"imgui(              
             renderer.render( scene, camera );
         }
     }
@@ -8657,8 +8755,7 @@ body {
     padding: 16px;
     background: #F7F7F7;
 }
-.)imgui",
-R"imgui(form-style-6 h1{
+.form-style-6 h1{
     background: #409FC1;
     padding: 15px 0;
     font-size: 100%;
@@ -8667,7 +8764,8 @@ R"imgui(form-style-6 h1{
     color: #fff;
     margin: -16px -16px 16px -16px;
 }
-.form-style-6 input[type="text"],
+.form-style-6 in)imgui",
+R"imgui(put[type="text"],
 .form-style-6 input[type="date"],
 .form-style-6 input[type="datetime"],
 .form-style-6 input[type="email"],
@@ -8695,13 +8793,13 @@ R"imgui(form-style-6 h1{
     text-align: center;
     font: 100% Arial, Helvetica, sans-serif;
 }
-.form-style-6 input[type)imgui",
-R"imgui(="text"]:focus,
+.form-style-6 input[type="text"]:focus,
 .form-style-6 input[type="date"]:focus,
 .form-style-6 input[type="datetime"]:focus,
 .form-style-6 input[type="email"]:focus,
 .form-style-6 input[type="number"]:focus,
-.form-style-6 input[type="search"]:focus,
+.form-style-6 inpu)imgui",
+R"imgui(t[type="search"]:focus,
 .form-style-6 input[type="time"]:focus,
 .form-style-6 input[type="url"]:focus,
 .form-style-6 textarea:focus,
@@ -8738,8 +8836,7 @@ R"imgui(="text"]:focus,
 <style>
     #imgui_container
     {
-        touch-a)imgui",
-R"imgui(ction: none; /* Disable touch behaviors, like pan and zoom */
+        touch-action: none; /* Disable touch behaviors, like pan and zoom */
     }
     body 
     {
@@ -8751,7 +8848,8 @@ R"imgui(ction: none; /* Disable touch behaviors, like pan and zoom */
 
 </head>
 <body>
-    <div id="imgui_container"></div>
+    <div id)imgui",
+R"imgui(="imgui_container"></div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
