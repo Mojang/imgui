@@ -24,7 +24,7 @@ namespace imgui {
 
 	const bool RemoteImGuiFrameBuilder::buildDrawFrame(ImDrawList** const cmd_lists, int cmd_lists_count, bool isKeyFrame, Frame& frame) {
 		static int sendframe = 0;
-		if (sendframe++ < 2) // every 2 frames, @TWEAK
+		if (++sendframe < 2) // every 2 frames, @TWEAK
 		{
 			return false;
 		}
