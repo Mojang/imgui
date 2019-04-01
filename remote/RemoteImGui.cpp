@@ -6,6 +6,8 @@
 
 #include "RemoteImGuiFrameBuilder.h"
 
+#ifdef IMGUI_ENABLED
+
 #define IMGUI_REMOTE_KEY_FRAME    60  // send keyframe every 30 frames
 #define IMGUI_REMOTE_INPUT_FRAMES 60 // input valid during 120 frames
 
@@ -95,3 +97,5 @@ namespace imgui {
 		return res;
 	}
 }
+
+#endif // IMGUI_ENABLED

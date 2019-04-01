@@ -9,6 +9,7 @@
 #include <streambuf>
 #include <string>
 
+#ifdef IMGUI_ENABLED
 
 namespace imgui {
 	void RemoteImGuiFrameBuilder::buildFontFrame(Frame &frame) {
@@ -179,3 +180,5 @@ namespace imgui {
 	}
 
 }
+
+#endif // IMGUI_ENABLED

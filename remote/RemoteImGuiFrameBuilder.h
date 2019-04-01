@@ -7,6 +7,8 @@
 #include "../imgui.h"
 #include <vector>
 
+#ifdef IMGUI_ENABLED
+
 namespace imgui {
 	struct Frame {
 		const void* data;
@@ -82,3 +84,5 @@ namespace imgui {
 		std::vector<unsigned char> mPrevPacket;
 	};
 }
+
+#endif // IMGUI_ENABLED

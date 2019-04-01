@@ -10,6 +10,8 @@
 #include "RemoteImGuiFrameBuilder.h"
 #include <cstdio>
 
+#ifdef IMGUI_ENABLED
+
 namespace imgui {
 	RemoteImGuiServer::~RemoteImGuiServer() {
 	}
@@ -118,3 +120,5 @@ namespace imgui {
 		return mIsClientActive;
 	}
 }
+
+#endif // IMGUI_ENABLED

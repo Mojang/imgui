@@ -10,6 +10,8 @@
 #include "imgui_remote_webby.h"
 #include "RemoteImGui.h"
 
+#ifdef IMGUI_ENABLED
+
 namespace imgui {
 	class RemoteImGuiServer : public RemoteImGui, public IWebSocketServer {
 	public:
@@ -32,3 +34,5 @@ namespace imgui {
 		bool mIsClientActive = false;
 	};
 }
+
+#endif // IMGUI_ENABLED

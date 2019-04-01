@@ -7,6 +7,8 @@
 #include "../imgui.h"
 #include <memory>
 
+#ifdef IMGUI_ENABLED
+
 namespace imgui {
 	struct RemoteInput;
 	struct Frame;
@@ -92,3 +94,5 @@ namespace imgui {
 		int mFrameReceived = 0;
 	};
 }
+
+#endif // IMGUI_ENABLED
