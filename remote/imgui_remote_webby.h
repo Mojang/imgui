@@ -5,13 +5,15 @@
 // Webby https://github.com/deplinenoise/webby
 // LZ4   https://code.google.com/p/lz4/
 //-----------------------------------------------------------------------------
+#pragma once
 
 #include "webby/webby.h"
 
 #include <stdio.h>
-#include <string.h>
+#include <string>
 #include <stdlib.h>
 #include <ctype.h>
+#include <vector>
 
 #ifdef _WIN32
 #include <winsock2.h>
@@ -21,9 +23,9 @@
 #include <unistd.h>
 #endif
 
-struct IWebSocketServer;
+class IWebSocketServer;
 
-IWebSocketServer *s_WebSocketServer;
+
 
 static void onLog         (const char* text);
 static int  onDispatch    (struct WebbyConnection *connection);
@@ -32,8 +34,10 @@ static void onConnected   (struct WebbyConnection *connection);
 static void onDisconnected(struct WebbyConnection *connection);
 static int  onFrame       (struct WebbyConnection *connection, const struct WebbyWsFrame *frame);
 
-struct IWebSocketServer
+class IWebSocketServer
 {
+public:
+	static IWebSocketServer *s_WebSocketServer;
 	virtual ~IWebSocketServer() {};
 
 	enum OpCode // based on websocket connection opcodes
@@ -67,7 +71,7 @@ struct IWebSocketServer
 
 		memset(&ServerConfig, 0, sizeof ServerConfig);
 		ServerConfig.bind_address = local_address;
-		ServerConfig.listening_port = local_port;
+		ServerConfig.listening_port = static_cast<unsigned short>(local_port);
 		ServerConfig.flags = WEBBY_SERVER_WEBSOCKETS;
 		ServerConfig.connection_max = 255;
 		ServerConfig.request_buffer_size = 2048;
@@ -113,7 +117,7 @@ struct IWebSocketServer
 		Client = connection;
 	}
 
-	void WsOnDisconnected(struct WebbyConnection *connection)
+	void WsOnDisconnected(struct WebbyConnection*)
 	{
 		Client = NULL;
 		OnMessage(Disconnect, NULL, 0);
@@ -138,7 +142,7 @@ struct IWebSocketServer
 		return 0;
 	}
 
-	virtual void OnMessage(OpCode opcode, const void *data, int size) { }
+	virtual void OnMessage(OpCode, const void*, int) { }
 	virtual void OnError() { }
 
 	virtual void SendText(const void *data, int size)
@@ -159,7 +163,7 @@ struct IWebSocketServer
 };
 
 
-static void onLog(const char* text)
+static void onLog(const char*)
 {
 	//printf("[WsOnLog] %s\n", text);
 }
@@ -173,14 +177,14 @@ static int onDispatch(struct WebbyConnection *connection)
 		htmlStr += imgui_html[i];
 	}
 
-	WebbyBeginResponse(connection, 200, htmlStr.size(), NULL, 0);
+	WebbyBeginResponse(connection, 200, static_cast<int>(htmlStr.size()), NULL, 0);
 	WebbyWrite(connection, htmlStr.data(), htmlStr.size());
 	WebbyEndResponse(connection);
 
 	return 0;
 }
 
-static int onConnect(struct WebbyConnection *connection)
+static int onConnect(struct WebbyConnection *)
 {
 	//printf("[WsOnConnect] %s\n", connection->request.uri);
 
@@ -194,17 +198,17 @@ static int onConnect(struct WebbyConnection *connection)
 static void onConnected(struct WebbyConnection *connection)
 {
 	//printf("[WsOnConnected]\n");
-	s_WebSocketServer->WsOnConnected(connection);
+	IWebSocketServer::s_WebSocketServer->WsOnConnected(connection);
 }
 
 static void onDisconnected(struct WebbyConnection *connection)
 {
 	//printf("[WsOnDisconnected]\n");
-	s_WebSocketServer->WsOnDisconnected(connection);
+	IWebSocketServer::s_WebSocketServer->WsOnDisconnected(connection);
 }
 
 static int onFrame(struct WebbyConnection *connection, const struct WebbyWsFrame *frame)
 {
 	//printf("[WsOnFrame]\n");
-	return s_WebSocketServer->WsOnFrame(connection, frame);
+	return IWebSocketServer::s_WebSocketServer->WsOnFrame(connection, frame);
 }
