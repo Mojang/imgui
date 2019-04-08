@@ -6,11 +6,11 @@
 
 #include "../imgui.h"
 #include <memory>
+#include <string>
 
 #ifdef IMGUI_ENABLED
 
 namespace imgui {
-	struct RemoteInput;
 	struct Frame;
 	class RemoteImGuiFrameBuilder;
 
@@ -29,6 +29,32 @@ namespace imgui {
 		bool	KeysDown[256];
 	};
 
+	// Keys set in KeysDown to represent special keys
+	enum class ImGuiKeyCode : size_t {
+		Control = 21,
+		Shift = 22
+	};
+
+	enum class RemoteMessageType : unsigned char {
+		// System events fired by the relay server
+		RelayRoomJoined = 0,
+		RelayRoomUpdate,
+
+		// System events fired by the local server
+		LocalIgnored,
+		LocalDisconnect,
+
+		// ImGUI events owned by the client
+		ImInit = 10,
+		ImMouseMove,
+		ImMousePress,
+		ImMouseWheelDelta,
+		ImKeyDown,
+		ImKeyUp,
+		ImKeyPress,
+		ImClipboard
+	};
+
 	class RemoteImGui {
 	public:
 		RemoteImGui();
@@ -38,12 +64,23 @@ namespace imgui {
 		virtual void connect() = 0;
 		virtual void disconnect() = 0;
 		virtual void update();
-		virtual void draw(ImDrawList** const cmd_lists, int cmd_lists_count);
-
-		bool getRemoteInput(RemoteInput &input);
 		virtual bool getIsConnected() const = 0;
 
+		bool getRemoteInput(RemoteInput &input);
+		void draw(ImDrawList** const cmd_lists, int cmd_lists_count);
+
+		void (*mDebug)(const std::string & output);
+
 	protected:
+		virtual bool _getIsActive() const = 0;
+		virtual void _sendFrame(const Frame& frame) = 0;
+
+		void _sendFontFrame();
+		void _sendDrawFrame(ImDrawList** const cmd_lists, int cmd_lists_count);
+
+		void _handleMessage(RemoteMessageType messageType, const void *data, int size);
+
+	private:
 		void _onImMouseMove(int x, int y, int left, int right);
 		void _onImMousePress(int left, int right);
 		void _onImMouseWheelDelta(float mouseWheel);
@@ -51,13 +88,7 @@ namespace imgui {
 		void _onImKeyUp(int key);
 		void _onImKeyPress(int key);
 		void _onImClipboard(void* userData, const char* text);
-		void _sendFontFrame();
-		void _sendDrawFrame(ImDrawList** const cmd_lists, int cmd_lists_count);
 
-		virtual void _sendFrame(const Frame& frame) = 0;
-		virtual bool _getIsActive() const = 0;
-
-	private:
 		inline bool mapRemoteKey(int* remoteKey, bool isCtrlPressed) {
 			if (*remoteKey == 37)
 				*remoteKey = ImGuiKey_LeftArrow;

@@ -38,86 +38,71 @@ namespace imgui {
 		return _getIsActive();
 	}
 
-	void RemoteImGuiServer::OnMessage(IWebSocketServer::OpCode opcode, const void *data, int) {
-		switch (opcode)
-		{
-			// Text message
-		case IWebSocketServer::Text:
-			if (!_getIsActive()) {
-				if (!memcmp(data, "ImInit", 6)) {
-					mIsClientActive = true;
+	void RemoteImGuiServer::OnMessage(IWebSocketServer::OpCode opcode, const void *data, int size) {
+		switch (opcode) {
+			case IWebSocketServer::Text: {
+				// If not active, don't process input
+				if (!_getIsActive()) {
+					// Wait for init instead
+					if (!memcmp(data, "ImInit", sizeof("ImInit") - 1)) {
+						mIsClientActive = true;
 
-					// Send confirmation
-					SendText("ImInit", 6);
+						// Send confirmation
+						SendText("ImInit", 6);
 
-					// Send font texture
-					_sendFontFrame();
+						// Send font texture
+						_sendFontFrame();
+					}
 				}
-			}
-			else if (strstr((char *)data, "ImMouseMove")) {
-				int x, y, mouse_left, mouse_right;
-				if (sscanf((char *)data, "ImMouseMove=%d,%d,%d,%d", &x, &y, &mouse_left, &mouse_right) == 4) {
-					_onImMouseMove(x, y, mouse_left, mouse_right);
+				// Handling other messages is not specific to local servers
+				else if (strstr((char *)data, "ImMouseMove")) {
+					_handleMessage(RemoteMessageType::ImMouseMove, (char*)data + sizeof("ImMouseMove"), size - sizeof("ImMouseMove"));
 				}
-			}
-			else if (strstr((char *)data, "ImMousePress")) {
-				int l, r;
-				if (sscanf((char *)data, "ImMousePress=%d,%d", &l, &r) == 2) {
-					_onImMousePress(l, r);
+				else if (strstr((char *)data, "ImMousePress")) {
+					_handleMessage(RemoteMessageType::ImMousePress, (char*)data + sizeof("ImMousePress"), size - sizeof("ImMousePress"));
 				}
-			}
-			else if (strstr((char *)data, "ImMouseWheelDelta")) {
-				float mouseWheelDelta;
-				if (sscanf((char *)data, "ImMouseWheelDelta=%f", &mouseWheelDelta) == 1) {
-					_onImMouseWheelDelta(mouseWheelDelta);
+				else if (strstr((char *)data, "ImMouseWheelDelta")) {
+					_handleMessage(RemoteMessageType::ImMouseWheelDelta, (char*)data + sizeof("ImMouseWheelDelta"), size - sizeof("ImMouseWheelDelta"));
 				}
-			}
-			else if (strstr((char *)data, "ImKeyDown")) {
-				int key, shift, ctrl;
-				if (sscanf((char *)data, "ImKeyDown=%d,%d,%d", &key, &shift, &ctrl) == 3) {
-					_onImKeyDown(key, shift, ctrl);
+				else if (strstr((char *)data, "ImKeyDown")) {
+					_handleMessage(RemoteMessageType::ImKeyDown, (char*)data + sizeof("ImKeyDown"), size - sizeof("ImKeyDown"));
 				}
-			}
-			else if (strstr((char *)data, "ImKeyUp")) {
-				int key;
-				if (sscanf((char *)data, "ImKeyUp=%d", &key) == 1) {
-					_onImKeyUp(key);
+				else if (strstr((char *)data, "ImKeyUp")) {
+					_handleMessage(RemoteMessageType::ImKeyUp, (char*)data + sizeof("ImKeyUp"), size - sizeof("ImKeyUp"));
 				}
+				else if (strstr((char *)data, "ImKeyPress")) {
+					_handleMessage(RemoteMessageType::ImKeyPress, (char*)data + sizeof("ImKeyPress"), size - sizeof("ImKeyPress"));
+				}
+				else if (strstr((char *)data, "ImClipboard")) {
+					_handleMessage(RemoteMessageType::ImClipboard, (char*)data + sizeof("ImClipboard"), size - sizeof("ImClipboard"));
+				}
+				break;
 			}
-			else if (strstr((char *)data, "ImKeyPress")) {
-				unsigned int key;
-				if (sscanf((char *)data, "ImKeyPress=%d", &key) == 1)
-					_onImKeyPress(key);
+			case IWebSocketServer::Disconnect: {
+				mIsClientActive = false;
+				break;
 			}
-			else if (strstr((char *)data, "ImClipboard=")) {
-				_onImClipboard(nullptr, &((char *)data)[strlen("ImClipboard=")]);
+			case IWebSocketServer::Continuation:
+			case IWebSocketServer::Binary:
+			case IWebSocketServer::Ping:
+			case IWebSocketServer::Pong: {
+				// Valid, but unhandled
+				break;
 			}
-			break;
-
-		
-			break;
-
-		case IWebSocketServer::Disconnect:
-			mIsClientActive = false;
-			break;
-
-		case IWebSocketServer::Binary:
-		case IWebSocketServer::Ping:
-		case IWebSocketServer::Pong:
-			break;
-		
-		default:
-			assert(0);
-			break;
+			default: {
+				// Unsupported message type
+				assert(0);
+				break;
+			}
 		}
-	}
-
-	void RemoteImGuiServer::_sendFrame(const Frame& frame) {
-		SendBinary(frame.data, frame.size);
 	}
 
 	bool RemoteImGuiServer::_getIsActive() const {
 		return mIsClientActive;
+	}
+
+	void RemoteImGuiServer::_sendFrame(const Frame& frame) {
+		SendBinary(frame.data, frame.size);
 	}
 }
 
