@@ -58,12 +58,12 @@ int main(int argc, char* argv[]) {
 		std::cerr << "Too many arguments" << std::endl;
 		printUsageAndExit(5);
 	}
-	input.open(argv[1], std::ios::binary);
+	input.open(argv[1]);
 	if (input.bad()) {
 		std::cerr << "Input file could not be opened" << std::endl;
 		printUsageAndExit(3);
 	}
-	output.open(argv[2], std::ios::binary);
+	output.open(argv[2]);
 	if (output.bad()) {
 		std::cerr << "Output file could not be opened" << std::endl;
 		printUsageAndExit(4);
@@ -760,234 +760,234 @@ k;this.attributesKeys=O)raw_html",R"raw_html(bject.keys(this.attributes);this.id
 THREE.WebGLShader=function(){var a=function(a){a=a.split("\n");for(var c=0;c<a.length;c++)a[c]=c+1+": "+a[c];retu)raw_html",R"raw_html(rn a.join("\n")};return function(b,c,d){c=b.createShader(c);b.shaderSource(c,d);b.compileShader(c);!1===b.getShaderParameter(c,b.COMPILE_STATUS)&&console.error("THREE.WebGLShader: Shader couldn't compile.");""!==b.getShaderInfoLog(c)&&(console.warn("THREE.)raw_html",R"raw_html(WebGLShader: gl.getShaderInfoLog()",b.getShaderInfoLog(c)),console.warn(a(d)));return c}}();
 THREE.LensFlarePlugin=function(a,b){var c,d,e,f,g,h,k,n,p,q,m=a.context,r,t,s,u,v,y;this.render=function(G,w,K,x){if(0!==b.length){G=new THREE.Vector3;var D=x/K,E=)raw_html",R"raw_html(.5*K,A=.5*x,B=16/x,F=new THREE.Vector2(B*D,B),R=new THREE.Vector3(1,1,0),H=new THREE.Vector2(1,1);if(void 0===s){var B=new Float32Array([-1,-1,0,0,1,-1,1,0,1,1,1,1,-1,1,0,1]),C=new Uint16Array([0,1,2,0,2,3]);r=m.createBuffer();t=m.createBuffer();m.bindBuff)raw_html",R"raw_html(er(m.ARRAY_BUFFER,r);m.bufferData(m.ARRAY_BUFFER,B,m.STATIC_DRAW);m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,
 t);m.bufferData(m.ELEMENT_ARRAY_BUFFER,C,m.STATIC_DRAW);v=m.createTexture();y=m.createTexture();m.bindTexture(m.TEXTURE_2D,v);m.texImage2D(m.TEXTURE_2D,0)raw_html",R"raw_html(,m.RGB,16,16,0,m.RGB,m.UNSIGNED_BYTE,null);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_WRAP_S,m.CLAMP_TO_EDGE);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_WRAP_T,m.CLAMP_TO_EDGE);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_MAG_FILTER,m.NEAREST);m.texParameteri(m.TEXTURE_)raw_html",R"raw_html(2D,m.TEXTURE_MIN_FILTER,m.NEAREST);m.bindTexture(m.TEXTURE_2D,y);m.texImage2D(m.TEXTURE_2D,0,
-m.RGBA,16,16,0,m.RGBA,m.UNSIGNED_BYTE,null);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_WRAP_S,m.CLAMP_TO_EDGE);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_WRAP_T,m.CLAMP_T)raw_html",R"raw_html(O_EDGE);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_MAG_FILTER,m.NEAREST);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_MIN_FILTER,m.NEAREST);var B=(u=0<m.getParameter(m.MAX_VERTEX_TEXTURE_IMAGE_UNITS))?{vertexShader:"uniform lowp int renderType;\nuniform vec3 screenP)raw_html",R"raw_html(osition;\nuniform vec2 scale;\nuniform float rotation;\nuniform sampler2D occlusionMap;\nattribute vec2 position;\nattribute vec2 uv;\nvarying vec2 vUV;\nvarying float vVisibility;\nvoid main() {\nvUV = uv;\nvec2 pos = position;\nif( renderType == 2 ) {\nv)raw_html",R"raw_html(ec4 visibility = texture2D( occlusionMap, vec2( 0.1, 0.1 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.5, 0.1 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.9, 0.1 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.9, 0.5 ) );\nvisibility +=)raw_html",R"raw_html( texture2D( occlusionMap, vec2( 0.9, 0.9 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.5, 0.9 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.1, 0.9 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.1, 0.5 ) );\nvisibility += texture2D( occl)raw_html",R"raw_html(usionMap, vec2( 0.5, 0.5 ) );\nvVisibility =        visibility.r / 9.0;\nvVisibility *= 1.0 - visibility.g / 9.0;\nvVisibility *=       visibility.b / 9.0;\nvVisibility *= 1.0 - visibility.a / 9.0;\npos.x = cos( rotation ) * position.x - sin( rotation ) * )raw_html",R"raw_html(position.y;\npos.y = sin( rotation ) * position.x + cos( rotation ) * position.y;\n}\ngl_Position = vec4( ( pos * scale + screenPosition.xy ).xy, screenPosition.z, 1.0 );\n}",
-fragmentShader:"uniform lowp int renderType;\nuniform sampler2D map;\nuniform fl)raw_html",R"raw_html(oat opacity;\nuniform vec3 color;\nvarying vec2 vUV;\nvarying float vVisibility;\nvoid main() {\nif( renderType == 0 ) {\ngl_FragColor = vec4( 1.0, 0.0, 1.0, 0.0 );\n} else if( renderType == 1 ) {\ngl_FragColor = texture2D( map, vUV );\n} else {\nvec4 text)raw_html",R"raw_html(ure = texture2D( map, vUV );\ntexture.a *= opacity * vVisibility;\ngl_FragColor = texture;\ngl_FragColor.rgb *= color;\n}\n}"}:{vertexShader:"uniform lowp int renderType;\nuniform vec3 screenPosition;\nuniform vec2 scale;\nuniform float rotation;\nattribut)raw_html",R"raw_html(e vec2 position;\nattribute vec2 uv;\nvarying vec2 vUV;\nvoid main() {\nvUV = uv;\nvec2 pos = position;\nif( renderType == 2 ) {\npos.x = cos( rotation ) * position.x - sin( rotation ) * position.y;\npos.y = sin( rotation ) * position.x + cos( rotation ) *)raw_html",R"raw_html( position.y;\n}\ngl_Position = vec4( ( pos * scale + screenPosition.xy ).xy, screenPosition.z, 1.0 );\n}",
-fragmentShader:"precision mediump float;\nuniform lowp int renderType;\nuniform sampler2D map;\nuniform sampler2D occlusionMap;\nuniform float opacit)raw_html",R"raw_html(y;\nuniform vec3 color;\nvarying vec2 vUV;\nvoid main() {\nif( renderType == 0 ) {\ngl_FragColor = vec4( texture2D( map, vUV ).rgb, 0.0 );\n} else if( renderType == 1 ) {\ngl_FragColor = texture2D( map, vUV );\n} else {\nfloat visibility = texture2D( occlu)raw_html",R"raw_html(sionMap, vec2( 0.5, 0.1 ) ).a;\nvisibility += texture2D( occlusionMap, vec2( 0.9, 0.5 ) ).a;\nvisibility += texture2D( occlusionMap, vec2( 0.5, 0.9 ) ).a;\nvisibility += texture2D( occlusionMap, vec2( 0.1, 0.5 ) ).a;\nvisibility = ( 1.0 - visibility / 4.0 )raw_html",R"raw_html();\nvec4 texture = texture2D( map, vUV );\ntexture.a *= opacity * visibility;\ngl_FragColor = texture;\ngl_FragColor.rgb *= color;\n}\n}"},
-C=m.createProgram(),T=m.createShader(m.FRAGMENT_SHADER),Q=m.createShader(m.VERTEX_SHADER),O="precision "+a.getPrecis)raw_html",R"raw_html(ion()+" float;\n";m.shaderSource(T,O+B.fragmentShader);m.shaderSource(Q,O+B.vertexShader);m.compileShader(T);m.compileShader(Q);m.attachShader(C,T);m.attachShader(C,Q);m.linkProgram(C);s=C;p=m.getAttribLocation(s,"position");q=m.getAttribLocation(s,"uv");c)raw_html",R"raw_html(=m.getUniformLocation(s,"renderType");d=m.getUniformLocation(s,"map");e=m.getUniformLocation(s,"occlusionMap");f=m.getUniformLocation(s,
-"opacity");g=m.getUniformLocation(s,"color");h=m.getUniformLocation(s,"scale");k=m.getUniformLocation(s,"rotation");n=m)raw_html",R"raw_html(.getUniformLocation(s,"screenPosition")}m.useProgram(s);m.enableVertexAttribArray(p);m.enableVertexAttribArray(q);m.uniform1i(e,0);m.uniform1i(d,1);m.bindBuffer(m.ARRAY_BUFFER,r);m.vertexAttribPointer(p,2,m.FLOAT,!1,16,0);m.vertexAttribPointer(q,2,m.FLOAT,)raw_html",R"raw_html(!1,16,8);m.bindBuffer(m.ELEMENT_ARRAY_BUFFER,t);m.disable(m.CULL_FACE);m.depthMask(!1);C=0;for(T=b.length;C<T;C++)if(B=16/x,F.set(B*
-D,B),Q=b[C],G.set(Q.matrixWorld.elements[12],Q.matrixWorld.elements[13],Q.matrixWorld.elements[14]),G.applyMatrix4(w.matrix)raw_html",R"raw_html(WorldInverse),G.applyProjection(w.projectionMatrix),R.copy(G),H.x=R.x*E+E,H.y=R.y*A+A,u||0<H.x&&H.x<K&&0<H.y&&H.y<x){m.activeTexture(m.TEXTURE1);m.bindTexture(m.TEXTURE_2D,v);m.copyTexImage2D(m.TEXTURE_2D,0,m.RGB,H.x-8,H.y-8,16,16,0);m.uniform1i(c,0);m.uni)raw_html",R"raw_html(form2f(h,F.x,F.y);m.uniform3f(n,R.x,R.y,R.z);m.disable(m.BLEND);m.enable(m.DEPTH_TEST);m.drawElements(m.TRIANGLES,6,m.UNSIGNED_SHORT,
-0);m.activeTexture(m.TEXTURE0);m.bindTexture(m.TEXTURE_2D,y);m.copyTexImage2D(m.TEXTURE_2D,0,m.RGBA,H.x-8,H.y-8,16,16,0);m)raw_html",R"raw_html(.uniform1i(c,1);m.disable(m.DEPTH_TEST);m.activeTexture(m.TEXTURE1);m.bindTexture(m.TEXTURE_2D,v);m.drawElements(m.TRIANGLES,6,m.UNSIGNED_SHORT,0);Q.positionScreen.copy(R);Q.customUpdateCallback?Q.customUpdateCallback(Q):Q.updateLensFlares();m.uniform1i(c,)raw_html",R"raw_html(2);m.enable(m.BLEND);for(var O=0,S=Q.lensFlares.length;O<S;O++){var X=Q.lensFlares[O];.001<X.opacity&&.001<X.scale&&(R.x=X.x,
-R.y=X.y,R.z=X.z,B=X.size*X.scale/x,F.x=B*D,F.y=B,m.uniform3f(n,R.x,R.y,R.z),m.uniform2f(h,F.x,F.y),m.uniform1f(k,X.rotation),m.uni)raw_html",R"raw_html(form1f(f,X.opacity),m.uniform3f(g,X.color.r,X.color.g,X.color.b),a.setBlending(X.blending,X.blendEquation,X.blendSrc,X.blendDst),a.setTexture(X.texture,1),m.drawElements(m.TRIANGLES,6,m.UNSIGNED_SHORT,0))}}m.enable(m.CULL_FACE);m.enable(m.DEPTH_TEST);m.dep)raw_html",R"raw_html(thMask(!0);a.resetGLState()}}};
-THREE.ShadowMapPlugin=function(a,b,c,d){function e(a,b,d){if(b.visible){var f=c[b.id];if(f&&b.castShadow&&(!1===b.frustumCulled||!0===p.intersectsObject(b)))for(var g=0,h=f.length;g<h;g++){var k=f[g];b._modelViewMatrix.multi)raw_html",R"raw_html(plyMatrices(d.matrixWorldInverse,b.matrixWorld);s.push(k)}g=0;for(h=b.children.length;g<h;g++)e(a,b.children[g],d)}}var f=a.context,g,h,k,n,p=new THREE.Frustum,q=new THREE.Matrix4,m=new THREE.Vector3,r=new THREE.Vector3,t=new THREE.Vector3,s=[],u=THREE.Sha)raw_html",R"raw_html(derLib.depthRGBA,v=THREE.UniformsUtils.clone(u.uniforms);
-g=new THREE.ShaderMaterial({uniforms:v,vertexShader:u.vertexShader,fragmentShader:u.fragmentShader});h=new THREE.ShaderMaterial({uniforms:v,vertexShader:u.vertexShader,fragmentShader:u.fragmentShade)raw_html",R"raw_html(r,morphTargets:!0});k=new THREE.ShaderMaterial({uniforms:v,vertexShader:u.vertexShader,fragmentShader:u.fragmentShader,skinning:!0});n=new THREE.ShaderMaterial({uniforms:v,vertexShader:u.vertexShader,fragmentShader:u.fragmentShader,morphTargets:!0,skinning)raw_html",R"raw_html(:!0});g._shadowPass=!0;h._shadowPass=!0;k._shadowPass=
-!0;n._shadowPass=!0;this.render=function(c,v){if(!1!==a.shadowMapEnabled){var u,K,x,D,E,A,B,F,R=[];D=0;f.clearColor(1,1,1,1);f.disable(f.BLEND);f.enable(f.CULL_FACE);f.frontFace(f.CCW);a.shadowMapCullF)raw_html",R"raw_html(ace===THREE.CullFaceFront?f.cullFace(f.FRONT):f.cullFace(f.BACK);a.setDepthTest(!0);u=0;for(K=b.length;u<K;u++)if(x=b[u],x.castShadow)if(x instanceof THREE.DirectionalLight&&x.shadowCascade)for(E=0;E<x.shadowCascadeCount;E++){var H;if(x.shadowCascadeArray[)raw_html",R"raw_html(E])H=x.shadowCascadeArray[E];else{B=x;var C=
-E;H=new THREE.DirectionalLight;H.isVirtual=!0;H.onlyShadow=!0;H.castShadow=!0;H.shadowCameraNear=B.shadowCameraNear;H.shadowCameraFar=B.shadowCameraFar;H.shadowCameraLeft=B.shadowCameraLeft;H.shadowCameraRight=B)raw_html",R"raw_html(.shadowCameraRight;H.shadowCameraBottom=B.shadowCameraBottom;H.shadowCameraTop=B.shadowCameraTop;H.shadowCameraVisible=B.shadowCameraVisible;H.shadowDarkness=B.shadowDarkness;H.shadowBias=B.shadowCascadeBias[C];H.shadowMapWidth=B.shadowCascadeWidth[C];H.sh)raw_html",R"raw_html(adowMapHeight=B.shadowCascadeHeight[C];
-H.pointsWorld=[];H.pointsFrustum=[];F=H.pointsWorld;A=H.pointsFrustum;for(var T=0;8>T;T++)F[T]=new THREE.Vector3,A[T]=new THREE.Vector3;F=B.shadowCascadeNearZ[C];B=B.shadowCascadeFarZ[C];A[0].set(-1,-1,F);A[1].set(1,)raw_html",R"raw_html(-1,F);A[2].set(-1,1,F);A[3].set(1,1,F);A[4].set(-1,-1,B);A[5].set(1,-1,B);A[6].set(-1,1,B);A[7].set(1,1,B);H.originalCamera=v;A=new THREE.Gyroscope;A.position.copy(x.shadowCascadeOffset);A.add(H);A.add(H.target);v.add(A);x.shadowCascadeArray[E]=H;console.l)raw_html",R"raw_html(og("Created virtualLight",H)}C=
-x;F=E;B=C.shadowCascadeArray[F];B.position.copy(C.position);B.target.position.copy(C.target.position);B.lookAt(B.target);B.shadowCameraVisible=C.shadowCameraVisible;B.shadowDarkness=C.shadowDarkness;B.shadowBias=C.shadowCasc)raw_html",R"raw_html(adeBias[F];A=C.shadowCascadeNearZ[F];C=C.shadowCascadeFarZ[F];B=B.pointsFrustum;B[0].z=A;B[1].z=A;B[2].z=A;B[3].z=A;B[4].z=C;B[5].z=C;B[6].z=C;B[7].z=C;R[D]=H;D++}else R[D]=x,D++;u=0;for(K=R.length;u<K;u++){x=R[u];x.shadowMap||(E=THREE.LinearFilter,a.shado)raw_html",R"raw_html(wMapType===THREE.PCFSoftShadowMap&&
-(E=THREE.NearestFilter),x.shadowMap=new THREE.WebGLRenderTarget(x.shadowMapWidth,x.shadowMapHeight,{minFilter:E,magFilter:E,format:THREE.RGBAFormat}),x.shadowMapSize=new THREE.Vector2(x.shadowMapWidth,x.shadowMapHeight),)raw_html",R"raw_html(x.shadowMatrix=new THREE.Matrix4);if(!x.shadowCamera){if(x instanceof THREE.SpotLight)x.shadowCamera=new THREE.PerspectiveCamera(x.shadowCameraFov,x.shadowMapWidth/x.shadowMapHeight,x.shadowCameraNear,x.shadowCameraFar);else if(x instanceof THREE.Direction)raw_html",R"raw_html(alLight)x.shadowCamera=new THREE.OrthographicCamera(x.shadowCameraLeft,
-x.shadowCameraRight,x.shadowCameraTop,x.shadowCameraBottom,x.shadowCameraNear,x.shadowCameraFar);else{console.error("Unsupported light type for shadow");continue}c.add(x.shadowCamera);)raw_html",R"raw_html(!0===c.autoUpdate&&c.updateMatrixWorld()}x.shadowCameraVisible&&!x.cameraHelper&&(x.cameraHelper=new THREE.CameraHelper(x.shadowCamera),c.add(x.cameraHelper));if(x.isVirtual&&H.originalCamera==v){E=v;D=x.shadowCamera;A=x.pointsFrustum;B=x.pointsWorld;m.set)raw_html",R"raw_html((Infinity,Infinity,Infinity);r.set(-Infinity,-Infinity,-Infinity);
-for(C=0;8>C;C++)F=B[C],F.copy(A[C]),F.unproject(E),F.applyMatrix4(D.matrixWorldInverse),F.x<m.x&&(m.x=F.x),F.x>r.x&&(r.x=F.x),F.y<m.y&&(m.y=F.y),F.y>r.y&&(r.y=F.y),F.z<m.z&&(m.z=F.z),F.z>r.)raw_html",R"raw_html(z&&(r.z=F.z);D.left=m.x;D.right=r.x;D.top=r.y;D.bottom=m.y;D.updateProjectionMatrix()}D=x.shadowMap;A=x.shadowMatrix;E=x.shadowCamera;E.position.setFromMatrixPosition(x.matrixWorld);t.setFromMatrixPosition(x.target.matrixWorld);E.lookAt(t);E.updateMatrixWo)raw_html",R"raw_html(rld();E.matrixWorldInverse.getInverse(E.matrixWorld);x.cameraHelper&&
-(x.cameraHelper.visible=x.shadowCameraVisible);x.shadowCameraVisible&&x.cameraHelper.update();A.set(.5,0,0,.5,0,.5,0,.5,0,0,.5,.5,0,0,0,1);A.multiply(E.projectionMatrix);A.multiply(E.mat)raw_html",R"raw_html(rixWorldInverse);q.multiplyMatrices(E.projectionMatrix,E.matrixWorldInverse);p.setFromMatrix(q);a.setRenderTarget(D);a.clear();s.length=0;e(c,c,E);x=0;for(D=s.length;x<D;x++)B=s[x],A=B.object,B=B.buffer,C=A.material instanceof THREE.MeshFaceMaterial?A.mate)raw_html",R"raw_html(rial.materials[0]:A.material,F=void 0!==A.geometry.morphTargets&&
-0<A.geometry.morphTargets.length&&C.morphTargets,T=A instanceof THREE.SkinnedMesh&&C.skinning,F=A.customDepthMaterial?A.customDepthMaterial:T?F?n:k:F?h:g,a.setMaterialFaces(C),B instanceof T)raw_html",R"raw_html(HREE.BufferGeometry?a.renderBufferDirect(E,b,null,F,B,A):a.renderBuffer(E,b,null,F,B,A);x=0;for(D=d.length;x<D;x++)B=d[x],A=B.object,A.visible&&A.castShadow&&(A._modelViewMatrix.multiplyMatrices(E.matrixWorldInverse,A.matrixWorld),a.renderImmediateObject(E)raw_html",R"raw_html(,b,null,g,A))}u=a.getClearColor();K=a.getClearAlpha();f.clearColor(u.r,
+m.RGBA,16,16,0,m.RGBA,m.UNSIGNED_BYTE,null);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_WRAP_S,m.CLAMP_TO_EDGE);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_WRAP_T,m.CLAMP_T)raw_html",R"raw_html(O_EDGE);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_MAG_FILTER,m.NEAREST);m.texParameteri(m.TEXTURE_2D,m.TEXTURE_MIN_FILTER,m.NEAREST);var B=(u=0<m.getParameter(m.MAX_VERTEX_TEXTURE_IMAGE_UNITS))?{vertexShader:"uniform lowp int renderType;\nuniform vec3 screenP)raw_html",R"raw_html(osition;\nuniform vec2 scale;\nuniform float rotation;\nuniform sampler2D occlusionMap;\nattribute vec2 position;\nattribute vec2 uv;\nvarying vec2 vUV;\nvarying float vVisibility;\nvoid main() {\nvUV = uv;\nvec2 pos = position;\nif( renderType == 2 ) {\nv)raw_html",R"raw_html(ec4 visibility = texture2D( occlusionMap, vec2( 0.1, 0.1 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.5, 0.1 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.9, 0.1 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.9, 0.5 ) );\nvisibility +=)raw_html",R"raw_html( texture2D( occlusionMap, vec2( 0.9, 0.9 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.5, 0.9 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.1, 0.9 ) );\nvisibility += texture2D( occlusionMap, vec2( 0.1, 0.5 ) );\nvisibility += texture2D( occl)raw_html",R"raw_html(usionMap, vec2( 0.5, 0.5 ) );\nvVisibility = visibility.r / 9.0;\nvVisibility *= 1.0 - visibility.g / 9.0;\nvVisibility *= visibility.b / 9.0;\nvVisibility *= 1.0 - visibility.a / 9.0;\npos.x = cos( rotation ) * position.x - sin( rotation ) * position.y;\n)raw_html",R"raw_html(pos.y = sin( rotation ) * position.x + cos( rotation ) * position.y;\n}\ngl_Position = vec4( ( pos * scale + screenPosition.xy ).xy, screenPosition.z, 1.0 );\n}",
+fragmentShader:"uniform lowp int renderType;\nuniform sampler2D map;\nuniform float opacity;\)raw_html",R"raw_html(nuniform vec3 color;\nvarying vec2 vUV;\nvarying float vVisibility;\nvoid main() {\nif( renderType == 0 ) {\ngl_FragColor = vec4( 1.0, 0.0, 1.0, 0.0 );\n} else if( renderType == 1 ) {\ngl_FragColor = texture2D( map, vUV );\n} else {\nvec4 texture = texture)raw_html",R"raw_html(2D( map, vUV );\ntexture.a *= opacity * vVisibility;\ngl_FragColor = texture;\ngl_FragColor.rgb *= color;\n}\n}"}:{vertexShader:"uniform lowp int renderType;\nuniform vec3 screenPosition;\nuniform vec2 scale;\nuniform float rotation;\nattribute vec2 positi)raw_html",R"raw_html(on;\nattribute vec2 uv;\nvarying vec2 vUV;\nvoid main() {\nvUV = uv;\nvec2 pos = position;\nif( renderType == 2 ) {\npos.x = cos( rotation ) * position.x - sin( rotation ) * position.y;\npos.y = sin( rotation ) * position.x + cos( rotation ) * position.y;\)raw_html",R"raw_html(n}\ngl_Position = vec4( ( pos * scale + screenPosition.xy ).xy, screenPosition.z, 1.0 );\n}",
+fragmentShader:"precision mediump float;\nuniform lowp int renderType;\nuniform sampler2D map;\nuniform sampler2D occlusionMap;\nuniform float opacity;\nuniform v)raw_html",R"raw_html(ec3 color;\nvarying vec2 vUV;\nvoid main() {\nif( renderType == 0 ) {\ngl_FragColor = vec4( texture2D( map, vUV ).rgb, 0.0 );\n} else if( renderType == 1 ) {\ngl_FragColor = texture2D( map, vUV );\n} else {\nfloat visibility = texture2D( occlusionMap, vec2)raw_html",R"raw_html(( 0.5, 0.1 ) ).a;\nvisibility += texture2D( occlusionMap, vec2( 0.9, 0.5 ) ).a;\nvisibility += texture2D( occlusionMap, vec2( 0.5, 0.9 ) ).a;\nvisibility += texture2D( occlusionMap, vec2( 0.1, 0.5 ) ).a;\nvisibility = ( 1.0 - visibility / 4.0 );\nvec4 text)raw_html",R"raw_html(ure = texture2D( map, vUV );\ntexture.a *= opacity * visibility;\ngl_FragColor = texture;\ngl_FragColor.rgb *= color;\n}\n}"},
+C=m.createProgram(),T=m.createShader(m.FRAGMENT_SHADER),Q=m.createShader(m.VERTEX_SHADER),O="precision "+a.getPrecision()+" float)raw_html",R"raw_html(;\n";m.shaderSource(T,O+B.fragmentShader);m.shaderSource(Q,O+B.vertexShader);m.compileShader(T);m.compileShader(Q);m.attachShader(C,T);m.attachShader(C,Q);m.linkProgram(C);s=C;p=m.getAttribLocation(s,"position");q=m.getAttribLocation(s,"uv");c=m.getUniform)raw_html",R"raw_html(Location(s,"renderType");d=m.getUniformLocation(s,"map");e=m.getUniformLocation(s,"occlusionMap");f=m.getUniformLocation(s,
+"opacity");g=m.getUniformLocation(s,"color");h=m.getUniformLocation(s,"scale");k=m.getUniformLocation(s,"rotation");n=m.getUniformLo)raw_html",R"raw_html(cation(s,"screenPosition")}m.useProgram(s);m.enableVertexAttribArray(p);m.enableVertexAttribArray(q);m.uniform1i(e,0);m.uniform1i(d,1);m.bindBuffer(m.ARRAY_BUFFER,r);m.vertexAttribPointer(p,2,m.FLOAT,!1,16,0);m.vertexAttribPointer(q,2,m.FLOAT,!1,16,8);m.bi)raw_html",R"raw_html(ndBuffer(m.ELEMENT_ARRAY_BUFFER,t);m.disable(m.CULL_FACE);m.depthMask(!1);C=0;for(T=b.length;C<T;C++)if(B=16/x,F.set(B*
+D,B),Q=b[C],G.set(Q.matrixWorld.elements[12],Q.matrixWorld.elements[13],Q.matrixWorld.elements[14]),G.applyMatrix4(w.matrixWorldInverse))raw_html",R"raw_html(,G.applyProjection(w.projectionMatrix),R.copy(G),H.x=R.x*E+E,H.y=R.y*A+A,u||0<H.x&&H.x<K&&0<H.y&&H.y<x){m.activeTexture(m.TEXTURE1);m.bindTexture(m.TEXTURE_2D,v);m.copyTexImage2D(m.TEXTURE_2D,0,m.RGB,H.x-8,H.y-8,16,16,0);m.uniform1i(c,0);m.uniform2f(h,F.x,)raw_html",R"raw_html(F.y);m.uniform3f(n,R.x,R.y,R.z);m.disable(m.BLEND);m.enable(m.DEPTH_TEST);m.drawElements(m.TRIANGLES,6,m.UNSIGNED_SHORT,
+0);m.activeTexture(m.TEXTURE0);m.bindTexture(m.TEXTURE_2D,y);m.copyTexImage2D(m.TEXTURE_2D,0,m.RGBA,H.x-8,H.y-8,16,16,0);m.uniform1i(c,)raw_html",R"raw_html(1);m.disable(m.DEPTH_TEST);m.activeTexture(m.TEXTURE1);m.bindTexture(m.TEXTURE_2D,v);m.drawElements(m.TRIANGLES,6,m.UNSIGNED_SHORT,0);Q.positionScreen.copy(R);Q.customUpdateCallback?Q.customUpdateCallback(Q):Q.updateLensFlares();m.uniform1i(c,2);m.enable(m)raw_html",R"raw_html(.BLEND);for(var O=0,S=Q.lensFlares.length;O<S;O++){var X=Q.lensFlares[O];.001<X.opacity&&.001<X.scale&&(R.x=X.x,
+R.y=X.y,R.z=X.z,B=X.size*X.scale/x,F.x=B*D,F.y=B,m.uniform3f(n,R.x,R.y,R.z),m.uniform2f(h,F.x,F.y),m.uniform1f(k,X.rotation),m.uniform1f(f,X.op)raw_html",R"raw_html(acity),m.uniform3f(g,X.color.r,X.color.g,X.color.b),a.setBlending(X.blending,X.blendEquation,X.blendSrc,X.blendDst),a.setTexture(X.texture,1),m.drawElements(m.TRIANGLES,6,m.UNSIGNED_SHORT,0))}}m.enable(m.CULL_FACE);m.enable(m.DEPTH_TEST);m.depthMask(!0);a.)raw_html",R"raw_html(resetGLState()}}};
+THREE.ShadowMapPlugin=function(a,b,c,d){function e(a,b,d){if(b.visible){var f=c[b.id];if(f&&b.castShadow&&(!1===b.frustumCulled||!0===p.intersectsObject(b)))for(var g=0,h=f.length;g<h;g++){var k=f[g];b._modelViewMatrix.multiplyMatrices(d)raw_html",R"raw_html(.matrixWorldInverse,b.matrixWorld);s.push(k)}g=0;for(h=b.children.length;g<h;g++)e(a,b.children[g],d)}}var f=a.context,g,h,k,n,p=new THREE.Frustum,q=new THREE.Matrix4,m=new THREE.Vector3,r=new THREE.Vector3,t=new THREE.Vector3,s=[],u=THREE.ShaderLib.depthR)raw_html",R"raw_html(GBA,v=THREE.UniformsUtils.clone(u.uniforms);
+g=new THREE.ShaderMaterial({uniforms:v,vertexShader:u.vertexShader,fragmentShader:u.fragmentShader});h=new THREE.ShaderMaterial({uniforms:v,vertexShader:u.vertexShader,fragmentShader:u.fragmentShader,morphTarget)raw_html",R"raw_html(s:!0});k=new THREE.ShaderMaterial({uniforms:v,vertexShader:u.vertexShader,fragmentShader:u.fragmentShader,skinning:!0});n=new THREE.ShaderMaterial({uniforms:v,vertexShader:u.vertexShader,fragmentShader:u.fragmentShader,morphTargets:!0,skinning:!0});g._shad)raw_html",R"raw_html(owPass=!0;h._shadowPass=!0;k._shadowPass=
+!0;n._shadowPass=!0;this.render=function(c,v){if(!1!==a.shadowMapEnabled){var u,K,x,D,E,A,B,F,R=[];D=0;f.clearColor(1,1,1,1);f.disable(f.BLEND);f.enable(f.CULL_FACE);f.frontFace(f.CCW);a.shadowMapCullFace===THREE.C)raw_html",R"raw_html(ullFaceFront?f.cullFace(f.FRONT):f.cullFace(f.BACK);a.setDepthTest(!0);u=0;for(K=b.length;u<K;u++)if(x=b[u],x.castShadow)if(x instanceof THREE.DirectionalLight&&x.shadowCascade)for(E=0;E<x.shadowCascadeCount;E++){var H;if(x.shadowCascadeArray[E])H=x.shadow)raw_html",R"raw_html(CascadeArray[E];else{B=x;var C=
+E;H=new THREE.DirectionalLight;H.isVirtual=!0;H.onlyShadow=!0;H.castShadow=!0;H.shadowCameraNear=B.shadowCameraNear;H.shadowCameraFar=B.shadowCameraFar;H.shadowCameraLeft=B.shadowCameraLeft;H.shadowCameraRight=B.shadowCamera)raw_html",R"raw_html(Right;H.shadowCameraBottom=B.shadowCameraBottom;H.shadowCameraTop=B.shadowCameraTop;H.shadowCameraVisible=B.shadowCameraVisible;H.shadowDarkness=B.shadowDarkness;H.shadowBias=B.shadowCascadeBias[C];H.shadowMapWidth=B.shadowCascadeWidth[C];H.shadowMapHeight)raw_html",R"raw_html(=B.shadowCascadeHeight[C];
+H.pointsWorld=[];H.pointsFrustum=[];F=H.pointsWorld;A=H.pointsFrustum;for(var T=0;8>T;T++)F[T]=new THREE.Vector3,A[T]=new THREE.Vector3;F=B.shadowCascadeNearZ[C];B=B.shadowCascadeFarZ[C];A[0].set(-1,-1,F);A[1].set(1,-1,F);A[2].se)raw_html",R"raw_html(t(-1,1,F);A[3].set(1,1,F);A[4].set(-1,-1,B);A[5].set(1,-1,B);A[6].set(-1,1,B);A[7].set(1,1,B);H.originalCamera=v;A=new THREE.Gyroscope;A.position.copy(x.shadowCascadeOffset);A.add(H);A.add(H.target);v.add(A);x.shadowCascadeArray[E]=H;console.log("Created v)raw_html",R"raw_html(irtualLight",H)}C=
+x;F=E;B=C.shadowCascadeArray[F];B.position.copy(C.position);B.target.position.copy(C.target.position);B.lookAt(B.target);B.shadowCameraVisible=C.shadowCameraVisible;B.shadowDarkness=C.shadowDarkness;B.shadowBias=C.shadowCascadeBias[F];A=)raw_html",R"raw_html(C.shadowCascadeNearZ[F];C=C.shadowCascadeFarZ[F];B=B.pointsFrustum;B[0].z=A;B[1].z=A;B[2].z=A;B[3].z=A;B[4].z=C;B[5].z=C;B[6].z=C;B[7].z=C;R[D]=H;D++}else R[D]=x,D++;u=0;for(K=R.length;u<K;u++){x=R[u];x.shadowMap||(E=THREE.LinearFilter,a.shadowMapType===TH)raw_html",R"raw_html(REE.PCFSoftShadowMap&&
+(E=THREE.NearestFilter),x.shadowMap=new THREE.WebGLRenderTarget(x.shadowMapWidth,x.shadowMapHeight,{minFilter:E,magFilter:E,format:THREE.RGBAFormat}),x.shadowMapSize=new THREE.Vector2(x.shadowMapWidth,x.shadowMapHeight),x.shadowMatri)raw_html",R"raw_html(x=new THREE.Matrix4);if(!x.shadowCamera){if(x instanceof THREE.SpotLight)x.shadowCamera=new THREE.PerspectiveCamera(x.shadowCameraFov,x.shadowMapWidth/x.shadowMapHeight,x.shadowCameraNear,x.shadowCameraFar);else if(x instanceof THREE.DirectionalLight)x.sha)raw_html",R"raw_html(dowCamera=new THREE.OrthographicCamera(x.shadowCameraLeft,
+x.shadowCameraRight,x.shadowCameraTop,x.shadowCameraBottom,x.shadowCameraNear,x.shadowCameraFar);else{console.error("Unsupported light type for shadow");continue}c.add(x.shadowCamera);!0===c.autoUp)raw_html",R"raw_html(date&&c.updateMatrixWorld()}x.shadowCameraVisible&&!x.cameraHelper&&(x.cameraHelper=new THREE.CameraHelper(x.shadowCamera),c.add(x.cameraHelper));if(x.isVirtual&&H.originalCamera==v){E=v;D=x.shadowCamera;A=x.pointsFrustum;B=x.pointsWorld;m.set(Infinity,Inf)raw_html",R"raw_html(inity,Infinity);r.set(-Infinity,-Infinity,-Infinity);
+for(C=0;8>C;C++)F=B[C],F.copy(A[C]),F.unproject(E),F.applyMatrix4(D.matrixWorldInverse),F.x<m.x&&(m.x=F.x),F.x>r.x&&(r.x=F.x),F.y<m.y&&(m.y=F.y),F.y>r.y&&(r.y=F.y),F.z<m.z&&(m.z=F.z),F.z>r.z&&(r.z=F.z);)raw_html",R"raw_html(D.left=m.x;D.right=r.x;D.top=r.y;D.bottom=m.y;D.updateProjectionMatrix()}D=x.shadowMap;A=x.shadowMatrix;E=x.shadowCamera;E.position.setFromMatrixPosition(x.matrixWorld);t.setFromMatrixPosition(x.target.matrixWorld);E.lookAt(t);E.updateMatrixWorld();E.matri)raw_html",R"raw_html(xWorldInverse.getInverse(E.matrixWorld);x.cameraHelper&&
+(x.cameraHelper.visible=x.shadowCameraVisible);x.shadowCameraVisible&&x.cameraHelper.update();A.set(.5,0,0,.5,0,.5,0,.5,0,0,.5,.5,0,0,0,1);A.multiply(E.projectionMatrix);A.multiply(E.matrixWorldInver)raw_html",R"raw_html(se);q.multiplyMatrices(E.projectionMatrix,E.matrixWorldInverse);p.setFromMatrix(q);a.setRenderTarget(D);a.clear();s.length=0;e(c,c,E);x=0;for(D=s.length;x<D;x++)B=s[x],A=B.object,B=B.buffer,C=A.material instanceof THREE.MeshFaceMaterial?A.material.material)raw_html",R"raw_html(s[0]:A.material,F=void 0!==A.geometry.morphTargets&&
+0<A.geometry.morphTargets.length&&C.morphTargets,T=A instanceof THREE.SkinnedMesh&&C.skinning,F=A.customDepthMaterial?A.customDepthMaterial:T?F?n:k:F?h:g,a.setMaterialFaces(C),B instanceof THREE.BufferGe)raw_html",R"raw_html(ometry?a.renderBufferDirect(E,b,null,F,B,A):a.renderBuffer(E,b,null,F,B,A);x=0;for(D=d.length;x<D;x++)B=d[x],A=B.object,A.visible&&A.castShadow&&(A._modelViewMatrix.multiplyMatrices(E.matrixWorldInverse,A.matrixWorld),a.renderImmediateObject(E,b,null,g,A)))raw_html",R"raw_html(}u=a.getClearColor();K=a.getClearAlpha();f.clearColor(u.r,
 u.g,u.b,K);f.enable(f.BLEND);a.shadowMapCullFace===THREE.CullFaceFront&&f.cullFace(f.BACK);a.resetGLState()}}};
-THREE.SpritePlugin=function(a,b){var c,d,e,f,g,h,k,n,p,q,m,r,t,s,u,v,y;f)raw_html",R"raw_html(unction G(a,b){return a.z!==b.z?b.z-a.z:b.id-a.id}var w=a.context,K,x,D,E;this.render=function(A,B){if(0!==b.length){if(void 0===D){var F=new Float32Array([-.5,-.5,0,0,.5,-.5,1,0,.5,.5,1,1,-.5,.5,0,1]),R=new Uint16Array([0,1,2,0,2,3]);K=w.createBuffer();x=)raw_html",R"raw_html(w.createBuffer();w.bindBuffer(w.ARRAY_BUFFER,K);w.bufferData(w.ARRAY_BUFFER,F,w.STATIC_DRAW);w.bindBuffer(w.ELEMENT_ARRAY_BUFFER,x);w.bufferData(w.ELEMENT_ARRAY_BUFFER,R,w.STATIC_DRAW);
-var F=w.createProgram(),R=w.createShader(w.VERTEX_SHADER),H=w.createSh)raw_html",R"raw_html(ader(w.FRAGMENT_SHADER);w.shaderSource(R,["precision "+a.getPrecision()+" float;","uniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform float rotation;\nuniform vec2 scale;\nuniform vec2 uvOffset;\nuniform vec2 uvScale;\nattribute vec2 po)raw_html",R"raw_html(sition;\nattribute vec2 uv;\nvarying vec2 vUV;\nvoid main() {\nvUV = uvOffset + uv * uvScale;\nvec2 alignedPosition = position * scale;\nvec2 rotatedPosition;\nrotatedPosition.x = cos( rotation ) * alignedPosition.x - sin( rotation ) * alignedPosition.y;\n)raw_html",R"raw_html(rotatedPosition.y = sin( rotation ) * alignedPosition.x + cos( rotation ) * alignedPosition.y;\nvec4 finalPosition;\nfinalPosition = modelViewMatrix * vec4( 0.0, 0.0, 0.0, 1.0 );\nfinalPosition.xy += rotatedPosition;\nfinalPosition = projectionMatrix * fin)raw_html",R"raw_html(alPosition;\ngl_Position = finalPosition;\n}"].join("\n"));
-w.shaderSource(H,["precision "+a.getPrecision()+" float;","uniform vec3 color;\nuniform sampler2D map;\nuniform float opacity;\nuniform int fogType;\nuniform vec3 fogColor;\nuniform float fogDensi)raw_html",R"raw_html(ty;\nuniform float fogNear;\nuniform float fogFar;\nuniform float alphaTest;\nvarying vec2 vUV;\nvoid main() {\nvec4 texture = texture2D( map, vUV );\nif ( texture.a < alphaTest ) discard;\ngl_FragColor = vec4( color * texture.xyz, texture.a * opacity );\n)raw_html",R"raw_html(if ( fogType > 0 ) {\nfloat depth = gl_FragCoord.z / gl_FragCoord.w;\nfloat fogFactor = 0.0;\nif ( fogType == 1 ) {\nfogFactor = smoothstep( fogNear, fogFar, depth );\n} else {\nconst float LOG2 = 1.442695;\nfloat fogFactor = exp2( - fogDensity * fogDensit)raw_html",R"raw_html(y * depth * depth * LOG2 );\nfogFactor = 1.0 - clamp( fogFactor, 0.0, 1.0 );\n}\ngl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );\n}\n}"].join("\n"));
-w.compileShader(R);w.compileShader(H);w.attachShader(F,R);w.attachShader()raw_html",R"raw_html(F,H);w.linkProgram(F);D=F;v=w.getAttribLocation(D,"position");y=w.getAttribLocation(D,"uv");c=w.getUniformLocation(D,"uvOffset");d=w.getUniformLocation(D,"uvScale");e=w.getUniformLocation(D,"rotation");f=w.getUniformLocation(D,"scale");g=w.getUniformLocati)raw_html",R"raw_html(on(D,"color");h=w.getUniformLocation(D,"map");k=w.getUniformLocation(D,"opacity");n=w.getUniformLocation(D,"modelViewMatrix");p=w.getUniformLocation(D,"projectionMatrix");q=
-w.getUniformLocation(D,"fogType");m=w.getUniformLocation(D,"fogDensity");r=w.getUn)raw_html",R"raw_html(iformLocation(D,"fogNear");t=w.getUniformLocation(D,"fogFar");s=w.getUniformLocation(D,"fogColor");u=w.getUniformLocation(D,"alphaTest");F=document.createElement("canvas");F.width=8;F.height=8;R=F.getContext("2d");R.fillStyle="white";R.fillRect(0,0,8,8);E=)raw_html",R"raw_html(new THREE.Texture(F);E.needsUpdate=!0}w.useProgram(D);w.enableVertexAttribArray(v);w.enableVertexAttribArray(y);w.disable(w.CULL_FACE);w.enable(w.BLEND);w.bindBuffer(w.ARRAY_BUFFER,
-K);w.vertexAttribPointer(v,2,w.FLOAT,!1,16,0);w.vertexAttribPointer(y,2,w.)raw_html",R"raw_html(FLOAT,!1,16,8);w.bindBuffer(w.ELEMENT_ARRAY_BUFFER,x);w.uniformMatrix4fv(p,!1,B.projectionMatrix.elements);w.activeTexture(w.TEXTURE0);w.uniform1i(h,0);R=F=0;(H=A.fog)?(w.uniform3f(s,H.color.r,H.color.g,H.color.b),H instanceof THREE.Fog?(w.uniform1f(r,H.ne)raw_html",R"raw_html(ar),w.uniform1f(t,H.far),w.uniform1i(q,1),R=F=1):H instanceof THREE.FogExp2&&(w.uniform1f(m,H.density),w.uniform1i(q,2),R=F=2)):(w.uniform1i(q,0),R=F=0);for(var H=0,C=b.length;H<
-C;H++){var T=b[H];T._modelViewMatrix.multiplyMatrices(B.matrixWorldInverse,T.)raw_html",R"raw_html(matrixWorld);T.z=null===T.renderDepth?-T._modelViewMatrix.elements[14]:T.renderDepth}b.sort(G);for(var Q=[],H=0,C=b.length;H<C;H++){var T=b[H],O=T.material;w.uniform1f(u,O.alphaTest);w.uniformMatrix4fv(n,!1,T._modelViewMatrix.elements);Q[0]=T.scale.x;Q[1]=)raw_html",R"raw_html(T.scale.y;T=0;A.fog&&O.fog&&(T=R);F!==T&&(w.uniform1i(q,T),F=T);null!==O.map?(w.uniform2f(c,O.map.offset.x,O.map.offset.y),w.uniform2f(d,O.map.repeat.x,O.map.repeat.y)):
-(w.uniform2f(c,0,0),w.uniform2f(d,1,1));w.uniform1f(k,O.opacity);w.uniform3f(g,O.color)raw_html",R"raw_html(.r,O.color.g,O.color.b);w.uniform1f(e,O.rotation);w.uniform2fv(f,Q);a.setBlending(O.blending,O.blendEquation,O.blendSrc,O.blendDst);a.setDepthTest(O.depthTest);a.setDepthWrite(O.depthWrite);O.map&&O.map.image&&O.map.image.width?a.setTexture(O.map,0):a.setT)raw_html",R"raw_html(exture(E,0);w.drawElements(w.TRIANGLES,6,w.UNSIGNED_SHORT,0)}w.enable(w.CULL_FACE);a.resetGLState()}}};
-THREE.GeometryUtils={merge:function(a,b,c){console.warn("THREE.GeometryUtils: .merge() has been moved to Geometry. Use geometry.merge( geometry2, matrix)raw_html",R"raw_html(, materialIndexOffset ) instead.");var d;b instanceof THREE.Mesh&&(b.matrixAutoUpdate&&b.updateMatrix(),d=b.matrix,b=b.geometry);a.merge(b,d,c)},center:function(a){console.warn("THREE.GeometryUtils: .center() has been moved to Geometry. Use geometry.center)raw_html",R"raw_html(() instead.");return a.center()}};
-THREE.ImageUtils={crossOrigin:void 0,loadTexture:function(a,b,c,d){var e=new THREE.ImageLoader;e.crossOrigin=this.crossOrigin;var f=new THREE.Texture(void 0,b);e.load(a,function(a){f.image=a;f.needsUpdate=!0;c&&c(f)},void)raw_html",R"raw_html( 0,function(a){d&&d(a)});f.sourceFile=a;return f},loadTextureCube:function(a,b,c,d){var e=new THREE.ImageLoader;e.crossOrigin=this.crossOrigin;var f=new THREE.CubeTexture([],b);f.flipY=!1;var g=0;b=function(b){e.load(a[b],function(a){f.images[b]=a;g+=1;6==)raw_html",R"raw_html(=g&&(f.needsUpdate=!0,c&&
-c(f))})};d=0;for(var h=a.length;d<h;++d)b(d);return f},loadCompressedTexture:function(){console.error("THREE.ImageUtils.loadCompressedTexture has been removed. Use THREE.DDSLoader instead.")},loadCompressedTextureCube:function(){c)raw_html",R"raw_html(onsole.error("THREE.ImageUtils.loadCompressedTextureCube has been removed. Use THREE.DDSLoader instead.")},getNormalMap:function(a,b){var c=function(a){var b=Math.sqrt(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]);return[a[0]/b,a[1]/b,a[2]/b]};b|=1;var d=a.width,e=a.heig)raw_html",R"raw_html(ht,f=document.createElement("canvas");
-f.width=d;f.height=e;var g=f.getContext("2d");g.drawImage(a,0,0);for(var h=g.getImageData(0,0,d,e).data,k=g.createImageData(d,e),n=k.data,p=0;p<d;p++)for(var q=0;q<e;q++){var m=0>q-1?0:q-1,r=q+1>e-1?e-1:q+1,t=0>p-1?0:)raw_html",R"raw_html(p-1,s=p+1>d-1?d-1:p+1,u=[],v=[0,0,h[4*(q*d+p)]/255*b];u.push([-1,0,h[4*(q*d+t)]/255*b]);u.push([-1,-1,h[4*(m*d+t)]/255*b]);u.push([0,-1,h[4*(m*d+p)]/255*b]);u.push([1,-1,h[4*(m*d+s)]/255*b]);u.push([1,0,h[4*(q*d+s)]/255*b]);u.push([1,1,h[4*(r*d+s)]/255*b]))raw_html",R"raw_html(;u.push([0,1,h[4*(r*d+p)]/255*
-b]);u.push([-1,1,h[4*(r*d+t)]/255*b]);m=[];t=u.length;for(r=0;r<t;r++){var s=u[r],y=u[(r+1)%t],s=[s[0]-v[0],s[1]-v[1],s[2]-v[2]],y=[y[0]-v[0],y[1]-v[1],y[2]-v[2]];m.push(c([s[1]*y[2]-s[2]*y[1],s[2]*y[0]-s[0]*y[2],s[0]*y[1]-s[)raw_html",R"raw_html(1]*y[0]]))}u=[0,0,0];for(r=0;r<m.length;r++)u[0]+=m[r][0],u[1]+=m[r][1],u[2]+=m[r][2];u[0]/=m.length;u[1]/=m.length;u[2]/=m.length;v=4*(q*d+p);n[v]=(u[0]+1)/2*255|0;n[v+1]=(u[1]+1)/2*255|0;n[v+2]=255*u[2]|0;n[v+3]=255}g.putImageData(k,0,0);return f},genera)raw_html",R"raw_html(teDataTexture:function(a,
+THREE.SpritePlugin=function(a,b){var c,d,e,f,g,h,k,n,p,q,m,r,t,s,u,v,y;function G(a,b)raw_html",R"raw_html(){return a.z!==b.z?b.z-a.z:b.id-a.id}var w=a.context,K,x,D,E;this.render=function(A,B){if(0!==b.length){if(void 0===D){var F=new Float32Array([-.5,-.5,0,0,.5,-.5,1,0,.5,.5,1,1,-.5,.5,0,1]),R=new Uint16Array([0,1,2,0,2,3]);K=w.createBuffer();x=w.createBuffe)raw_html",R"raw_html(r();w.bindBuffer(w.ARRAY_BUFFER,K);w.bufferData(w.ARRAY_BUFFER,F,w.STATIC_DRAW);w.bindBuffer(w.ELEMENT_ARRAY_BUFFER,x);w.bufferData(w.ELEMENT_ARRAY_BUFFER,R,w.STATIC_DRAW);
+var F=w.createProgram(),R=w.createShader(w.VERTEX_SHADER),H=w.createShader(w.FRAGME)raw_html",R"raw_html(NT_SHADER);w.shaderSource(R,["precision "+a.getPrecision()+" float;","uniform mat4 modelViewMatrix;\nuniform mat4 projectionMatrix;\nuniform float rotation;\nuniform vec2 scale;\nuniform vec2 uvOffset;\nuniform vec2 uvScale;\nattribute vec2 position;\nattr)raw_html",R"raw_html(ibute vec2 uv;\nvarying vec2 vUV;\nvoid main() {\nvUV = uvOffset + uv * uvScale;\nvec2 alignedPosition = position * scale;\nvec2 rotatedPosition;\nrotatedPosition.x = cos( rotation ) * alignedPosition.x - sin( rotation ) * alignedPosition.y;\nrotatedPositi)raw_html",R"raw_html(on.y = sin( rotation ) * alignedPosition.x + cos( rotation ) * alignedPosition.y;\nvec4 finalPosition;\nfinalPosition = modelViewMatrix * vec4( 0.0, 0.0, 0.0, 1.0 );\nfinalPosition.xy += rotatedPosition;\nfinalPosition = projectionMatrix * finalPosition;\n)raw_html",R"raw_html(gl_Position = finalPosition;\n}"].join("\n"));
+w.shaderSource(H,["precision "+a.getPrecision()+" float;","uniform vec3 color;\nuniform sampler2D map;\nuniform float opacity;\nuniform int fogType;\nuniform vec3 fogColor;\nuniform float fogDensity;\nuniform )raw_html",R"raw_html(float fogNear;\nuniform float fogFar;\nuniform float alphaTest;\nvarying vec2 vUV;\nvoid main() {\nvec4 texture = texture2D( map, vUV );\nif ( texture.a < alphaTest ) discard;\ngl_FragColor = vec4( color * texture.xyz, texture.a * opacity );\nif ( fogType )raw_html",R"raw_html(> 0 ) {\nfloat depth = gl_FragCoord.z / gl_FragCoord.w;\nfloat fogFactor = 0.0;\nif ( fogType == 1 ) {\nfogFactor = smoothstep( fogNear, fogFar, depth );\n} else {\nconst float LOG2 = 1.442695;\nfloat fogFactor = exp2( - fogDensity * fogDensity * depth * d)raw_html",R"raw_html(epth * LOG2 );\nfogFactor = 1.0 - clamp( fogFactor, 0.0, 1.0 );\n}\ngl_FragColor = mix( gl_FragColor, vec4( fogColor, gl_FragColor.w ), fogFactor );\n}\n}"].join("\n"));
+w.compileShader(R);w.compileShader(H);w.attachShader(F,R);w.attachShader(F,H);w.linkPr)raw_html",R"raw_html(ogram(F);D=F;v=w.getAttribLocation(D,"position");y=w.getAttribLocation(D,"uv");c=w.getUniformLocation(D,"uvOffset");d=w.getUniformLocation(D,"uvScale");e=w.getUniformLocation(D,"rotation");f=w.getUniformLocation(D,"scale");g=w.getUniformLocation(D,"color"))raw_html",R"raw_html(;h=w.getUniformLocation(D,"map");k=w.getUniformLocation(D,"opacity");n=w.getUniformLocation(D,"modelViewMatrix");p=w.getUniformLocation(D,"projectionMatrix");q=
+w.getUniformLocation(D,"fogType");m=w.getUniformLocation(D,"fogDensity");r=w.getUniformLocation)raw_html",R"raw_html((D,"fogNear");t=w.getUniformLocation(D,"fogFar");s=w.getUniformLocation(D,"fogColor");u=w.getUniformLocation(D,"alphaTest");F=document.createElement("canvas");F.width=8;F.height=8;R=F.getContext("2d");R.fillStyle="white";R.fillRect(0,0,8,8);E=new THREE.Tex)raw_html",R"raw_html(ture(F);E.needsUpdate=!0}w.useProgram(D);w.enableVertexAttribArray(v);w.enableVertexAttribArray(y);w.disable(w.CULL_FACE);w.enable(w.BLEND);w.bindBuffer(w.ARRAY_BUFFER,
+K);w.vertexAttribPointer(v,2,w.FLOAT,!1,16,0);w.vertexAttribPointer(y,2,w.FLOAT,!1,16,8)raw_html",R"raw_html();w.bindBuffer(w.ELEMENT_ARRAY_BUFFER,x);w.uniformMatrix4fv(p,!1,B.projectionMatrix.elements);w.activeTexture(w.TEXTURE0);w.uniform1i(h,0);R=F=0;(H=A.fog)?(w.uniform3f(s,H.color.r,H.color.g,H.color.b),H instanceof THREE.Fog?(w.uniform1f(r,H.near),w.uniform)raw_html",R"raw_html(1f(t,H.far),w.uniform1i(q,1),R=F=1):H instanceof THREE.FogExp2&&(w.uniform1f(m,H.density),w.uniform1i(q,2),R=F=2)):(w.uniform1i(q,0),R=F=0);for(var H=0,C=b.length;H<
+C;H++){var T=b[H];T._modelViewMatrix.multiplyMatrices(B.matrixWorldInverse,T.matrixWorld);)raw_html",R"raw_html(T.z=null===T.renderDepth?-T._modelViewMatrix.elements[14]:T.renderDepth}b.sort(G);for(var Q=[],H=0,C=b.length;H<C;H++){var T=b[H],O=T.material;w.uniform1f(u,O.alphaTest);w.uniformMatrix4fv(n,!1,T._modelViewMatrix.elements);Q[0]=T.scale.x;Q[1]=T.scale.y;T=0)raw_html",R"raw_html(;A.fog&&O.fog&&(T=R);F!==T&&(w.uniform1i(q,T),F=T);null!==O.map?(w.uniform2f(c,O.map.offset.x,O.map.offset.y),w.uniform2f(d,O.map.repeat.x,O.map.repeat.y)):
+(w.uniform2f(c,0,0),w.uniform2f(d,1,1));w.uniform1f(k,O.opacity);w.uniform3f(g,O.color.r,O.color.g,)raw_html",R"raw_html(O.color.b);w.uniform1f(e,O.rotation);w.uniform2fv(f,Q);a.setBlending(O.blending,O.blendEquation,O.blendSrc,O.blendDst);a.setDepthTest(O.depthTest);a.setDepthWrite(O.depthWrite);O.map&&O.map.image&&O.map.image.width?a.setTexture(O.map,0):a.setTexture(E,0);w)raw_html",R"raw_html(.drawElements(w.TRIANGLES,6,w.UNSIGNED_SHORT,0)}w.enable(w.CULL_FACE);a.resetGLState()}}};
+THREE.GeometryUtils={merge:function(a,b,c){console.warn("THREE.GeometryUtils: .merge() has been moved to Geometry. Use geometry.merge( geometry2, matrix, materialInd)raw_html",R"raw_html(exOffset ) instead.");var d;b instanceof THREE.Mesh&&(b.matrixAutoUpdate&&b.updateMatrix(),d=b.matrix,b=b.geometry);a.merge(b,d,c)},center:function(a){console.warn("THREE.GeometryUtils: .center() has been moved to Geometry. Use geometry.center() instead."))raw_html",R"raw_html(;return a.center()}};
+THREE.ImageUtils={crossOrigin:void 0,loadTexture:function(a,b,c,d){var e=new THREE.ImageLoader;e.crossOrigin=this.crossOrigin;var f=new THREE.Texture(void 0,b);e.load(a,function(a){f.image=a;f.needsUpdate=!0;c&&c(f)},void 0,function(a)raw_html",R"raw_html(){d&&d(a)});f.sourceFile=a;return f},loadTextureCube:function(a,b,c,d){var e=new THREE.ImageLoader;e.crossOrigin=this.crossOrigin;var f=new THREE.CubeTexture([],b);f.flipY=!1;var g=0;b=function(b){e.load(a[b],function(a){f.images[b]=a;g+=1;6===g&&(f.needsU)raw_html",R"raw_html(pdate=!0,c&&
+c(f))})};d=0;for(var h=a.length;d<h;++d)b(d);return f},loadCompressedTexture:function(){console.error("THREE.ImageUtils.loadCompressedTexture has been removed. Use THREE.DDSLoader instead.")},loadCompressedTextureCube:function(){console.error()raw_html",R"raw_html("THREE.ImageUtils.loadCompressedTextureCube has been removed. Use THREE.DDSLoader instead.")},getNormalMap:function(a,b){var c=function(a){var b=Math.sqrt(a[0]*a[0]+a[1]*a[1]+a[2]*a[2]);return[a[0]/b,a[1]/b,a[2]/b]};b|=1;var d=a.width,e=a.height,f=document)raw_html",R"raw_html(.createElement("canvas");
+f.width=d;f.height=e;var g=f.getContext("2d");g.drawImage(a,0,0);for(var h=g.getImageData(0,0,d,e).data,k=g.createImageData(d,e),n=k.data,p=0;p<d;p++)for(var q=0;q<e;q++){var m=0>q-1?0:q-1,r=q+1>e-1?e-1:q+1,t=0>p-1?0:p-1,s=p+1>d-1)raw_html",R"raw_html(?d-1:p+1,u=[],v=[0,0,h[4*(q*d+p)]/255*b];u.push([-1,0,h[4*(q*d+t)]/255*b]);u.push([-1,-1,h[4*(m*d+t)]/255*b]);u.push([0,-1,h[4*(m*d+p)]/255*b]);u.push([1,-1,h[4*(m*d+s)]/255*b]);u.push([1,0,h[4*(q*d+s)]/255*b]);u.push([1,1,h[4*(r*d+s)]/255*b]);u.push([0,1,)raw_html",R"raw_html(h[4*(r*d+p)]/255*
+b]);u.push([-1,1,h[4*(r*d+t)]/255*b]);m=[];t=u.length;for(r=0;r<t;r++){var s=u[r],y=u[(r+1)%t],s=[s[0]-v[0],s[1]-v[1],s[2]-v[2]],y=[y[0]-v[0],y[1]-v[1],y[2]-v[2]];m.push(c([s[1]*y[2]-s[2]*y[1],s[2]*y[0]-s[0]*y[2],s[0]*y[1]-s[1]*y[0]]))}u=)raw_html",R"raw_html([0,0,0];for(r=0;r<m.length;r++)u[0]+=m[r][0],u[1]+=m[r][1],u[2]+=m[r][2];u[0]/=m.length;u[1]/=m.length;u[2]/=m.length;v=4*(q*d+p);n[v]=(u[0]+1)/2*255|0;n[v+1]=(u[1]+1)/2*255|0;n[v+2]=255*u[2]|0;n[v+3]=255}g.putImageData(k,0,0);return f},generateDataTexture)raw_html",R"raw_html(:function(a,
 b,c){var d=a*b,e=new Uint8Array(3*d),f=Math.floor(255*c.r),g=Math.floor(255*c.g);c=Math.floor(255*c.b);for(var h=0;h<d;h++)e[3*h]=f,e[3*h+1]=g,e[3*h+2]=c;a=new THREE.DataTexture(e,a,b,THREE.RGBFormat);a.needsUpdate=!0;return a}};
-)raw_html",R"raw_html(THREE.SceneUtils={createMultiMaterialObject:function(a,b){for(var c=new THREE.Object3D,d=0,e=b.length;d<e;d++)c.add(new THREE.Mesh(a,b[d]));return c},detach:function(a,b,c){a.applyMatrix(b.matrixWorld);b.remove(a);c.add(a)},attach:function(a,b,c){var d=new)raw_html",R"raw_html( THREE.Matrix4;d.getInverse(c.matrixWorld);a.applyMatrix(d);b.remove(a);c.add(a)}};
-THREE.FontUtils={faces:{},face:"helvetiker",weight:"normal",style:"normal",size:150,divisions:10,getFace:function(){try{return this.faces[this.face][this.weight][this.style)raw_html",R"raw_html(]}catch(a){throw"The font "+this.face+" with "+this.weight+" weight and "+this.style+" style is missing.";}},loadFace:function(a){var b=a.familyName.toLowerCase();this.faces[b]=this.faces[b]||{};this.faces[b][a.cssFontWeight]=this.faces[b][a.cssFontWeight])raw_html",R"raw_html(||{};this.faces[b][a.cssFontWeight][a.cssFontStyle]=a;return this.faces[b][a.cssFontWeight][a.cssFontStyle]=
-a},drawText:function(a){var b=this.getFace(),c=this.size/b.resolution,d=0,e=String(a).split(""),f=e.length,g=[];for(a=0;a<f;a++){var h=new THREE.Pa)raw_html",R"raw_html(th,h=this.extractGlyphPoints(e[a],b,c,d,h),d=d+h.offset;g.push(h.path)}return{paths:g,offset:d/2}},extractGlyphPoints:function(a,b,c,d,e){var f=[],g,h,k,n,p,q,m,r,t,s,u,v=b.glyphs[a]||b.glyphs["?"];if(v){if(v.o)for(b=v._cachedOutline||(v._cachedOutline=v.o)raw_html",R"raw_html(.split(" ")),n=b.length,a=0;a<n;)switch(k=b[a++],k){case "m":k=b[a++]*c+d;p=b[a++]*c;e.moveTo(k,p);
-break;case "l":k=b[a++]*c+d;p=b[a++]*c;e.lineTo(k,p);break;case "q":k=b[a++]*c+d;p=b[a++]*c;r=b[a++]*c+d;t=b[a++]*c;e.quadraticCurveTo(r,t,k,p);if(g=f[f.len)raw_html",R"raw_html(gth-1])for(q=g.x,m=g.y,g=1,h=this.divisions;g<=h;g++){var y=g/h;THREE.Shape.Utils.b2(y,q,r,k);THREE.Shape.Utils.b2(y,m,t,p)}break;case "b":if(k=b[a++]*c+d,p=b[a++]*c,r=b[a++]*c+d,t=b[a++]*c,s=b[a++]*c+d,u=b[a++]*c,e.bezierCurveTo(r,t,s,u,k,p),g=f[f.length-)raw_html",R"raw_html(1])for(q=g.x,m=g.y,g=1,h=this.divisions;g<=h;g++)y=g/h,THREE.Shape.Utils.b3(y,q,r,s,k),THREE.Shape.Utils.b3(y,
+THREE.SceneUt)raw_html",R"raw_html(ils={createMultiMaterialObject:function(a,b){for(var c=new THREE.Object3D,d=0,e=b.length;d<e;d++)c.add(new THREE.Mesh(a,b[d]));return c},detach:function(a,b,c){a.applyMatrix(b.matrixWorld);b.remove(a);c.add(a)},attach:function(a,b,c){var d=new THREE.Matrix)raw_html",R"raw_html(4;d.getInverse(c.matrixWorld);a.applyMatrix(d);b.remove(a);c.add(a)}};
+THREE.FontUtils={faces:{},face:"helvetiker",weight:"normal",style:"normal",size:150,divisions:10,getFace:function(){try{return this.faces[this.face][this.weight][this.style]}catch(a){th)raw_html",R"raw_html(row"The font "+this.face+" with "+this.weight+" weight and "+this.style+" style is missing.";}},loadFace:function(a){var b=a.familyName.toLowerCase();this.faces[b]=this.faces[b]||{};this.faces[b][a.cssFontWeight]=this.faces[b][a.cssFontWeight]||{};this.fac)raw_html",R"raw_html(es[b][a.cssFontWeight][a.cssFontStyle]=a;return this.faces[b][a.cssFontWeight][a.cssFontStyle]=
+a},drawText:function(a){var b=this.getFace(),c=this.size/b.resolution,d=0,e=String(a).split(""),f=e.length,g=[];for(a=0;a<f;a++){var h=new THREE.Path,h=this.ext)raw_html",R"raw_html(ractGlyphPoints(e[a],b,c,d,h),d=d+h.offset;g.push(h.path)}return{paths:g,offset:d/2}},extractGlyphPoints:function(a,b,c,d,e){var f=[],g,h,k,n,p,q,m,r,t,s,u,v=b.glyphs[a]||b.glyphs["?"];if(v){if(v.o)for(b=v._cachedOutline||(v._cachedOutline=v.o.split(" ")),)raw_html",R"raw_html(n=b.length,a=0;a<n;)switch(k=b[a++],k){case "m":k=b[a++]*c+d;p=b[a++]*c;e.moveTo(k,p);
+break;case "l":k=b[a++]*c+d;p=b[a++]*c;e.lineTo(k,p);break;case "q":k=b[a++]*c+d;p=b[a++]*c;r=b[a++]*c+d;t=b[a++]*c;e.quadraticCurveTo(r,t,k,p);if(g=f[f.length-1])for(q=)raw_html",R"raw_html(g.x,m=g.y,g=1,h=this.divisions;g<=h;g++){var y=g/h;THREE.Shape.Utils.b2(y,q,r,k);THREE.Shape.Utils.b2(y,m,t,p)}break;case "b":if(k=b[a++]*c+d,p=b[a++]*c,r=b[a++]*c+d,t=b[a++]*c,s=b[a++]*c+d,u=b[a++]*c,e.bezierCurveTo(r,t,s,u,k,p),g=f[f.length-1])for(q=g.x,)raw_html",R"raw_html(m=g.y,g=1,h=this.divisions;g<=h;g++)y=g/h,THREE.Shape.Utils.b3(y,q,r,s,k),THREE.Shape.Utils.b3(y,
 m,t,u,p)}return{offset:v.ha*c,path:e}}}};
-THREE.FontUtils.generateShapes=function(a,b){b=b||{};var c=void 0!==b.curveSegments?b.curveSegments:4,d)raw_html",R"raw_html(=void 0!==b.font?b.font:"helvetiker",e=void 0!==b.weight?b.weight:"normal",f=void 0!==b.style?b.style:"normal";THREE.FontUtils.size=void 0!==b.size?b.size:100;THREE.FontUtils.divisions=c;THREE.FontUtils.face=d;THREE.FontUtils.weight=e;THREE.FontUtils.style)raw_html",R"raw_html(=f;c=THREE.FontUtils.drawText(a).paths;d=[];e=0;for(f=c.length;e<f;e++)Array.prototype.push.apply(d,c[e].toShapes());return d};
-(function(a){var b=function(a){for(var b=a.length,e=0,f=b-1,g=0;g<b;f=g++)e+=a[f].x*a[g].y-a[g].x*a[f].y;return.5*e};a.Triangula)raw_html",R"raw_html(te=function(a,d){var e=a.length;if(3>e)return null;var f=[],g=[],h=[],k,n,p;if(0<b(a))for(n=0;n<e;n++)g[n]=n;else for(n=0;n<e;n++)g[n]=e-1-n;var q=2*e;for(n=e-1;2<e;){if(0>=q--){console.log("Warning, unable to triangulate polygon!");break}k=n;e<=k&&(k=0);n)raw_html",R"raw_html(=k+1;e<=n&&(n=0);p=n+1;e<=p&&(p=0);var m;a:{var r=m=void 0,t=void 0,s=void 0,u=void 0,v=void 0,y=void 0,G=void 0,w=void 0,
-r=a[g[k]].x,t=a[g[k]].y,s=a[g[n]].x,u=a[g[n]].y,v=a[g[p]].x,y=a[g[p]].y;if(1E-10>(s-r)*(y-t)-(u-t)*(v-r))m=!1;else{var K=void 0,x=voi)raw_html",R"raw_html(d 0,D=void 0,E=void 0,A=void 0,B=void 0,F=void 0,R=void 0,H=void 0,C=void 0,H=R=F=w=G=void 0,K=v-s,x=y-u,D=r-v,E=t-y,A=s-r,B=u-t;for(m=0;m<e;m++)if(G=a[g[m]].x,w=a[g[m]].y,!(G===r&&w===t||G===s&&w===u||G===v&&w===y)&&(F=G-r,R=w-t,H=G-s,C=w-u,G-=v,w-=y,H=K*)raw_html",R"raw_html(C-x*H,F=A*R-B*F,R=D*w-E*G,-1E-10<=H&&-1E-10<=R&&-1E-10<=F)){m=!1;break a}m=!0}}if(m){f.push([a[g[k]],a[g[n]],a[g[p]]]);
-h.push([g[k],g[n],g[p]]);k=n;for(p=n+1;p<e;k++,p++)g[k]=g[p];e--;q=2*e}}return d?h:f};a.Triangulate.area=b;return a})(THREE.FontUtils);s)raw_html",R"raw_html(elf._typeface_js={faces:THREE.FontUtils.faces,loadFace:THREE.FontUtils.loadFace};THREE.typeface_js=self._typeface_js;
-THREE.Audio=function(a){THREE.Object3D.call(this);this.type="Audio";this.context=a.context;this.source=this.context.createBufferSource();t)raw_html",R"raw_html(his.gain=this.context.createGain();this.gain.connect(this.context.destination);this.panner=this.context.createPanner();this.panner.connect(this.gain)};THREE.Audio.prototype=Object.create(THREE.Object3D.prototype);
-THREE.Audio.prototype.load=function(a){var)raw_html",R"raw_html( b=this,c=new XMLHttpRequest;c.open("GET",a,!0);c.responseType="arraybuffer";c.onload=function(a){b.context.decodeAudioData(this.response,function(a){b.source.buffer=a;b.source.connect(b.panner);b.source.start(0)})};c.send();return this};THREE.Audio.protot)raw_html",R"raw_html(ype.setLoop=function(a){this.source.loop=a};THREE.Audio.prototype.setRefDistance=function(a){this.panner.refDistance=a};THREE.Audio.prototype.setRolloffFactor=function(a){this.panner.rolloffFactor=a};
-THREE.Audio.prototype.updateMatrixWorld=function(){var )raw_html",R"raw_html(a=new THREE.Vector3;return function(b){THREE.Object3D.prototype.updateMatrixWorld.call(this,b);a.setFromMatrixPosition(this.matrixWorld);this.panner.setPosition(a.x,a.y,a.z)}}();THREE.AudioListener=function(){THREE.Object3D.call(this);this.type="AudioListe)raw_html",R"raw_html(ner";this.context=new (window.AudioContext||window.webkitAudioContext)};THREE.AudioListener.prototype=Object.create(THREE.Object3D.prototype);
-THREE.AudioListener.prototype.updateMatrixWorld=function(){var a=new THREE.Vector3,b=new THREE.Quaternion,c=new T)raw_html",R"raw_html(HREE.Vector3,d=new THREE.Vector3,e=new THREE.Vector3,f=new THREE.Vector3;return function(g){THREE.Object3D.prototype.updateMatrixWorld.call(this,g);g=this.context.listener;this.matrixWorld.decompose(a,b,c);d.set(0,0,-1).applyQuaternion(b);e.subVectors(a,f))raw_html",R"raw_html(;g.setPosition(a.x,a.y,a.z);g.setOrientation(d.x,d.y,d.z,this.up.x,this.up.y,this.up.z);g.setVelocity(e.x,e.y,e.z);f.copy(a)}}();
-THREE.Curve=function(){};THREE.Curve.prototype.getPoint=function(a){console.log("Warning, getPoint() not implemented!");return)raw_html",R"raw_html( null};THREE.Curve.prototype.getPointAt=function(a){a=this.getUtoTmapping(a);return this.getPoint(a)};THREE.Curve.prototype.getPoints=function(a){a||(a=5);var b,c=[];for(b=0;b<=a;b++)c.push(this.getPoint(b/a));return c};THREE.Curve.prototype.getSpacedPoint)raw_html",R"raw_html(s=function(a){a||(a=5);var b,c=[];for(b=0;b<=a;b++)c.push(this.getPointAt(b/a));return c};
-THREE.Curve.prototype.getLength=function(){var a=this.getLengths();return a[a.length-1]};THREE.Curve.prototype.getLengths=function(a){a||(a=this.__arcLengthDivisions)raw_html",R"raw_html(?this.__arcLengthDivisions:200);if(this.cacheArcLengths&&this.cacheArcLengths.length==a+1&&!this.needsUpdate)return this.cacheArcLengths;this.needsUpdate=!1;var b=[],c,d=this.getPoint(0),e,f=0;b.push(0);for(e=1;e<=a;e++)c=this.getPoint(e/a),f+=c.distanceTo)raw_html",R"raw_html((d),b.push(f),d=c;return this.cacheArcLengths=b};
-THREE.Curve.prototype.updateArcLengths=function(){this.needsUpdate=!0;this.getLengths()};THREE.Curve.prototype.getUtoTmapping=function(a,b){var c=this.getLengths(),d=0,e=c.length,f;f=b?b:a*c[e-1];for(var g=)raw_html",R"raw_html(0,h=e-1,k;g<=h;)if(d=Math.floor(g+(h-g)/2),k=c[d]-f,0>k)g=d+1;else if(0<k)h=d-1;else{h=d;break}d=h;if(c[d]==f)return d/(e-1);g=c[d];return c=(d+(f-g)/(c[d+1]-g))/(e-1)};THREE.Curve.prototype.getTangent=function(a){var b=a-1E-4;a+=1E-4;0>b&&(b=0);1<a&&(a=1))raw_html",R"raw_html(;b=this.getPoint(b);return this.getPoint(a).clone().sub(b).normalize()};
+THREE.FontUtils.generateShapes=function(a,b){b=b||{};var c=void 0!==b.curveSegments?b.curveSegments:4,d=void 0!==b.f)raw_html",R"raw_html(ont?b.font:"helvetiker",e=void 0!==b.weight?b.weight:"normal",f=void 0!==b.style?b.style:"normal";THREE.FontUtils.size=void 0!==b.size?b.size:100;THREE.FontUtils.divisions=c;THREE.FontUtils.face=d;THREE.FontUtils.weight=e;THREE.FontUtils.style=f;c=THREE.Fo)raw_html",R"raw_html(ntUtils.drawText(a).paths;d=[];e=0;for(f=c.length;e<f;e++)Array.prototype.push.apply(d,c[e].toShapes());return d};
+(function(a){var b=function(a){for(var b=a.length,e=0,f=b-1,g=0;g<b;f=g++)e+=a[f].x*a[g].y-a[g].x*a[f].y;return.5*e};a.Triangulate=function(a)raw_html",R"raw_html(,d){var e=a.length;if(3>e)return null;var f=[],g=[],h=[],k,n,p;if(0<b(a))for(n=0;n<e;n++)g[n]=n;else for(n=0;n<e;n++)g[n]=e-1-n;var q=2*e;for(n=e-1;2<e;){if(0>=q--){console.log("Warning, unable to triangulate polygon!");break}k=n;e<=k&&(k=0);n=k+1;e<=n&&(n)raw_html",R"raw_html(=0);p=n+1;e<=p&&(p=0);var m;a:{var r=m=void 0,t=void 0,s=void 0,u=void 0,v=void 0,y=void 0,G=void 0,w=void 0,
+r=a[g[k]].x,t=a[g[k]].y,s=a[g[n]].x,u=a[g[n]].y,v=a[g[p]].x,y=a[g[p]].y;if(1E-10>(s-r)*(y-t)-(u-t)*(v-r))m=!1;else{var K=void 0,x=void 0,D=void 0,)raw_html",R"raw_html(E=void 0,A=void 0,B=void 0,F=void 0,R=void 0,H=void 0,C=void 0,H=R=F=w=G=void 0,K=v-s,x=y-u,D=r-v,E=t-y,A=s-r,B=u-t;for(m=0;m<e;m++)if(G=a[g[m]].x,w=a[g[m]].y,!(G===r&&w===t||G===s&&w===u||G===v&&w===y)&&(F=G-r,R=w-t,H=G-s,C=w-u,G-=v,w-=y,H=K*C-x*H,F=A*R-B)raw_html",R"raw_html(*F,R=D*w-E*G,-1E-10<=H&&-1E-10<=R&&-1E-10<=F)){m=!1;break a}m=!0}}if(m){f.push([a[g[k]],a[g[n]],a[g[p]]]);
+h.push([g[k],g[n],g[p]]);k=n;for(p=n+1;p<e;k++,p++)g[k]=g[p];e--;q=2*e}}return d?h:f};a.Triangulate.area=b;return a})(THREE.FontUtils);self._typeface)raw_html",R"raw_html(_js={faces:THREE.FontUtils.faces,loadFace:THREE.FontUtils.loadFace};THREE.typeface_js=self._typeface_js;
+THREE.Audio=function(a){THREE.Object3D.call(this);this.type="Audio";this.context=a.context;this.source=this.context.createBufferSource();this.gain=this)raw_html",R"raw_html(.context.createGain();this.gain.connect(this.context.destination);this.panner=this.context.createPanner();this.panner.connect(this.gain)};THREE.Audio.prototype=Object.create(THREE.Object3D.prototype);
+THREE.Audio.prototype.load=function(a){var b=this,c=new)raw_html",R"raw_html( XMLHttpRequest;c.open("GET",a,!0);c.responseType="arraybuffer";c.onload=function(a){b.context.decodeAudioData(this.response,function(a){b.source.buffer=a;b.source.connect(b.panner);b.source.start(0)})};c.send();return this};THREE.Audio.prototype.setLoop=f)raw_html",R"raw_html(unction(a){this.source.loop=a};THREE.Audio.prototype.setRefDistance=function(a){this.panner.refDistance=a};THREE.Audio.prototype.setRolloffFactor=function(a){this.panner.rolloffFactor=a};
+THREE.Audio.prototype.updateMatrixWorld=function(){var a=new THREE.V)raw_html",R"raw_html(ector3;return function(b){THREE.Object3D.prototype.updateMatrixWorld.call(this,b);a.setFromMatrixPosition(this.matrixWorld);this.panner.setPosition(a.x,a.y,a.z)}}();THREE.AudioListener=function(){THREE.Object3D.call(this);this.type="AudioListener";this.con)raw_html",R"raw_html(text=new (window.AudioContext||window.webkitAudioContext)};THREE.AudioListener.prototype=Object.create(THREE.Object3D.prototype);
+THREE.AudioListener.prototype.updateMatrixWorld=function(){var a=new THREE.Vector3,b=new THREE.Quaternion,c=new THREE.Vector3,)raw_html",R"raw_html(d=new THREE.Vector3,e=new THREE.Vector3,f=new THREE.Vector3;return function(g){THREE.Object3D.prototype.updateMatrixWorld.call(this,g);g=this.context.listener;this.matrixWorld.decompose(a,b,c);d.set(0,0,-1).applyQuaternion(b);e.subVectors(a,f);g.setPositio)raw_html",R"raw_html(n(a.x,a.y,a.z);g.setOrientation(d.x,d.y,d.z,this.up.x,this.up.y,this.up.z);g.setVelocity(e.x,e.y,e.z);f.copy(a)}}();
+THREE.Curve=function(){};THREE.Curve.prototype.getPoint=function(a){console.log("Warning, getPoint() not implemented!");return null};THREE.)raw_html",R"raw_html(Curve.prototype.getPointAt=function(a){a=this.getUtoTmapping(a);return this.getPoint(a)};THREE.Curve.prototype.getPoints=function(a){a||(a=5);var b,c=[];for(b=0;b<=a;b++)c.push(this.getPoint(b/a));return c};THREE.Curve.prototype.getSpacedPoints=function(a))raw_html",R"raw_html({a||(a=5);var b,c=[];for(b=0;b<=a;b++)c.push(this.getPointAt(b/a));return c};
+THREE.Curve.prototype.getLength=function(){var a=this.getLengths();return a[a.length-1]};THREE.Curve.prototype.getLengths=function(a){a||(a=this.__arcLengthDivisions?this.__arcLe)raw_html",R"raw_html(ngthDivisions:200);if(this.cacheArcLengths&&this.cacheArcLengths.length==a+1&&!this.needsUpdate)return this.cacheArcLengths;this.needsUpdate=!1;var b=[],c,d=this.getPoint(0),e,f=0;b.push(0);for(e=1;e<=a;e++)c=this.getPoint(e/a),f+=c.distanceTo(d),b.push(f))raw_html",R"raw_html(,d=c;return this.cacheArcLengths=b};
+THREE.Curve.prototype.updateArcLengths=function(){this.needsUpdate=!0;this.getLengths()};THREE.Curve.prototype.getUtoTmapping=function(a,b){var c=this.getLengths(),d=0,e=c.length,f;f=b?b:a*c[e-1];for(var g=0,h=e-1,k;g<=)raw_html",R"raw_html(h;)if(d=Math.floor(g+(h-g)/2),k=c[d]-f,0>k)g=d+1;else if(0<k)h=d-1;else{h=d;break}d=h;if(c[d]==f)return d/(e-1);g=c[d];return c=(d+(f-g)/(c[d+1]-g))/(e-1)};THREE.Curve.prototype.getTangent=function(a){var b=a-1E-4;a+=1E-4;0>b&&(b=0);1<a&&(a=1);b=this.getPo)raw_html",R"raw_html(int(b);return this.getPoint(a).clone().sub(b).normalize()};
 THREE.Curve.prototype.getTangentAt=function(a){a=this.getUtoTmapping(a);return this.getTangent(a)};
-THREE.Curve.Utils={tangentQuadraticBezier:function(a,b,c,d){return 2*(1-a)*(c-b)+2*)raw_html",R"raw_html(a*(d-c)},tangentCubicBezier:function(a,b,c,d,e){return-3*b*(1-a)*(1-a)+3*c*(1-a)*(1-a)-6*a*c*(1-a)+6*a*d*(1-a)-3*a*a*d+3*a*a*e},tangentSpline:function(a,b,c,d,e){return 6*a*a-6*a+(3*a*a-4*a+1)+(-6*a*a+6*a)+(3*a*a-2*a)},interpolate:function(a,b,c,d,e){a=.5*)raw_html",R"raw_html((c-a);d=.5*(d-b);var f=e*e;return(2*b-2*c+a+d)*e*f+(-3*b+3*c-2*a-d)*f+a*e+b}};
-THREE.Curve.create=function(a,b){a.prototype=Object.create(THREE.Curve.prototype);a.prototype.getPoint=b;return a};THREE.CurvePath=function(){this.curves=[];this.bends=[];this.a)raw_html",R"raw_html(utoClose=!1};THREE.CurvePath.prototype=Object.create(THREE.Curve.prototype);THREE.CurvePath.prototype.add=function(a){this.curves.push(a)};THREE.CurvePath.prototype.checkConnection=function(){};
-THREE.CurvePath.prototype.closePath=function(){var a=this.cur)raw_html",R"raw_html(ves[0].getPoint(0),b=this.curves[this.curves.length-1].getPoint(1);a.equals(b)||this.curves.push(new THREE.LineCurve(b,a))};THREE.CurvePath.prototype.getPoint=function(a){var b=a*this.getLength(),c=this.getCurveLengths();for(a=0;a<c.length;){if(c[a]>=b)ret)raw_html",R"raw_html(urn b=c[a]-b,a=this.curves[a],b=1-b/a.getLength(),a.getPointAt(b);a++}return null};THREE.CurvePath.prototype.getLength=function(){var a=this.getCurveLengths();return a[a.length-1]};
-THREE.CurvePath.prototype.getCurveLengths=function(){if(this.cacheLengths&)raw_html",R"raw_html(&this.cacheLengths.length==this.curves.length)return this.cacheLengths;var a=[],b=0,c,d=this.curves.length;for(c=0;c<d;c++)b+=this.curves[c].getLength(),a.push(b);return this.cacheLengths=a};
-THREE.CurvePath.prototype.getBoundingBox=function(){var a=this.g)raw_html",R"raw_html(etPoints(),b,c,d,e,f,g;b=c=Number.NEGATIVE_INFINITY;e=f=Number.POSITIVE_INFINITY;var h,k,n,p,q=a[0]instanceof THREE.Vector3;p=q?new THREE.Vector3:new THREE.Vector2;k=0;for(n=a.length;k<n;k++)h=a[k],h.x>b?b=h.x:h.x<e&&(e=h.x),h.y>c?c=h.y:h.y<f&&(f=h.y),q&&()raw_html",R"raw_html(h.z>d?d=h.z:h.z<g&&(g=h.z)),p.add(h);a={minX:e,minY:f,maxX:b,maxY:c};q&&(a.maxZ=d,a.minZ=g);return a};
-THREE.CurvePath.prototype.createPointsGeometry=function(a){a=this.getPoints(a,!0);return this.createGeometry(a)};THREE.CurvePath.prototype.createSpacedPo)raw_html",R"raw_html(intsGeometry=function(a){a=this.getSpacedPoints(a,!0);return this.createGeometry(a)};THREE.CurvePath.prototype.createGeometry=function(a){for(var b=new THREE.Geometry,c=0;c<a.length;c++)b.vertices.push(new THREE.Vector3(a[c].x,a[c].y,a[c].z||0));return b};)raw_html",R"raw_html(THREE.CurvePath.prototype.addWrapPath=function(a){this.bends.push(a)};
-THREE.CurvePath.prototype.getTransformedPoints=function(a,b){var c=this.getPoints(a),d,e;b||(b=this.bends);d=0;for(e=b.length;d<e;d++)c=this.getWrapPoints(c,b[d]);return c};THREE.CurveP)raw_html",R"raw_html(ath.prototype.getTransformedSpacedPoints=function(a,b){var c=this.getSpacedPoints(a),d,e;b||(b=this.bends);d=0;for(e=b.length;d<e;d++)c=this.getWrapPoints(c,b[d]);return c};
-THREE.CurvePath.prototype.getWrapPoints=function(a,b){var c=this.getBoundingBox(),)raw_html",R"raw_html(d,e,f,g,h,k;d=0;for(e=a.length;d<e;d++)f=a[d],g=f.x,h=f.y,k=g/c.maxX,k=b.getUtoTmapping(k,g),g=b.getPoint(k),k=b.getTangent(k),k.set(-k.y,k.x).multiplyScalar(h),f.x=g.x+k.x,f.y=g.y+k.y;return a};THREE.Gyroscope=function(){THREE.Object3D.call(this)};THREE.G)raw_html",R"raw_html(yroscope.prototype=Object.create(THREE.Object3D.prototype);
-THREE.Gyroscope.prototype.updateMatrixWorld=function(){var a=new THREE.Vector3,b=new THREE.Quaternion,c=new THREE.Vector3,d=new THREE.Vector3,e=new THREE.Quaternion,f=new THREE.Vector3;return func)raw_html",R"raw_html(tion(g){this.matrixAutoUpdate&&this.updateMatrix();if(this.matrixWorldNeedsUpdate||g)this.parent?(this.matrixWorld.multiplyMatrices(this.parent.matrixWorld,this.matrix),this.matrixWorld.decompose(d,e,f),this.matrix.decompose(a,b,c),this.matrixWorld.compose)raw_html",R"raw_html((d,b,f)):this.matrixWorld.copy(this.matrix),this.matrixWorldNeedsUpdate=
-!1,g=!0;for(var h=0,k=this.children.length;h<k;h++)this.children[h].updateMatrixWorld(g)}}();THREE.Path=function(a){THREE.CurvePath.call(this);this.actions=[];a&&this.fromPoints(a)};T)raw_html",R"raw_html(HREE.Path.prototype=Object.create(THREE.CurvePath.prototype);THREE.PathActions={MOVE_TO:"moveTo",LINE_TO:"lineTo",QUADRATIC_CURVE_TO:"quadraticCurveTo",BEZIER_CURVE_TO:"bezierCurveTo",CSPLINE_THRU:"splineThru",ARC:"arc",ELLIPSE:"ellipse"};
-THREE.Path.proto)raw_html",R"raw_html(type.fromPoints=function(a){this.moveTo(a[0].x,a[0].y);for(var b=1,c=a.length;b<c;b++)this.lineTo(a[b].x,a[b].y)};THREE.Path.prototype.moveTo=function(a,b){var c=Array.prototype.slice.call(arguments);this.actions.push({action:THREE.PathActions.MOVE_TO,args)raw_html",R"raw_html(:c})};
-THREE.Path.prototype.lineTo=function(a,b){var c=Array.prototype.slice.call(arguments),d=this.actions[this.actions.length-1].args,d=new THREE.LineCurve(new THREE.Vector2(d[d.length-2],d[d.length-1]),new THREE.Vector2(a,b));this.curves.push(d);this.ac)raw_html",R"raw_html(tions.push({action:THREE.PathActions.LINE_TO,args:c})};
-THREE.Path.prototype.quadraticCurveTo=function(a,b,c,d){var e=Array.prototype.slice.call(arguments),f=this.actions[this.actions.length-1].args,f=new THREE.QuadraticBezierCurve(new THREE.Vector2(f[f.le)raw_html",R"raw_html(ngth-2],f[f.length-1]),new THREE.Vector2(a,b),new THREE.Vector2(c,d));this.curves.push(f);this.actions.push({action:THREE.PathActions.QUADRATIC_CURVE_TO,args:e})};
-THREE.Path.prototype.bezierCurveTo=function(a,b,c,d,e,f){var g=Array.prototype.slice.call(ar)raw_html",R"raw_html(guments),h=this.actions[this.actions.length-1].args,h=new THREE.CubicBezierCurve(new THREE.Vector2(h[h.length-2],h[h.length-1]),new THREE.Vector2(a,b),new THREE.Vector2(c,d),new THREE.Vector2(e,f));this.curves.push(h);this.actions.push({action:THREE.PathAc)raw_html",R"raw_html(tions.BEZIER_CURVE_TO,args:g})};
-THREE.Path.prototype.splineThru=function(a){var b=Array.prototype.slice.call(arguments),c=this.actions[this.actions.length-1].args,c=[new THREE.Vector2(c[c.length-2],c[c.length-1])];Array.prototype.push.apply(c,a);c=new THR)raw_html",R"raw_html(EE.SplineCurve(c);this.curves.push(c);this.actions.push({action:THREE.PathActions.CSPLINE_THRU,args:b})};THREE.Path.prototype.arc=function(a,b,c,d,e,f){var g=this.actions[this.actions.length-1].args;this.absarc(a+g[g.length-2],b+g[g.length-1],c,d,e,f)};
-TH)raw_html",R"raw_html(REE.Path.prototype.absarc=function(a,b,c,d,e,f){this.absellipse(a,b,c,c,d,e,f)};THREE.Path.prototype.ellipse=function(a,b,c,d,e,f,g){var h=this.actions[this.actions.length-1].args;this.absellipse(a+h[h.length-2],b+h[h.length-1],c,d,e,f,g)};THREE.Path.proto)raw_html",R"raw_html(type.absellipse=function(a,b,c,d,e,f,g){var h=Array.prototype.slice.call(arguments),k=new THREE.EllipseCurve(a,b,c,d,e,f,g);this.curves.push(k);k=k.getPoint(1);h.push(k.x);h.push(k.y);this.actions.push({action:THREE.PathActions.ELLIPSE,args:h})};
-THREE.Pat)raw_html",R"raw_html(h.prototype.getSpacedPoints=function(a,b){a||(a=40);for(var c=[],d=0;d<a;d++)c.push(this.getPoint(d/a));return c};
-THREE.Path.prototype.getPoints=function(a,b){if(this.useSpacedPoints)return console.log("tata"),this.getSpacedPoints(a,b);a=a||12;var c=[],d,)raw_html",R"raw_html(e,f,g,h,k,n,p,q,m,r,t,s;d=0;for(e=this.actions.length;d<e;d++)switch(f=this.actions[d],g=f.action,f=f.args,g){case THREE.PathActions.MOVE_TO:c.push(new THREE.Vector2(f[0],f[1]));break;case THREE.PathActions.LINE_TO:c.push(new THREE.Vector2(f[0],f[1]));brea)raw_html",R"raw_html(k;case THREE.PathActions.QUADRATIC_CURVE_TO:h=f[2];k=f[3];q=f[0];m=f[1];0<c.length?(g=c[c.length-1],r=g.x,
-t=g.y):(g=this.actions[d-1].args,r=g[g.length-2],t=g[g.length-1]);for(f=1;f<=a;f++)s=f/a,g=THREE.Shape.Utils.b2(s,r,q,h),s=THREE.Shape.Utils.b2(s,t,m)raw_html",R"raw_html(,k),c.push(new THREE.Vector2(g,s));break;case THREE.PathActions.BEZIER_CURVE_TO:h=f[4];k=f[5];q=f[0];m=f[1];n=f[2];p=f[3];0<c.length?(g=c[c.length-1],r=g.x,t=g.y):(g=this.actions[d-1].args,r=g[g.length-2],t=g[g.length-1]);for(f=1;f<=a;f++)s=f/a,g=THREE.Sha)raw_html",R"raw_html(pe.Utils.b3(s,r,q,n,h),s=THREE.Shape.Utils.b3(s,t,m,p,k),c.push(new THREE.Vector2(g,s));break;case THREE.PathActions.CSPLINE_THRU:g=
-this.actions[d-1].args;s=[new THREE.Vector2(g[g.length-2],g[g.length-1])];g=a*f[0].length;s=s.concat(f[0]);s=new THREE.Spli)raw_html",R"raw_html(neCurve(s);for(f=1;f<=g;f++)c.push(s.getPointAt(f/g));break;case THREE.PathActions.ARC:h=f[0];k=f[1];m=f[2];n=f[3];g=f[4];q=!!f[5];r=g-n;t=2*a;for(f=1;f<=t;f++)s=f/t,q||(s=1-s),s=n+s*r,g=h+m*Math.cos(s),s=k+m*Math.sin(s),c.push(new THREE.Vector2(g,s));brea)raw_html",R"raw_html(k;case THREE.PathActions.ELLIPSE:for(h=f[0],k=f[1],m=f[2],p=f[3],n=f[4],g=f[5],q=!!f[6],r=g-n,t=2*a,f=1;f<=t;f++)s=f/t,q||
-(s=1-s),s=n+s*r,g=h+m*Math.cos(s),s=k+p*Math.sin(s),c.push(new THREE.Vector2(g,s))}d=c[c.length-1];1E-10>Math.abs(d.x-c[0].x)&&1E-10>)raw_html",R"raw_html(Math.abs(d.y-c[0].y)&&c.splice(c.length-1,1);b&&c.push(c[0]);return c};
-THREE.Path.prototype.toShapes=function(a,b){function c(a){for(var b=[],c=0,d=a.length;c<d;c++){var e=a[c],f=new THREE.Shape;f.actions=e.actions;f.curves=e.curves;b.push(f)}return b}fun)raw_html",R"raw_html(ction d(a,b){for(var c=b.length,d=!1,e=c-1,f=0;f<c;e=f++){var g=b[e],h=b[f],k=h.x-g.x,m=h.y-g.y;if(1E-10<Math.abs(m)){if(0>m&&(g=b[f],k=-k,h=b[e],m=-m),!(a.y<g.y||a.y>h.y))if(a.y==g.y){if(a.x==g.x)return!0}else{e=m*(a.x-g.x)-k*(a.y-g.y);if(0==e)return!0;0>)raw_html",R"raw_html(e||(d=!d)}}else if(a.y==g.y&&(h.x<=a.x&&a.x<=g.x||g.x<=a.x&&a.x<=
-h.x))return!0}return d}var e=function(a){var b,c,d,e,f=[],g=new THREE.Path;b=0;for(c=a.length;b<c;b++)d=a[b],e=d.args,d=d.action,d==THREE.PathActions.MOVE_TO&&0!=g.actions.length&&(f.push(g))raw_html",R"raw_html(,g=new THREE.Path),g[d].apply(g,e);0!=g.actions.length&&f.push(g);return f}(this.actions);if(0==e.length)return[];if(!0===b)return c(e);var f,g,h,k=[];if(1==e.length)return g=e[0],h=new THREE.Shape,h.actions=g.actions,h.curves=g.curves,k.push(h),k;var n=!T)raw_html",R"raw_html(HREE.Shape.Utils.isClockWise(e[0].getPoints()),n=a?!n:n;
-h=[];var p=[],q=[],m=0,r;p[m]=void 0;q[m]=[];var t,s;t=0;for(s=e.length;t<s;t++)g=e[t],r=g.getPoints(),f=THREE.Shape.Utils.isClockWise(r),(f=a?!f:f)?(!n&&p[m]&&m++,p[m]={s:new THREE.Shape,p:r},p[m].s)raw_html",R"raw_html(.actions=g.actions,p[m].s.curves=g.curves,n&&m++,q[m]=[]):q[m].push({h:g,p:r[0]});if(!p[0])return c(e);if(1<p.length){t=!1;s=[];g=0;for(e=p.length;g<e;g++)h[g]=[];g=0;for(e=p.length;g<e;g++)for(f=q[g],n=0;n<f.length;n++){m=f[n];r=!0;for(var u=0;u<p.length;)raw_html",R"raw_html(u++)d(m.p,p[u].p)&&(g!=u&&s.push({froms:g,tos:u,
-hole:n}),r?(r=!1,h[u].push(m)):t=!0);r&&h[g].push(m)}0<s.length&&(t||(q=h))}t=0;for(s=p.length;t<s;t++)for(h=p[t].s,k.push(h),g=q[t],e=0,f=g.length;e<f;e++)h.holes.push(g[e].h);return k};THREE.Shape=function)raw_html",R"raw_html((){THREE.Path.apply(this,arguments);this.holes=[]};THREE.Shape.prototype=Object.create(THREE.Path.prototype);THREE.Shape.prototype.extrude=function(a){return new THREE.ExtrudeGeometry(this,a)};THREE.Shape.prototype.makeGeometry=function(a){return new THREE)raw_html",R"raw_html(.ShapeGeometry(this,a)};
-THREE.Shape.prototype.getPointsHoles=function(a){var b,c=this.holes.length,d=[];for(b=0;b<c;b++)d[b]=this.holes[b].getTransformedPoints(a,this.bends);return d};THREE.Shape.prototype.getSpacedPointsHoles=function(a){var b,c=this.hol)raw_html",R"raw_html(es.length,d=[];for(b=0;b<c;b++)d[b]=this.holes[b].getTransformedSpacedPoints(a,this.bends);return d};THREE.Shape.prototype.extractAllPoints=function(a){return{shape:this.getTransformedPoints(a),holes:this.getPointsHoles(a)}};
-THREE.Shape.prototype.extractP)raw_html",R"raw_html(oints=function(a){return this.useSpacedPoints?this.extractAllSpacedPoints(a):this.extractAllPoints(a)};THREE.Shape.prototype.extractAllSpacedPoints=function(a){return{shape:this.getTransformedSpacedPoints(a),holes:this.getSpacedPointsHoles(a)}};
-THREE.Shap)raw_html",R"raw_html(e.Utils={triangulateShape:function(a,b){function c(a,b,c){return a.x!=b.x?a.x<b.x?a.x<=c.x&&c.x<=b.x:b.x<=c.x&&c.x<=a.x:a.y<b.y?a.y<=c.y&&c.y<=b.y:b.y<=c.y&&c.y<=a.y}function d(a,b,d,e,f){var g=b.x-a.x,h=b.y-a.y,k=e.x-d.x,n=e.y-d.y,p=a.x-d.x,q=a.y-d.y,D=h*)raw_html",R"raw_html(k-g*n,E=h*p-g*q;if(1E-10<Math.abs(D)){if(0<D){if(0>E||E>D)return[];k=n*p-k*q;if(0>k||k>D)return[]}else{if(0<E||E<D)return[];k=n*p-k*q;if(0<k||k<D)return[]}if(0==k)return!f||0!=E&&E!=D?[a]:[];if(k==D)return!f||0!=E&&E!=D?[b]:[];if(0==E)return[d];
-if(E==D)re)raw_html",R"raw_html(turn[e];f=k/D;return[{x:a.x+f*g,y:a.y+f*h}]}if(0!=E||n*p!=k*q)return[];h=0==g&&0==h;k=0==k&&0==n;if(h&&k)return a.x!=d.x||a.y!=d.y?[]:[a];if(h)return c(d,e,a)?[a]:[];if(k)return c(a,b,d)?[d]:[];0!=g?(a.x<b.x?(g=a,k=a.x,h=b,a=b.x):(g=b,k=b.x,h=a,a=a.x),d.x<)raw_html",R"raw_html(e.x?(b=d,D=d.x,n=e,d=e.x):(b=e,D=e.x,n=d,d=d.x)):(a.y<b.y?(g=a,k=a.y,h=b,a=b.y):(g=b,k=b.y,h=a,a=a.y),d.y<e.y?(b=d,D=d.y,n=e,d=e.y):(b=e,D=e.y,n=d,d=d.y));return k<=D?a<D?[]:a==D?f?[]:[b]:a<=d?[b,h]:[b,n]:k>d?[]:k==d?f?[]:[g]:a<=d?[g,h]:
-[g,n]}function e(a)raw_html",R"raw_html(,b,c,d){var e=b.x-a.x,f=b.y-a.y;b=c.x-a.x;c=c.y-a.y;var g=d.x-a.x;d=d.y-a.y;a=e*c-f*b;e=e*d-f*g;return 1E-10<Math.abs(a)?(b=g*c-d*b,0<a?0<=e&&0<=b:0<=e||0<=b):0<e}var f,g,h,k,n,p={};h=a.concat();f=0;for(g=b.length;f<g;f++)Array.prototype.push.apply(h,b[f]))raw_html",R"raw_html(;f=0;for(g=h.length;f<g;f++)n=h[f].x+":"+h[f].y,void 0!==p[n]&&console.log("Duplicate point",n),p[n]=f;f=function(a,b){function c(a,b){var d=h.length-1,f=a-1;0>f&&(f=d);var g=a+1;g>d&&(g=0);d=e(h[a],h[f],h[g],k[b]);if(!d)return!1;
-d=k.length-1;f=b-1;0>f&&()raw_html",R"raw_html(f=d);g=b+1;g>d&&(g=0);return(d=e(k[b],k[f],k[g],h[a]))?!0:!1}function f(a,b){var c,e;for(c=0;c<h.length;c++)if(e=c+1,e%=h.length,e=d(a,b,h[c],h[e],!0),0<e.length)return!0;return!1}function g(a,c){var e,f,h,k;for(e=0;e<n.length;e++)for(f=b[n[e]],h=0;h<f.len)raw_html",R"raw_html(gth;h++)if(k=h+1,k%=f.length,k=d(a,c,f[h],f[k],!0),0<k.length)return!0;return!1}var h=a.concat(),k,n=[],p,q,x,D,E,A=[],B,F,R,H=0;for(p=b.length;H<p;H++)n.push(H);B=0;for(var C=2*n.length;0<n.length;){C--;if(0>C){console.log("Infinite Loop! Holes left:"+
-n.)raw_html",R"raw_html(length+", Probably Hole outside Shape!");break}for(q=B;q<h.length;q++){x=h[q];p=-1;for(H=0;H<n.length;H++)if(D=n[H],E=x.x+":"+x.y+":"+D,void 0===A[E]){k=b[D];for(F=0;F<k.length;F++)if(D=k[F],c(q,F)&&!f(x,D)&&!g(x,D)){p=F;n.splice(H,1);B=h.slice(0,q+1);D=h.)raw_html",R"raw_html(slice(q);F=k.slice(p);R=k.slice(0,p+1);h=B.concat(F).concat(R).concat(D);B=q;break}if(0<=p)break;A[E]=!0}if(0<=p)break}}return h}(a,b);var q=THREE.FontUtils.Triangulate(f,!1);f=0;for(g=q.length;f<g;f++)for(k=q[f],h=0;3>h;h++)n=k[h].x+":"+k[h].y,
-n=p[n],voi)raw_html",R"raw_html(d 0!==n&&(k[h]=n);return q.concat()},isClockWise:function(a){return 0>THREE.FontUtils.Triangulate.area(a)},b2p0:function(a,b){var c=1-a;return c*c*b},b2p1:function(a,b){return 2*(1-a)*a*b},b2p2:function(a,b){return a*a*b},b2:function(a,b,c,d){return this.b)raw_html",R"raw_html(2p0(a,b)+this.b2p1(a,c)+this.b2p2(a,d)},b3p0:function(a,b){var c=1-a;return c*c*c*b},b3p1:function(a,b){var c=1-a;return 3*c*c*a*b},b3p2:function(a,b){return 3*(1-a)*a*a*b},b3p3:function(a,b){return a*a*a*b},b3:function(a,b,c,d,e){return this.b3p0(a,
-b)+th)raw_html",R"raw_html(is.b3p1(a,c)+this.b3p2(a,d)+this.b3p3(a,e)}};THREE.LineCurve=function(a,b){this.v1=a;this.v2=b};THREE.LineCurve.prototype=Object.create(THREE.Curve.prototype);THREE.LineCurve.prototype.getPoint=function(a){var b=this.v2.clone().sub(this.v1);b.multiplyScala)raw_html",R"raw_html(r(a).add(this.v1);return b};THREE.LineCurve.prototype.getPointAt=function(a){return this.getPoint(a)};THREE.LineCurve.prototype.getTangent=function(a){return this.v2.clone().sub(this.v1).normalize()};
-THREE.QuadraticBezierCurve=function(a,b,c){this.v0=a;th)raw_html",R"raw_html(is.v1=b;this.v2=c};THREE.QuadraticBezierCurve.prototype=Object.create(THREE.Curve.prototype);THREE.QuadraticBezierCurve.prototype.getPoint=function(a){var b=new THREE.Vector2;b.x=THREE.Shape.Utils.b2(a,this.v0.x,this.v1.x,this.v2.x);b.y=THREE.Shape.Utils.b)raw_html",R"raw_html(2(a,this.v0.y,this.v1.y,this.v2.y);return b};
-THREE.QuadraticBezierCurve.prototype.getTangent=function(a){var b=new THREE.Vector2;b.x=THREE.Curve.Utils.tangentQuadraticBezier(a,this.v0.x,this.v1.x,this.v2.x);b.y=THREE.Curve.Utils.tangentQuadraticBezier(a,t)raw_html",R"raw_html(his.v0.y,this.v1.y,this.v2.y);return b.normalize()};THREE.CubicBezierCurve=function(a,b,c,d){this.v0=a;this.v1=b;this.v2=c;this.v3=d};THREE.CubicBezierCurve.prototype=Object.create(THREE.Curve.prototype);
-THREE.CubicBezierCurve.prototype.getPoint=function()raw_html",R"raw_html(a){var b;b=THREE.Shape.Utils.b3(a,this.v0.x,this.v1.x,this.v2.x,this.v3.x);a=THREE.Shape.Utils.b3(a,this.v0.y,this.v1.y,this.v2.y,this.v3.y);return new THREE.Vector2(b,a)};THREE.CubicBezierCurve.prototype.getTangent=function(a){var b;b=THREE.Curve.Utils.ta)raw_html",R"raw_html(ngentCubicBezier(a,this.v0.x,this.v1.x,this.v2.x,this.v3.x);a=THREE.Curve.Utils.tangentCubicBezier(a,this.v0.y,this.v1.y,this.v2.y,this.v3.y);b=new THREE.Vector2(b,a);b.normalize();return b};
-THREE.SplineCurve=function(a){this.points=void 0==a?[]:a};THREE.)raw_html",R"raw_html(SplineCurve.prototype=Object.create(THREE.Curve.prototype);THREE.SplineCurve.prototype.getPoint=function(a){var b=this.points;a*=b.length-1;var c=Math.floor(a);a-=c;var d=b[0==c?c:c-1],e=b[c],f=b[c>b.length-2?b.length-1:c+1],b=b[c>b.length-3?b.length-1:c+2)raw_html",R"raw_html(],c=new THREE.Vector2;c.x=THREE.Curve.Utils.interpolate(d.x,e.x,f.x,b.x,a);c.y=THREE.Curve.Utils.interpolate(d.y,e.y,f.y,b.y,a);return c};
-THREE.EllipseCurve=function(a,b,c,d,e,f,g){this.aX=a;this.aY=b;this.xRadius=c;this.yRadius=d;this.aStartAngle=e;this.)raw_html",R"raw_html(aEndAngle=f;this.aClockwise=g};THREE.EllipseCurve.prototype=Object.create(THREE.Curve.prototype);
-THREE.EllipseCurve.prototype.getPoint=function(a){var b=this.aEndAngle-this.aStartAngle;0>b&&(b+=2*Math.PI);b>2*Math.PI&&(b-=2*Math.PI);a=!0===this.aClockwise)raw_html",R"raw_html(?this.aEndAngle+(1-a)*(2*Math.PI-b):this.aStartAngle+a*b;b=new THREE.Vector2;b.x=this.aX+this.xRadius*Math.cos(a);b.y=this.aY+this.yRadius*Math.sin(a);return b};THREE.ArcCurve=function(a,b,c,d,e,f){THREE.EllipseCurve.call(this,a,b,c,c,d,e,f)};THREE.ArcCurv)raw_html",R"raw_html(e.prototype=Object.create(THREE.EllipseCurve.prototype);
-THREE.LineCurve3=THREE.Curve.create(function(a,b){this.v1=a;this.v2=b},function(a){var b=new THREE.Vector3;b.subVectors(this.v2,this.v1);b.multiplyScalar(a);b.add(this.v1);return b});THREE.QuadraticB)raw_html",R"raw_html(ezierCurve3=THREE.Curve.create(function(a,b,c){this.v0=a;this.v1=b;this.v2=c},function(a){var b=new THREE.Vector3;b.x=THREE.Shape.Utils.b2(a,this.v0.x,this.v1.x,this.v2.x);b.y=THREE.Shape.Utils.b2(a,this.v0.y,this.v1.y,this.v2.y);b.z=THREE.Shape.Utils.b2(a)raw_html",R"raw_html(,this.v0.z,this.v1.z,this.v2.z);return b});
-THREE.CubicBezierCurve3=THREE.Curve.create(function(a,b,c,d){this.v0=a;this.v1=b;this.v2=c;this.v3=d},function(a){var b=new THREE.Vector3;b.x=THREE.Shape.Utils.b3(a,this.v0.x,this.v1.x,this.v2.x,this.v3.x);b.y=TH)raw_html",R"raw_html(REE.Shape.Utils.b3(a,this.v0.y,this.v1.y,this.v2.y,this.v3.y);b.z=THREE.Shape.Utils.b3(a,this.v0.z,this.v1.z,this.v2.z,this.v3.z);return b});
-THREE.SplineCurve3=THREE.Curve.create(function(a){this.points=void 0==a?[]:a},function(a){var b=this.points;a*=b.l)raw_html",R"raw_html(ength-1;var c=Math.floor(a);a-=c;var d=b[0==c?c:c-1],e=b[c],f=b[c>b.length-2?b.length-1:c+1],b=b[c>b.length-3?b.length-1:c+2],c=new THREE.Vector3;c.x=THREE.Curve.Utils.interpolate(d.x,e.x,f.x,b.x,a);c.y=THREE.Curve.Utils.interpolate(d.y,e.y,f.y,b.y,a);c.z=)raw_html",R"raw_html(THREE.Curve.Utils.interpolate(d.z,e.z,f.z,b.z,a);return c});
-THREE.ClosedSplineCurve3=THREE.Curve.create(function(a){this.points=void 0==a?[]:a},function(a){var b=this.points;a*=b.length-0;var c=Math.floor(a);a-=c;var c=c+(0<c?0:(Math.floor(Math.abs(c)/b.l)raw_html",R"raw_html(ength)+1)*b.length),d=b[(c-1)%b.length],e=b[c%b.length],f=b[(c+1)%b.length],b=b[(c+2)%b.length],c=new THREE.Vector3;c.x=THREE.Curve.Utils.interpolate(d.x,e.x,f.x,b.x,a);c.y=THREE.Curve.Utils.interpolate(d.y,e.y,f.y,b.y,a);c.z=THREE.Curve.Utils.interpolate()raw_html",R"raw_html(d.z,e.z,f.z,b.z,a);return c});
-THREE.AnimationHandler={LINEAR:0,CATMULLROM:1,CATMULLROM_FORWARD:2,add:function(){console.warn("THREE.AnimationHandler.add() has been deprecated.")},get:function(){console.warn("THREE.AnimationHandler.get() has been deprecate)raw_html",R"raw_html(d.")},remove:function(){console.warn("THREE.AnimationHandler.remove() has been deprecated.")},animations:[],init:function(a){if(!0!==a.initialized){for(var b=0;b<a.hierarchy.length;b++){for(var c=0;c<a.hierarchy[b].keys.length;c++)if(0>a.hierarchy[b].keys[)raw_html",R"raw_html(c].time&&(a.hierarchy[b].keys[c].time=
-0),void 0!==a.hierarchy[b].keys[c].rot&&!(a.hierarchy[b].keys[c].rot instanceof THREE.Quaternion)){var d=a.hierarchy[b].keys[c].rot;a.hierarchy[b].keys[c].rot=(new THREE.Quaternion).fromArray(d)}if(a.hierarchy[b].keys)raw_html",R"raw_html(.length&&void 0!==a.hierarchy[b].keys[0].morphTargets){d={};for(c=0;c<a.hierarchy[b].keys.length;c++)for(var e=0;e<a.hierarchy[b].keys[c].morphTargets.length;e++){var f=a.hierarchy[b].keys[c].morphTargets[e];d[f]=-1}a.hierarchy[b].usedMorphTargets=d;for(c=)raw_html",R"raw_html(0;c<a.hierarchy[b].keys.length;c++){var g=
-{};for(f in d){for(e=0;e<a.hierarchy[b].keys[c].morphTargets.length;e++)if(a.hierarchy[b].keys[c].morphTargets[e]===f){g[f]=a.hierarchy[b].keys[c].morphTargetsInfluences[e];break}e===a.hierarchy[b].keys[c].morphTa)raw_html",R"raw_html(rgets.length&&(g[f]=0)}a.hierarchy[b].keys[c].morphTargetsInfluences=g}}for(c=1;c<a.hierarchy[b].keys.length;c++)a.hierarchy[b].keys[c].time===a.hierarchy[b].keys[c-1].time&&(a.hierarchy[b].keys.splice(c,1),c--);for(c=0;c<a.hierarchy[b].keys.length;c++)a.h)raw_html",R"raw_html(ierarchy[b].keys[c].index=c}a.initialized=
-!0;return a}},parse:function(a){var b=function(a,c){c.push(a);for(var d=0;d<a.children.length;d++)b(a.children[d],c)},c=[];if(a instanceof THREE.SkinnedMesh)for(var d=0;d<a.skeleton.bones.length;d++)c.push(a.skele)raw_html",R"raw_html(ton.bones[d]);else b(a,c);return c},play:function(a){-1===this.animations.indexOf(a)&&this.animations.push(a)},stop:function(a){a=this.animations.indexOf(a);-1!==a&&this.animations.splice(a,1)},update:function(a){for(var b=0;b<this.animations.length;b++)th)raw_html",R"raw_html(is.animations[b].resetBlendWeights();
-for(b=0;b<this.animations.length;b++)this.animations[b].update(a)}};THREE.Animation=function(a,b){this.root=a;this.data=THREE.AnimationHandler.init(b);this.hierarchy=THREE.AnimationHandler.parse(a);this.currentTime=0;t)raw_html",R"raw_html(his.timeScale=1;this.isPlaying=!1;this.loop=!0;this.weight=0;this.interpolationType=THREE.AnimationHandler.LINEAR};THREE.Animation.prototype.keyTypes=["pos","rot","scl"];
-THREE.Animation.prototype.play=function(a,b){this.currentTime=void 0!==a?a:0;this.wei)raw_html",R"raw_html(ght=void 0!==b?b:1;this.isPlaying=!0;this.reset();THREE.AnimationHandler.play(this)};THREE.Animation.prototype.stop=function(){this.isPlaying=!1;THREE.AnimationHandler.stop(this)};
-THREE.Animation.prototype.reset=function(){for(var a=0,b=this.hierarchy.len)raw_html",R"raw_html(gth;a<b;a++){var c=this.hierarchy[a];c.matrixAutoUpdate=!0;void 0===c.animationCache&&(c.animationCache={animations:{},blending:{positionWeight:0,quaternionWeight:0,scaleWeight:0}});void 0===c.animationCache.animations[this.data.name]&&(c.animationCache.an)raw_html",R"raw_html(imations[this.data.name]={},c.animationCache.animations[this.data.name].prevKey={pos:0,rot:0,scl:0},c.animationCache.animations[this.data.name].nextKey={pos:0,rot:0,scl:0},
-c.animationCache.animations[this.data.name].originalMatrix=c.matrix);for(var c=c.an)raw_html",R"raw_html(imationCache.animations[this.data.name],d=0;3>d;d++){for(var e=this.keyTypes[d],f=this.data.hierarchy[a].keys[0],g=this.getNextKeyWith(e,a,1);g.time<this.currentTime&&g.index>f.index;)f=g,g=this.getNextKeyWith(e,a,g.index+1);c.prevKey[e]=f;c.nextKey[e]=g}})raw_html",R"raw_html(};
-THREE.Animation.prototype.resetBlendWeights=function(){for(var a=0,b=this.hierarchy.length;a<b;a++){var c=this.hierarchy[a];void 0!==c.animationCache&&(c.animationCache.blending.positionWeight=0,c.animationCache.blending.quaternionWeight=0,c.animationCa)raw_html",R"raw_html(che.blending.scaleWeight=0)}};
-THREE.Animation.prototype.update=function(){var a=[],b=new THREE.Vector3,c=new THREE.Vector3,d=new THREE.Quaternion,e=function(a,b){var c=[],d=[],e,q,m,r,t,s;e=(a.length-1)*b;q=Math.floor(e);e-=q;c[0]=0===q?q:q-1;c[1]=q;c[2]=)raw_html",R"raw_html(q>a.length-2?q:q+1;c[3]=q>a.length-3?q:q+2;q=a[c[0]];r=a[c[1]];t=a[c[2]];s=a[c[3]];c=e*e;m=e*c;d[0]=f(q[0],r[0],t[0],s[0],e,c,m);d[1]=f(q[1],r[1],t[1],s[1],e,c,m);d[2]=f(q[2],r[2],t[2],s[2],e,c,m);return d},f=function(a,b,c,d,e,f,m){a=.5*(c-a);d=.5*(d-b);r)raw_html",R"raw_html(eturn(2*(b-c)+a+d)*m+
-(-3*(b-c)-2*a-d)*f+a*e+b};return function(f){if(!1!==this.isPlaying&&(this.currentTime+=f*this.timeScale,0!==this.weight)){f=this.data.length;if(this.currentTime>f||0>this.currentTime)if(this.loop)this.currentTime%=f,0>this.currentTim)raw_html",R"raw_html(e&&(this.currentTime+=f),this.reset();else{this.stop();return}f=0;for(var h=this.hierarchy.length;f<h;f++)for(var k=this.hierarchy[f],n=k.animationCache.animations[this.data.name],p=k.animationCache.blending,q=0;3>q;q++){var m=this.keyTypes[q],r=n.prevKey[)raw_html",R"raw_html(m],t=n.nextKey[m];
-if(0<this.timeScale&&t.time<=this.currentTime||0>this.timeScale&&r.time>=this.currentTime){r=this.data.hierarchy[f].keys[0];for(t=this.getNextKeyWith(m,f,1);t.time<this.currentTime&&t.index>r.index;)r=t,t=this.getNextKeyWith(m,f,t.index+)raw_html",R"raw_html(1);n.prevKey[m]=r;n.nextKey[m]=t}k.matrixAutoUpdate=!0;k.matrixWorldNeedsUpdate=!0;var s=(this.currentTime-r.time)/(t.time-r.time),u=r[m],v=t[m];0>s&&(s=0);1<s&&(s=1);if("pos"===m)if(this.interpolationType===THREE.AnimationHandler.LINEAR)c.x=u[0]+(v[0]-u[0)raw_html",R"raw_html(])*s,c.y=
-u[1]+(v[1]-u[1])*s,c.z=u[2]+(v[2]-u[2])*s,r=this.weight/(this.weight+p.positionWeight),k.position.lerp(c,r),p.positionWeight+=this.weight;else{if(this.interpolationType===THREE.AnimationHandler.CATMULLROM||this.interpolationType===THREE.Animation)raw_html",R"raw_html(Handler.CATMULLROM_FORWARD)a[0]=this.getPrevKeyWith("pos",f,r.index-1).pos,a[1]=u,a[2]=v,a[3]=this.getNextKeyWith("pos",f,t.index+1).pos,s=.33*s+.33,t=e(a,s),r=this.weight/(this.weight+p.positionWeight),p.positionWeight+=this.weight,m=k.position,m.x+=(t[0])raw_html",R"raw_html(-
-m.x)*r,m.y+=(t[1]-m.y)*r,m.z+=(t[2]-m.z)*r,this.interpolationType===THREE.AnimationHandler.CATMULLROM_FORWARD&&(s=e(a,1.01*s),b.set(s[0],s[1],s[2]),b.sub(m),b.y=0,b.normalize(),s=Math.atan2(b.x,b.z),k.rotation.set(0,s,0))}else"rot"===m?(THREE.Quaternion.)raw_html",R"raw_html(slerp(u,v,d,s),0===p.quaternionWeight?(k.quaternion.copy(d),p.quaternionWeight=this.weight):(r=this.weight/(this.weight+p.quaternionWeight),THREE.Quaternion.slerp(k.quaternion,d,k.quaternion,r),p.quaternionWeight+=this.weight)):"scl"===m&&(c.x=u[0]+
-(v[0]-)raw_html",R"raw_html(u[0])*s,c.y=u[1]+(v[1]-u[1])*s,c.z=u[2]+(v[2]-u[2])*s,r=this.weight/(this.weight+p.scaleWeight),k.scale.lerp(c,r),p.scaleWeight+=this.weight)}return!0}}}();THREE.Animation.prototype.getNextKeyWith=function(a,b,c){var d=this.data.hierarchy[b].keys;for(c=thi)raw_html",R"raw_html(s.interpolationType===THREE.AnimationHandler.CATMULLROM||this.interpolationType===THREE.AnimationHandler.CATMULLROM_FORWARD?c<d.length-1?c:d.length-1:c%d.length;c<d.length;c++)if(void 0!==d[c][a])return d[c];return this.data.hierarchy[b].keys[0]};
-THREE.An)raw_html",R"raw_html(imation.prototype.getPrevKeyWith=function(a,b,c){var d=this.data.hierarchy[b].keys;for(c=this.interpolationType===THREE.AnimationHandler.CATMULLROM||this.interpolationType===THREE.AnimationHandler.CATMULLROM_FORWARD?0<c?c:0:0<=c?c:c+d.length;0<=c;c--)if(vo)raw_html",R"raw_html(id 0!==d[c][a])return d[c];return this.data.hierarchy[b].keys[d.length-1]};
-THREE.KeyFrameAnimation=function(a){this.root=a.node;this.data=THREE.AnimationHandler.init(a);this.hierarchy=THREE.AnimationHandler.parse(this.root);this.currentTime=0;this.timeSca)raw_html",R"raw_html(le=.001;this.isPlaying=!1;this.loop=this.isPaused=!0;a=0;for(var b=this.hierarchy.length;a<b;a++){var c=this.data.hierarchy[a].sids,d=this.hierarchy[a];if(this.data.hierarchy[a].keys.length&&c){for(var e=0;e<c.length;e++){var f=c[e],g=this.getNextKeyWith(f)raw_html",R"raw_html(,a,0);g&&g.apply(f)}d.matrixAutoUpdate=!1;this.data.hierarchy[a].node.updateMatrix();
+THREE.Curve.Utils={tangentQuadraticBezier:function(a,b,c,d){return 2*(1-a)*(c-b)+2*a*(d-c)},tang)raw_html",R"raw_html(entCubicBezier:function(a,b,c,d,e){return-3*b*(1-a)*(1-a)+3*c*(1-a)*(1-a)-6*a*c*(1-a)+6*a*d*(1-a)-3*a*a*d+3*a*a*e},tangentSpline:function(a,b,c,d,e){return 6*a*a-6*a+(3*a*a-4*a+1)+(-6*a*a+6*a)+(3*a*a-2*a)},interpolate:function(a,b,c,d,e){a=.5*(c-a);d=.5*(d)raw_html",R"raw_html(-b);var f=e*e;return(2*b-2*c+a+d)*e*f+(-3*b+3*c-2*a-d)*f+a*e+b}};
+THREE.Curve.create=function(a,b){a.prototype=Object.create(THREE.Curve.prototype);a.prototype.getPoint=b;return a};THREE.CurvePath=function(){this.curves=[];this.bends=[];this.autoClose=!1};)raw_html",R"raw_html(THREE.CurvePath.prototype=Object.create(THREE.Curve.prototype);THREE.CurvePath.prototype.add=function(a){this.curves.push(a)};THREE.CurvePath.prototype.checkConnection=function(){};
+THREE.CurvePath.prototype.closePath=function(){var a=this.curves[0].getPoi)raw_html",R"raw_html(nt(0),b=this.curves[this.curves.length-1].getPoint(1);a.equals(b)||this.curves.push(new THREE.LineCurve(b,a))};THREE.CurvePath.prototype.getPoint=function(a){var b=a*this.getLength(),c=this.getCurveLengths();for(a=0;a<c.length;){if(c[a]>=b)return b=c[a]-b,)raw_html",R"raw_html(a=this.curves[a],b=1-b/a.getLength(),a.getPointAt(b);a++}return null};THREE.CurvePath.prototype.getLength=function(){var a=this.getCurveLengths();return a[a.length-1]};
+THREE.CurvePath.prototype.getCurveLengths=function(){if(this.cacheLengths&&this.cacheLe)raw_html",R"raw_html(ngths.length==this.curves.length)return this.cacheLengths;var a=[],b=0,c,d=this.curves.length;for(c=0;c<d;c++)b+=this.curves[c].getLength(),a.push(b);return this.cacheLengths=a};
+THREE.CurvePath.prototype.getBoundingBox=function(){var a=this.getPoints(),b,)raw_html",R"raw_html(c,d,e,f,g;b=c=Number.NEGATIVE_INFINITY;e=f=Number.POSITIVE_INFINITY;var h,k,n,p,q=a[0]instanceof THREE.Vector3;p=q?new THREE.Vector3:new THREE.Vector2;k=0;for(n=a.length;k<n;k++)h=a[k],h.x>b?b=h.x:h.x<e&&(e=h.x),h.y>c?c=h.y:h.y<f&&(f=h.y),q&&(h.z>d?d=h.z:h)raw_html",R"raw_html(.z<g&&(g=h.z)),p.add(h);a={minX:e,minY:f,maxX:b,maxY:c};q&&(a.maxZ=d,a.minZ=g);return a};
+THREE.CurvePath.prototype.createPointsGeometry=function(a){a=this.getPoints(a,!0);return this.createGeometry(a)};THREE.CurvePath.prototype.createSpacedPointsGeometry=)raw_html",R"raw_html(function(a){a=this.getSpacedPoints(a,!0);return this.createGeometry(a)};THREE.CurvePath.prototype.createGeometry=function(a){for(var b=new THREE.Geometry,c=0;c<a.length;c++)b.vertices.push(new THREE.Vector3(a[c].x,a[c].y,a[c].z||0));return b};THREE.CurvePa)raw_html",R"raw_html(th.prototype.addWrapPath=function(a){this.bends.push(a)};
+THREE.CurvePath.prototype.getTransformedPoints=function(a,b){var c=this.getPoints(a),d,e;b||(b=this.bends);d=0;for(e=b.length;d<e;d++)c=this.getWrapPoints(c,b[d]);return c};THREE.CurvePath.prototype)raw_html",R"raw_html(.getTransformedSpacedPoints=function(a,b){var c=this.getSpacedPoints(a),d,e;b||(b=this.bends);d=0;for(e=b.length;d<e;d++)c=this.getWrapPoints(c,b[d]);return c};
+THREE.CurvePath.prototype.getWrapPoints=function(a,b){var c=this.getBoundingBox(),d,e,f,g,h,k;d)raw_html",R"raw_html(=0;for(e=a.length;d<e;d++)f=a[d],g=f.x,h=f.y,k=g/c.maxX,k=b.getUtoTmapping(k,g),g=b.getPoint(k),k=b.getTangent(k),k.set(-k.y,k.x).multiplyScalar(h),f.x=g.x+k.x,f.y=g.y+k.y;return a};THREE.Gyroscope=function(){THREE.Object3D.call(this)};THREE.Gyroscope.prot)raw_html",R"raw_html(otype=Object.create(THREE.Object3D.prototype);
+THREE.Gyroscope.prototype.updateMatrixWorld=function(){var a=new THREE.Vector3,b=new THREE.Quaternion,c=new THREE.Vector3,d=new THREE.Vector3,e=new THREE.Quaternion,f=new THREE.Vector3;return function(g){this.)raw_html",R"raw_html(matrixAutoUpdate&&this.updateMatrix();if(this.matrixWorldNeedsUpdate||g)this.parent?(this.matrixWorld.multiplyMatrices(this.parent.matrixWorld,this.matrix),this.matrixWorld.decompose(d,e,f),this.matrix.decompose(a,b,c),this.matrixWorld.compose(d,b,f)):this)raw_html",R"raw_html(.matrixWorld.copy(this.matrix),this.matrixWorldNeedsUpdate=
+!1,g=!0;for(var h=0,k=this.children.length;h<k;h++)this.children[h].updateMatrixWorld(g)}}();THREE.Path=function(a){THREE.CurvePath.call(this);this.actions=[];a&&this.fromPoints(a)};THREE.Path.pro)raw_html",R"raw_html(totype=Object.create(THREE.CurvePath.prototype);THREE.PathActions={MOVE_TO:"moveTo",LINE_TO:"lineTo",QUADRATIC_CURVE_TO:"quadraticCurveTo",BEZIER_CURVE_TO:"bezierCurveTo",CSPLINE_THRU:"splineThru",ARC:"arc",ELLIPSE:"ellipse"};
+THREE.Path.prototype.fromPoin)raw_html",R"raw_html(ts=function(a){this.moveTo(a[0].x,a[0].y);for(var b=1,c=a.length;b<c;b++)this.lineTo(a[b].x,a[b].y)};THREE.Path.prototype.moveTo=function(a,b){var c=Array.prototype.slice.call(arguments);this.actions.push({action:THREE.PathActions.MOVE_TO,args:c})};
+THREE.)raw_html",R"raw_html(Path.prototype.lineTo=function(a,b){var c=Array.prototype.slice.call(arguments),d=this.actions[this.actions.length-1].args,d=new THREE.LineCurve(new THREE.Vector2(d[d.length-2],d[d.length-1]),new THREE.Vector2(a,b));this.curves.push(d);this.actions.push({a)raw_html",R"raw_html(ction:THREE.PathActions.LINE_TO,args:c})};
+THREE.Path.prototype.quadraticCurveTo=function(a,b,c,d){var e=Array.prototype.slice.call(arguments),f=this.actions[this.actions.length-1].args,f=new THREE.QuadraticBezierCurve(new THREE.Vector2(f[f.length-2],f[f.l)raw_html",R"raw_html(ength-1]),new THREE.Vector2(a,b),new THREE.Vector2(c,d));this.curves.push(f);this.actions.push({action:THREE.PathActions.QUADRATIC_CURVE_TO,args:e})};
+THREE.Path.prototype.bezierCurveTo=function(a,b,c,d,e,f){var g=Array.prototype.slice.call(arguments),h=th)raw_html",R"raw_html(is.actions[this.actions.length-1].args,h=new THREE.CubicBezierCurve(new THREE.Vector2(h[h.length-2],h[h.length-1]),new THREE.Vector2(a,b),new THREE.Vector2(c,d),new THREE.Vector2(e,f));this.curves.push(h);this.actions.push({action:THREE.PathActions.BEZIER_)raw_html",R"raw_html(CURVE_TO,args:g})};
+THREE.Path.prototype.splineThru=function(a){var b=Array.prototype.slice.call(arguments),c=this.actions[this.actions.length-1].args,c=[new THREE.Vector2(c[c.length-2],c[c.length-1])];Array.prototype.push.apply(c,a);c=new THREE.SplineCurv)raw_html",R"raw_html(e(c);this.curves.push(c);this.actions.push({action:THREE.PathActions.CSPLINE_THRU,args:b})};THREE.Path.prototype.arc=function(a,b,c,d,e,f){var g=this.actions[this.actions.length-1].args;this.absarc(a+g[g.length-2],b+g[g.length-1],c,d,e,f)};
+THREE.Path.prot)raw_html",R"raw_html(otype.absarc=function(a,b,c,d,e,f){this.absellipse(a,b,c,c,d,e,f)};THREE.Path.prototype.ellipse=function(a,b,c,d,e,f,g){var h=this.actions[this.actions.length-1].args;this.absellipse(a+h[h.length-2],b+h[h.length-1],c,d,e,f,g)};THREE.Path.prototype.absellip)raw_html",R"raw_html(se=function(a,b,c,d,e,f,g){var h=Array.prototype.slice.call(arguments),k=new THREE.EllipseCurve(a,b,c,d,e,f,g);this.curves.push(k);k=k.getPoint(1);h.push(k.x);h.push(k.y);this.actions.push({action:THREE.PathActions.ELLIPSE,args:h})};
+THREE.Path.prototype.g)raw_html",R"raw_html(etSpacedPoints=function(a,b){a||(a=40);for(var c=[],d=0;d<a;d++)c.push(this.getPoint(d/a));return c};
+THREE.Path.prototype.getPoints=function(a,b){if(this.useSpacedPoints)return console.log("tata"),this.getSpacedPoints(a,b);a=a||12;var c=[],d,e,f,g,h,k,n,p)raw_html",R"raw_html(,q,m,r,t,s;d=0;for(e=this.actions.length;d<e;d++)switch(f=this.actions[d],g=f.action,f=f.args,g){case THREE.PathActions.MOVE_TO:c.push(new THREE.Vector2(f[0],f[1]));break;case THREE.PathActions.LINE_TO:c.push(new THREE.Vector2(f[0],f[1]));break;case THREE.)raw_html",R"raw_html(PathActions.QUADRATIC_CURVE_TO:h=f[2];k=f[3];q=f[0];m=f[1];0<c.length?(g=c[c.length-1],r=g.x,
+t=g.y):(g=this.actions[d-1].args,r=g[g.length-2],t=g[g.length-1]);for(f=1;f<=a;f++)s=f/a,g=THREE.Shape.Utils.b2(s,r,q,h),s=THREE.Shape.Utils.b2(s,t,m,k),c.push(ne)raw_html",R"raw_html(w THREE.Vector2(g,s));break;case THREE.PathActions.BEZIER_CURVE_TO:h=f[4];k=f[5];q=f[0];m=f[1];n=f[2];p=f[3];0<c.length?(g=c[c.length-1],r=g.x,t=g.y):(g=this.actions[d-1].args,r=g[g.length-2],t=g[g.length-1]);for(f=1;f<=a;f++)s=f/a,g=THREE.Shape.Utils.b3(s)raw_html",R"raw_html(,r,q,n,h),s=THREE.Shape.Utils.b3(s,t,m,p,k),c.push(new THREE.Vector2(g,s));break;case THREE.PathActions.CSPLINE_THRU:g=
+this.actions[d-1].args;s=[new THREE.Vector2(g[g.length-2],g[g.length-1])];g=a*f[0].length;s=s.concat(f[0]);s=new THREE.SplineCurve(s);fo)raw_html",R"raw_html(r(f=1;f<=g;f++)c.push(s.getPointAt(f/g));break;case THREE.PathActions.ARC:h=f[0];k=f[1];m=f[2];n=f[3];g=f[4];q=!!f[5];r=g-n;t=2*a;for(f=1;f<=t;f++)s=f/t,q||(s=1-s),s=n+s*r,g=h+m*Math.cos(s),s=k+m*Math.sin(s),c.push(new THREE.Vector2(g,s));break;case THREE.)raw_html",R"raw_html(PathActions.ELLIPSE:for(h=f[0],k=f[1],m=f[2],p=f[3],n=f[4],g=f[5],q=!!f[6],r=g-n,t=2*a,f=1;f<=t;f++)s=f/t,q||
+(s=1-s),s=n+s*r,g=h+m*Math.cos(s),s=k+p*Math.sin(s),c.push(new THREE.Vector2(g,s))}d=c[c.length-1];1E-10>Math.abs(d.x-c[0].x)&&1E-10>Math.abs(d.y-)raw_html",R"raw_html(c[0].y)&&c.splice(c.length-1,1);b&&c.push(c[0]);return c};
+THREE.Path.prototype.toShapes=function(a,b){function c(a){for(var b=[],c=0,d=a.length;c<d;c++){var e=a[c],f=new THREE.Shape;f.actions=e.actions;f.curves=e.curves;b.push(f)}return b}function d(a,b){)raw_html",R"raw_html(for(var c=b.length,d=!1,e=c-1,f=0;f<c;e=f++){var g=b[e],h=b[f],k=h.x-g.x,m=h.y-g.y;if(1E-10<Math.abs(m)){if(0>m&&(g=b[f],k=-k,h=b[e],m=-m),!(a.y<g.y||a.y>h.y))if(a.y==g.y){if(a.x==g.x)return!0}else{e=m*(a.x-g.x)-k*(a.y-g.y);if(0==e)return!0;0>e||(d=!d)}}el)raw_html",R"raw_html(se if(a.y==g.y&&(h.x<=a.x&&a.x<=g.x||g.x<=a.x&&a.x<=
+h.x))return!0}return d}var e=function(a){var b,c,d,e,f=[],g=new THREE.Path;b=0;for(c=a.length;b<c;b++)d=a[b],e=d.args,d=d.action,d==THREE.PathActions.MOVE_TO&&0!=g.actions.length&&(f.push(g),g=new THREE.)raw_html",R"raw_html(Path),g[d].apply(g,e);0!=g.actions.length&&f.push(g);return f}(this.actions);if(0==e.length)return[];if(!0===b)return c(e);var f,g,h,k=[];if(1==e.length)return g=e[0],h=new THREE.Shape,h.actions=g.actions,h.curves=g.curves,k.push(h),k;var n=!THREE.Shape.Ut)raw_html",R"raw_html(ils.isClockWise(e[0].getPoints()),n=a?!n:n;
+h=[];var p=[],q=[],m=0,r;p[m]=void 0;q[m]=[];var t,s;t=0;for(s=e.length;t<s;t++)g=e[t],r=g.getPoints(),f=THREE.Shape.Utils.isClockWise(r),(f=a?!f:f)?(!n&&p[m]&&m++,p[m]={s:new THREE.Shape,p:r},p[m].s.actions=g.ac)raw_html",R"raw_html(tions,p[m].s.curves=g.curves,n&&m++,q[m]=[]):q[m].push({h:g,p:r[0]});if(!p[0])return c(e);if(1<p.length){t=!1;s=[];g=0;for(e=p.length;g<e;g++)h[g]=[];g=0;for(e=p.length;g<e;g++)for(f=q[g],n=0;n<f.length;n++){m=f[n];r=!0;for(var u=0;u<p.length;u++)d(m.p,p[u)raw_html",R"raw_html(].p)&&(g!=u&&s.push({froms:g,tos:u,
+hole:n}),r?(r=!1,h[u].push(m)):t=!0);r&&h[g].push(m)}0<s.length&&(t||(q=h))}t=0;for(s=p.length;t<s;t++)for(h=p[t].s,k.push(h),g=q[t],e=0,f=g.length;e<f;e++)h.holes.push(g[e].h);return k};THREE.Shape=function(){THREE.Path)raw_html",R"raw_html(.apply(this,arguments);this.holes=[]};THREE.Shape.prototype=Object.create(THREE.Path.prototype);THREE.Shape.prototype.extrude=function(a){return new THREE.ExtrudeGeometry(this,a)};THREE.Shape.prototype.makeGeometry=function(a){return new THREE.ShapeGeometr)raw_html",R"raw_html(y(this,a)};
+THREE.Shape.prototype.getPointsHoles=function(a){var b,c=this.holes.length,d=[];for(b=0;b<c;b++)d[b]=this.holes[b].getTransformedPoints(a,this.bends);return d};THREE.Shape.prototype.getSpacedPointsHoles=function(a){var b,c=this.holes.length,d=[)raw_html",R"raw_html(];for(b=0;b<c;b++)d[b]=this.holes[b].getTransformedSpacedPoints(a,this.bends);return d};THREE.Shape.prototype.extractAllPoints=function(a){return{shape:this.getTransformedPoints(a),holes:this.getPointsHoles(a)}};
+THREE.Shape.prototype.extractPoints=functio)raw_html",R"raw_html(n(a){return this.useSpacedPoints?this.extractAllSpacedPoints(a):this.extractAllPoints(a)};THREE.Shape.prototype.extractAllSpacedPoints=function(a){return{shape:this.getTransformedSpacedPoints(a),holes:this.getSpacedPointsHoles(a)}};
+THREE.Shape.Utils={tria)raw_html",R"raw_html(ngulateShape:function(a,b){function c(a,b,c){return a.x!=b.x?a.x<b.x?a.x<=c.x&&c.x<=b.x:b.x<=c.x&&c.x<=a.x:a.y<b.y?a.y<=c.y&&c.y<=b.y:b.y<=c.y&&c.y<=a.y}function d(a,b,d,e,f){var g=b.x-a.x,h=b.y-a.y,k=e.x-d.x,n=e.y-d.y,p=a.x-d.x,q=a.y-d.y,D=h*k-g*n,E=h*p-g)raw_html",R"raw_html(*q;if(1E-10<Math.abs(D)){if(0<D){if(0>E||E>D)return[];k=n*p-k*q;if(0>k||k>D)return[]}else{if(0<E||E<D)return[];k=n*p-k*q;if(0<k||k<D)return[]}if(0==k)return!f||0!=E&&E!=D?[a]:[];if(k==D)return!f||0!=E&&E!=D?[b]:[];if(0==E)return[d];
+if(E==D)return[e];f=k/D)raw_html",R"raw_html(;return[{x:a.x+f*g,y:a.y+f*h}]}if(0!=E||n*p!=k*q)return[];h=0==g&&0==h;k=0==k&&0==n;if(h&&k)return a.x!=d.x||a.y!=d.y?[]:[a];if(h)return c(d,e,a)?[a]:[];if(k)return c(a,b,d)?[d]:[];0!=g?(a.x<b.x?(g=a,k=a.x,h=b,a=b.x):(g=b,k=b.x,h=a,a=a.x),d.x<e.x?(b=d,D=d.)raw_html",R"raw_html(x,n=e,d=e.x):(b=e,D=e.x,n=d,d=d.x)):(a.y<b.y?(g=a,k=a.y,h=b,a=b.y):(g=b,k=b.y,h=a,a=a.y),d.y<e.y?(b=d,D=d.y,n=e,d=e.y):(b=e,D=e.y,n=d,d=d.y));return k<=D?a<D?[]:a==D?f?[]:[b]:a<=d?[b,h]:[b,n]:k>d?[]:k==d?f?[]:[g]:a<=d?[g,h]:
+[g,n]}function e(a,b,c,d){var e)raw_html",R"raw_html(=b.x-a.x,f=b.y-a.y;b=c.x-a.x;c=c.y-a.y;var g=d.x-a.x;d=d.y-a.y;a=e*c-f*b;e=e*d-f*g;return 1E-10<Math.abs(a)?(b=g*c-d*b,0<a?0<=e&&0<=b:0<=e||0<=b):0<e}var f,g,h,k,n,p={};h=a.concat();f=0;for(g=b.length;f<g;f++)Array.prototype.push.apply(h,b[f]);f=0;for(g=h.)raw_html",R"raw_html(length;f<g;f++)n=h[f].x+":"+h[f].y,void 0!==p[n]&&console.log("Duplicate point",n),p[n]=f;f=function(a,b){function c(a,b){var d=h.length-1,f=a-1;0>f&&(f=d);var g=a+1;g>d&&(g=0);d=e(h[a],h[f],h[g],k[b]);if(!d)return!1;
+d=k.length-1;f=b-1;0>f&&(f=d);g=b+1;g>)raw_html",R"raw_html(d&&(g=0);return(d=e(k[b],k[f],k[g],h[a]))?!0:!1}function f(a,b){var c,e;for(c=0;c<h.length;c++)if(e=c+1,e%=h.length,e=d(a,b,h[c],h[e],!0),0<e.length)return!0;return!1}function g(a,c){var e,f,h,k;for(e=0;e<n.length;e++)for(f=b[n[e]],h=0;h<f.length;h++)if(k=)raw_html",R"raw_html(h+1,k%=f.length,k=d(a,c,f[h],f[k],!0),0<k.length)return!0;return!1}var h=a.concat(),k,n=[],p,q,x,D,E,A=[],B,F,R,H=0;for(p=b.length;H<p;H++)n.push(H);B=0;for(var C=2*n.length;0<n.length;){C--;if(0>C){console.log("Infinite Loop! Holes left:"+
+n.length+", Pro)raw_html",R"raw_html(bably Hole outside Shape!");break}for(q=B;q<h.length;q++){x=h[q];p=-1;for(H=0;H<n.length;H++)if(D=n[H],E=x.x+":"+x.y+":"+D,void 0===A[E]){k=b[D];for(F=0;F<k.length;F++)if(D=k[F],c(q,F)&&!f(x,D)&&!g(x,D)){p=F;n.splice(H,1);B=h.slice(0,q+1);D=h.slice(q);F=k.)raw_html",R"raw_html(slice(p);R=k.slice(0,p+1);h=B.concat(F).concat(R).concat(D);B=q;break}if(0<=p)break;A[E]=!0}if(0<=p)break}}return h}(a,b);var q=THREE.FontUtils.Triangulate(f,!1);f=0;for(g=q.length;f<g;f++)for(k=q[f],h=0;3>h;h++)n=k[h].x+":"+k[h].y,
+n=p[n],void 0!==n&&(k[h)raw_html",R"raw_html(]=n);return q.concat()},isClockWise:function(a){return 0>THREE.FontUtils.Triangulate.area(a)},b2p0:function(a,b){var c=1-a;return c*c*b},b2p1:function(a,b){return 2*(1-a)*a*b},b2p2:function(a,b){return a*a*b},b2:function(a,b,c,d){return this.b2p0(a,b)+this)raw_html",R"raw_html(.b2p1(a,c)+this.b2p2(a,d)},b3p0:function(a,b){var c=1-a;return c*c*c*b},b3p1:function(a,b){var c=1-a;return 3*c*c*a*b},b3p2:function(a,b){return 3*(1-a)*a*a*b},b3p3:function(a,b){return a*a*a*b},b3:function(a,b,c,d,e){return this.b3p0(a,
+b)+this.b3p1(a,c)+)raw_html",R"raw_html(this.b3p2(a,d)+this.b3p3(a,e)}};THREE.LineCurve=function(a,b){this.v1=a;this.v2=b};THREE.LineCurve.prototype=Object.create(THREE.Curve.prototype);THREE.LineCurve.prototype.getPoint=function(a){var b=this.v2.clone().sub(this.v1);b.multiplyScalar(a).add(this)raw_html",R"raw_html(.v1);return b};THREE.LineCurve.prototype.getPointAt=function(a){return this.getPoint(a)};THREE.LineCurve.prototype.getTangent=function(a){return this.v2.clone().sub(this.v1).normalize()};
+THREE.QuadraticBezierCurve=function(a,b,c){this.v0=a;this.v1=b;this.)raw_html",R"raw_html(v2=c};THREE.QuadraticBezierCurve.prototype=Object.create(THREE.Curve.prototype);THREE.QuadraticBezierCurve.prototype.getPoint=function(a){var b=new THREE.Vector2;b.x=THREE.Shape.Utils.b2(a,this.v0.x,this.v1.x,this.v2.x);b.y=THREE.Shape.Utils.b2(a,this.v0.y)raw_html",R"raw_html(,this.v1.y,this.v2.y);return b};
+THREE.QuadraticBezierCurve.prototype.getTangent=function(a){var b=new THREE.Vector2;b.x=THREE.Curve.Utils.tangentQuadraticBezier(a,this.v0.x,this.v1.x,this.v2.x);b.y=THREE.Curve.Utils.tangentQuadraticBezier(a,this.v0.y,this)raw_html",R"raw_html(.v1.y,this.v2.y);return b.normalize()};THREE.CubicBezierCurve=function(a,b,c,d){this.v0=a;this.v1=b;this.v2=c;this.v3=d};THREE.CubicBezierCurve.prototype=Object.create(THREE.Curve.prototype);
+THREE.CubicBezierCurve.prototype.getPoint=function(a){var b;b=TH)raw_html",R"raw_html(REE.Shape.Utils.b3(a,this.v0.x,this.v1.x,this.v2.x,this.v3.x);a=THREE.Shape.Utils.b3(a,this.v0.y,this.v1.y,this.v2.y,this.v3.y);return new THREE.Vector2(b,a)};THREE.CubicBezierCurve.prototype.getTangent=function(a){var b;b=THREE.Curve.Utils.tangentCubicBez)raw_html",R"raw_html(ier(a,this.v0.x,this.v1.x,this.v2.x,this.v3.x);a=THREE.Curve.Utils.tangentCubicBezier(a,this.v0.y,this.v1.y,this.v2.y,this.v3.y);b=new THREE.Vector2(b,a);b.normalize();return b};
+THREE.SplineCurve=function(a){this.points=void 0==a?[]:a};THREE.SplineCurve.p)raw_html",R"raw_html(rototype=Object.create(THREE.Curve.prototype);THREE.SplineCurve.prototype.getPoint=function(a){var b=this.points;a*=b.length-1;var c=Math.floor(a);a-=c;var d=b[0==c?c:c-1],e=b[c],f=b[c>b.length-2?b.length-1:c+1],b=b[c>b.length-3?b.length-1:c+2],c=new THREE)raw_html",R"raw_html(.Vector2;c.x=THREE.Curve.Utils.interpolate(d.x,e.x,f.x,b.x,a);c.y=THREE.Curve.Utils.interpolate(d.y,e.y,f.y,b.y,a);return c};
+THREE.EllipseCurve=function(a,b,c,d,e,f,g){this.aX=a;this.aY=b;this.xRadius=c;this.yRadius=d;this.aStartAngle=e;this.aEndAngle=f;t)raw_html",R"raw_html(his.aClockwise=g};THREE.EllipseCurve.prototype=Object.create(THREE.Curve.prototype);
+THREE.EllipseCurve.prototype.getPoint=function(a){var b=this.aEndAngle-this.aStartAngle;0>b&&(b+=2*Math.PI);b>2*Math.PI&&(b-=2*Math.PI);a=!0===this.aClockwise?this.aEndAng)raw_html",R"raw_html(le+(1-a)*(2*Math.PI-b):this.aStartAngle+a*b;b=new THREE.Vector2;b.x=this.aX+this.xRadius*Math.cos(a);b.y=this.aY+this.yRadius*Math.sin(a);return b};THREE.ArcCurve=function(a,b,c,d,e,f){THREE.EllipseCurve.call(this,a,b,c,c,d,e,f)};THREE.ArcCurve.prototype=O)raw_html",R"raw_html(bject.create(THREE.EllipseCurve.prototype);
+THREE.LineCurve3=THREE.Curve.create(function(a,b){this.v1=a;this.v2=b},function(a){var b=new THREE.Vector3;b.subVectors(this.v2,this.v1);b.multiplyScalar(a);b.add(this.v1);return b});THREE.QuadraticBezierCurve3=T)raw_html",R"raw_html(HREE.Curve.create(function(a,b,c){this.v0=a;this.v1=b;this.v2=c},function(a){var b=new THREE.Vector3;b.x=THREE.Shape.Utils.b2(a,this.v0.x,this.v1.x,this.v2.x);b.y=THREE.Shape.Utils.b2(a,this.v0.y,this.v1.y,this.v2.y);b.z=THREE.Shape.Utils.b2(a,this.v0.z,th)raw_html",R"raw_html(is.v1.z,this.v2.z);return b});
+THREE.CubicBezierCurve3=THREE.Curve.create(function(a,b,c,d){this.v0=a;this.v1=b;this.v2=c;this.v3=d},function(a){var b=new THREE.Vector3;b.x=THREE.Shape.Utils.b3(a,this.v0.x,this.v1.x,this.v2.x,this.v3.x);b.y=THREE.Shape.Uti)raw_html",R"raw_html(ls.b3(a,this.v0.y,this.v1.y,this.v2.y,this.v3.y);b.z=THREE.Shape.Utils.b3(a,this.v0.z,this.v1.z,this.v2.z,this.v3.z);return b});
+THREE.SplineCurve3=THREE.Curve.create(function(a){this.points=void 0==a?[]:a},function(a){var b=this.points;a*=b.length-1;var c)raw_html",R"raw_html(=Math.floor(a);a-=c;var d=b[0==c?c:c-1],e=b[c],f=b[c>b.length-2?b.length-1:c+1],b=b[c>b.length-3?b.length-1:c+2],c=new THREE.Vector3;c.x=THREE.Curve.Utils.interpolate(d.x,e.x,f.x,b.x,a);c.y=THREE.Curve.Utils.interpolate(d.y,e.y,f.y,b.y,a);c.z=THREE.Curve.U)raw_html",R"raw_html(tils.interpolate(d.z,e.z,f.z,b.z,a);return c});
+THREE.ClosedSplineCurve3=THREE.Curve.create(function(a){this.points=void 0==a?[]:a},function(a){var b=this.points;a*=b.length-0;var c=Math.floor(a);a-=c;var c=c+(0<c?0:(Math.floor(Math.abs(c)/b.length)+1)*b.l)raw_html",R"raw_html(ength),d=b[(c-1)%b.length],e=b[c%b.length],f=b[(c+1)%b.length],b=b[(c+2)%b.length],c=new THREE.Vector3;c.x=THREE.Curve.Utils.interpolate(d.x,e.x,f.x,b.x,a);c.y=THREE.Curve.Utils.interpolate(d.y,e.y,f.y,b.y,a);c.z=THREE.Curve.Utils.interpolate(d.z,e.z,f.z,b)raw_html",R"raw_html(.z,a);return c});
+THREE.AnimationHandler={LINEAR:0,CATMULLROM:1,CATMULLROM_FORWARD:2,add:function(){console.warn("THREE.AnimationHandler.add() has been deprecated.")},get:function(){console.warn("THREE.AnimationHandler.get() has been deprecated.")},remove:)raw_html",R"raw_html(function(){console.warn("THREE.AnimationHandler.remove() has been deprecated.")},animations:[],init:function(a){if(!0!==a.initialized){for(var b=0;b<a.hierarchy.length;b++){for(var c=0;c<a.hierarchy[b].keys.length;c++)if(0>a.hierarchy[b].keys[c].time&&(a.h)raw_html",R"raw_html(ierarchy[b].keys[c].time=
+0),void 0!==a.hierarchy[b].keys[c].rot&&!(a.hierarchy[b].keys[c].rot instanceof THREE.Quaternion)){var d=a.hierarchy[b].keys[c].rot;a.hierarchy[b].keys[c].rot=(new THREE.Quaternion).fromArray(d)}if(a.hierarchy[b].keys.length&&void)raw_html",R"raw_html( 0!==a.hierarchy[b].keys[0].morphTargets){d={};for(c=0;c<a.hierarchy[b].keys.length;c++)for(var e=0;e<a.hierarchy[b].keys[c].morphTargets.length;e++){var f=a.hierarchy[b].keys[c].morphTargets[e];d[f]=-1}a.hierarchy[b].usedMorphTargets=d;for(c=0;c<a.hierarc)raw_html",R"raw_html(hy[b].keys.length;c++){var g=
+{};for(f in d){for(e=0;e<a.hierarchy[b].keys[c].morphTargets.length;e++)if(a.hierarchy[b].keys[c].morphTargets[e]===f){g[f]=a.hierarchy[b].keys[c].morphTargetsInfluences[e];break}e===a.hierarchy[b].keys[c].morphTargets.length&)raw_html",R"raw_html(&(g[f]=0)}a.hierarchy[b].keys[c].morphTargetsInfluences=g}}for(c=1;c<a.hierarchy[b].keys.length;c++)a.hierarchy[b].keys[c].time===a.hierarchy[b].keys[c-1].time&&(a.hierarchy[b].keys.splice(c,1),c--);for(c=0;c<a.hierarchy[b].keys.length;c++)a.hierarchy[b].k)raw_html",R"raw_html(eys[c].index=c}a.initialized=
+!0;return a}},parse:function(a){var b=function(a,c){c.push(a);for(var d=0;d<a.children.length;d++)b(a.children[d],c)},c=[];if(a instanceof THREE.SkinnedMesh)for(var d=0;d<a.skeleton.bones.length;d++)c.push(a.skeleton.bones[d]))raw_html",R"raw_html(;else b(a,c);return c},play:function(a){-1===this.animations.indexOf(a)&&this.animations.push(a)},stop:function(a){a=this.animations.indexOf(a);-1!==a&&this.animations.splice(a,1)},update:function(a){for(var b=0;b<this.animations.length;b++)this.animations)raw_html",R"raw_html([b].resetBlendWeights();
+for(b=0;b<this.animations.length;b++)this.animations[b].update(a)}};THREE.Animation=function(a,b){this.root=a;this.data=THREE.AnimationHandler.init(b);this.hierarchy=THREE.AnimationHandler.parse(a);this.currentTime=0;this.timeScale)raw_html",R"raw_html(=1;this.isPlaying=!1;this.loop=!0;this.weight=0;this.interpolationType=THREE.AnimationHandler.LINEAR};THREE.Animation.prototype.keyTypes=["pos","rot","scl"];
+THREE.Animation.prototype.play=function(a,b){this.currentTime=void 0!==a?a:0;this.weight=void 0!==)raw_html",R"raw_html(b?b:1;this.isPlaying=!0;this.reset();THREE.AnimationHandler.play(this)};THREE.Animation.prototype.stop=function(){this.isPlaying=!1;THREE.AnimationHandler.stop(this)};
+THREE.Animation.prototype.reset=function(){for(var a=0,b=this.hierarchy.length;a<b;a++){)raw_html",R"raw_html(var c=this.hierarchy[a];c.matrixAutoUpdate=!0;void 0===c.animationCache&&(c.animationCache={animations:{},blending:{positionWeight:0,quaternionWeight:0,scaleWeight:0}});void 0===c.animationCache.animations[this.data.name]&&(c.animationCache.animations[this)raw_html",R"raw_html(.data.name]={},c.animationCache.animations[this.data.name].prevKey={pos:0,rot:0,scl:0},c.animationCache.animations[this.data.name].nextKey={pos:0,rot:0,scl:0},
+c.animationCache.animations[this.data.name].originalMatrix=c.matrix);for(var c=c.animationCache.)raw_html",R"raw_html(animations[this.data.name],d=0;3>d;d++){for(var e=this.keyTypes[d],f=this.data.hierarchy[a].keys[0],g=this.getNextKeyWith(e,a,1);g.time<this.currentTime&&g.index>f.index;)f=g,g=this.getNextKeyWith(e,a,g.index+1);c.prevKey[e]=f;c.nextKey[e]=g}}};
+THREE.Anim)raw_html",R"raw_html(ation.prototype.resetBlendWeights=function(){for(var a=0,b=this.hierarchy.length;a<b;a++){var c=this.hierarchy[a];void 0!==c.animationCache&&(c.animationCache.blending.positionWeight=0,c.animationCache.blending.quaternionWeight=0,c.animationCache.blending.)raw_html",R"raw_html(scaleWeight=0)}};
+THREE.Animation.prototype.update=function(){var a=[],b=new THREE.Vector3,c=new THREE.Vector3,d=new THREE.Quaternion,e=function(a,b){var c=[],d=[],e,q,m,r,t,s;e=(a.length-1)*b;q=Math.floor(e);e-=q;c[0]=0===q?q:q-1;c[1]=q;c[2]=q>a.length-2?)raw_html",R"raw_html(q:q+1;c[3]=q>a.length-3?q:q+2;q=a[c[0]];r=a[c[1]];t=a[c[2]];s=a[c[3]];c=e*e;m=e*c;d[0]=f(q[0],r[0],t[0],s[0],e,c,m);d[1]=f(q[1],r[1],t[1],s[1],e,c,m);d[2]=f(q[2],r[2],t[2],s[2],e,c,m);return d},f=function(a,b,c,d,e,f,m){a=.5*(c-a);d=.5*(d-b);return(2*(b-c))raw_html",R"raw_html(+a+d)*m+
+(-3*(b-c)-2*a-d)*f+a*e+b};return function(f){if(!1!==this.isPlaying&&(this.currentTime+=f*this.timeScale,0!==this.weight)){f=this.data.length;if(this.currentTime>f||0>this.currentTime)if(this.loop)this.currentTime%=f,0>this.currentTime&&(this.curr)raw_html",R"raw_html(entTime+=f),this.reset();else{this.stop();return}f=0;for(var h=this.hierarchy.length;f<h;f++)for(var k=this.hierarchy[f],n=k.animationCache.animations[this.data.name],p=k.animationCache.blending,q=0;3>q;q++){var m=this.keyTypes[q],r=n.prevKey[m],t=n.nextKe)raw_html",R"raw_html(y[m];
+if(0<this.timeScale&&t.time<=this.currentTime||0>this.timeScale&&r.time>=this.currentTime){r=this.data.hierarchy[f].keys[0];for(t=this.getNextKeyWith(m,f,1);t.time<this.currentTime&&t.index>r.index;)r=t,t=this.getNextKeyWith(m,f,t.index+1);n.prevKey[)raw_html",R"raw_html(m]=r;n.nextKey[m]=t}k.matrixAutoUpdate=!0;k.matrixWorldNeedsUpdate=!0;var s=(this.currentTime-r.time)/(t.time-r.time),u=r[m],v=t[m];0>s&&(s=0);1<s&&(s=1);if("pos"===m)if(this.interpolationType===THREE.AnimationHandler.LINEAR)c.x=u[0]+(v[0]-u[0])*s,c.y=
+u[1)raw_html",R"raw_html(]+(v[1]-u[1])*s,c.z=u[2]+(v[2]-u[2])*s,r=this.weight/(this.weight+p.positionWeight),k.position.lerp(c,r),p.positionWeight+=this.weight;else{if(this.interpolationType===THREE.AnimationHandler.CATMULLROM||this.interpolationType===THREE.AnimationHandler.CATMU)raw_html",R"raw_html(LLROM_FORWARD)a[0]=this.getPrevKeyWith("pos",f,r.index-1).pos,a[1]=u,a[2]=v,a[3]=this.getNextKeyWith("pos",f,t.index+1).pos,s=.33*s+.33,t=e(a,s),r=this.weight/(this.weight+p.positionWeight),p.positionWeight+=this.weight,m=k.position,m.x+=(t[0]-
+m.x)*r,m.y+)raw_html",R"raw_html(=(t[1]-m.y)*r,m.z+=(t[2]-m.z)*r,this.interpolationType===THREE.AnimationHandler.CATMULLROM_FORWARD&&(s=e(a,1.01*s),b.set(s[0],s[1],s[2]),b.sub(m),b.y=0,b.normalize(),s=Math.atan2(b.x,b.z),k.rotation.set(0,s,0))}else"rot"===m?(THREE.Quaternion.slerp(u,v,d,s)raw_html",R"raw_html(),0===p.quaternionWeight?(k.quaternion.copy(d),p.quaternionWeight=this.weight):(r=this.weight/(this.weight+p.quaternionWeight),THREE.Quaternion.slerp(k.quaternion,d,k.quaternion,r),p.quaternionWeight+=this.weight)):"scl"===m&&(c.x=u[0]+
+(v[0]-u[0])*s,c.y=u)raw_html",R"raw_html([1]+(v[1]-u[1])*s,c.z=u[2]+(v[2]-u[2])*s,r=this.weight/(this.weight+p.scaleWeight),k.scale.lerp(c,r),p.scaleWeight+=this.weight)}return!0}}}();THREE.Animation.prototype.getNextKeyWith=function(a,b,c){var d=this.data.hierarchy[b].keys;for(c=this.interpolati)raw_html",R"raw_html(onType===THREE.AnimationHandler.CATMULLROM||this.interpolationType===THREE.AnimationHandler.CATMULLROM_FORWARD?c<d.length-1?c:d.length-1:c%d.length;c<d.length;c++)if(void 0!==d[c][a])return d[c];return this.data.hierarchy[b].keys[0]};
+THREE.Animation.proto)raw_html",R"raw_html(type.getPrevKeyWith=function(a,b,c){var d=this.data.hierarchy[b].keys;for(c=this.interpolationType===THREE.AnimationHandler.CATMULLROM||this.interpolationType===THREE.AnimationHandler.CATMULLROM_FORWARD?0<c?c:0:0<=c?c:c+d.length;0<=c;c--)if(void 0!==d[c][a)raw_html",R"raw_html(])return d[c];return this.data.hierarchy[b].keys[d.length-1]};
+THREE.KeyFrameAnimation=function(a){this.root=a.node;this.data=THREE.AnimationHandler.init(a);this.hierarchy=THREE.AnimationHandler.parse(this.root);this.currentTime=0;this.timeScale=.001;this.)raw_html",R"raw_html(isPlaying=!1;this.loop=this.isPaused=!0;a=0;for(var b=this.hierarchy.length;a<b;a++){var c=this.data.hierarchy[a].sids,d=this.hierarchy[a];if(this.data.hierarchy[a].keys.length&&c){for(var e=0;e<c.length;e++){var f=c[e],g=this.getNextKeyWith(f,a,0);g&&g.ap)raw_html",R"raw_html(ply(f)}d.matrixAutoUpdate=!1;this.data.hierarchy[a].node.updateMatrix();
 d.matrixWorldNeedsUpdate=!0}}};
-THREE.KeyFrameAnimation.prototype.play=function(a){this.currentTime=void 0!==a?a:0;if(!1===this.isPlaying){this.isPlaying=!0;var b=this.hi)raw_html",R"raw_html(erarchy.length,c,d;for(a=0;a<b;a++)c=this.hierarchy[a],d=this.data.hierarchy[a],void 0===d.animationCache&&(d.animationCache={},d.animationCache.prevKey=null,d.animationCache.nextKey=null,d.animationCache.originalMatrix=c.matrix),c=this.data.hierarchy[a].k)raw_html",R"raw_html(eys,c.length&&(d.animationCache.prevKey=c[0],d.animationCache.nextKey=c[1],this.startTime=Math.min(c[0].time,
-this.startTime),this.endTime=Math.max(c[c.length-1].time,this.endTime));this.update(0)}this.isPaused=!1;THREE.AnimationHandler.play(this)};THREE.K)raw_html",R"raw_html(eyFrameAnimation.prototype.stop=function(){this.isPaused=this.isPlaying=!1;THREE.AnimationHandler.stop(this);for(var a=0;a<this.data.hierarchy.length;a++){var b=this.hierarchy[a],c=this.data.hierarchy[a];if(void 0!==c.animationCache){var d=c.animationCache)raw_html",R"raw_html(.originalMatrix;d.copy(b.matrix);b.matrix=d;delete c.animationCache}}};
-THREE.KeyFrameAnimation.prototype.update=function(a){if(!1!==this.isPlaying){this.currentTime+=a*this.timeScale;a=this.data.length;!0===this.loop&&this.currentTime>a&&(this.currentTime)raw_html",R"raw_html(%=a);this.currentTime=Math.min(this.currentTime,a);a=0;for(var b=this.hierarchy.length;a<b;a++){var c=this.hierarchy[a],d=this.data.hierarchy[a],e=d.keys,d=d.animationCache;if(e.length){var f=d.prevKey,g=d.nextKey;if(g.time<=this.currentTime){for(;g.time<t)raw_html",R"raw_html(his.currentTime&&g.index>f.index;)f=g,g=e[f.index+1];d.prevKey=
-f;d.nextKey=g}g.time>=this.currentTime?f.interpolate(g,this.currentTime):f.interpolate(g,g.time);this.data.hierarchy[a].node.updateMatrix();c.matrixWorldNeedsUpdate=!0}}}};THREE.KeyFrameAnimat)raw_html",R"raw_html(ion.prototype.getNextKeyWith=function(a,b,c){b=this.data.hierarchy[b].keys;for(c%=b.length;c<b.length;c++)if(b[c].hasTarget(a))return b[c];return b[0]};
-THREE.KeyFrameAnimation.prototype.getPrevKeyWith=function(a,b,c){b=this.data.hierarchy[b].keys;for(c=0<)raw_html",R"raw_html(=c?c:c+b.length;0<=c;c--)if(b[c].hasTarget(a))return b[c];return b[b.length-1]};THREE.MorphAnimation=function(a){this.mesh=a;this.frames=a.morphTargetInfluences.length;this.currentTime=0;this.duration=1E3;this.loop=!0;this.isPlaying=!1};
-THREE.MorphAnimati)raw_html",R"raw_html(on.prototype={play:function(){this.isPlaying=!0},pause:function(){this.isPlaying=!1},update:function(){var a=0,b=0;return function(c){if(!1!==this.isPlaying){this.currentTime+=c;!0===this.loop&&this.currentTime>this.duration&&(this.currentTime%=this.durati)raw_html",R"raw_html(on);this.currentTime=Math.min(this.currentTime,this.duration);c=this.duration/this.frames;var d=Math.floor(this.currentTime/c);d!=b&&(this.mesh.morphTargetInfluences[a]=0,this.mesh.morphTargetInfluences[b]=1,this.mesh.morphTargetInfluences[d]=
-0,a=b,b=d);t)raw_html",R"raw_html(his.mesh.morphTargetInfluences[d]=this.currentTime%c/c;this.mesh.morphTargetInfluences[a]=1-this.mesh.morphTargetInfluences[d]}}}()};
-THREE.BoxGeometry=function(a,b,c,d,e,f){function g(a,b,c,d,e,f,g,s){var u,v=h.widthSegments,y=h.heightSegments,G=e/2,w=f/2)raw_html",R"raw_html(,K=h.vertices.length;if("x"===a&&"y"===b||"y"===a&&"x"===b)u="z";else if("x"===a&&"z"===b||"z"===a&&"x"===b)u="y",y=h.depthSegments;else if("z"===a&&"y"===b||"y"===a&&"z"===b)u="x",v=h.depthSegments;var x=v+1,D=y+1,E=e/v,A=f/y,B=new THREE.Vector3;B[u]=0<g?)raw_html",R"raw_html(1:-1;for(e=0;e<D;e++)for(f=0;f<x;f++){var F=new THREE.Vector3;F[a]=(f*E-G)*c;F[b]=(e*A-w)*d;F[u]=g;h.vertices.push(F)}for(e=
-0;e<y;e++)for(f=0;f<v;f++)w=f+x*e,a=f+x*(e+1),b=f+1+x*(e+1),c=f+1+x*e,d=new THREE.Vector2(f/v,1-e/y),g=new THREE.Vector2(f/v,1-(e+1)raw_html",R"raw_html()/y),u=new THREE.Vector2((f+1)/v,1-(e+1)/y),G=new THREE.Vector2((f+1)/v,1-e/y),w=new THREE.Face3(w+K,a+K,c+K),w.normal.copy(B),w.vertexNormals.push(B.clone(),B.clone(),B.clone()),w.materialIndex=s,h.faces.push(w),h.faceVertexUvs[0].push([d,g,G]),w=new THRE)raw_html",R"raw_html(E.Face3(a+K,b+K,c+K),w.normal.copy(B),w.vertexNormals.push(B.clone(),B.clone(),B.clone()),w.materialIndex=s,h.faces.push(w),
-h.faceVertexUvs[0].push([g.clone(),u,G.clone()])}THREE.Geometry.call(this);this.type="BoxGeometry";this.parameters={width:a,height:)raw_html",R"raw_html(b,depth:c,widthSegments:d,heightSegments:e,depthSegments:f};this.widthSegments=d||1;this.heightSegments=e||1;this.depthSegments=f||1;var h=this;d=a/2;e=b/2;f=c/2;g("z","y",-1,-1,c,b,d,0);g("z","y",1,-1,c,b,-d,1);g("x","z",1,1,a,c,e,2);g("x","z",1,-1,a,c,-e)raw_html",R"raw_html(,3);g("x","y",1,-1,a,b,f,4);g("x","y",-1,-1,a,b,-f,5);this.mergeVertices()};THREE.BoxGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.CircleGeometry=function(a,b,c,d){THREE.Geometry.call(this);this.type="CircleGeometry";this.parameters={ra)raw_html",R"raw_html(dius:a,segments:b,thetaStart:c,thetaLength:d};a=a||50;b=void 0!==b?Math.max(3,b):8;c=void 0!==c?c:0;d=void 0!==d?d:2*Math.PI;var e,f=[];e=new THREE.Vector3;var g=new THREE.Vector2(.5,.5);this.vertices.push(e);f.push(g);for(e=0;e<=b;e++){var h=new THREE.Vec)raw_html",R"raw_html(tor3,k=c+e/b*d;h.x=a*Math.cos(k);h.y=a*Math.sin(k);this.vertices.push(h);f.push(new THREE.Vector2((h.x/a+1)/2,(h.y/a+1)/2))}c=new THREE.Vector3(0,
-0,1);for(e=1;e<=b;e++)this.faces.push(new THREE.Face3(e,e+1,0,[c.clone(),c.clone(),c.clone()])),this.faceVert)raw_html",R"raw_html(exUvs[0].push([f[e].clone(),f[e+1].clone(),g.clone()]);this.computeFaceNormals();this.boundingSphere=new THREE.Sphere(new THREE.Vector3,a)};THREE.CircleGeometry.prototype=Object.create(THREE.Geometry.prototype);THREE.CubeGeometry=function(a,b,c,d,e,f){cons)raw_html",R"raw_html(ole.warn("THREE.CubeGeometry has been renamed to THREE.BoxGeometry.");return new THREE.BoxGeometry(a,b,c,d,e,f)};
-THREE.CylinderGeometry=function(a,b,c,d,e,f){THREE.Geometry.call(this);this.type="CylinderGeometry";this.parameters={radiusTop:a,radiusBottom:)raw_html",R"raw_html(b,height:c,radialSegments:d,heightSegments:e,openEnded:f};a=void 0!==a?a:20;b=void 0!==b?b:20;c=void 0!==c?c:100;d=d||8;e=e||1;f=void 0!==f?f:!1;var g=c/2,h,k,n=[],p=[];for(k=0;k<=e;k++){var q=[],m=[],r=k/e,t=r*(b-a)+a;for(h=0;h<=d;h++){var s=h/d,u=new THR)raw_html",R"raw_html(EE.Vector3;u.x=t*Math.sin(s*Math.PI*2);u.y=-r*c+g;u.z=t*Math.cos(s*Math.PI*2);this.vertices.push(u);q.push(this.vertices.length-
-1);m.push(new THREE.Vector2(s,1-r))}n.push(q);p.push(m)}c=(b-a)/c;for(h=0;h<d;h++)for(0!==a?(q=this.vertices[n[0][h]].clone(),m)raw_html",R"raw_html(=this.vertices[n[0][h+1]].clone()):(q=this.vertices[n[1][h]].clone(),m=this.vertices[n[1][h+1]].clone()),q.setY(Math.sqrt(q.x*q.x+q.z*q.z)*c).normalize(),m.setY(Math.sqrt(m.x*m.x+m.z*m.z)*c).normalize(),k=0;k<e;k++){var r=n[k][h],t=n[k+1][h],s=n[k+1][h+1],)raw_html",R"raw_html(u=n[k][h+1],v=q.clone(),y=q.clone(),G=m.clone(),w=m.clone(),K=p[k][h].clone(),x=p[k+1][h].clone(),D=p[k+1][h+1].clone(),
-E=p[k][h+1].clone();this.faces.push(new THREE.Face3(r,t,u,[v,y,w]));this.faceVertexUvs[0].push([K,x,E]);this.faces.push(new THREE.Face3)raw_html",R"raw_html((t,s,u,[y.clone(),G,w.clone()]));this.faceVertexUvs[0].push([x.clone(),D,E.clone()])}if(!1===f&&0<a)for(this.vertices.push(new THREE.Vector3(0,g,0)),h=0;h<d;h++)r=n[0][h],t=n[0][h+1],s=this.vertices.length-1,v=new THREE.Vector3(0,1,0),y=new THREE.Vector3(0)raw_html",R"raw_html(,1,0),G=new THREE.Vector3(0,1,0),K=p[0][h].clone(),x=p[0][h+1].clone(),D=new THREE.Vector2(x.x,0),this.faces.push(new THREE.Face3(r,
-t,s,[v,y,G])),this.faceVertexUvs[0].push([K,x,D]);if(!1===f&&0<b)for(this.vertices.push(new THREE.Vector3(0,-g,0)),h=0;h<d;)raw_html",R"raw_html(h++)r=n[k][h+1],t=n[k][h],s=this.vertices.length-1,v=new THREE.Vector3(0,-1,0),y=new THREE.Vector3(0,-1,0),G=new THREE.Vector3(0,-1,0),K=p[k][h+1].clone(),x=p[k][h].clone(),D=new THREE.Vector2(x.x,1),this.faces.push(new THREE.Face3(r,t,s,[v,y,G])),this.fac)raw_html",R"raw_html(eVertexUvs[0].push([K,x,D]);this.computeFaceNormals()};THREE.CylinderGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.ExtrudeGeometry=function(a,b){"undefined"!==typeof a&&(THREE.Geometry.call(this),this.type="ExtrudeGeometry",a=a instance)raw_html",R"raw_html(of Array?a:[a],this.addShapeList(a,b),this.computeFaceNormals())};THREE.ExtrudeGeometry.prototype=Object.create(THREE.Geometry.prototype);THREE.ExtrudeGeometry.prototype.addShapeList=function(a,b){for(var c=a.length,d=0;d<c;d++)this.addShape(a[d],b)};
-THRE)raw_html",R"raw_html(E.ExtrudeGeometry.prototype.addShape=function(a,b){function c(a,b,c){b||console.log("die");return b.clone().multiplyScalar(c).add(a)}function d(a,b,c){var d=1,d=a.x-b.x,e=a.y-b.y,f=c.x-a.x,g=c.y-a.y,h=d*d+e*e;if(1E-10<Math.abs(d*g-e*f)){var k=Math.sqrt(h),)raw_html",R"raw_html(m=Math.sqrt(f*f+g*g),h=b.x-e/k;b=b.y+d/k;f=((c.x-g/m-h)*g-(c.y+f/m-b)*f)/(d*g-e*f);c=h+d*f-a.x;a=b+e*f-a.y;d=c*c+a*a;if(2>=d)return new THREE.Vector2(c,a);d=Math.sqrt(d/2)}else a=!1,1E-10<d?1E-10<f&&(a=!0):-1E-10>d?-1E-10>f&&(a=!0):Math.sign(e)==
-Math.sign)raw_html",R"raw_html((g)&&(a=!0),a?(c=-e,a=d,d=Math.sqrt(h)):(c=d,a=e,d=Math.sqrt(h/2));return new THREE.Vector2(c/d,a/d)}function e(a,b){var c,d;for(P=a.length;0<=--P;){c=P;d=P-1;0>d&&(d=a.length-1);for(var e=0,f=r+2*p,e=0;e<f;e++){var g=la*e,h=la*(e+1),k=b+c+g,g=b+d+g,m=b+d+)raw_html",R"raw_html(h,h=b+c+h,k=k+R,g=g+R,m=m+R,h=h+R;F.faces.push(new THREE.Face3(k,g,h,null,null,y));F.faces.push(new THREE.Face3(g,m,h,null,null,y));k=G.generateSideWallUV(F,k,g,m,h);F.faceVertexUvs[0].push([k[0],k[1],k[3]]);F.faceVertexUvs[0].push([k[1],
-k[2],k[3]])}}}fun)raw_html",R"raw_html(ction f(a,b,c){F.vertices.push(new THREE.Vector3(a,b,c))}function g(a,b,c){a+=R;b+=R;c+=R;F.faces.push(new THREE.Face3(a,b,c,null,null,v));a=G.generateTopUV(F,a,b,c);F.faceVertexUvs[0].push(a)}var h=void 0!==b.amount?b.amount:100,k=void 0!==b.bevelThicknes)raw_html",R"raw_html(s?b.bevelThickness:6,n=void 0!==b.bevelSize?b.bevelSize:k-2,p=void 0!==b.bevelSegments?b.bevelSegments:3,q=void 0!==b.bevelEnabled?b.bevelEnabled:!0,m=void 0!==b.curveSegments?b.curveSegments:12,r=void 0!==b.steps?b.steps:1,t=b.extrudePath,
-s,u=!1,v=b.mate)raw_html",R"raw_html(rial,y=b.extrudeMaterial,G=void 0!==b.UVGenerator?b.UVGenerator:THREE.ExtrudeGeometry.WorldUVGenerator,w,K,x,D;t&&(s=t.getSpacedPoints(r),u=!0,q=!1,w=void 0!==b.frames?b.frames:new THREE.TubeGeometry.FrenetFrames(t,r,!1),K=new THREE.Vector3,x=new THREE.Vec)raw_html",R"raw_html(tor3,D=new THREE.Vector3);q||(n=k=p=0);var E,A,B,F=this,R=this.vertices.length,t=a.extractPoints(m),m=t.shape,H=t.holes;if(t=!THREE.Shape.Utils.isClockWise(m)){m=m.reverse();A=0;for(B=H.length;A<B;A++)E=H[A],THREE.Shape.Utils.isClockWise(E)&&
-(H[A]=E.rever)raw_html",R"raw_html(se());t=!1}var C=THREE.Shape.Utils.triangulateShape(m,H),T=m;A=0;for(B=H.length;A<B;A++)E=H[A],m=m.concat(E);var Q,O,S,X,Y,la=m.length,ma,ya=C.length,t=[],P=0;S=T.length;Q=S-1;for(O=P+1;P<S;P++,Q++,O++)Q===S&&(Q=0),O===S&&(O=0),t[P]=d(T[P],T[Q],T[O]);var G)raw_html",R"raw_html(a=[],Fa,za=t.concat();A=0;for(B=H.length;A<B;A++){E=H[A];Fa=[];P=0;S=E.length;Q=S-1;for(O=P+1;P<S;P++,Q++,O++)Q===S&&(Q=0),O===S&&(O=0),Fa[P]=d(E[P],E[Q],E[O]);Ga.push(Fa);za=za.concat(Fa)}for(Q=0;Q<p;Q++){S=Q/p;X=k*(1-S);O=n*Math.sin(S*
-Math.PI/2);P=0;for)raw_html",R"raw_html((S=T.length;P<S;P++)Y=c(T[P],t[P],O),f(Y.x,Y.y,-X);A=0;for(B=H.length;A<B;A++)for(E=H[A],Fa=Ga[A],P=0,S=E.length;P<S;P++)Y=c(E[P],Fa[P],O),f(Y.x,Y.y,-X)}O=n;for(P=0;P<la;P++)Y=q?c(m[P],za[P],O):m[P],u?(x.copy(w.normals[0]).multiplyScalar(Y.x),K.copy(w.bino)raw_html",R"raw_html(rmals[0]).multiplyScalar(Y.y),D.copy(s[0]).add(x).add(K),f(D.x,D.y,D.z)):f(Y.x,Y.y,0);for(S=1;S<=r;S++)for(P=0;P<la;P++)Y=q?c(m[P],za[P],O):m[P],u?(x.copy(w.normals[S]).multiplyScalar(Y.x),K.copy(w.binormals[S]).multiplyScalar(Y.y),
-D.copy(s[S]).add(x).add)raw_html",R"raw_html((K),f(D.x,D.y,D.z)):f(Y.x,Y.y,h/r*S);for(Q=p-1;0<=Q;Q--){S=Q/p;X=k*(1-S);O=n*Math.sin(S*Math.PI/2);P=0;for(S=T.length;P<S;P++)Y=c(T[P],t[P],O),f(Y.x,Y.y,h+X);A=0;for(B=H.length;A<B;A++)for(E=H[A],Fa=Ga[A],P=0,S=E.length;P<S;P++)Y=c(E[P],Fa[P],O),u?f(Y.x,Y.)raw_html",R"raw_html(y+s[r-1].y,s[r-1].x+X):f(Y.x,Y.y,h+X)}(function(){if(q){var a;a=0*la;for(P=0;P<ya;P++)ma=C[P],g(ma[2]+a,ma[1]+a,ma[0]+a);a=r+2*p;a*=la;for(P=0;P<ya;P++)ma=C[P],g(ma[0]+a,ma[1]+a,ma[2]+a)}else{for(P=0;P<ya;P++)ma=C[P],g(ma[2],
-ma[1],ma[0]);for(P=0;P<ya;P++))raw_html",R"raw_html(ma=C[P],g(ma[0]+la*r,ma[1]+la*r,ma[2]+la*r)}})();(function(){var a=0;e(T,a);a+=T.length;A=0;for(B=H.length;A<B;A++)E=H[A],e(E,a),a+=E.length})()};
-THREE.ExtrudeGeometry.WorldUVGenerator={generateTopUV:function(a,b,c,d){a=a.vertices;b=a[b];c=a[c];d=a[d];ret)raw_html",R"raw_html(urn[new THREE.Vector2(b.x,b.y),new THREE.Vector2(c.x,c.y),new THREE.Vector2(d.x,d.y)]},generateSideWallUV:function(a,b,c,d,e){a=a.vertices;b=a[b];c=a[c];d=a[d];e=a[e];return.01>Math.abs(b.y-c.y)?[new THREE.Vector2(b.x,1-b.z),new THREE.Vector2(c.x,1-c.z),ne)raw_html",R"raw_html(w THREE.Vector2(d.x,1-d.z),new THREE.Vector2(e.x,1-e.z)]:[new THREE.Vector2(b.y,1-b.z),new THREE.Vector2(c.y,1-c.z),new THREE.Vector2(d.y,
-1-d.z),new THREE.Vector2(e.y,1-e.z)]}};THREE.ShapeGeometry=function(a,b){THREE.Geometry.call(this);this.type="ShapeGe)raw_html",R"raw_html(ometry";!1===a instanceof Array&&(a=[a]);this.addShapeList(a,b);this.computeFaceNormals()};THREE.ShapeGeometry.prototype=Object.create(THREE.Geometry.prototype);THREE.ShapeGeometry.prototype.addShapeList=function(a,b){for(var c=0,d=a.length;c<d;c++)this.ad)raw_html",R"raw_html(dShape(a[c],b);return this};
-THREE.ShapeGeometry.prototype.addShape=function(a,b){void 0===b&&(b={});var c=b.material,d=void 0===b.UVGenerator?THREE.ExtrudeGeometry.WorldUVGenerator:b.UVGenerator,e,f,g,h=this.vertices.length;e=a.extractPoints(void 0!==b.cu)raw_html",R"raw_html(rveSegments?b.curveSegments:12);var k=e.shape,n=e.holes;if(!THREE.Shape.Utils.isClockWise(k))for(k=k.reverse(),e=0,f=n.length;e<f;e++)g=n[e],THREE.Shape.Utils.isClockWise(g)&&(n[e]=g.reverse());var p=THREE.Shape.Utils.triangulateShape(k,n);e=0;for(f=n.leng)raw_html",R"raw_html(th;e<f;e++)g=n[e],
-k=k.concat(g);n=k.length;f=p.length;for(e=0;e<n;e++)g=k[e],this.vertices.push(new THREE.Vector3(g.x,g.y,0));for(e=0;e<f;e++)n=p[e],k=n[0]+h,g=n[1]+h,n=n[2]+h,this.faces.push(new THREE.Face3(k,g,n,null,null,c)),this.faceVertexUvs[0].push()raw_html",R"raw_html(d.generateTopUV(this,k,g,n))};
-THREE.LatheGeometry=function(a,b,c,d){THREE.Geometry.call(this);this.type="LatheGeometry";this.parameters={points:a,segments:b,phiStart:c,phiLength:d};b=b||12;c=c||0;d=d||2*Math.PI;for(var e=1/(a.length-1),f=1/b,g=0,h=b;g<=h;)raw_html",R"raw_html(g++)for(var k=c+g*f*d,n=Math.cos(k),p=Math.sin(k),k=0,q=a.length;k<q;k++){var m=a[k],r=new THREE.Vector3;r.x=n*m.x-p*m.y;r.y=p*m.x+n*m.y;r.z=m.z;this.vertices.push(r)}c=a.length;g=0;for(h=b;g<h;g++)for(k=0,q=a.length-1;k<q;k++){b=p=k+c*g;d=p+c;var n=p+1+c,)raw_html",R"raw_html(p=p+1,m=g*f,r=k*e,t=
-m+f,s=r+e;this.faces.push(new THREE.Face3(b,d,p));this.faceVertexUvs[0].push([new THREE.Vector2(m,r),new THREE.Vector2(t,r),new THREE.Vector2(m,s)]);this.faces.push(new THREE.Face3(d,n,p));this.faceVertexUvs[0].push([new THREE.Vector2()raw_html",R"raw_html(t,r),new THREE.Vector2(t,s),new THREE.Vector2(m,s)])}this.mergeVertices();this.computeFaceNormals();this.computeVertexNormals()};THREE.LatheGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.PlaneGeometry=function(a,b,c,d){console.info("THRE)raw_html",R"raw_html(E.PlaneGeometry: Consider using THREE.PlaneBufferGeometry for lower memory footprint.");THREE.Geometry.call(this);this.type="PlaneGeometry";this.parameters={width:a,height:b,widthSegments:c,heightSegments:d};this.fromBufferGeometry(new THREE.PlaneBufferGeo)raw_html",R"raw_html(metry(a,b,c,d))};THREE.PlaneGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.PlaneBufferGeometry=function(a,b,c,d){THREE.BufferGeometry.call(this);this.type="PlaneBufferGeometry";this.parameters={width:a,height:b,widthSegments:c,heightSegm)raw_html",R"raw_html(ents:d};var e=a/2,f=b/2;c=c||1;d=d||1;var g=c+1,h=d+1,k=a/c,n=b/d;b=new Float32Array(g*h*3);a=new Float32Array(g*h*3);for(var p=new Float32Array(g*h*2),q=0,m=0,r=0;r<h;r++)for(var t=r*n-f,s=0;s<g;s++)b[q]=s*k-e,b[q+1]=-t,a[q+2]=1,p[m]=s/c,p[m+1]=1-r/d,q+=3)raw_html",R"raw_html(,m+=2;q=0;e=new (65535<b.length/3?Uint32Array:Uint16Array)(c*d*6);for(r=0;r<d;r++)for(s=
-0;s<c;s++)f=s+g*(r+1),h=s+1+g*(r+1),k=s+1+g*r,e[q]=s+g*r,e[q+1]=f,e[q+2]=k,e[q+3]=f,e[q+4]=h,e[q+5]=k,q+=6;this.addAttribute("index",new THREE.BufferAttribute(e,1));th)raw_html",R"raw_html(is.addAttribute("position",new THREE.BufferAttribute(b,3));this.addAttribute("normal",new THREE.BufferAttribute(a,3));this.addAttribute("uv",new THREE.BufferAttribute(p,2))};THREE.PlaneBufferGeometry.prototype=Object.create(THREE.BufferGeometry.prototype);)raw_html",R"raw_html(
-THREE.RingGeometry=function(a,b,c,d,e,f){THREE.Geometry.call(this);this.type="RingGeometry";this.parameters={innerRadius:a,outerRadius:b,thetaSegments:c,phiSegments:d,thetaStart:e,thetaLength:f};a=a||0;b=b||50;e=void 0!==e?e:0;f=void 0!==f?f:2*Math.PI;c=v)raw_html",R"raw_html(oid 0!==c?Math.max(3,c):8;d=void 0!==d?Math.max(1,d):8;var g,h=[],k=a,n=(b-a)/d;for(a=0;a<d+1;a++){for(g=0;g<c+1;g++){var p=new THREE.Vector3,q=e+g/c*f;p.x=k*Math.cos(q);p.y=k*Math.sin(q);this.vertices.push(p);h.push(new THREE.Vector2((p.x/b+1)/2,
-(p.y/b+1)raw_html",R"raw_html()/2))}k+=n}b=new THREE.Vector3(0,0,1);for(a=0;a<d;a++)for(e=a*(c+1),g=0;g<c;g++)f=q=g+e,n=q+c+1,p=q+c+2,this.faces.push(new THREE.Face3(f,n,p,[b.clone(),b.clone(),b.clone()])),this.faceVertexUvs[0].push([h[f].clone(),h[n].clone(),h[p].clone()]),f=q,n=q+c+2)raw_html",R"raw_html(,p=q+1,this.faces.push(new THREE.Face3(f,n,p,[b.clone(),b.clone(),b.clone()])),this.faceVertexUvs[0].push([h[f].clone(),h[n].clone(),h[p].clone()]);this.computeFaceNormals();this.boundingSphere=new THREE.Sphere(new THREE.Vector3,k)};
-THREE.RingGeometry.pro)raw_html",R"raw_html(totype=Object.create(THREE.Geometry.prototype);
-THREE.SphereGeometry=function(a,b,c,d,e,f,g){THREE.Geometry.call(this);this.type="SphereGeometry";this.parameters={radius:a,widthSegments:b,heightSegments:c,phiStart:d,phiLength:e,thetaStart:f,thetaLength:g};)raw_html",R"raw_html(a=a||50;b=Math.max(3,Math.floor(b)||8);c=Math.max(2,Math.floor(c)||6);d=void 0!==d?d:0;e=void 0!==e?e:2*Math.PI;f=void 0!==f?f:0;g=void 0!==g?g:Math.PI;var h,k,n=[],p=[];for(k=0;k<=c;k++){var q=[],m=[];for(h=0;h<=b;h++){var r=h/b,t=k/c,s=new THREE.Vector3;)raw_html",R"raw_html(s.x=-a*Math.cos(d+r*e)*Math.sin(f+t*g);
-s.y=a*Math.cos(f+t*g);s.z=a*Math.sin(d+r*e)*Math.sin(f+t*g);this.vertices.push(s);q.push(this.vertices.length-1);m.push(new THREE.Vector2(r,1-t))}n.push(q);p.push(m)}for(k=0;k<c;k++)for(h=0;h<b;h++){d=n[k][h+1];e=n[k)raw_html",R"raw_html(][h];f=n[k+1][h];g=n[k+1][h+1];var q=this.vertices[d].clone().normalize(),m=this.vertices[e].clone().normalize(),r=this.vertices[f].clone().normalize(),t=this.vertices[g].clone().normalize(),s=p[k][h+1].clone(),u=p[k][h].clone(),v=p[k+1][h].clone(),y=p[k+1)raw_html",R"raw_html(][h+1].clone();Math.abs(this.vertices[d].y)===
-a?(s.x=(s.x+u.x)/2,this.faces.push(new THREE.Face3(d,f,g,[q,r,t])),this.faceVertexUvs[0].push([s,v,y])):Math.abs(this.vertices[f].y)===a?(v.x=(v.x+y.x)/2,this.faces.push(new THREE.Face3(d,e,f,[q,m,r])),this.fa)raw_html",R"raw_html(ceVertexUvs[0].push([s,u,v])):(this.faces.push(new THREE.Face3(d,e,g,[q,m,t])),this.faceVertexUvs[0].push([s,u,y]),this.faces.push(new THREE.Face3(e,f,g,[m.clone(),r,t.clone()])),this.faceVertexUvs[0].push([u.clone(),v,y.clone()]))}this.computeFaceNormals()raw_html",R"raw_html();this.boundingSphere=new THREE.Sphere(new THREE.Vector3,
-a)};THREE.SphereGeometry.prototype=Object.create(THREE.Geometry.prototype);THREE.TextGeometry=function(a,b){b=b||{};var c=THREE.FontUtils.generateShapes(a,b);b.amount=void 0!==b.height?b.height:50;v)raw_html",R"raw_html(oid 0===b.bevelThickness&&(b.bevelThickness=10);void 0===b.bevelSize&&(b.bevelSize=8);void 0===b.bevelEnabled&&(b.bevelEnabled=!1);THREE.ExtrudeGeometry.call(this,c,b);this.type="TextGeometry"};THREE.TextGeometry.prototype=Object.create(THREE.ExtrudeGeomet)raw_html",R"raw_html(ry.prototype);
-THREE.TorusGeometry=function(a,b,c,d,e){THREE.Geometry.call(this);this.type="TorusGeometry";this.parameters={radius:a,tube:b,radialSegments:c,tubularSegments:d,arc:e};a=a||100;b=b||40;c=c||8;d=d||6;e=e||2*Math.PI;for(var f=new THREE.Vector3,)raw_html",R"raw_html(g=[],h=[],k=0;k<=c;k++)for(var n=0;n<=d;n++){var p=n/d*e,q=k/c*Math.PI*2;f.x=a*Math.cos(p);f.y=a*Math.sin(p);var m=new THREE.Vector3;m.x=(a+b*Math.cos(q))*Math.cos(p);m.y=(a+b*Math.cos(q))*Math.sin(p);m.z=b*Math.sin(q);this.vertices.push(m);g.push(new THRE)raw_html",R"raw_html(E.Vector2(n/
-d,k/c));h.push(m.clone().sub(f).normalize())}for(k=1;k<=c;k++)for(n=1;n<=d;n++)a=(d+1)*k+n-1,b=(d+1)*(k-1)+n-1,e=(d+1)*(k-1)+n,f=(d+1)*k+n,p=new THREE.Face3(a,b,f,[h[a].clone(),h[b].clone(),h[f].clone()]),this.faces.push(p),this.faceVertexUvs[)raw_html",R"raw_html(0].push([g[a].clone(),g[b].clone(),g[f].clone()]),p=new THREE.Face3(b,e,f,[h[b].clone(),h[e].clone(),h[f].clone()]),this.faces.push(p),this.faceVertexUvs[0].push([g[b].clone(),g[e].clone(),g[f].clone()]);this.computeFaceNormals()};
-THREE.TorusGeometry.prot)raw_html",R"raw_html(otype=Object.create(THREE.Geometry.prototype);
-THREE.TorusKnotGeometry=function(a,b,c,d,e,f,g){function h(a,b,c,d,e){var f=Math.cos(a),g=Math.sin(a);a*=b/c;b=Math.cos(a);f*=d*(2+b)*.5;g=d*(2+b)*g*.5;d=e*d*Math.sin(a)*.5;return new THREE.Vector3(f,g,d)}THRE)raw_html",R"raw_html(E.Geometry.call(this);this.type="TorusKnotGeometry";this.parameters={radius:a,tube:b,radialSegments:c,tubularSegments:d,p:e,q:f,heightScale:g};a=a||100;b=b||40;c=c||64;d=d||8;e=e||2;f=f||3;g=g||1;for(var k=Array(c),n=new THREE.Vector3,p=new THREE.Vector3,q)raw_html",R"raw_html(=new THREE.Vector3,m=0;m<c;++m){k[m]=
-Array(d);var r=m/c*2*e*Math.PI,t=h(r,f,e,a,g),r=h(r+.01,f,e,a,g);n.subVectors(r,t);p.addVectors(r,t);q.crossVectors(n,p);p.crossVectors(q,n);q.normalize();p.normalize();for(r=0;r<d;++r){var s=r/d*2*Math.PI,u=-b*Math.co)raw_html",R"raw_html(s(s),s=b*Math.sin(s),v=new THREE.Vector3;v.x=t.x+u*p.x+s*q.x;v.y=t.y+u*p.y+s*q.y;v.z=t.z+u*p.z+s*q.z;k[m][r]=this.vertices.push(v)-1}}for(m=0;m<c;++m)for(r=0;r<d;++r)e=(m+1)%c,f=(r+1)%d,a=k[m][r],b=k[e][r],e=k[e][f],f=k[m][f],g=new THREE.Vector2(m/c,r/d),n)raw_html",R"raw_html(=new THREE.Vector2((m+1)/c,
-r/d),p=new THREE.Vector2((m+1)/c,(r+1)/d),q=new THREE.Vector2(m/c,(r+1)/d),this.faces.push(new THREE.Face3(a,b,f)),this.faceVertexUvs[0].push([g,n,q]),this.faces.push(new THREE.Face3(b,e,f)),this.faceVertexUvs[0].push([n.clone())raw_html",R"raw_html(,p,q.clone()]);this.computeFaceNormals();this.computeVertexNormals()};THREE.TorusKnotGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.TubeGeometry=function(a,b,c,d,e){THREE.Geometry.call(this);this.type="TubeGeometry";this.parameters={path)raw_html",R"raw_html(:a,segments:b,radius:c,radialSegments:d,closed:e};b=b||64;c=c||1;d=d||8;e=e||!1;var f=[],g,h,k=b+1,n,p,q,m,r=new THREE.Vector3,t,s,u;t=new THREE.TubeGeometry.FrenetFrames(a,b,e);s=t.normals;u=t.binormals;this.tangents=t.tangents;this.normals=s;this.binorma)raw_html",R"raw_html(ls=u;for(t=0;t<k;t++)for(f[t]=[],n=t/(k-1),m=a.getPointAt(n),g=s[t],h=u[t],n=0;n<d;n++)p=n/d*2*Math.PI,q=-c*Math.cos(p),p=c*Math.sin(p),
-r.copy(m),r.x+=q*g.x+p*h.x,r.y+=q*g.y+p*h.y,r.z+=q*g.z+p*h.z,f[t][n]=this.vertices.push(new THREE.Vector3(r.x,r.y,r.z)))raw_html",R"raw_html(-1;for(t=0;t<b;t++)for(n=0;n<d;n++)k=e?(t+1)%b:t+1,r=(n+1)%d,a=f[t][n],c=f[k][n],k=f[k][r],r=f[t][r],s=new THREE.Vector2(t/b,n/d),u=new THREE.Vector2((t+1)/b,n/d),g=new THREE.Vector2((t+1)/b,(n+1)/d),h=new THREE.Vector2(t/b,(n+1)/d),this.faces.push(new THR)raw_html",R"raw_html(EE.Face3(a,c,r)),this.faceVertexUvs[0].push([s,u,h]),this.faces.push(new THREE.Face3(c,k,r)),this.faceVertexUvs[0].push([u.clone(),
-g,h.clone()]);this.computeFaceNormals();this.computeVertexNormals()};THREE.TubeGeometry.prototype=Object.create(THREE.Geomet)raw_html",R"raw_html(ry.prototype);
-THREE.TubeGeometry.FrenetFrames=function(a,b,c){new THREE.Vector3;var d=new THREE.Vector3;new THREE.Vector3;var e=[],f=[],g=[],h=new THREE.Vector3,k=new THREE.Matrix4;b+=1;var n,p,q;this.tangents=e;this.normals=f;this.binormals=g;for(n=0;n<b)raw_html",R"raw_html(;n++)p=n/(b-1),e[n]=a.getTangentAt(p),e[n].normalize();f[0]=new THREE.Vector3;g[0]=new THREE.Vector3;a=Number.MAX_VALUE;n=Math.abs(e[0].x);p=Math.abs(e[0].y);q=Math.abs(e[0].z);n<=a&&(a=n,d.set(1,0,0));p<=a&&(a=p,d.set(0,1,0));q<=a&&d.set(0,0,1);h.crossVec)raw_html",R"raw_html(tors(e[0],
-d).normalize();f[0].crossVectors(e[0],h);g[0].crossVectors(e[0],f[0]);for(n=1;n<b;n++)f[n]=f[n-1].clone(),g[n]=g[n-1].clone(),h.crossVectors(e[n-1],e[n]),1E-4<h.length()&&(h.normalize(),d=Math.acos(THREE.Math.clamp(e[n-1].dot(e[n]),-1,1)),f[n].a)raw_html",R"raw_html(pplyMatrix4(k.makeRotationAxis(h,d))),g[n].crossVectors(e[n],f[n]);if(c)for(d=Math.acos(THREE.Math.clamp(f[0].dot(f[b-1]),-1,1)),d/=b-1,0<e[0].dot(h.crossVectors(f[0],f[b-1]))&&(d=-d),n=1;n<b;n++)f[n].applyMatrix4(k.makeRotationAxis(e[n],d*n)),g[n].crossVe)raw_html",R"raw_html(ctors(e[n],
-f[n])};
-THREE.PolyhedronGeometry=function(a,b,c,d){function e(a){var b=a.normalize().clone();b.index=k.vertices.push(b)-1;var c=Math.atan2(a.z,-a.x)/2/Math.PI+.5;a=Math.atan2(-a.y,Math.sqrt(a.x*a.x+a.z*a.z))/Math.PI+.5;b.uv=new THREE.Vector2(c,)raw_html",R"raw_html(1-a);return b}function f(a,b,c){var d=new THREE.Face3(a.index,b.index,c.index,[a.clone(),b.clone(),c.clone()]);k.faces.push(d);u.copy(a).add(b).add(c).divideScalar(3);d=Math.atan2(u.z,-u.x);k.faceVertexUvs[0].push([h(a.uv,a,d),h(b.uv,b,d),h(c.uv,c,d)])}fun)raw_html",R"raw_html(ction g(a,b){var c=
-Math.pow(2,b);Math.pow(4,b);for(var d=e(k.vertices[a.a]),g=e(k.vertices[a.b]),h=e(k.vertices[a.c]),m=[],n=0;n<=c;n++){m[n]=[];for(var p=e(d.clone().lerp(h,n/c)),q=e(g.clone().lerp(h,n/c)),r=c-n,s=0;s<=r;s++)m[n][s]=0==s&&n==c?p:e(p.clon)raw_html",R"raw_html(e().lerp(q,s/r))}for(n=0;n<c;n++)for(s=0;s<2*(c-n)-1;s++)d=Math.floor(s/2),0==s%2?f(m[n][d+1],m[n+1][d],m[n][d]):f(m[n][d+1],m[n+1][d+1],m[n+1][d])}function h(a,b,c){0>c&&1===a.x&&(a=new THREE.Vector2(a.x-1,a.y));0===b.x&&0===b.z&&(a=new THREE.Vector2(c/2/)raw_html",R"raw_html(Math.PI+.5,
-a.y));return a.clone()}THREE.Geometry.call(this);this.type="PolyhedronGeometry";this.parameters={vertices:a,indices:b,radius:c,detail:d};c=c||1;d=d||0;for(var k=this,n=0,p=a.length;n<p;n+=3)e(new THREE.Vector3(a[n],a[n+1],a[n+2]));a=this.vertic)raw_html",R"raw_html(es;for(var q=[],m=n=0,p=b.length;n<p;n+=3,m++){var r=a[b[n]],t=a[b[n+1]],s=a[b[n+2]];q[m]=new THREE.Face3(r.index,t.index,s.index,[r.clone(),t.clone(),s.clone()])}for(var u=new THREE.Vector3,n=0,p=q.length;n<p;n++)g(q[n],d);n=0;for(p=this.faceVertexUvs[0].)raw_html",R"raw_html(length;n<
-p;n++)b=this.faceVertexUvs[0][n],d=b[0].x,a=b[1].x,q=b[2].x,m=Math.max(d,Math.max(a,q)),r=Math.min(d,Math.min(a,q)),.9<m&&.1>r&&(.2>d&&(b[0].x+=1),.2>a&&(b[1].x+=1),.2>q&&(b[2].x+=1));n=0;for(p=this.vertices.length;n<p;n++)this.vertices[n].multip)raw_html",R"raw_html(lyScalar(c);this.mergeVertices();this.computeFaceNormals();this.boundingSphere=new THREE.Sphere(new THREE.Vector3,c)};THREE.PolyhedronGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.DodecahedronGeometry=function(a,b){this.parameters={radi)raw_html",R"raw_html(us:a,detail:b};var c=(1+Math.sqrt(5))/2,d=1/c;THREE.PolyhedronGeometry.call(this,[-1,-1,-1,-1,-1,1,-1,1,-1,-1,1,1,1,-1,-1,1,-1,1,1,1,-1,1,1,1,0,-d,-c,0,-d,c,0,d,-c,0,d,c,-d,-c,0,-d,c,0,d,-c,0,d,c,0,-c,0,-d,c,0,-d,-c,0,d,c,0,d],[3,11,7,3,7,15,3,15,13,7,19,1)raw_html",R"raw_html(7,7,17,6,7,6,15,17,4,8,17,8,10,17,10,6,8,0,16,8,16,2,8,2,10,0,12,1,0,1,18,0,18,16,6,10,2,6,2,13,6,13,15,2,16,18,2,18,3,2,3,13,18,1,9,18,9,11,18,11,3,4,14,12,4,12,0,4,0,8,11,9,5,11,5,19,
-11,19,7,19,5,14,19,14,4,19,4,17,1,12,14,1,14,5,1,5,9],a,b)};THREE.Dode)raw_html",R"raw_html(cahedronGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.IcosahedronGeometry=function(a,b){var c=(1+Math.sqrt(5))/2;THREE.PolyhedronGeometry.call(this,[-1,c,0,1,c,0,-1,-c,0,1,-c,0,0,-1,c,0,1,c,0,-1,-c,0,1,-c,c,0,-1,c,0,1,-c,0,-1,-c,0,1],[0)raw_html",R"raw_html(,11,5,0,5,1,0,1,7,0,7,10,0,10,11,1,5,9,5,11,4,11,10,2,10,7,6,7,1,8,3,9,4,3,4,2,3,2,6,3,6,8,3,8,9,4,9,5,2,4,11,6,2,10,8,6,7,9,8,1],a,b);this.type="IcosahedronGeometry";this.parameters={radius:a,detail:b}};THREE.IcosahedronGeometry.prototype=Object.create(TH)raw_html",R"raw_html(REE.Geometry.prototype);
-THREE.OctahedronGeometry=function(a,b){this.parameters={radius:a,detail:b};THREE.PolyhedronGeometry.call(this,[1,0,0,-1,0,0,0,1,0,0,-1,0,0,0,1,0,0,-1],[0,2,4,0,4,3,0,3,5,0,5,2,1,2,5,1,5,3,1,3,4,1,4,2],a,b);this.type="OctahedronGeom)raw_html",R"raw_html(etry";this.parameters={radius:a,detail:b}};THREE.OctahedronGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.TetrahedronGeometry=function(a,b){THREE.PolyhedronGeometry.call(this,[1,1,1,-1,-1,1,-1,1,-1,1,-1,-1],[2,1,0,0,3,2,1,3,0,2,3,1],a,b))raw_html",R"raw_html(;this.type="TetrahedronGeometry";this.parameters={radius:a,detail:b}};THREE.TetrahedronGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.ParametricGeometry=function(a,b,c){THREE.Geometry.call(this);this.type="ParametricGeometry";this.parame)raw_html",R"raw_html(ters={func:a,slices:b,stacks:c};var d=this.vertices,e=this.faces,f=this.faceVertexUvs[0],g,h,k,n,p=b+1;for(g=0;g<=c;g++)for(n=g/c,h=0;h<=b;h++)k=h/b,k=a(k,n),d.push(k);var q,m,r,t;for(g=0;g<c;g++)for(h=0;h<b;h++)a=g*p+h,d=g*p+h+1,n=(g+1)*p+h+1,k=(g+1)*p+h,)raw_html",R"raw_html(q=new THREE.Vector2(h/b,g/c),m=new THREE.Vector2((h+1)/b,g/c),r=new THREE.Vector2((h+1)/b,(g+1)/c),t=new THREE.Vector2(h/b,(g+1)/c),e.push(new THREE.Face3(a,
-d,k)),f.push([q,m,t]),e.push(new THREE.Face3(d,n,k)),f.push([m.clone(),r,t.clone()]);this.computeF)raw_html",R"raw_html(aceNormals();this.computeVertexNormals()};THREE.ParametricGeometry.prototype=Object.create(THREE.Geometry.prototype);
-THREE.AxisHelper=function(a){a=a||1;var b=new Float32Array([0,0,0,a,0,0,0,0,0,0,a,0,0,0,0,0,0,a]),c=new Float32Array([1,0,0,1,.6,0,0,1,0,.)raw_html",R"raw_html(6,1,0,0,0,1,0,.6,1]);a=new THREE.BufferGeometry;a.addAttribute("position",new THREE.BufferAttribute(b,3));a.addAttribute("color",new THREE.BufferAttribute(c,3));b=new THREE.LineBasicMaterial({vertexColors:THREE.VertexColors});THREE.Line.call(this,a,b,THREE)raw_html",R"raw_html(.LinePieces)};THREE.AxisHelper.prototype=Object.create(THREE.Line.prototype);
-THREE.ArrowHelper=function(){var a=new THREE.Geometry;a.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,1,0));var b=new THREE.CylinderGeometry(0,.5,1,5,1);b.applyMatri)raw_html",R"raw_html(x((new THREE.Matrix4).makeTranslation(0,-.5,0));return function(c,d,e,f,g,h){THREE.Object3D.call(this);void 0===f&&(f=16776960);void 0===e&&(e=1);void 0===g&&(g=.2*e);void 0===h&&(h=.2*g);this.position.copy(d);this.line=new THREE.Line(a,new THREE.LineBasic)raw_html",R"raw_html(Material({color:f}));this.line.matrixAutoUpdate=!1;this.add(this.line);
-this.cone=new THREE.Mesh(b,new THREE.MeshBasicMaterial({color:f}));this.cone.matrixAutoUpdate=!1;this.add(this.cone);this.setDirection(c);this.setLength(e,g,h)}}();THREE.ArrowHelper.pr)raw_html",R"raw_html(ototype=Object.create(THREE.Object3D.prototype);THREE.ArrowHelper.prototype.setDirection=function(){var a=new THREE.Vector3,b;return function(c){.99999<c.y?this.quaternion.set(0,0,0,1):-.99999>c.y?this.quaternion.set(1,0,0,0):(a.set(c.z,0,-c.x).normalize())raw_html",R"raw_html(,b=Math.acos(c.y),this.quaternion.setFromAxisAngle(a,b))}}();
-THREE.ArrowHelper.prototype.setLength=function(a,b,c){void 0===b&&(b=.2*a);void 0===c&&(c=.2*b);this.line.scale.set(1,a,1);this.line.updateMatrix();this.cone.scale.set(c,b,c);this.cone.position.)raw_html",R"raw_html(y=a;this.cone.updateMatrix()};THREE.ArrowHelper.prototype.setColor=function(a){this.line.material.color.set(a);this.cone.material.color.set(a)};
-THREE.BoxHelper=function(a){var b=new THREE.BufferGeometry;b.addAttribute("position",new THREE.BufferAttribute()raw_html",R"raw_html(new Float32Array(72),3));THREE.Line.call(this,b,new THREE.LineBasicMaterial({color:16776960}),THREE.LinePieces);void 0!==a&&this.update(a)};THREE.BoxHelper.prototype=Object.create(THREE.Line.prototype);
-THREE.BoxHelper.prototype.update=function(a){var b=a.)raw_html",R"raw_html(geometry;null===b.boundingBox&&b.computeBoundingBox();var c=b.boundingBox.min,b=b.boundingBox.max,d=this.geometry.attributes.position.array;d[0]=b.x;d[1]=b.y;d[2]=b.z;d[3]=c.x;d[4]=b.y;d[5]=b.z;d[6]=c.x;d[7]=b.y;d[8]=b.z;d[9]=c.x;d[10]=c.y;d[11]=b.z;d[12]=)raw_html",R"raw_html(c.x;d[13]=c.y;d[14]=b.z;d[15]=b.x;d[16]=c.y;d[17]=b.z;d[18]=b.x;d[19]=c.y;d[20]=b.z;d[21]=b.x;d[22]=b.y;d[23]=b.z;d[24]=b.x;d[25]=b.y;d[26]=c.z;d[27]=c.x;d[28]=b.y;d[29]=c.z;d[30]=c.x;d[31]=b.y;
-d[32]=c.z;d[33]=c.x;d[34]=c.y;d[35]=c.z;d[36]=c.x;d[37]=c.y;d)raw_html",R"raw_html([38]=c.z;d[39]=b.x;d[40]=c.y;d[41]=c.z;d[42]=b.x;d[43]=c.y;d[44]=c.z;d[45]=b.x;d[46]=b.y;d[47]=c.z;d[48]=b.x;d[49]=b.y;d[50]=b.z;d[51]=b.x;d[52]=b.y;d[53]=c.z;d[54]=c.x;d[55]=b.y;d[56]=b.z;d[57]=c.x;d[58]=b.y;d[59]=c.z;d[60]=c.x;d[61]=c.y;d[62]=b.z;d[63]=c)raw_html",R"raw_html(.x;d[64]=c.y;d[65]=c.z;d[66]=b.x;d[67]=c.y;d[68]=b.z;d[69]=b.x;d[70]=c.y;d[71]=c.z;this.geometry.attributes.position.needsUpdate=!0;this.geometry.computeBoundingSphere();this.matrix=a.matrixWorld;
-this.matrixAutoUpdate=!1};THREE.BoundingBoxHelper=function()raw_html",R"raw_html(a,b){var c=void 0!==b?b:8947848;this.object=a;this.box=new THREE.Box3;THREE.Mesh.call(this,new THREE.BoxGeometry(1,1,1),new THREE.MeshBasicMaterial({color:c,wireframe:!0}))};THREE.BoundingBoxHelper.prototype=Object.create(THREE.Mesh.prototype);THREE.Boundi)raw_html",R"raw_html(ngBoxHelper.prototype.update=function(){this.box.setFromObject(this.object);this.box.size(this.scale);this.box.center(this.position)};
-THREE.CameraHelper=function(a){function b(a,b,d){c(a,d);c(b,d)}function c(a,b){d.vertices.push(new THREE.Vector3);d.color)raw_html",R"raw_html(s.push(new THREE.Color(b));void 0===f[a]&&(f[a]=[]);f[a].push(d.vertices.length-1)}var d=new THREE.Geometry,e=new THREE.LineBasicMaterial({color:16777215,vertexColors:THREE.FaceColors}),f={};b("n1","n2",16755200);b("n2","n4",16755200);b("n4","n3",16755200))raw_html",R"raw_html(;b("n3","n1",16755200);b("f1","f2",16755200);b("f2","f4",16755200);b("f4","f3",16755200);b("f3","f1",16755200);b("n1","f1",16755200);
-b("n2","f2",16755200);b("n3","f3",16755200);b("n4","f4",16755200);b("p","n1",16711680);b("p","n2",16711680);b("p","n3",167)raw_html",R"raw_html(11680);b("p","n4",16711680);b("u1","u2",43775);b("u2","u3",43775);b("u3","u1",43775);b("c","t",16777215);b("p","c",3355443);b("cn1","cn2",3355443);b("cn3","cn4",3355443);b("cf1","cf2",3355443);b("cf3","cf4",3355443);THREE.Line.call(this,d,e,THREE.LinePiece)raw_html",R"raw_html(s);this.camera=a;this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1;this.pointMap=f;this.update()};
+THREE.KeyFrameAnimation.prototype.play=function(a){this.currentTime=void 0!==a?a:0;if(!1===this.isPlaying){this.isPlaying=!0;var b=this.hierarchy.lengt)raw_html",R"raw_html(h,c,d;for(a=0;a<b;a++)c=this.hierarchy[a],d=this.data.hierarchy[a],void 0===d.animationCache&&(d.animationCache={},d.animationCache.prevKey=null,d.animationCache.nextKey=null,d.animationCache.originalMatrix=c.matrix),c=this.data.hierarchy[a].keys,c.length&)raw_html",R"raw_html(&(d.animationCache.prevKey=c[0],d.animationCache.nextKey=c[1],this.startTime=Math.min(c[0].time,
+this.startTime),this.endTime=Math.max(c[c.length-1].time,this.endTime));this.update(0)}this.isPaused=!1;THREE.AnimationHandler.play(this)};THREE.KeyFrameAnimat)raw_html",R"raw_html(ion.prototype.stop=function(){this.isPaused=this.isPlaying=!1;THREE.AnimationHandler.stop(this);for(var a=0;a<this.data.hierarchy.length;a++){var b=this.hierarchy[a],c=this.data.hierarchy[a];if(void 0!==c.animationCache){var d=c.animationCache.originalMatr)raw_html",R"raw_html(ix;d.copy(b.matrix);b.matrix=d;delete c.animationCache}}};
+THREE.KeyFrameAnimation.prototype.update=function(a){if(!1!==this.isPlaying){this.currentTime+=a*this.timeScale;a=this.data.length;!0===this.loop&&this.currentTime>a&&(this.currentTime%=a);this.cur)raw_html",R"raw_html(rentTime=Math.min(this.currentTime,a);a=0;for(var b=this.hierarchy.length;a<b;a++){var c=this.hierarchy[a],d=this.data.hierarchy[a],e=d.keys,d=d.animationCache;if(e.length){var f=d.prevKey,g=d.nextKey;if(g.time<=this.currentTime){for(;g.time<this.currentTi)raw_html",R"raw_html(me&&g.index>f.index;)f=g,g=e[f.index+1];d.prevKey=
+f;d.nextKey=g}g.time>=this.currentTime?f.interpolate(g,this.currentTime):f.interpolate(g,g.time);this.data.hierarchy[a].node.updateMatrix();c.matrixWorldNeedsUpdate=!0}}}};THREE.KeyFrameAnimation.prototype)raw_html",R"raw_html(.getNextKeyWith=function(a,b,c){b=this.data.hierarchy[b].keys;for(c%=b.length;c<b.length;c++)if(b[c].hasTarget(a))return b[c];return b[0]};
+THREE.KeyFrameAnimation.prototype.getPrevKeyWith=function(a,b,c){b=this.data.hierarchy[b].keys;for(c=0<=c?c:c+b.leng)raw_html",R"raw_html(th;0<=c;c--)if(b[c].hasTarget(a))return b[c];return b[b.length-1]};THREE.MorphAnimation=function(a){this.mesh=a;this.frames=a.morphTargetInfluences.length;this.currentTime=0;this.duration=1E3;this.loop=!0;this.isPlaying=!1};
+THREE.MorphAnimation.prototype=)raw_html",R"raw_html({play:function(){this.isPlaying=!0},pause:function(){this.isPlaying=!1},update:function(){var a=0,b=0;return function(c){if(!1!==this.isPlaying){this.currentTime+=c;!0===this.loop&&this.currentTime>this.duration&&(this.currentTime%=this.duration);this.curr)raw_html",R"raw_html(entTime=Math.min(this.currentTime,this.duration);c=this.duration/this.frames;var d=Math.floor(this.currentTime/c);d!=b&&(this.mesh.morphTargetInfluences[a]=0,this.mesh.morphTargetInfluences[b]=1,this.mesh.morphTargetInfluences[d]=
+0,a=b,b=d);this.mesh.morp)raw_html",R"raw_html(hTargetInfluences[d]=this.currentTime%c/c;this.mesh.morphTargetInfluences[a]=1-this.mesh.morphTargetInfluences[d]}}}()};
+THREE.BoxGeometry=function(a,b,c,d,e,f){function g(a,b,c,d,e,f,g,s){var u,v=h.widthSegments,y=h.heightSegments,G=e/2,w=f/2,K=h.vertices)raw_html",R"raw_html(.length;if("x"===a&&"y"===b||"y"===a&&"x"===b)u="z";else if("x"===a&&"z"===b||"z"===a&&"x"===b)u="y",y=h.depthSegments;else if("z"===a&&"y"===b||"y"===a&&"z"===b)u="x",v=h.depthSegments;var x=v+1,D=y+1,E=e/v,A=f/y,B=new THREE.Vector3;B[u]=0<g?1:-1;for(e=0;)raw_html",R"raw_html(e<D;e++)for(f=0;f<x;f++){var F=new THREE.Vector3;F[a]=(f*E-G)*c;F[b]=(e*A-w)*d;F[u]=g;h.vertices.push(F)}for(e=
+0;e<y;e++)for(f=0;f<v;f++)w=f+x*e,a=f+x*(e+1),b=f+1+x*(e+1),c=f+1+x*e,d=new THREE.Vector2(f/v,1-e/y),g=new THREE.Vector2(f/v,1-(e+1)/y),u=new TH)raw_html",R"raw_html(REE.Vector2((f+1)/v,1-(e+1)/y),G=new THREE.Vector2((f+1)/v,1-e/y),w=new THREE.Face3(w+K,a+K,c+K),w.normal.copy(B),w.vertexNormals.push(B.clone(),B.clone(),B.clone()),w.materialIndex=s,h.faces.push(w),h.faceVertexUvs[0].push([d,g,G]),w=new THREE.Face3(a+K,b)raw_html",R"raw_html(+K,c+K),w.normal.copy(B),w.vertexNormals.push(B.clone(),B.clone(),B.clone()),w.materialIndex=s,h.faces.push(w),
+h.faceVertexUvs[0].push([g.clone(),u,G.clone()])}THREE.Geometry.call(this);this.type="BoxGeometry";this.parameters={width:a,height:b,depth:c,wid)raw_html",R"raw_html(thSegments:d,heightSegments:e,depthSegments:f};this.widthSegments=d||1;this.heightSegments=e||1;this.depthSegments=f||1;var h=this;d=a/2;e=b/2;f=c/2;g("z","y",-1,-1,c,b,d,0);g("z","y",1,-1,c,b,-d,1);g("x","z",1,1,a,c,e,2);g("x","z",1,-1,a,c,-e,3);g("x","y")raw_html",R"raw_html(,1,-1,a,b,f,4);g("x","y",-1,-1,a,b,-f,5);this.mergeVertices()};THREE.BoxGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.CircleGeometry=function(a,b,c,d){THREE.Geometry.call(this);this.type="CircleGeometry";this.parameters={radius:a,segmen)raw_html",R"raw_html(ts:b,thetaStart:c,thetaLength:d};a=a||50;b=void 0!==b?Math.max(3,b):8;c=void 0!==c?c:0;d=void 0!==d?d:2*Math.PI;var e,f=[];e=new THREE.Vector3;var g=new THREE.Vector2(.5,.5);this.vertices.push(e);f.push(g);for(e=0;e<=b;e++){var h=new THREE.Vector3,k=c+e/b*)raw_html",R"raw_html(d;h.x=a*Math.cos(k);h.y=a*Math.sin(k);this.vertices.push(h);f.push(new THREE.Vector2((h.x/a+1)/2,(h.y/a+1)/2))}c=new THREE.Vector3(0,
+0,1);for(e=1;e<=b;e++)this.faces.push(new THREE.Face3(e,e+1,0,[c.clone(),c.clone(),c.clone()])),this.faceVertexUvs[0].push)raw_html",R"raw_html(([f[e].clone(),f[e+1].clone(),g.clone()]);this.computeFaceNormals();this.boundingSphere=new THREE.Sphere(new THREE.Vector3,a)};THREE.CircleGeometry.prototype=Object.create(THREE.Geometry.prototype);THREE.CubeGeometry=function(a,b,c,d,e,f){console.warn("THR)raw_html",R"raw_html(EE.CubeGeometry has been renamed to THREE.BoxGeometry.");return new THREE.BoxGeometry(a,b,c,d,e,f)};
+THREE.CylinderGeometry=function(a,b,c,d,e,f){THREE.Geometry.call(this);this.type="CylinderGeometry";this.parameters={radiusTop:a,radiusBottom:b,height:c,ra)raw_html",R"raw_html(dialSegments:d,heightSegments:e,openEnded:f};a=void 0!==a?a:20;b=void 0!==b?b:20;c=void 0!==c?c:100;d=d||8;e=e||1;f=void 0!==f?f:!1;var g=c/2,h,k,n=[],p=[];for(k=0;k<=e;k++){var q=[],m=[],r=k/e,t=r*(b-a)+a;for(h=0;h<=d;h++){var s=h/d,u=new THREE.Vector3;u.)raw_html",R"raw_html(x=t*Math.sin(s*Math.PI*2);u.y=-r*c+g;u.z=t*Math.cos(s*Math.PI*2);this.vertices.push(u);q.push(this.vertices.length-
+1);m.push(new THREE.Vector2(s,1-r))}n.push(q);p.push(m)}c=(b-a)/c;for(h=0;h<d;h++)for(0!==a?(q=this.vertices[n[0][h]].clone(),m=this.vertice)raw_html",R"raw_html(s[n[0][h+1]].clone()):(q=this.vertices[n[1][h]].clone(),m=this.vertices[n[1][h+1]].clone()),q.setY(Math.sqrt(q.x*q.x+q.z*q.z)*c).normalize(),m.setY(Math.sqrt(m.x*m.x+m.z*m.z)*c).normalize(),k=0;k<e;k++){var r=n[k][h],t=n[k+1][h],s=n[k+1][h+1],u=n[k][h+1],v)raw_html",R"raw_html(=q.clone(),y=q.clone(),G=m.clone(),w=m.clone(),K=p[k][h].clone(),x=p[k+1][h].clone(),D=p[k+1][h+1].clone(),
+E=p[k][h+1].clone();this.faces.push(new THREE.Face3(r,t,u,[v,y,w]));this.faceVertexUvs[0].push([K,x,E]);this.faces.push(new THREE.Face3(t,s,u,[y.clo)raw_html",R"raw_html(ne(),G,w.clone()]));this.faceVertexUvs[0].push([x.clone(),D,E.clone()])}if(!1===f&&0<a)for(this.vertices.push(new THREE.Vector3(0,g,0)),h=0;h<d;h++)r=n[0][h],t=n[0][h+1],s=this.vertices.length-1,v=new THREE.Vector3(0,1,0),y=new THREE.Vector3(0,1,0),G=new T)raw_html",R"raw_html(HREE.Vector3(0,1,0),K=p[0][h].clone(),x=p[0][h+1].clone(),D=new THREE.Vector2(x.x,0),this.faces.push(new THREE.Face3(r,
+t,s,[v,y,G])),this.faceVertexUvs[0].push([K,x,D]);if(!1===f&&0<b)for(this.vertices.push(new THREE.Vector3(0,-g,0)),h=0;h<d;h++)r=n[k][h+)raw_html",R"raw_html(1],t=n[k][h],s=this.vertices.length-1,v=new THREE.Vector3(0,-1,0),y=new THREE.Vector3(0,-1,0),G=new THREE.Vector3(0,-1,0),K=p[k][h+1].clone(),x=p[k][h].clone(),D=new THREE.Vector2(x.x,1),this.faces.push(new THREE.Face3(r,t,s,[v,y,G])),this.faceVertexUvs[0])raw_html",R"raw_html(.push([K,x,D]);this.computeFaceNormals()};THREE.CylinderGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.ExtrudeGeometry=function(a,b){"undefined"!==typeof a&&(THREE.Geometry.call(this),this.type="ExtrudeGeometry",a=a instanceof Array?a:[a)raw_html",R"raw_html(],this.addShapeList(a,b),this.computeFaceNormals())};THREE.ExtrudeGeometry.prototype=Object.create(THREE.Geometry.prototype);THREE.ExtrudeGeometry.prototype.addShapeList=function(a,b){for(var c=a.length,d=0;d<c;d++)this.addShape(a[d],b)};
+THREE.ExtrudeGeom)raw_html",R"raw_html(etry.prototype.addShape=function(a,b){function c(a,b,c){b||console.log("die");return b.clone().multiplyScalar(c).add(a)}function d(a,b,c){var d=1,d=a.x-b.x,e=a.y-b.y,f=c.x-a.x,g=c.y-a.y,h=d*d+e*e;if(1E-10<Math.abs(d*g-e*f)){var k=Math.sqrt(h),m=Math.sqrt(f)raw_html",R"raw_html(*f+g*g),h=b.x-e/k;b=b.y+d/k;f=((c.x-g/m-h)*g-(c.y+f/m-b)*f)/(d*g-e*f);c=h+d*f-a.x;a=b+e*f-a.y;d=c*c+a*a;if(2>=d)return new THREE.Vector2(c,a);d=Math.sqrt(d/2)}else a=!1,1E-10<d?1E-10<f&&(a=!0):-1E-10>d?-1E-10>f&&(a=!0):Math.sign(e)==
+Math.sign(g)&&(a=!0),a)raw_html",R"raw_html(?(c=-e,a=d,d=Math.sqrt(h)):(c=d,a=e,d=Math.sqrt(h/2));return new THREE.Vector2(c/d,a/d)}function e(a,b){var c,d;for(P=a.length;0<=--P;){c=P;d=P-1;0>d&&(d=a.length-1);for(var e=0,f=r+2*p,e=0;e<f;e++){var g=la*e,h=la*(e+1),k=b+c+g,g=b+d+g,m=b+d+h,h=b+c+h,k=k)raw_html",R"raw_html(+R,g=g+R,m=m+R,h=h+R;F.faces.push(new THREE.Face3(k,g,h,null,null,y));F.faces.push(new THREE.Face3(g,m,h,null,null,y));k=G.generateSideWallUV(F,k,g,m,h);F.faceVertexUvs[0].push([k[0],k[1],k[3]]);F.faceVertexUvs[0].push([k[1],
+k[2],k[3]])}}}function f(a,b,c)raw_html",R"raw_html(){F.vertices.push(new THREE.Vector3(a,b,c))}function g(a,b,c){a+=R;b+=R;c+=R;F.faces.push(new THREE.Face3(a,b,c,null,null,v));a=G.generateTopUV(F,a,b,c);F.faceVertexUvs[0].push(a)}var h=void 0!==b.amount?b.amount:100,k=void 0!==b.bevelThickness?b.bevelThic)raw_html",R"raw_html(kness:6,n=void 0!==b.bevelSize?b.bevelSize:k-2,p=void 0!==b.bevelSegments?b.bevelSegments:3,q=void 0!==b.bevelEnabled?b.bevelEnabled:!0,m=void 0!==b.curveSegments?b.curveSegments:12,r=void 0!==b.steps?b.steps:1,t=b.extrudePath,
+s,u=!1,v=b.material,y=b.extr)raw_html",R"raw_html(udeMaterial,G=void 0!==b.UVGenerator?b.UVGenerator:THREE.ExtrudeGeometry.WorldUVGenerator,w,K,x,D;t&&(s=t.getSpacedPoints(r),u=!0,q=!1,w=void 0!==b.frames?b.frames:new THREE.TubeGeometry.FrenetFrames(t,r,!1),K=new THREE.Vector3,x=new THREE.Vector3,D=new TH)raw_html",R"raw_html(REE.Vector3);q||(n=k=p=0);var E,A,B,F=this,R=this.vertices.length,t=a.extractPoints(m),m=t.shape,H=t.holes;if(t=!THREE.Shape.Utils.isClockWise(m)){m=m.reverse();A=0;for(B=H.length;A<B;A++)E=H[A],THREE.Shape.Utils.isClockWise(E)&&
+(H[A]=E.reverse());t=!1}va)raw_html",R"raw_html(r C=THREE.Shape.Utils.triangulateShape(m,H),T=m;A=0;for(B=H.length;A<B;A++)E=H[A],m=m.concat(E);var Q,O,S,X,Y,la=m.length,ma,ya=C.length,t=[],P=0;S=T.length;Q=S-1;for(O=P+1;P<S;P++,Q++,O++)Q===S&&(Q=0),O===S&&(O=0),t[P]=d(T[P],T[Q],T[O]);var Ga=[],Fa,za=t.)raw_html",R"raw_html(concat();A=0;for(B=H.length;A<B;A++){E=H[A];Fa=[];P=0;S=E.length;Q=S-1;for(O=P+1;P<S;P++,Q++,O++)Q===S&&(Q=0),O===S&&(O=0),Fa[P]=d(E[P],E[Q],E[O]);Ga.push(Fa);za=za.concat(Fa)}for(Q=0;Q<p;Q++){S=Q/p;X=k*(1-S);O=n*Math.sin(S*
+Math.PI/2);P=0;for(S=T.length;P)raw_html",R"raw_html(<S;P++)Y=c(T[P],t[P],O),f(Y.x,Y.y,-X);A=0;for(B=H.length;A<B;A++)for(E=H[A],Fa=Ga[A],P=0,S=E.length;P<S;P++)Y=c(E[P],Fa[P],O),f(Y.x,Y.y,-X)}O=n;for(P=0;P<la;P++)Y=q?c(m[P],za[P],O):m[P],u?(x.copy(w.normals[0]).multiplyScalar(Y.x),K.copy(w.binormals[0]).mul)raw_html",R"raw_html(tiplyScalar(Y.y),D.copy(s[0]).add(x).add(K),f(D.x,D.y,D.z)):f(Y.x,Y.y,0);for(S=1;S<=r;S++)for(P=0;P<la;P++)Y=q?c(m[P],za[P],O):m[P],u?(x.copy(w.normals[S]).multiplyScalar(Y.x),K.copy(w.binormals[S]).multiplyScalar(Y.y),
+D.copy(s[S]).add(x).add(K),f(D.x,D.y)raw_html",R"raw_html(,D.z)):f(Y.x,Y.y,h/r*S);for(Q=p-1;0<=Q;Q--){S=Q/p;X=k*(1-S);O=n*Math.sin(S*Math.PI/2);P=0;for(S=T.length;P<S;P++)Y=c(T[P],t[P],O),f(Y.x,Y.y,h+X);A=0;for(B=H.length;A<B;A++)for(E=H[A],Fa=Ga[A],P=0,S=E.length;P<S;P++)Y=c(E[P],Fa[P],O),u?f(Y.x,Y.y+s[r-1].y,s[)raw_html",R"raw_html(r-1].x+X):f(Y.x,Y.y,h+X)}(function(){if(q){var a;a=0*la;for(P=0;P<ya;P++)ma=C[P],g(ma[2]+a,ma[1]+a,ma[0]+a);a=r+2*p;a*=la;for(P=0;P<ya;P++)ma=C[P],g(ma[0]+a,ma[1]+a,ma[2]+a)}else{for(P=0;P<ya;P++)ma=C[P],g(ma[2],
+ma[1],ma[0]);for(P=0;P<ya;P++)ma=C[P],g(ma[)raw_html",R"raw_html(0]+la*r,ma[1]+la*r,ma[2]+la*r)}})();(function(){var a=0;e(T,a);a+=T.length;A=0;for(B=H.length;A<B;A++)E=H[A],e(E,a),a+=E.length})()};
+THREE.ExtrudeGeometry.WorldUVGenerator={generateTopUV:function(a,b,c,d){a=a.vertices;b=a[b];c=a[c];d=a[d];return[new THREE)raw_html",R"raw_html(.Vector2(b.x,b.y),new THREE.Vector2(c.x,c.y),new THREE.Vector2(d.x,d.y)]},generateSideWallUV:function(a,b,c,d,e){a=a.vertices;b=a[b];c=a[c];d=a[d];e=a[e];return.01>Math.abs(b.y-c.y)?[new THREE.Vector2(b.x,1-b.z),new THREE.Vector2(c.x,1-c.z),new THREE.Vecto)raw_html",R"raw_html(r2(d.x,1-d.z),new THREE.Vector2(e.x,1-e.z)]:[new THREE.Vector2(b.y,1-b.z),new THREE.Vector2(c.y,1-c.z),new THREE.Vector2(d.y,
+1-d.z),new THREE.Vector2(e.y,1-e.z)]}};THREE.ShapeGeometry=function(a,b){THREE.Geometry.call(this);this.type="ShapeGeometry";!1===)raw_html",R"raw_html(a instanceof Array&&(a=[a]);this.addShapeList(a,b);this.computeFaceNormals()};THREE.ShapeGeometry.prototype=Object.create(THREE.Geometry.prototype);THREE.ShapeGeometry.prototype.addShapeList=function(a,b){for(var c=0,d=a.length;c<d;c++)this.addShape(a[c],b)raw_html",R"raw_html();return this};
+THREE.ShapeGeometry.prototype.addShape=function(a,b){void 0===b&&(b={});var c=b.material,d=void 0===b.UVGenerator?THREE.ExtrudeGeometry.WorldUVGenerator:b.UVGenerator,e,f,g,h=this.vertices.length;e=a.extractPoints(void 0!==b.curveSegments?b)raw_html",R"raw_html(.curveSegments:12);var k=e.shape,n=e.holes;if(!THREE.Shape.Utils.isClockWise(k))for(k=k.reverse(),e=0,f=n.length;e<f;e++)g=n[e],THREE.Shape.Utils.isClockWise(g)&&(n[e]=g.reverse());var p=THREE.Shape.Utils.triangulateShape(k,n);e=0;for(f=n.length;e<f;e++)g=)raw_html",R"raw_html(n[e],
+k=k.concat(g);n=k.length;f=p.length;for(e=0;e<n;e++)g=k[e],this.vertices.push(new THREE.Vector3(g.x,g.y,0));for(e=0;e<f;e++)n=p[e],k=n[0]+h,g=n[1]+h,n=n[2]+h,this.faces.push(new THREE.Face3(k,g,n,null,null,c)),this.faceVertexUvs[0].push(d.generateTop)raw_html",R"raw_html(UV(this,k,g,n))};
+THREE.LatheGeometry=function(a,b,c,d){THREE.Geometry.call(this);this.type="LatheGeometry";this.parameters={points:a,segments:b,phiStart:c,phiLength:d};b=b||12;c=c||0;d=d||2*Math.PI;for(var e=1/(a.length-1),f=1/b,g=0,h=b;g<=h;g++)for(var k)raw_html",R"raw_html(=c+g*f*d,n=Math.cos(k),p=Math.sin(k),k=0,q=a.length;k<q;k++){var m=a[k],r=new THREE.Vector3;r.x=n*m.x-p*m.y;r.y=p*m.x+n*m.y;r.z=m.z;this.vertices.push(r)}c=a.length;g=0;for(h=b;g<h;g++)for(k=0,q=a.length-1;k<q;k++){b=p=k+c*g;d=p+c;var n=p+1+c,p=p+1,m=g*f,r)raw_html",R"raw_html(=k*e,t=
+m+f,s=r+e;this.faces.push(new THREE.Face3(b,d,p));this.faceVertexUvs[0].push([new THREE.Vector2(m,r),new THREE.Vector2(t,r),new THREE.Vector2(m,s)]);this.faces.push(new THREE.Face3(d,n,p));this.faceVertexUvs[0].push([new THREE.Vector2(t,r),new THRE)raw_html",R"raw_html(E.Vector2(t,s),new THREE.Vector2(m,s)])}this.mergeVertices();this.computeFaceNormals();this.computeVertexNormals()};THREE.LatheGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.PlaneGeometry=function(a,b,c,d){console.info("THREE.PlaneGeomet)raw_html",R"raw_html(ry: Consider using THREE.PlaneBufferGeometry for lower memory footprint.");THREE.Geometry.call(this);this.type="PlaneGeometry";this.parameters={width:a,height:b,widthSegments:c,heightSegments:d};this.fromBufferGeometry(new THREE.PlaneBufferGeometry(a,b,c,d)raw_html",R"raw_html())};THREE.PlaneGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.PlaneBufferGeometry=function(a,b,c,d){THREE.BufferGeometry.call(this);this.type="PlaneBufferGeometry";this.parameters={width:a,height:b,widthSegments:c,heightSegments:d};var e)raw_html",R"raw_html(=a/2,f=b/2;c=c||1;d=d||1;var g=c+1,h=d+1,k=a/c,n=b/d;b=new Float32Array(g*h*3);a=new Float32Array(g*h*3);for(var p=new Float32Array(g*h*2),q=0,m=0,r=0;r<h;r++)for(var t=r*n-f,s=0;s<g;s++)b[q]=s*k-e,b[q+1]=-t,a[q+2]=1,p[m]=s/c,p[m+1]=1-r/d,q+=3,m+=2;q=0;e=n)raw_html",R"raw_html(ew (65535<b.length/3?Uint32Array:Uint16Array)(c*d*6);for(r=0;r<d;r++)for(s=
+0;s<c;s++)f=s+g*(r+1),h=s+1+g*(r+1),k=s+1+g*r,e[q]=s+g*r,e[q+1]=f,e[q+2]=k,e[q+3]=f,e[q+4]=h,e[q+5]=k,q+=6;this.addAttribute("index",new THREE.BufferAttribute(e,1));this.addAttribu)raw_html",R"raw_html(te("position",new THREE.BufferAttribute(b,3));this.addAttribute("normal",new THREE.BufferAttribute(a,3));this.addAttribute("uv",new THREE.BufferAttribute(p,2))};THREE.PlaneBufferGeometry.prototype=Object.create(THREE.BufferGeometry.prototype);
+THREE.RingGe)raw_html",R"raw_html(ometry=function(a,b,c,d,e,f){THREE.Geometry.call(this);this.type="RingGeometry";this.parameters={innerRadius:a,outerRadius:b,thetaSegments:c,phiSegments:d,thetaStart:e,thetaLength:f};a=a||0;b=b||50;e=void 0!==e?e:0;f=void 0!==f?f:2*Math.PI;c=void 0!==c?Mat)raw_html",R"raw_html(h.max(3,c):8;d=void 0!==d?Math.max(1,d):8;var g,h=[],k=a,n=(b-a)/d;for(a=0;a<d+1;a++){for(g=0;g<c+1;g++){var p=new THREE.Vector3,q=e+g/c*f;p.x=k*Math.cos(q);p.y=k*Math.sin(q);this.vertices.push(p);h.push(new THREE.Vector2((p.x/b+1)/2,
+(p.y/b+1)/2))}k+=n}b=)raw_html",R"raw_html(new THREE.Vector3(0,0,1);for(a=0;a<d;a++)for(e=a*(c+1),g=0;g<c;g++)f=q=g+e,n=q+c+1,p=q+c+2,this.faces.push(new THREE.Face3(f,n,p,[b.clone(),b.clone(),b.clone()])),this.faceVertexUvs[0].push([h[f].clone(),h[n].clone(),h[p].clone()]),f=q,n=q+c+2,p=q+1,this.f)raw_html",R"raw_html(aces.push(new THREE.Face3(f,n,p,[b.clone(),b.clone(),b.clone()])),this.faceVertexUvs[0].push([h[f].clone(),h[n].clone(),h[p].clone()]);this.computeFaceNormals();this.boundingSphere=new THREE.Sphere(new THREE.Vector3,k)};
+THREE.RingGeometry.prototype=Object)raw_html",R"raw_html(.create(THREE.Geometry.prototype);
+THREE.SphereGeometry=function(a,b,c,d,e,f,g){THREE.Geometry.call(this);this.type="SphereGeometry";this.parameters={radius:a,widthSegments:b,heightSegments:c,phiStart:d,phiLength:e,thetaStart:f,thetaLength:g};a=a||50;b=Mat)raw_html",R"raw_html(h.max(3,Math.floor(b)||8);c=Math.max(2,Math.floor(c)||6);d=void 0!==d?d:0;e=void 0!==e?e:2*Math.PI;f=void 0!==f?f:0;g=void 0!==g?g:Math.PI;var h,k,n=[],p=[];for(k=0;k<=c;k++){var q=[],m=[];for(h=0;h<=b;h++){var r=h/b,t=k/c,s=new THREE.Vector3;s.x=-a*Math.c)raw_html",R"raw_html(os(d+r*e)*Math.sin(f+t*g);
+s.y=a*Math.cos(f+t*g);s.z=a*Math.sin(d+r*e)*Math.sin(f+t*g);this.vertices.push(s);q.push(this.vertices.length-1);m.push(new THREE.Vector2(r,1-t))}n.push(q);p.push(m)}for(k=0;k<c;k++)for(h=0;h<b;h++){d=n[k][h+1];e=n[k][h];f=n[k+1])raw_html",R"raw_html([h];g=n[k+1][h+1];var q=this.vertices[d].clone().normalize(),m=this.vertices[e].clone().normalize(),r=this.vertices[f].clone().normalize(),t=this.vertices[g].clone().normalize(),s=p[k][h+1].clone(),u=p[k][h].clone(),v=p[k+1][h].clone(),y=p[k+1][h+1].clone()raw_html",R"raw_html();Math.abs(this.vertices[d].y)===
+a?(s.x=(s.x+u.x)/2,this.faces.push(new THREE.Face3(d,f,g,[q,r,t])),this.faceVertexUvs[0].push([s,v,y])):Math.abs(this.vertices[f].y)===a?(v.x=(v.x+y.x)/2,this.faces.push(new THREE.Face3(d,e,f,[q,m,r])),this.faceVertexUvs[0)raw_html",R"raw_html(].push([s,u,v])):(this.faces.push(new THREE.Face3(d,e,g,[q,m,t])),this.faceVertexUvs[0].push([s,u,y]),this.faces.push(new THREE.Face3(e,f,g,[m.clone(),r,t.clone()])),this.faceVertexUvs[0].push([u.clone(),v,y.clone()]))}this.computeFaceNormals();this.boundi)raw_html",R"raw_html(ngSphere=new THREE.Sphere(new THREE.Vector3,
+a)};THREE.SphereGeometry.prototype=Object.create(THREE.Geometry.prototype);THREE.TextGeometry=function(a,b){b=b||{};var c=THREE.FontUtils.generateShapes(a,b);b.amount=void 0!==b.height?b.height:50;void 0===b.bev)raw_html",R"raw_html(elThickness&&(b.bevelThickness=10);void 0===b.bevelSize&&(b.bevelSize=8);void 0===b.bevelEnabled&&(b.bevelEnabled=!1);THREE.ExtrudeGeometry.call(this,c,b);this.type="TextGeometry"};THREE.TextGeometry.prototype=Object.create(THREE.ExtrudeGeometry.prototype))raw_html",R"raw_html(;
+THREE.TorusGeometry=function(a,b,c,d,e){THREE.Geometry.call(this);this.type="TorusGeometry";this.parameters={radius:a,tube:b,radialSegments:c,tubularSegments:d,arc:e};a=a||100;b=b||40;c=c||8;d=d||6;e=e||2*Math.PI;for(var f=new THREE.Vector3,g=[],h=[],k=0)raw_html",R"raw_html(;k<=c;k++)for(var n=0;n<=d;n++){var p=n/d*e,q=k/c*Math.PI*2;f.x=a*Math.cos(p);f.y=a*Math.sin(p);var m=new THREE.Vector3;m.x=(a+b*Math.cos(q))*Math.cos(p);m.y=(a+b*Math.cos(q))*Math.sin(p);m.z=b*Math.sin(q);this.vertices.push(m);g.push(new THREE.Vector2(n/
+)raw_html",R"raw_html(d,k/c));h.push(m.clone().sub(f).normalize())}for(k=1;k<=c;k++)for(n=1;n<=d;n++)a=(d+1)*k+n-1,b=(d+1)*(k-1)+n-1,e=(d+1)*(k-1)+n,f=(d+1)*k+n,p=new THREE.Face3(a,b,f,[h[a].clone(),h[b].clone(),h[f].clone()]),this.faces.push(p),this.faceVertexUvs[0].push([g[a])raw_html",R"raw_html(.clone(),g[b].clone(),g[f].clone()]),p=new THREE.Face3(b,e,f,[h[b].clone(),h[e].clone(),h[f].clone()]),this.faces.push(p),this.faceVertexUvs[0].push([g[b].clone(),g[e].clone(),g[f].clone()]);this.computeFaceNormals()};
+THREE.TorusGeometry.prototype=Object.)raw_html",R"raw_html(create(THREE.Geometry.prototype);
+THREE.TorusKnotGeometry=function(a,b,c,d,e,f,g){function h(a,b,c,d,e){var f=Math.cos(a),g=Math.sin(a);a*=b/c;b=Math.cos(a);f*=d*(2+b)*.5;g=d*(2+b)*g*.5;d=e*d*Math.sin(a)*.5;return new THREE.Vector3(f,g,d)}THREE.Geometry.ca)raw_html",R"raw_html(ll(this);this.type="TorusKnotGeometry";this.parameters={radius:a,tube:b,radialSegments:c,tubularSegments:d,p:e,q:f,heightScale:g};a=a||100;b=b||40;c=c||64;d=d||8;e=e||2;f=f||3;g=g||1;for(var k=Array(c),n=new THREE.Vector3,p=new THREE.Vector3,q=new THREE.Ve)raw_html",R"raw_html(ctor3,m=0;m<c;++m){k[m]=
+Array(d);var r=m/c*2*e*Math.PI,t=h(r,f,e,a,g),r=h(r+.01,f,e,a,g);n.subVectors(r,t);p.addVectors(r,t);q.crossVectors(n,p);p.crossVectors(q,n);q.normalize();p.normalize();for(r=0;r<d;++r){var s=r/d*2*Math.PI,u=-b*Math.cos(s),s=b*Math)raw_html",R"raw_html(.sin(s),v=new THREE.Vector3;v.x=t.x+u*p.x+s*q.x;v.y=t.y+u*p.y+s*q.y;v.z=t.z+u*p.z+s*q.z;k[m][r]=this.vertices.push(v)-1}}for(m=0;m<c;++m)for(r=0;r<d;++r)e=(m+1)%c,f=(r+1)%d,a=k[m][r],b=k[e][r],e=k[e][f],f=k[m][f],g=new THREE.Vector2(m/c,r/d),n=new THREE.Ve)raw_html",R"raw_html(ctor2((m+1)/c,
+r/d),p=new THREE.Vector2((m+1)/c,(r+1)/d),q=new THREE.Vector2(m/c,(r+1)/d),this.faces.push(new THREE.Face3(a,b,f)),this.faceVertexUvs[0].push([g,n,q]),this.faces.push(new THREE.Face3(b,e,f)),this.faceVertexUvs[0].push([n.clone(),p,q.clone()])raw_html",R"raw_html();this.computeFaceNormals();this.computeVertexNormals()};THREE.TorusKnotGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.TubeGeometry=function(a,b,c,d,e){THREE.Geometry.call(this);this.type="TubeGeometry";this.parameters={path:a,segments:b)raw_html",R"raw_html(,radius:c,radialSegments:d,closed:e};b=b||64;c=c||1;d=d||8;e=e||!1;var f=[],g,h,k=b+1,n,p,q,m,r=new THREE.Vector3,t,s,u;t=new THREE.TubeGeometry.FrenetFrames(a,b,e);s=t.normals;u=t.binormals;this.tangents=t.tangents;this.normals=s;this.binormals=u;for(t=0;)raw_html",R"raw_html(t<k;t++)for(f[t]=[],n=t/(k-1),m=a.getPointAt(n),g=s[t],h=u[t],n=0;n<d;n++)p=n/d*2*Math.PI,q=-c*Math.cos(p),p=c*Math.sin(p),
+r.copy(m),r.x+=q*g.x+p*h.x,r.y+=q*g.y+p*h.y,r.z+=q*g.z+p*h.z,f[t][n]=this.vertices.push(new THREE.Vector3(r.x,r.y,r.z))-1;for(t=0;t<)raw_html",R"raw_html(b;t++)for(n=0;n<d;n++)k=e?(t+1)%b:t+1,r=(n+1)%d,a=f[t][n],c=f[k][n],k=f[k][r],r=f[t][r],s=new THREE.Vector2(t/b,n/d),u=new THREE.Vector2((t+1)/b,n/d),g=new THREE.Vector2((t+1)/b,(n+1)/d),h=new THREE.Vector2(t/b,(n+1)/d),this.faces.push(new THREE.Face3(a,c,)raw_html",R"raw_html(r)),this.faceVertexUvs[0].push([s,u,h]),this.faces.push(new THREE.Face3(c,k,r)),this.faceVertexUvs[0].push([u.clone(),
+g,h.clone()]);this.computeFaceNormals();this.computeVertexNormals()};THREE.TubeGeometry.prototype=Object.create(THREE.Geometry.prototype))raw_html",R"raw_html(;
+THREE.TubeGeometry.FrenetFrames=function(a,b,c){new THREE.Vector3;var d=new THREE.Vector3;new THREE.Vector3;var e=[],f=[],g=[],h=new THREE.Vector3,k=new THREE.Matrix4;b+=1;var n,p,q;this.tangents=e;this.normals=f;this.binormals=g;for(n=0;n<b;n++)p=n/(b-1)raw_html",R"raw_html(),e[n]=a.getTangentAt(p),e[n].normalize();f[0]=new THREE.Vector3;g[0]=new THREE.Vector3;a=Number.MAX_VALUE;n=Math.abs(e[0].x);p=Math.abs(e[0].y);q=Math.abs(e[0].z);n<=a&&(a=n,d.set(1,0,0));p<=a&&(a=p,d.set(0,1,0));q<=a&&d.set(0,0,1);h.crossVectors(e[0],
+d))raw_html",R"raw_html(.normalize();f[0].crossVectors(e[0],h);g[0].crossVectors(e[0],f[0]);for(n=1;n<b;n++)f[n]=f[n-1].clone(),g[n]=g[n-1].clone(),h.crossVectors(e[n-1],e[n]),1E-4<h.length()&&(h.normalize(),d=Math.acos(THREE.Math.clamp(e[n-1].dot(e[n]),-1,1)),f[n].applyMatrix4(k)raw_html",R"raw_html(.makeRotationAxis(h,d))),g[n].crossVectors(e[n],f[n]);if(c)for(d=Math.acos(THREE.Math.clamp(f[0].dot(f[b-1]),-1,1)),d/=b-1,0<e[0].dot(h.crossVectors(f[0],f[b-1]))&&(d=-d),n=1;n<b;n++)f[n].applyMatrix4(k.makeRotationAxis(e[n],d*n)),g[n].crossVectors(e[n],
+f)raw_html",R"raw_html([n])};
+THREE.PolyhedronGeometry=function(a,b,c,d){function e(a){var b=a.normalize().clone();b.index=k.vertices.push(b)-1;var c=Math.atan2(a.z,-a.x)/2/Math.PI+.5;a=Math.atan2(-a.y,Math.sqrt(a.x*a.x+a.z*a.z))/Math.PI+.5;b.uv=new THREE.Vector2(c,1-a);return b)raw_html",R"raw_html(}function f(a,b,c){var d=new THREE.Face3(a.index,b.index,c.index,[a.clone(),b.clone(),c.clone()]);k.faces.push(d);u.copy(a).add(b).add(c).divideScalar(3);d=Math.atan2(u.z,-u.x);k.faceVertexUvs[0].push([h(a.uv,a,d),h(b.uv,b,d),h(c.uv,c,d)])}function g(a,b){)raw_html",R"raw_html(var c=
+Math.pow(2,b);Math.pow(4,b);for(var d=e(k.vertices[a.a]),g=e(k.vertices[a.b]),h=e(k.vertices[a.c]),m=[],n=0;n<=c;n++){m[n]=[];for(var p=e(d.clone().lerp(h,n/c)),q=e(g.clone().lerp(h,n/c)),r=c-n,s=0;s<=r;s++)m[n][s]=0==s&&n==c?p:e(p.clone().lerp(q,s/)raw_html",R"raw_html(r))}for(n=0;n<c;n++)for(s=0;s<2*(c-n)-1;s++)d=Math.floor(s/2),0==s%2?f(m[n][d+1],m[n+1][d],m[n][d]):f(m[n][d+1],m[n+1][d+1],m[n+1][d])}function h(a,b,c){0>c&&1===a.x&&(a=new THREE.Vector2(a.x-1,a.y));0===b.x&&0===b.z&&(a=new THREE.Vector2(c/2/Math.PI+.5,
+a)raw_html",R"raw_html(.y));return a.clone()}THREE.Geometry.call(this);this.type="PolyhedronGeometry";this.parameters={vertices:a,indices:b,radius:c,detail:d};c=c||1;d=d||0;for(var k=this,n=0,p=a.length;n<p;n+=3)e(new THREE.Vector3(a[n],a[n+1],a[n+2]));a=this.vertices;for(var q=)raw_html",R"raw_html([],m=n=0,p=b.length;n<p;n+=3,m++){var r=a[b[n]],t=a[b[n+1]],s=a[b[n+2]];q[m]=new THREE.Face3(r.index,t.index,s.index,[r.clone(),t.clone(),s.clone()])}for(var u=new THREE.Vector3,n=0,p=q.length;n<p;n++)g(q[n],d);n=0;for(p=this.faceVertexUvs[0].length;n<
+p;n)raw_html",R"raw_html(++)b=this.faceVertexUvs[0][n],d=b[0].x,a=b[1].x,q=b[2].x,m=Math.max(d,Math.max(a,q)),r=Math.min(d,Math.min(a,q)),.9<m&&.1>r&&(.2>d&&(b[0].x+=1),.2>a&&(b[1].x+=1),.2>q&&(b[2].x+=1));n=0;for(p=this.vertices.length;n<p;n++)this.vertices[n].multiplyScalar(c);t)raw_html",R"raw_html(his.mergeVertices();this.computeFaceNormals();this.boundingSphere=new THREE.Sphere(new THREE.Vector3,c)};THREE.PolyhedronGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.DodecahedronGeometry=function(a,b){this.parameters={radius:a,detail:b)raw_html",R"raw_html(};var c=(1+Math.sqrt(5))/2,d=1/c;THREE.PolyhedronGeometry.call(this,[-1,-1,-1,-1,-1,1,-1,1,-1,-1,1,1,1,-1,-1,1,-1,1,1,1,-1,1,1,1,0,-d,-c,0,-d,c,0,d,-c,0,d,c,-d,-c,0,-d,c,0,d,-c,0,d,c,0,-c,0,-d,c,0,-d,-c,0,d,c,0,d],[3,11,7,3,7,15,3,15,13,7,19,17,7,17,6,7,6,)raw_html",R"raw_html(15,17,4,8,17,8,10,17,10,6,8,0,16,8,16,2,8,2,10,0,12,1,0,1,18,0,18,16,6,10,2,6,2,13,6,13,15,2,16,18,2,18,3,2,3,13,18,1,9,18,9,11,18,11,3,4,14,12,4,12,0,4,0,8,11,9,5,11,5,19,
+11,19,7,19,5,14,19,14,4,19,4,17,1,12,14,1,14,5,1,5,9],a,b)};THREE.DodecahedronGeome)raw_html",R"raw_html(try.prototype=Object.create(THREE.Geometry.prototype);
+THREE.IcosahedronGeometry=function(a,b){var c=(1+Math.sqrt(5))/2;THREE.PolyhedronGeometry.call(this,[-1,c,0,1,c,0,-1,-c,0,1,-c,0,0,-1,c,0,1,c,0,-1,-c,0,1,-c,c,0,-1,c,0,1,-c,0,-1,-c,0,1],[0,11,5,0,5,1,0)raw_html",R"raw_html(,1,7,0,7,10,0,10,11,1,5,9,5,11,4,11,10,2,10,7,6,7,1,8,3,9,4,3,4,2,3,2,6,3,6,8,3,8,9,4,9,5,2,4,11,6,2,10,8,6,7,9,8,1],a,b);this.type="IcosahedronGeometry";this.parameters={radius:a,detail:b}};THREE.IcosahedronGeometry.prototype=Object.create(THREE.Geometry.)raw_html",R"raw_html(prototype);
+THREE.OctahedronGeometry=function(a,b){this.parameters={radius:a,detail:b};THREE.PolyhedronGeometry.call(this,[1,0,0,-1,0,0,0,1,0,0,-1,0,0,0,1,0,0,-1],[0,2,4,0,4,3,0,3,5,0,5,2,1,2,5,1,5,3,1,3,4,1,4,2],a,b);this.type="OctahedronGeometry";this.pa)raw_html",R"raw_html(rameters={radius:a,detail:b}};THREE.OctahedronGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.TetrahedronGeometry=function(a,b){THREE.PolyhedronGeometry.call(this,[1,1,1,-1,-1,1,-1,1,-1,1,-1,-1],[2,1,0,0,3,2,1,3,0,2,3,1],a,b);this.type="T)raw_html",R"raw_html(etrahedronGeometry";this.parameters={radius:a,detail:b}};THREE.TetrahedronGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.ParametricGeometry=function(a,b,c){THREE.Geometry.call(this);this.type="ParametricGeometry";this.parameters={func:a,)raw_html",R"raw_html(slices:b,stacks:c};var d=this.vertices,e=this.faces,f=this.faceVertexUvs[0],g,h,k,n,p=b+1;for(g=0;g<=c;g++)for(n=g/c,h=0;h<=b;h++)k=h/b,k=a(k,n),d.push(k);var q,m,r,t;for(g=0;g<c;g++)for(h=0;h<b;h++)a=g*p+h,d=g*p+h+1,n=(g+1)*p+h+1,k=(g+1)*p+h,q=new THREE.V)raw_html",R"raw_html(ector2(h/b,g/c),m=new THREE.Vector2((h+1)/b,g/c),r=new THREE.Vector2((h+1)/b,(g+1)/c),t=new THREE.Vector2(h/b,(g+1)/c),e.push(new THREE.Face3(a,
+d,k)),f.push([q,m,t]),e.push(new THREE.Face3(d,n,k)),f.push([m.clone(),r,t.clone()]);this.computeFaceNormals();)raw_html",R"raw_html(this.computeVertexNormals()};THREE.ParametricGeometry.prototype=Object.create(THREE.Geometry.prototype);
+THREE.AxisHelper=function(a){a=a||1;var b=new Float32Array([0,0,0,a,0,0,0,0,0,0,a,0,0,0,0,0,0,a]),c=new Float32Array([1,0,0,1,.6,0,0,1,0,.6,1,0,0,0,1,0)raw_html",R"raw_html(,.6,1]);a=new THREE.BufferGeometry;a.addAttribute("position",new THREE.BufferAttribute(b,3));a.addAttribute("color",new THREE.BufferAttribute(c,3));b=new THREE.LineBasicMaterial({vertexColors:THREE.VertexColors});THREE.Line.call(this,a,b,THREE.LinePieces)})raw_html",R"raw_html(;THREE.AxisHelper.prototype=Object.create(THREE.Line.prototype);
+THREE.ArrowHelper=function(){var a=new THREE.Geometry;a.vertices.push(new THREE.Vector3(0,0,0),new THREE.Vector3(0,1,0));var b=new THREE.CylinderGeometry(0,.5,1,5,1);b.applyMatrix((new THREE.)raw_html",R"raw_html(Matrix4).makeTranslation(0,-.5,0));return function(c,d,e,f,g,h){THREE.Object3D.call(this);void 0===f&&(f=16776960);void 0===e&&(e=1);void 0===g&&(g=.2*e);void 0===h&&(h=.2*g);this.position.copy(d);this.line=new THREE.Line(a,new THREE.LineBasicMaterial({col)raw_html",R"raw_html(or:f}));this.line.matrixAutoUpdate=!1;this.add(this.line);
+this.cone=new THREE.Mesh(b,new THREE.MeshBasicMaterial({color:f}));this.cone.matrixAutoUpdate=!1;this.add(this.cone);this.setDirection(c);this.setLength(e,g,h)}}();THREE.ArrowHelper.prototype=Objec)raw_html",R"raw_html(t.create(THREE.Object3D.prototype);THREE.ArrowHelper.prototype.setDirection=function(){var a=new THREE.Vector3,b;return function(c){.99999<c.y?this.quaternion.set(0,0,0,1):-.99999>c.y?this.quaternion.set(1,0,0,0):(a.set(c.z,0,-c.x).normalize(),b=Math.acos()raw_html",R"raw_html(c.y),this.quaternion.setFromAxisAngle(a,b))}}();
+THREE.ArrowHelper.prototype.setLength=function(a,b,c){void 0===b&&(b=.2*a);void 0===c&&(c=.2*b);this.line.scale.set(1,a,1);this.line.updateMatrix();this.cone.scale.set(c,b,c);this.cone.position.y=a;this.cone)raw_html",R"raw_html(.updateMatrix()};THREE.ArrowHelper.prototype.setColor=function(a){this.line.material.color.set(a);this.cone.material.color.set(a)};
+THREE.BoxHelper=function(a){var b=new THREE.BufferGeometry;b.addAttribute("position",new THREE.BufferAttribute(new Float32Ar)raw_html",R"raw_html(ray(72),3));THREE.Line.call(this,b,new THREE.LineBasicMaterial({color:16776960}),THREE.LinePieces);void 0!==a&&this.update(a)};THREE.BoxHelper.prototype=Object.create(THREE.Line.prototype);
+THREE.BoxHelper.prototype.update=function(a){var b=a.geometry;null)raw_html",R"raw_html(===b.boundingBox&&b.computeBoundingBox();var c=b.boundingBox.min,b=b.boundingBox.max,d=this.geometry.attributes.position.array;d[0]=b.x;d[1]=b.y;d[2]=b.z;d[3]=c.x;d[4]=b.y;d[5]=b.z;d[6]=c.x;d[7]=b.y;d[8]=b.z;d[9]=c.x;d[10]=c.y;d[11]=b.z;d[12]=c.x;d[13]=c.y)raw_html",R"raw_html(;d[14]=b.z;d[15]=b.x;d[16]=c.y;d[17]=b.z;d[18]=b.x;d[19]=c.y;d[20]=b.z;d[21]=b.x;d[22]=b.y;d[23]=b.z;d[24]=b.x;d[25]=b.y;d[26]=c.z;d[27]=c.x;d[28]=b.y;d[29]=c.z;d[30]=c.x;d[31]=b.y;
+d[32]=c.z;d[33]=c.x;d[34]=c.y;d[35]=c.z;d[36]=c.x;d[37]=c.y;d[38]=c.z;d[39)raw_html",R"raw_html(]=b.x;d[40]=c.y;d[41]=c.z;d[42]=b.x;d[43]=c.y;d[44]=c.z;d[45]=b.x;d[46]=b.y;d[47]=c.z;d[48]=b.x;d[49]=b.y;d[50]=b.z;d[51]=b.x;d[52]=b.y;d[53]=c.z;d[54]=c.x;d[55]=b.y;d[56]=b.z;d[57]=c.x;d[58]=b.y;d[59]=c.z;d[60]=c.x;d[61]=c.y;d[62]=b.z;d[63]=c.x;d[64]=c.y;)raw_html",R"raw_html(d[65]=c.z;d[66]=b.x;d[67]=c.y;d[68]=b.z;d[69]=b.x;d[70]=c.y;d[71]=c.z;this.geometry.attributes.position.needsUpdate=!0;this.geometry.computeBoundingSphere();this.matrix=a.matrixWorld;
+this.matrixAutoUpdate=!1};THREE.BoundingBoxHelper=function(a,b){var c=vo)raw_html",R"raw_html(id 0!==b?b:8947848;this.object=a;this.box=new THREE.Box3;THREE.Mesh.call(this,new THREE.BoxGeometry(1,1,1),new THREE.MeshBasicMaterial({color:c,wireframe:!0}))};THREE.BoundingBoxHelper.prototype=Object.create(THREE.Mesh.prototype);THREE.BoundingBoxHelper.p)raw_html",R"raw_html(rototype.update=function(){this.box.setFromObject(this.object);this.box.size(this.scale);this.box.center(this.position)};
+THREE.CameraHelper=function(a){function b(a,b,d){c(a,d);c(b,d)}function c(a,b){d.vertices.push(new THREE.Vector3);d.colors.push(new TH)raw_html",R"raw_html(REE.Color(b));void 0===f[a]&&(f[a]=[]);f[a].push(d.vertices.length-1)}var d=new THREE.Geometry,e=new THREE.LineBasicMaterial({color:16777215,vertexColors:THREE.FaceColors}),f={};b("n1","n2",16755200);b("n2","n4",16755200);b("n4","n3",16755200);b("n3","n1",)raw_html",R"raw_html(16755200);b("f1","f2",16755200);b("f2","f4",16755200);b("f4","f3",16755200);b("f3","f1",16755200);b("n1","f1",16755200);
+b("n2","f2",16755200);b("n3","f3",16755200);b("n4","f4",16755200);b("p","n1",16711680);b("p","n2",16711680);b("p","n3",16711680);b("p",)raw_html",R"raw_html("n4",16711680);b("u1","u2",43775);b("u2","u3",43775);b("u3","u1",43775);b("c","t",16777215);b("p","c",3355443);b("cn1","cn2",3355443);b("cn3","cn4",3355443);b("cf1","cf2",3355443);b("cf3","cf4",3355443);THREE.Line.call(this,d,e,THREE.LinePieces);this.camer)raw_html",R"raw_html(a=a;this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1;this.pointMap=f;this.update()};
 THREE.CameraHelper.prototype=Object.create(THREE.Line.prototype);
-THREE.CameraHelper.prototype.update=function(){var a,b,c=new THREE.Vector3,d=new THREE.Cam)raw_html",R"raw_html(era,e=function(e,g,h,k){c.set(g,h,k).unproject(d);e=b[e];if(void 0!==e)for(g=0,h=e.length;g<h;g++)a.vertices[e[g]].copy(c)};return function(){a=this.geometry;b=this.pointMap;d.projectionMatrix.copy(this.camera.projectionMatrix);e("c",0,0,-1);e("t",0,0,1);e)raw_html",R"raw_html(("n1",-1,-1,-1);e("n2",1,-1,-1);e("n3",-1,1,-1);e("n4",1,1,-1);e("f1",-1,-1,1);e("f2",1,-1,1);e("f3",-1,1,1);e("f4",1,1,1);e("u1",.7,1.1,-1);e("u2",-.7,1.1,
--1);e("u3",0,2,-1);e("cf1",-1,0,1);e("cf2",1,0,1);e("cf3",0,-1,1);e("cf4",0,1,1);e("cn1",-1,0,-1);e)raw_html",R"raw_html(("cn2",1,0,-1);e("cn3",0,-1,-1);e("cn4",0,1,-1);a.verticesNeedUpdate=!0}}();
-THREE.DirectionalLightHelper=function(a,b){THREE.Object3D.call(this);this.light=a;this.light.updateMatrixWorld();this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1;b=b||1;var c=ne)raw_html",R"raw_html(w THREE.Geometry;c.vertices.push(new THREE.Vector3(-b,b,0),new THREE.Vector3(b,b,0),new THREE.Vector3(b,-b,0),new THREE.Vector3(-b,-b,0),new THREE.Vector3(-b,b,0));var d=new THREE.LineBasicMaterial({fog:!1});d.color.copy(this.light.color).multiplyScalar(th)raw_html",R"raw_html(is.light.intensity);this.lightPlane=new THREE.Line(c,d);this.add(this.lightPlane);
-c=new THREE.Geometry;c.vertices.push(new THREE.Vector3,new THREE.Vector3);d=new THREE.LineBasicMaterial({fog:!1});d.color.copy(this.light.color).multiplyScalar(this.light.in)raw_html",R"raw_html(tensity);this.targetLine=new THREE.Line(c,d);this.add(this.targetLine);this.update()};THREE.DirectionalLightHelper.prototype=Object.create(THREE.Object3D.prototype);
-THREE.DirectionalLightHelper.prototype.dispose=function(){this.lightPlane.geometry.dispose)raw_html",R"raw_html(();this.lightPlane.material.dispose();this.targetLine.geometry.dispose();this.targetLine.material.dispose()};
-THREE.DirectionalLightHelper.prototype.update=function(){var a=new THREE.Vector3,b=new THREE.Vector3,c=new THREE.Vector3;return function(){a.setFr)raw_html",R"raw_html(omMatrixPosition(this.light.matrixWorld);b.setFromMatrixPosition(this.light.target.matrixWorld);c.subVectors(b,a);this.lightPlane.lookAt(c);this.lightPlane.material.color.copy(this.light.color).multiplyScalar(this.light.intensity);this.targetLine.geometry.)raw_html",R"raw_html(vertices[1].copy(c);this.targetLine.geometry.verticesNeedUpdate=!0;this.targetLine.material.color.copy(this.lightPlane.material.color)}}();
-THREE.EdgesHelper=function(a,b){var c=void 0!==b?b:16777215,d=[0,0],e={},f=function(a,b){return a-b},g=["a","b","c"])raw_html",R"raw_html(,h=new THREE.BufferGeometry,k=a.geometry.clone();k.mergeVertices();k.computeFaceNormals();for(var n=k.vertices,k=k.faces,p=0,q=0,m=k.length;q<m;q++)for(var r=k[q],t=0;3>t;t++){d[0]=r[g[t]];d[1]=r[g[(t+1)%3]];d.sort(f);var s=d.toString();void 0===e[s]?(e[s])raw_html",R"raw_html(={vert1:d[0],vert2:d[1],face1:q,face2:void 0},p++):e[s].face2=q}d=new Float32Array(6*p);f=0;for(s in e)if(g=e[s],void 0===g.face2||
-.9999>k[g.face1].normal.dot(k[g.face2].normal))p=n[g.vert1],d[f++]=p.x,d[f++]=p.y,d[f++]=p.z,p=n[g.vert2],d[f++]=p.x,d[f++]=)raw_html",R"raw_html(p.y,d[f++]=p.z;h.addAttribute("position",new THREE.BufferAttribute(d,3));THREE.Line.call(this,h,new THREE.LineBasicMaterial({color:c}),THREE.LinePieces);this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1};THREE.EdgesHelper.prototype=Object.create(THREE.Lin)raw_html",R"raw_html(e.prototype);
-THREE.FaceNormalsHelper=function(a,b,c,d){this.object=a;this.size=void 0!==b?b:1;a=void 0!==c?c:16776960;d=void 0!==d?d:1;b=new THREE.Geometry;c=0;for(var e=this.object.geometry.faces.length;c<e;c++)b.vertices.push(new THREE.Vector3,new THREE)raw_html",R"raw_html(.Vector3);THREE.Line.call(this,b,new THREE.LineBasicMaterial({color:a,linewidth:d}),THREE.LinePieces);this.matrixAutoUpdate=!1;this.normalMatrix=new THREE.Matrix3;this.update()};THREE.FaceNormalsHelper.prototype=Object.create(THREE.Line.prototype);
-THREE.F)raw_html",R"raw_html(aceNormalsHelper.prototype.update=function(){var a=this.geometry.vertices,b=this.object,c=b.geometry.vertices,d=b.geometry.faces,e=b.matrixWorld;b.updateMatrixWorld(!0);this.normalMatrix.getNormalMatrix(e);for(var f=b=0,g=d.length;b<g;b++,f+=2){var h=d[b];)raw_html",R"raw_html(a[f].copy(c[h.a]).add(c[h.b]).add(c[h.c]).divideScalar(3).applyMatrix4(e);a[f+1].copy(h.normal).applyMatrix3(this.normalMatrix).normalize().multiplyScalar(this.size).add(a[f])}this.geometry.verticesNeedUpdate=!0;return this};
-THREE.GridHelper=function(a,b))raw_html",R"raw_html({var c=new THREE.Geometry,d=new THREE.LineBasicMaterial({vertexColors:THREE.VertexColors});this.color1=new THREE.Color(4473924);this.color2=new THREE.Color(8947848);for(var e=-a;e<=a;e+=b){c.vertices.push(new THREE.Vector3(-a,0,e),new THREE.Vector3(a,0,e),)raw_html",R"raw_html(new THREE.Vector3(e,0,-a),new THREE.Vector3(e,0,a));var f=0===e?this.color1:this.color2;c.colors.push(f,f,f,f)}THREE.Line.call(this,c,d,THREE.LinePieces)};THREE.GridHelper.prototype=Object.create(THREE.Line.prototype);
-THREE.GridHelper.prototype.setColors=)raw_html",R"raw_html(function(a,b){this.color1.set(a);this.color2.set(b);this.geometry.colorsNeedUpdate=!0};
-THREE.HemisphereLightHelper=function(a,b,c,d){THREE.Object3D.call(this);this.light=a;this.light.updateMatrixWorld();this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1;t)raw_html",R"raw_html(his.colors=[new THREE.Color,new THREE.Color];a=new THREE.SphereGeometry(b,4,2);a.applyMatrix((new THREE.Matrix4).makeRotationX(-Math.PI/2));for(b=0;8>b;b++)a.faces[b].color=this.colors[4>b?0:1];b=new THREE.MeshBasicMaterial({vertexColors:THREE.FaceColors,w)raw_html",R"raw_html(ireframe:!0});this.lightSphere=new THREE.Mesh(a,b);this.add(this.lightSphere);
-this.update()};THREE.HemisphereLightHelper.prototype=Object.create(THREE.Object3D.prototype);THREE.HemisphereLightHelper.prototype.dispose=function(){this.lightSphere.geometry.d)raw_html",R"raw_html(ispose();this.lightSphere.material.dispose()};
-THREE.HemisphereLightHelper.prototype.update=function(){var a=new THREE.Vector3;return function(){this.colors[0].copy(this.light.color).multiplyScalar(this.light.intensity);this.colors[1].copy(this.light.groun)raw_html",R"raw_html(dColor).multiplyScalar(this.light.intensity);this.lightSphere.lookAt(a.setFromMatrixPosition(this.light.matrixWorld).negate());this.lightSphere.geometry.colorsNeedUpdate=!0}}();
-THREE.PointLightHelper=function(a,b){this.light=a;this.light.updateMatrixWorld)raw_html",R"raw_html(();var c=new THREE.SphereGeometry(b,4,2),d=new THREE.MeshBasicMaterial({wireframe:!0,fog:!1});d.color.copy(this.light.color).multiplyScalar(this.light.intensity);THREE.Mesh.call(this,c,d);this.matrix=this.light.matrixWorld;this.matrixAutoUpdate=!1};THREE.P)raw_html",R"raw_html(ointLightHelper.prototype=Object.create(THREE.Mesh.prototype);THREE.PointLightHelper.prototype.dispose=function(){this.geometry.dispose();this.material.dispose()};
-THREE.PointLightHelper.prototype.update=function(){this.material.color.copy(this.light.color)raw_html",R"raw_html().multiplyScalar(this.light.intensity)};
-THREE.SkeletonHelper=function(a){this.bones=this.getBoneList(a);for(var b=new THREE.Geometry,c=0;c<this.bones.length;c++)this.bones[c].parent instanceof THREE.Bone&&(b.vertices.push(new THREE.Vector3),b.vertices.pus)raw_html",R"raw_html(h(new THREE.Vector3),b.colors.push(new THREE.Color(0,0,1)),b.colors.push(new THREE.Color(0,1,0)));c=new THREE.LineBasicMaterial({vertexColors:THREE.VertexColors,depthTest:!1,depthWrite:!1,transparent:!0});THREE.Line.call(this,b,c,THREE.LinePieces);this.roo)raw_html",R"raw_html(t=a;this.matrix=a.matrixWorld;
-this.matrixAutoUpdate=!1;this.update()};THREE.SkeletonHelper.prototype=Object.create(THREE.Line.prototype);THREE.SkeletonHelper.prototype.getBoneList=function(a){var b=[];a instanceof THREE.Bone&&b.push(a);for(var c=0;c<a.chi)raw_html",R"raw_html(ldren.length;c++)b.push.apply(b,this.getBoneList(a.children[c]));return b};
-THREE.SkeletonHelper.prototype.update=function(){for(var a=this.geometry,b=(new THREE.Matrix4).getInverse(this.root.matrixWorld),c=new THREE.Matrix4,d=0,e=0;e<this.bones.length;e++)raw_html",R"raw_html(){var f=this.bones[e];f.parent instanceof THREE.Bone&&(c.multiplyMatrices(b,f.matrixWorld),a.vertices[d].setFromMatrixPosition(c),c.multiplyMatrices(b,f.parent.matrixWorld),a.vertices[d+1].setFromMatrixPosition(c),d+=2)}a.verticesNeedUpdate=!0;a.computeBou)raw_html",R"raw_html(ndingSphere()};
-THREE.SpotLightHelper=function(a){THREE.Object3D.call(this);this.light=a;this.light.updateMatrixWorld();this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1;a=new THREE.CylinderGeometry(0,1,1,8,1,!0);a.applyMatrix((new THREE.Matrix4).makeTran)raw_html",R"raw_html(slation(0,-.5,0));a.applyMatrix((new THREE.Matrix4).makeRotationX(-Math.PI/2));var b=new THREE.MeshBasicMaterial({wireframe:!0,fog:!1});this.cone=new THREE.Mesh(a,b);this.add(this.cone);this.update()};THREE.SpotLightHelper.prototype=Object.create(THREE.Obj)raw_html",R"raw_html(ect3D.prototype);
-THREE.SpotLightHelper.prototype.dispose=function(){this.cone.geometry.dispose();this.cone.material.dispose()};THREE.SpotLightHelper.prototype.update=function(){var a=new THREE.Vector3,b=new THREE.Vector3;return function(){var c=this.light)raw_html",R"raw_html(.distance?this.light.distance:1E4,d=c*Math.tan(this.light.angle);this.cone.scale.set(d,d,c);a.setFromMatrixPosition(this.light.matrixWorld);b.setFromMatrixPosition(this.light.target.matrixWorld);this.cone.lookAt(b.sub(a));this.cone.material.color.copy(this)raw_html",R"raw_html(.light.color).multiplyScalar(this.light.intensity)}}();
-THREE.VertexNormalsHelper=function(a,b,c,d){this.object=a;this.size=void 0!==b?b:1;b=void 0!==c?c:16711680;d=void 0!==d?d:1;c=new THREE.Geometry;a=a.geometry.faces;for(var e=0,f=a.length;e<f;e++)for(v)raw_html",R"raw_html(ar g=0,h=a[e].vertexNormals.length;g<h;g++)c.vertices.push(new THREE.Vector3,new THREE.Vector3);THREE.Line.call(this,c,new THREE.LineBasicMaterial({color:b,linewidth:d}),THREE.LinePieces);this.matrixAutoUpdate=!1;this.normalMatrix=new THREE.Matrix3;this.up)raw_html",R"raw_html(date()};THREE.VertexNormalsHelper.prototype=Object.create(THREE.Line.prototype);
-THREE.VertexNormalsHelper.prototype.update=function(a){var b=new THREE.Vector3;return function(a){a=["a","b","c","d"];this.object.updateMatrixWorld(!0);this.normalMatrix.getNo)raw_html",R"raw_html(rmalMatrix(this.object.matrixWorld);for(var d=this.geometry.vertices,e=this.object.geometry.vertices,f=this.object.geometry.faces,g=this.object.matrixWorld,h=0,k=0,n=f.length;k<n;k++)for(var p=f[k],q=0,m=p.vertexNormals.length;q<m;q++){var r=p.vertexNormal)raw_html",R"raw_html(s[q];d[h].copy(e[p[a[q]]]).applyMatrix4(g);b.copy(r).applyMatrix3(this.normalMatrix).normalize().multiplyScalar(this.size);
+THREE.CameraHelper.prototype.update=function(){var a,b,c=new THREE.Vector3,d=new THREE.Camera,e=functio)raw_html",R"raw_html(n(e,g,h,k){c.set(g,h,k).unproject(d);e=b[e];if(void 0!==e)for(g=0,h=e.length;g<h;g++)a.vertices[e[g]].copy(c)};return function(){a=this.geometry;b=this.pointMap;d.projectionMatrix.copy(this.camera.projectionMatrix);e("c",0,0,-1);e("t",0,0,1);e("n1",-1,-1,-)raw_html",R"raw_html(1);e("n2",1,-1,-1);e("n3",-1,1,-1);e("n4",1,1,-1);e("f1",-1,-1,1);e("f2",1,-1,1);e("f3",-1,1,1);e("f4",1,1,1);e("u1",.7,1.1,-1);e("u2",-.7,1.1,
+-1);e("u3",0,2,-1);e("cf1",-1,0,1);e("cf2",1,0,1);e("cf3",0,-1,1);e("cf4",0,1,1);e("cn1",-1,0,-1);e("cn2",1,0,-1)raw_html",R"raw_html();e("cn3",0,-1,-1);e("cn4",0,1,-1);a.verticesNeedUpdate=!0}}();
+THREE.DirectionalLightHelper=function(a,b){THREE.Object3D.call(this);this.light=a;this.light.updateMatrixWorld();this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1;b=b||1;var c=new THREE.Geome)raw_html",R"raw_html(try;c.vertices.push(new THREE.Vector3(-b,b,0),new THREE.Vector3(b,b,0),new THREE.Vector3(b,-b,0),new THREE.Vector3(-b,-b,0),new THREE.Vector3(-b,b,0));var d=new THREE.LineBasicMaterial({fog:!1});d.color.copy(this.light.color).multiplyScalar(this.light.inte)raw_html",R"raw_html(nsity);this.lightPlane=new THREE.Line(c,d);this.add(this.lightPlane);
+c=new THREE.Geometry;c.vertices.push(new THREE.Vector3,new THREE.Vector3);d=new THREE.LineBasicMaterial({fog:!1});d.color.copy(this.light.color).multiplyScalar(this.light.intensity);this)raw_html",R"raw_html(.targetLine=new THREE.Line(c,d);this.add(this.targetLine);this.update()};THREE.DirectionalLightHelper.prototype=Object.create(THREE.Object3D.prototype);
+THREE.DirectionalLightHelper.prototype.dispose=function(){this.lightPlane.geometry.dispose();this.light)raw_html",R"raw_html(Plane.material.dispose();this.targetLine.geometry.dispose();this.targetLine.material.dispose()};
+THREE.DirectionalLightHelper.prototype.update=function(){var a=new THREE.Vector3,b=new THREE.Vector3,c=new THREE.Vector3;return function(){a.setFromMatrixPosit)raw_html",R"raw_html(ion(this.light.matrixWorld);b.setFromMatrixPosition(this.light.target.matrixWorld);c.subVectors(b,a);this.lightPlane.lookAt(c);this.lightPlane.material.color.copy(this.light.color).multiplyScalar(this.light.intensity);this.targetLine.geometry.vertices[1].c)raw_html",R"raw_html(opy(c);this.targetLine.geometry.verticesNeedUpdate=!0;this.targetLine.material.color.copy(this.lightPlane.material.color)}}();
+THREE.EdgesHelper=function(a,b){var c=void 0!==b?b:16777215,d=[0,0],e={},f=function(a,b){return a-b},g=["a","b","c"],h=new THREE.)raw_html",R"raw_html(BufferGeometry,k=a.geometry.clone();k.mergeVertices();k.computeFaceNormals();for(var n=k.vertices,k=k.faces,p=0,q=0,m=k.length;q<m;q++)for(var r=k[q],t=0;3>t;t++){d[0]=r[g[t]];d[1]=r[g[(t+1)%3]];d.sort(f);var s=d.toString();void 0===e[s]?(e[s]={vert1:d[0],)raw_html",R"raw_html(vert2:d[1],face1:q,face2:void 0},p++):e[s].face2=q}d=new Float32Array(6*p);f=0;for(s in e)if(g=e[s],void 0===g.face2||
+.9999>k[g.face1].normal.dot(k[g.face2].normal))p=n[g.vert1],d[f++]=p.x,d[f++]=p.y,d[f++]=p.z,p=n[g.vert2],d[f++]=p.x,d[f++]=p.y,d[f++]=p.)raw_html",R"raw_html(z;h.addAttribute("position",new THREE.BufferAttribute(d,3));THREE.Line.call(this,h,new THREE.LineBasicMaterial({color:c}),THREE.LinePieces);this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1};THREE.EdgesHelper.prototype=Object.create(THREE.Line.prototype);)raw_html",R"raw_html(
+THREE.FaceNormalsHelper=function(a,b,c,d){this.object=a;this.size=void 0!==b?b:1;a=void 0!==c?c:16776960;d=void 0!==d?d:1;b=new THREE.Geometry;c=0;for(var e=this.object.geometry.faces.length;c<e;c++)b.vertices.push(new THREE.Vector3,new THREE.Vector3);THR)raw_html",R"raw_html(EE.Line.call(this,b,new THREE.LineBasicMaterial({color:a,linewidth:d}),THREE.LinePieces);this.matrixAutoUpdate=!1;this.normalMatrix=new THREE.Matrix3;this.update()};THREE.FaceNormalsHelper.prototype=Object.create(THREE.Line.prototype);
+THREE.FaceNormalsHel)raw_html",R"raw_html(per.prototype.update=function(){var a=this.geometry.vertices,b=this.object,c=b.geometry.vertices,d=b.geometry.faces,e=b.matrixWorld;b.updateMatrixWorld(!0);this.normalMatrix.getNormalMatrix(e);for(var f=b=0,g=d.length;b<g;b++,f+=2){var h=d[b];a[f].copy(c[h)raw_html",R"raw_html(.a]).add(c[h.b]).add(c[h.c]).divideScalar(3).applyMatrix4(e);a[f+1].copy(h.normal).applyMatrix3(this.normalMatrix).normalize().multiplyScalar(this.size).add(a[f])}this.geometry.verticesNeedUpdate=!0;return this};
+THREE.GridHelper=function(a,b){var c=new TH)raw_html",R"raw_html(REE.Geometry,d=new THREE.LineBasicMaterial({vertexColors:THREE.VertexColors});this.color1=new THREE.Color(4473924);this.color2=new THREE.Color(8947848);for(var e=-a;e<=a;e+=b){c.vertices.push(new THREE.Vector3(-a,0,e),new THREE.Vector3(a,0,e),new THREE.Vec)raw_html",R"raw_html(tor3(e,0,-a),new THREE.Vector3(e,0,a));var f=0===e?this.color1:this.color2;c.colors.push(f,f,f,f)}THREE.Line.call(this,c,d,THREE.LinePieces)};THREE.GridHelper.prototype=Object.create(THREE.Line.prototype);
+THREE.GridHelper.prototype.setColors=function(a,b))raw_html",R"raw_html({this.color1.set(a);this.color2.set(b);this.geometry.colorsNeedUpdate=!0};
+THREE.HemisphereLightHelper=function(a,b,c,d){THREE.Object3D.call(this);this.light=a;this.light.updateMatrixWorld();this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1;this.colors=[n)raw_html",R"raw_html(ew THREE.Color,new THREE.Color];a=new THREE.SphereGeometry(b,4,2);a.applyMatrix((new THREE.Matrix4).makeRotationX(-Math.PI/2));for(b=0;8>b;b++)a.faces[b].color=this.colors[4>b?0:1];b=new THREE.MeshBasicMaterial({vertexColors:THREE.FaceColors,wireframe:!0}))raw_html",R"raw_html(;this.lightSphere=new THREE.Mesh(a,b);this.add(this.lightSphere);
+this.update()};THREE.HemisphereLightHelper.prototype=Object.create(THREE.Object3D.prototype);THREE.HemisphereLightHelper.prototype.dispose=function(){this.lightSphere.geometry.dispose();this)raw_html",R"raw_html(.lightSphere.material.dispose()};
+THREE.HemisphereLightHelper.prototype.update=function(){var a=new THREE.Vector3;return function(){this.colors[0].copy(this.light.color).multiplyScalar(this.light.intensity);this.colors[1].copy(this.light.groundColor).multi)raw_html",R"raw_html(plyScalar(this.light.intensity);this.lightSphere.lookAt(a.setFromMatrixPosition(this.light.matrixWorld).negate());this.lightSphere.geometry.colorsNeedUpdate=!0}}();
+THREE.PointLightHelper=function(a,b){this.light=a;this.light.updateMatrixWorld();var c=new )raw_html",R"raw_html(THREE.SphereGeometry(b,4,2),d=new THREE.MeshBasicMaterial({wireframe:!0,fog:!1});d.color.copy(this.light.color).multiplyScalar(this.light.intensity);THREE.Mesh.call(this,c,d);this.matrix=this.light.matrixWorld;this.matrixAutoUpdate=!1};THREE.PointLightHelp)raw_html",R"raw_html(er.prototype=Object.create(THREE.Mesh.prototype);THREE.PointLightHelper.prototype.dispose=function(){this.geometry.dispose();this.material.dispose()};
+THREE.PointLightHelper.prototype.update=function(){this.material.color.copy(this.light.color).multiplySca)raw_html",R"raw_html(lar(this.light.intensity)};
+THREE.SkeletonHelper=function(a){this.bones=this.getBoneList(a);for(var b=new THREE.Geometry,c=0;c<this.bones.length;c++)this.bones[c].parent instanceof THREE.Bone&&(b.vertices.push(new THREE.Vector3),b.vertices.push(new THREE.V)raw_html",R"raw_html(ector3),b.colors.push(new THREE.Color(0,0,1)),b.colors.push(new THREE.Color(0,1,0)));c=new THREE.LineBasicMaterial({vertexColors:THREE.VertexColors,depthTest:!1,depthWrite:!1,transparent:!0});THREE.Line.call(this,b,c,THREE.LinePieces);this.root=a;this.matr)raw_html",R"raw_html(ix=a.matrixWorld;
+this.matrixAutoUpdate=!1;this.update()};THREE.SkeletonHelper.prototype=Object.create(THREE.Line.prototype);THREE.SkeletonHelper.prototype.getBoneList=function(a){var b=[];a instanceof THREE.Bone&&b.push(a);for(var c=0;c<a.children.length;)raw_html",R"raw_html(c++)b.push.apply(b,this.getBoneList(a.children[c]));return b};
+THREE.SkeletonHelper.prototype.update=function(){for(var a=this.geometry,b=(new THREE.Matrix4).getInverse(this.root.matrixWorld),c=new THREE.Matrix4,d=0,e=0;e<this.bones.length;e++){var f=this.)raw_html",R"raw_html(bones[e];f.parent instanceof THREE.Bone&&(c.multiplyMatrices(b,f.matrixWorld),a.vertices[d].setFromMatrixPosition(c),c.multiplyMatrices(b,f.parent.matrixWorld),a.vertices[d+1].setFromMatrixPosition(c),d+=2)}a.verticesNeedUpdate=!0;a.computeBoundingSphere())raw_html",R"raw_html(};
+THREE.SpotLightHelper=function(a){THREE.Object3D.call(this);this.light=a;this.light.updateMatrixWorld();this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1;a=new THREE.CylinderGeometry(0,1,1,8,1,!0);a.applyMatrix((new THREE.Matrix4).makeTranslation(0,-.5)raw_html",R"raw_html(,0));a.applyMatrix((new THREE.Matrix4).makeRotationX(-Math.PI/2));var b=new THREE.MeshBasicMaterial({wireframe:!0,fog:!1});this.cone=new THREE.Mesh(a,b);this.add(this.cone);this.update()};THREE.SpotLightHelper.prototype=Object.create(THREE.Object3D.prototy)raw_html",R"raw_html(pe);
+THREE.SpotLightHelper.prototype.dispose=function(){this.cone.geometry.dispose();this.cone.material.dispose()};THREE.SpotLightHelper.prototype.update=function(){var a=new THREE.Vector3,b=new THREE.Vector3;return function(){var c=this.light.distance?thi)raw_html",R"raw_html(s.light.distance:1E4,d=c*Math.tan(this.light.angle);this.cone.scale.set(d,d,c);a.setFromMatrixPosition(this.light.matrixWorld);b.setFromMatrixPosition(this.light.target.matrixWorld);this.cone.lookAt(b.sub(a));this.cone.material.color.copy(this.light.color))raw_html",R"raw_html(.multiplyScalar(this.light.intensity)}}();
+THREE.VertexNormalsHelper=function(a,b,c,d){this.object=a;this.size=void 0!==b?b:1;b=void 0!==c?c:16711680;d=void 0!==d?d:1;c=new THREE.Geometry;a=a.geometry.faces;for(var e=0,f=a.length;e<f;e++)for(var g=0,h=a[e])raw_html",R"raw_html(.vertexNormals.length;g<h;g++)c.vertices.push(new THREE.Vector3,new THREE.Vector3);THREE.Line.call(this,c,new THREE.LineBasicMaterial({color:b,linewidth:d}),THREE.LinePieces);this.matrixAutoUpdate=!1;this.normalMatrix=new THREE.Matrix3;this.update()};THREE)raw_html",R"raw_html(.VertexNormalsHelper.prototype=Object.create(THREE.Line.prototype);
+THREE.VertexNormalsHelper.prototype.update=function(a){var b=new THREE.Vector3;return function(a){a=["a","b","c","d"];this.object.updateMatrixWorld(!0);this.normalMatrix.getNormalMatrix(th)raw_html",R"raw_html(is.object.matrixWorld);for(var d=this.geometry.vertices,e=this.object.geometry.vertices,f=this.object.geometry.faces,g=this.object.matrixWorld,h=0,k=0,n=f.length;k<n;k++)for(var p=f[k],q=0,m=p.vertexNormals.length;q<m;q++){var r=p.vertexNormals[q];d[h].cop)raw_html",R"raw_html(y(e[p[a[q]]]).applyMatrix4(g);b.copy(r).applyMatrix3(this.normalMatrix).normalize().multiplyScalar(this.size);
 b.add(d[h]);h+=1;d[h].copy(b);h+=1}this.geometry.verticesNeedUpdate=!0;return this}}();
-THREE.VertexTangentsHelper=function(a,b,c,d))raw_html",R"raw_html({this.object=a;this.size=void 0!==b?b:1;b=void 0!==c?c:255;d=void 0!==d?d:1;c=new THREE.Geometry;a=a.geometry.faces;for(var e=0,f=a.length;e<f;e++)for(var g=0,h=a[e].vertexTangents.length;g<h;g++)c.vertices.push(new THREE.Vector3),c.vertices.push(new THREE)raw_html",R"raw_html(.Vector3);THREE.Line.call(this,c,new THREE.LineBasicMaterial({color:b,linewidth:d}),THREE.LinePieces);this.matrixAutoUpdate=!1;this.update()};THREE.VertexTangentsHelper.prototype=Object.create(THREE.Line.prototype);
-THREE.VertexTangentsHelper.prototype.upd)raw_html",R"raw_html(ate=function(a){var b=new THREE.Vector3;return function(a){a=["a","b","c","d"];this.object.updateMatrixWorld(!0);for(var d=this.geometry.vertices,e=this.object.geometry.vertices,f=this.object.geometry.faces,g=this.object.matrixWorld,h=0,k=0,n=f.length;k<n;)raw_html",R"raw_html(k++)for(var p=f[k],q=0,m=p.vertexTangents.length;q<m;q++){var r=p.vertexTangents[q];d[h].copy(e[p[a[q]]]).applyMatrix4(g);b.copy(r).transformDirection(g).multiplyScalar(this.size);b.add(d[h]);h+=1;d[h].copy(b);
-h+=1}this.geometry.verticesNeedUpdate=!0;retu)raw_html",R"raw_html(rn this}}();
-THREE.WireframeHelper=function(a,b){var c=void 0!==b?b:16777215,d=[0,0],e={},f=function(a,b){return a-b},g=["a","b","c"],h=new THREE.BufferGeometry;if(a.geometry instanceof THREE.Geometry){for(var k=a.geometry.vertices,n=a.geometry.faces,p=0,q)raw_html",R"raw_html(=new Uint32Array(6*n.length),m=0,r=n.length;m<r;m++)for(var t=n[m],s=0;3>s;s++){d[0]=t[g[s]];d[1]=t[g[(s+1)%3]];d.sort(f);var u=d.toString();void 0===e[u]&&(q[2*p]=d[0],q[2*p+1]=d[1],e[u]=!0,p++)}d=new Float32Array(6*p);m=0;for(r=p;m<r;m++)for(s=0;2>s;s++))raw_html",R"raw_html(p=
-k[q[2*m+s]],g=6*m+3*s,d[g+0]=p.x,d[g+1]=p.y,d[g+2]=p.z;h.addAttribute("position",new THREE.BufferAttribute(d,3))}else if(a.geometry instanceof THREE.BufferGeometry){if(void 0!==a.geometry.attributes.index){k=a.geometry.attributes.position.array;r=a.geom)raw_html",R"raw_html(etry.attributes.index.array;n=a.geometry.drawcalls;p=0;0===n.length&&(n=[{count:r.length,index:0,start:0}]);for(var q=new Uint32Array(2*r.length),t=0,v=n.length;t<v;++t)for(var s=n[t].start,u=n[t].count,g=n[t].index,m=s,y=s+u;m<y;m+=3)for(s=0;3>s;s++)d[0]=)raw_html",R"raw_html(
-g+r[m+s],d[1]=g+r[m+(s+1)%3],d.sort(f),u=d.toString(),void 0===e[u]&&(q[2*p]=d[0],q[2*p+1]=d[1],e[u]=!0,p++);d=new Float32Array(6*p);m=0;for(r=p;m<r;m++)for(s=0;2>s;s++)g=6*m+3*s,p=3*q[2*m+s],d[g+0]=k[p],d[g+1]=k[p+1],d[g+2]=k[p+2]}else for(k=a.geometry.a)raw_html",R"raw_html(ttributes.position.array,p=k.length/3,q=p/3,d=new Float32Array(6*p),m=0,r=q;m<r;m++)for(s=0;3>s;s++)g=18*m+6*s,q=9*m+3*s,d[g+0]=k[q],d[g+1]=k[q+1],d[g+2]=k[q+2],p=9*m+(s+1)%3*3,d[g+3]=k[p],d[g+4]=k[p+1],d[g+5]=k[p+2];h.addAttribute("position",new THREE.Buf)raw_html",R"raw_html(ferAttribute(d,
-3))}THREE.Line.call(this,h,new THREE.LineBasicMaterial({color:c}),THREE.LinePieces);this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1};THREE.WireframeHelper.prototype=Object.create(THREE.Line.prototype);THREE.ImmediateRenderObject=function)raw_html",R"raw_html((){THREE.Object3D.call(this);this.render=function(a){}};THREE.ImmediateRenderObject.prototype=Object.create(THREE.Object3D.prototype);
-THREE.MorphBlendMesh=function(a,b){THREE.Mesh.call(this,a,b);this.animationsMap={};this.animationsList=[];var c=this.geom)raw_html",R"raw_html(etry.morphTargets.length;this.createAnimation("__default",0,c-1,c/1);this.setAnimationWeight("__default",1)};THREE.MorphBlendMesh.prototype=Object.create(THREE.Mesh.prototype);
-THREE.MorphBlendMesh.prototype.createAnimation=function(a,b,c,d){b={startFrame:)raw_html",R"raw_html(b,endFrame:c,length:c-b+1,fps:d,duration:(c-b)/d,lastFrame:0,currentFrame:0,active:!1,time:0,direction:1,weight:1,directionBackwards:!1,mirroredLoop:!1};this.animationsMap[a]=b;this.animationsList.push(b)};
-THREE.MorphBlendMesh.prototype.autoCreateAnimatio)raw_html",R"raw_html(ns=function(a){for(var b=/([a-z]+)_?(\d+)/,c,d={},e=this.geometry,f=0,g=e.morphTargets.length;f<g;f++){var h=e.morphTargets[f].name.match(b);if(h&&1<h.length){var k=h[1];d[k]||(d[k]={start:Infinity,end:-Infinity});h=d[k];f<h.start&&(h.start=f);f>h.end&&(h.)raw_html",R"raw_html(end=f);c||(c=k)}}for(k in d)h=d[k],this.createAnimation(k,h.start,h.end,a);this.firstAnimation=c};
-THREE.MorphBlendMesh.prototype.setAnimationDirectionForward=function(a){if(a=this.animationsMap[a])a.direction=1,a.directionBackwards=!1};THREE.MorphBlendMes)raw_html",R"raw_html(h.prototype.setAnimationDirectionBackward=function(a){if(a=this.animationsMap[a])a.direction=-1,a.directionBackwards=!0};THREE.MorphBlendMesh.prototype.setAnimationFPS=function(a,b){var c=this.animationsMap[a];c&&(c.fps=b,c.duration=(c.end-c.start)/c.fps)})raw_html",R"raw_html(;
-THREE.MorphBlendMesh.prototype.setAnimationDuration=function(a,b){var c=this.animationsMap[a];c&&(c.duration=b,c.fps=(c.end-c.start)/c.duration)};THREE.MorphBlendMesh.prototype.setAnimationWeight=function(a,b){var c=this.animationsMap[a];c&&(c.weight=b)})raw_html",R"raw_html(;THREE.MorphBlendMesh.prototype.setAnimationTime=function(a,b){var c=this.animationsMap[a];c&&(c.time=b)};THREE.MorphBlendMesh.prototype.getAnimationTime=function(a){var b=0;if(a=this.animationsMap[a])b=a.time;return b};
-THREE.MorphBlendMesh.prototype.getA)raw_html",R"raw_html(nimationDuration=function(a){var b=-1;if(a=this.animationsMap[a])b=a.duration;return b};THREE.MorphBlendMesh.prototype.playAnimation=function(a){var b=this.animationsMap[a];b?(b.time=0,b.active=!0):console.warn("animation["+a+"] undefined")};THREE.MorphBle)raw_html",R"raw_html(ndMesh.prototype.stopAnimation=function(a){if(a=this.animationsMap[a])a.active=!1};
-THREE.MorphBlendMesh.prototype.update=function(a){for(var b=0,c=this.animationsList.length;b<c;b++){var d=this.animationsList[b];if(d.active){var e=d.duration/d.length;d.ti)raw_html",R"raw_html(me+=d.direction*a;if(d.mirroredLoop){if(d.time>d.duration||0>d.time)d.direction*=-1,d.time>d.duration&&(d.time=d.duration,d.directionBackwards=!0),0>d.time&&(d.time=0,d.directionBackwards=!1)}else d.time%=d.duration,0>d.time&&(d.time+=d.duration);var f=d.s)raw_html",R"raw_html(tartFrame+THREE.Math.clamp(Math.floor(d.time/e),0,d.length-1),g=d.weight;
-f!==d.currentFrame&&(this.morphTargetInfluences[d.lastFrame]=0,this.morphTargetInfluences[d.currentFrame]=1*g,this.morphTargetInfluences[f]=0,d.lastFrame=d.currentFrame,d.currentFram)raw_html",R"raw_html(e=f);e=d.time%e/e;d.directionBackwards&&(e=1-e);this.morphTargetInfluences[d.currentFrame]=e*g;this.morphTargetInfluences[d.lastFrame]=(1-e)*g}}};
+THREE.VertexTangentsHelper=function(a,b,c,d){this.object=)raw_html",R"raw_html(a;this.size=void 0!==b?b:1;b=void 0!==c?c:255;d=void 0!==d?d:1;c=new THREE.Geometry;a=a.geometry.faces;for(var e=0,f=a.length;e<f;e++)for(var g=0,h=a[e].vertexTangents.length;g<h;g++)c.vertices.push(new THREE.Vector3),c.vertices.push(new THREE.Vector3);THR)raw_html",R"raw_html(EE.Line.call(this,c,new THREE.LineBasicMaterial({color:b,linewidth:d}),THREE.LinePieces);this.matrixAutoUpdate=!1;this.update()};THREE.VertexTangentsHelper.prototype=Object.create(THREE.Line.prototype);
+THREE.VertexTangentsHelper.prototype.update=function()raw_html",R"raw_html(a){var b=new THREE.Vector3;return function(a){a=["a","b","c","d"];this.object.updateMatrixWorld(!0);for(var d=this.geometry.vertices,e=this.object.geometry.vertices,f=this.object.geometry.faces,g=this.object.matrixWorld,h=0,k=0,n=f.length;k<n;k++)for(var p)raw_html",R"raw_html(=f[k],q=0,m=p.vertexTangents.length;q<m;q++){var r=p.vertexTangents[q];d[h].copy(e[p[a[q]]]).applyMatrix4(g);b.copy(r).transformDirection(g).multiplyScalar(this.size);b.add(d[h]);h+=1;d[h].copy(b);
+h+=1}this.geometry.verticesNeedUpdate=!0;return this}}();
+)raw_html",R"raw_html(THREE.WireframeHelper=function(a,b){var c=void 0!==b?b:16777215,d=[0,0],e={},f=function(a,b){return a-b},g=["a","b","c"],h=new THREE.BufferGeometry;if(a.geometry instanceof THREE.Geometry){for(var k=a.geometry.vertices,n=a.geometry.faces,p=0,q=new Uint32Ar)raw_html",R"raw_html(ray(6*n.length),m=0,r=n.length;m<r;m++)for(var t=n[m],s=0;3>s;s++){d[0]=t[g[s]];d[1]=t[g[(s+1)%3]];d.sort(f);var u=d.toString();void 0===e[u]&&(q[2*p]=d[0],q[2*p+1]=d[1],e[u]=!0,p++)}d=new Float32Array(6*p);m=0;for(r=p;m<r;m++)for(s=0;2>s;s++)p=
+k[q[2*m+s])raw_html",R"raw_html(],g=6*m+3*s,d[g+0]=p.x,d[g+1]=p.y,d[g+2]=p.z;h.addAttribute("position",new THREE.BufferAttribute(d,3))}else if(a.geometry instanceof THREE.BufferGeometry){if(void 0!==a.geometry.attributes.index){k=a.geometry.attributes.position.array;r=a.geometry.attribut)raw_html",R"raw_html(es.index.array;n=a.geometry.drawcalls;p=0;0===n.length&&(n=[{count:r.length,index:0,start:0}]);for(var q=new Uint32Array(2*r.length),t=0,v=n.length;t<v;++t)for(var s=n[t].start,u=n[t].count,g=n[t].index,m=s,y=s+u;m<y;m+=3)for(s=0;3>s;s++)d[0]=
+g+r[m+s],d[1)raw_html",R"raw_html(]=g+r[m+(s+1)%3],d.sort(f),u=d.toString(),void 0===e[u]&&(q[2*p]=d[0],q[2*p+1]=d[1],e[u]=!0,p++);d=new Float32Array(6*p);m=0;for(r=p;m<r;m++)for(s=0;2>s;s++)g=6*m+3*s,p=3*q[2*m+s],d[g+0]=k[p],d[g+1]=k[p+1],d[g+2]=k[p+2]}else for(k=a.geometry.attributes.pos)raw_html",R"raw_html(ition.array,p=k.length/3,q=p/3,d=new Float32Array(6*p),m=0,r=q;m<r;m++)for(s=0;3>s;s++)g=18*m+6*s,q=9*m+3*s,d[g+0]=k[q],d[g+1]=k[q+1],d[g+2]=k[q+2],p=9*m+(s+1)%3*3,d[g+3]=k[p],d[g+4]=k[p+1],d[g+5]=k[p+2];h.addAttribute("position",new THREE.BufferAttribute()raw_html",R"raw_html(d,
+3))}THREE.Line.call(this,h,new THREE.LineBasicMaterial({color:c}),THREE.LinePieces);this.matrix=a.matrixWorld;this.matrixAutoUpdate=!1};THREE.WireframeHelper.prototype=Object.create(THREE.Line.prototype);THREE.ImmediateRenderObject=function(){THREE.Obje)raw_html",R"raw_html(ct3D.call(this);this.render=function(a){}};THREE.ImmediateRenderObject.prototype=Object.create(THREE.Object3D.prototype);
+THREE.MorphBlendMesh=function(a,b){THREE.Mesh.call(this,a,b);this.animationsMap={};this.animationsList=[];var c=this.geometry.morphTar)raw_html",R"raw_html(gets.length;this.createAnimation("__default",0,c-1,c/1);this.setAnimationWeight("__default",1)};THREE.MorphBlendMesh.prototype=Object.create(THREE.Mesh.prototype);
+THREE.MorphBlendMesh.prototype.createAnimation=function(a,b,c,d){b={startFrame:b,endFrame:c,)raw_html",R"raw_html(length:c-b+1,fps:d,duration:(c-b)/d,lastFrame:0,currentFrame:0,active:!1,time:0,direction:1,weight:1,directionBackwards:!1,mirroredLoop:!1};this.animationsMap[a]=b;this.animationsList.push(b)};
+THREE.MorphBlendMesh.prototype.autoCreateAnimations=function(a)raw_html",R"raw_html(){for(var b=/([a-z]+)_?(\d+)/,c,d={},e=this.geometry,f=0,g=e.morphTargets.length;f<g;f++){var h=e.morphTargets[f].name.match(b);if(h&&1<h.length){var k=h[1];d[k]||(d[k]={start:Infinity,end:-Infinity});h=d[k];f<h.start&&(h.start=f);f>h.end&&(h.end=f);c||(c=)raw_html",R"raw_html(k)}}for(k in d)h=d[k],this.createAnimation(k,h.start,h.end,a);this.firstAnimation=c};
+THREE.MorphBlendMesh.prototype.setAnimationDirectionForward=function(a){if(a=this.animationsMap[a])a.direction=1,a.directionBackwards=!1};THREE.MorphBlendMesh.prototype.s)raw_html",R"raw_html(etAnimationDirectionBackward=function(a){if(a=this.animationsMap[a])a.direction=-1,a.directionBackwards=!0};THREE.MorphBlendMesh.prototype.setAnimationFPS=function(a,b){var c=this.animationsMap[a];c&&(c.fps=b,c.duration=(c.end-c.start)/c.fps)};
+THREE.Morph)raw_html",R"raw_html(BlendMesh.prototype.setAnimationDuration=function(a,b){var c=this.animationsMap[a];c&&(c.duration=b,c.fps=(c.end-c.start)/c.duration)};THREE.MorphBlendMesh.prototype.setAnimationWeight=function(a,b){var c=this.animationsMap[a];c&&(c.weight=b)};THREE.MorphB)raw_html",R"raw_html(lendMesh.prototype.setAnimationTime=function(a,b){var c=this.animationsMap[a];c&&(c.time=b)};THREE.MorphBlendMesh.prototype.getAnimationTime=function(a){var b=0;if(a=this.animationsMap[a])b=a.time;return b};
+THREE.MorphBlendMesh.prototype.getAnimationDurat)raw_html",R"raw_html(ion=function(a){var b=-1;if(a=this.animationsMap[a])b=a.duration;return b};THREE.MorphBlendMesh.prototype.playAnimation=function(a){var b=this.animationsMap[a];b?(b.time=0,b.active=!0):console.warn("animation["+a+"] undefined")};THREE.MorphBlendMesh.protot)raw_html",R"raw_html(ype.stopAnimation=function(a){if(a=this.animationsMap[a])a.active=!1};
+THREE.MorphBlendMesh.prototype.update=function(a){for(var b=0,c=this.animationsList.length;b<c;b++){var d=this.animationsList[b];if(d.active){var e=d.duration/d.length;d.time+=d.directi)raw_html",R"raw_html(on*a;if(d.mirroredLoop){if(d.time>d.duration||0>d.time)d.direction*=-1,d.time>d.duration&&(d.time=d.duration,d.directionBackwards=!0),0>d.time&&(d.time=0,d.directionBackwards=!1)}else d.time%=d.duration,0>d.time&&(d.time+=d.duration);var f=d.startFrame+THR)raw_html",R"raw_html(EE.Math.clamp(Math.floor(d.time/e),0,d.length-1),g=d.weight;
+f!==d.currentFrame&&(this.morphTargetInfluences[d.lastFrame]=0,this.morphTargetInfluences[d.currentFrame]=1*g,this.morphTargetInfluences[f]=0,d.lastFrame=d.currentFrame,d.currentFrame=f);e=d.time)raw_html",R"raw_html(%e/e;d.directionBackwards&&(e=1-e);this.morphTargetInfluences[d.currentFrame]=e*g;this.morphTargetInfluences[d.lastFrame]=(1-e)*g}}};
 </script>
 
 
@@ -995,59 +995,58 @@ f!==d.currentFrame&&(this.morphTargetInfluences[d.lastFrame]=0,this.morphTargetI
 <script type="text/javascript">
 /**
  * @author alteredq / http://alteredqualia.com/
- * @author m)raw_html",R"raw_html(r.doob / http://mrdoob.com/
+ * @author mr.doob / http)raw_html",R"raw_html(://mrdoob.com/
  */
 
 var Detector = {
 
 canvas: !! window.CanvasRenderingContext2D,
-webgl: ( function () { try { var canvas = document.createElement( 'canvas' ); return !! window.WebGLRenderingContext && ( canvas.getContext( 'webgl' ) || canvas.)raw_html",R"raw_html(getContext( 'experimental-webgl' ) ); } catch( e ) { return false; } } )(),
+webgl: ( function () { try { var canvas = document.createElement( 'canvas' ); return !! window.WebGLRenderingContext && ( canvas.getContext( 'webgl' ) || canvas.getContext( ')raw_html",R"raw_html(experimental-webgl' ) ); } catch( e ) { return false; } } )(),
 workers: !! window.Worker,
 fileapi: window.File && window.FileReader && window.FileList && window.Blob,
 
 getWebGLErrorMessage: function () {
 
-    var element = document.createEleme)raw_html",R"raw_html(nt( 'div' );
-    element.id = 'webgl-error-message';
-    element.style.fontFamily = 'monospace';
-    element.style.fontSize = '13px';
-    element.style.fontWeight = 'normal';
-    element.style.textAlign = 'center';
-    element.style.background = '#fff';
-  )raw_html",R"raw_html(  element.style.color = '#000';
-    element.style.padding = '1.5em';
-    element.style.width = '400px';
-    element.style.margin = '5em auto 0';
+	var element = document.createElement( 'div' );
+	el)raw_html",R"raw_html(ement.id = 'webgl-error-message';
+	element.style.fontFamily = 'monospace';
+	element.style.fontSize = '13px';
+	element.style.fontWeight = 'normal';
+	element.style.textAlign = 'center';
+	element.style.background = '#fff';
+	element.style.color = '#000';
+	elem)raw_html",R"raw_html(ent.style.padding = '1.5em';
+	element.style.width = '400px';
+	element.style.margin = '5em auto 0';
 
-    if ( ! this.webgl ) {
+	if ( ! this.webgl ) {
 
-        element.innerHTML = window.WebGLRenderingContext ? [
-            'Your grap)raw_html",R"raw_html(hics card does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br />',
-            'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a>.'
-        ].join)raw_html",R"raw_html(( '\n' ) : [
-            'Your browser does not seem to support <a href="http://khronos.org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br/>',
-            'Find out how to get it <a href="http://get.webgl.org/" style="color:#00)raw_html",R"raw_html(0">here</a>.'
-        ].join( '\n' );
+		element.innerHTML = window.WebGLRenderingContext ? [
+			'Your graphics card does not seem to support <a href="http://khronos.org/w)raw_html",R"raw_html(ebgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br />',
+			'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a>.'
+		].join( '\n' ) : [
+			'Your browser does not seem to support <a href="http://khronos.)raw_html",R"raw_html(org/webgl/wiki/Getting_a_WebGL_Implementation" style="color:#000">WebGL</a>.<br/>',
+			'Find out how to get it <a href="http://get.webgl.org/" style="color:#000">here</a>.'
+		].join( '\n' );
 
-    }
+	}
 
-    return element;
-
+	return element;
 },
 
-addGetWebGLMessage: function ( parameters ) {
+addGetWebGLMessage: function ( paramete)raw_html",R"raw_html(rs ) {
 
-    var parent, id, element;
+	var parent, id, element;
 
-    parameters = parameters || {};
+	parameters = parameters || {};
 
-    parent = parameters.parent !== undefined ? parameters.parent : docum)raw_html",R"raw_html(ent.body;
-    id = parameters.id !== undefined ? parameters.id : 'oldie';
+	parent = parameters.parent !== undefined ? parameters.parent : document.body;
+	id = parameters.id !== undefined ? parameters.id : 'oldie';
 
-    element = Detector.getWebGLErrorMessage();
-    element.id = id;
+	element = Detector.getWebGLErrorMessage();
+	el)raw_html",R"raw_html(ement.id = id;
 
-    parent.appendChild( element );
+	parent.appendChild( element );
 
 }
 
@@ -1056,7356 +1055,7173 @@ addGetWebGLMessage: function ( parameters ) {
 
 
 <script type="text/javascript">
-/*! lz4.js v0.1.0 Released)raw_html",R"raw_html( under the MIT license. https://github.com/ukyo/lz4.js/LICENSE */
+/*! lz4.js v0.1.0 Released under the MIT license. https://github.com/ukyo/lz4.js/LICENSE */
 var lz4 = {};
 (function() {
-    function e(a) {
-        throw a;
-    }
-    var i = void 0,
-        l = !0,
-        m = null,
-        p = !1;
-
-    function q() {
-        return function() {}
-)raw_html",R"raw_html(    }
-    var r = {
-            TOTAL_MEMORY: 13656760
-        },
-        aa = {},
-        s;
-    for (s in r) r.hasOwnProperty(s) && (aa[s] = r[s]);
-    var ba = "object" === typeof process && "function" === typeof require,
-        ca = "object" === typeo)raw_html",R"raw_html(f window,
-        ea = "function" === typeof importScripts,
-        fa = !ca && !ba && !ea;
-    if (ba) {
-        r.print = function(a) {
-            process.stdout.write(a + "\n")
-        };
-        r.printErr = function(a) {
-            process.stderr.wr)raw_html",R"raw_html(ite(a + "\n")
-        };
-        var ga = require("fs"),
-            ha = require("path");
-        r.read = function(a, b) {
-            var a = ha.normalize(a),
-                c = ga.readFileSync(a);
-            !c && a != ha.resolve(a) && (a = path.join)raw_html",R"raw_html((__dirname, "..", "src", a), c = ga.readFileSync(a));
-            c && !b && (c = c.toString());
-            return c
-        };
-        r.readBinary = function(a) {
-            return r.read(a, l)
-        };
-        r.load = function(a) {
-            ia(r)raw_html",R"raw_html(ead(a))
-        };
-        r.arguments = process.argv.slice(2);
-        module.exports = r
-    } else fa ? (r.print = print, "undefined" != typeof printErr &&
-        (r.printErr = printErr), r.read = "undefined" != typeof read ? read : function() {
-      )raw_html",R"raw_html(      e("no read() available (jsc?)")
-        }, r.readBinary = function(a) {
-            return read(a, "binary")
-        }, "undefined" != typeof scriptArgs ? r.arguments = scriptArgs : "undefined" != typeof arguments && (r.arguments = arguments), this.M)raw_html",R"raw_html(odule = r, eval("if (typeof gc === 'function' && gc.toString().indexOf('[native code]') > 0) var gc = undefined")) : ca || ea ? (r.read = function(a) {
-            var b = new XMLHttpRequest;
-            b.open("GET", a, p);
-            b.send(m);
-        )raw_html",R"raw_html(    return b.responseText
-        }, "undefined" != typeof arguments &&
-        (r.arguments = arguments), "undefined" !== typeof console ? (r.print = function(a) {
-            console.log(a)
-        }, r.printErr = function(a) {
-            console.log(a))raw_html",R"raw_html(
-        }) : r.print = q(), ca ? this.Module = r : r.load = importScripts) : e("Unknown runtime environment. Where are we?");
-
-    function ia(a) {
-        eval.call(m, a)
-    }
-    "undefined" == !r.load && r.read && (r.load = function(a) {
-        ia(r.)raw_html",R"raw_html(read(a))
-    });
-    r.print || (r.print = q());
-    r.printErr || (r.printErr = r.print);
-    r.arguments || (r.arguments = []);
-    r.print = r.print;
-    r.P = r.printErr;
-    r.preRun = [];
-    r.postRun = [];
-    for (s in aa) aa.hasOwnProperty(s) && )raw_html",R"raw_html((r[s] = aa[s]);
-
-    function ja() {
-        return u
-    }
-
-    function ka(a) {
-        u = a
-    }
-
-    function la(a) {
-        switch (a) {
-            case "i1":
-            case "i8":
-                return 1;
-            case "i16":
-               )raw_html",R"raw_html( return 2;
-            case "i32":
-                return 4;
-            case "i64":
-                return 8;
-            case "float":
-                return 4;
-            case "double":
-                return 8;
-            default:
-                ret)raw_html",R"raw_html(urn "*" === a[a.length - 1] ? ma : "i" === a[0] ? (a = parseInt(a.substr(1)), w(0 === a % 8), a / 8) : 0
-        }
-    }
-
-    function na(a, b, c) {
-        c && c.length ? (c.splice || (c = Array.prototype.slice.call(c)), c.splice(0, 0, b), r["dynCall_" +)raw_html",R"raw_html( a].apply(m, c)) : r["dynCall_" + a].call(m, b)
-    }
-    var oa;
-
-    function pa() {
-        var a = [],
-            b = 0;
-        this.ea = function(c) {
-            c &= 255;
-            if (0 == a.length) {
-                if (0 == (c & 128)) return )raw_html",R"raw_html(String.fromCharCode(c);
-                a.push(c);
-                b = 192 == (c & 224) ? 1 : 224 == (c & 240) ? 2 : 3;
-                return ""
-            }
-            if (b && (a.push(c), b--, 0 < b)) return "";
-            var c = a[0],
-             )raw_html",R"raw_html(   d = a[1],
-                f = a[2],
-                g = a[3];
-            2 == a.length ? c = String.fromCharCode((c & 31) << 6 | d & 63) : 3 == a.length ? c = String.fromCharCode((c & 15) << 12 | (d & 63) << 6 | f & 63) : (c = (c & 7) << 18 | (d & 63) )raw_html",R"raw_html(<< 12 | (f & 63) << 6 | g & 63, c = String.fromCharCode(Math.floor((c - 65536) / 1024) + 55296, (c - 65536) % 1024 + 56320));
-            a.length = 0;
-            return c
-        };
-        this.Sa = function(a) {
-            for (var a =
-               )raw_html",R"raw_html(     unescape(encodeURIComponent(a)), b = [], f = 0; f < a.length; f++) b.push(a.charCodeAt(f));
-            return b
-        }
-    }
-
-    function qa(a) {
-        var b = u;
-        u = u + a | 0;
-        u = u + 7 & -8;
-        return b
-    }
-
-    functi)raw_html",R"raw_html(on ra(a) {
-        var b = x;
-        x = x + a | 0;
-        x = x + 7 & -8;
-        return b
-    }
-
-    function ta(a) {
-        var b = y;
-        y = y + a | 0;
-        y = y + 7 & -8;
-        y >= ua && B("Cannot enlarge memory arrays in asm.js. Either)raw_html",R"raw_html( (1) compile with -s TOTAL_MEMORY=X with X higher than the current value " + ua + ", or (2) set Module.TOTAL_MEMORY before the program runs.");
-        return b
-    }
-
-    function va(a, b) {
-        return Math.ceil(a / (b ? b : 8)) * (b ? b : 8)
-    }
-  )raw_html",R"raw_html(  var ma = 4,
-        wa = {},
-        xa = p,
-        C, ya;
-
-    function w(a, b) {
-        a || B("Assertion failed: " + b)
-    }
-    r.ccall = function(a, b, c, d) {
-        return za(Aa(a), b, c, d)
-    };
-
-    function Aa(a) {
-        try {
-         )raw_html",R"raw_html(   var b = r["_" + a];
-            b || (b = eval("_" + a))
-        } catch (c) {}
-        w(b, "Cannot call unknown function " + a + " (perhaps LLVM optimizations or closure removed it?)");
-        return b
-    }
-
-    function za(a, b, c, d) {
-        fun)raw_html",R"raw_html(ction f(a, b) {
-            if ("string" == b) {
-                if (a === m || a === i || 0 === a) return 0;
-                a = D(a);
-                b = "array"
-            }
-            if ("array" == b) {
-                g || (g = ja());
-             )raw_html",R"raw_html(   var c = qa(a.length);
-                Ba(a, c);
-                return c
-            }
-            return a
-        }
-        var g = 0,
-            h = 0,
-            d = d ? d.map(function(a) {
-                return f(a, c[h++])
-            }) : [];
-)raw_html",R"raw_html(        a = a.apply(m, d);
-        "string" == b ? b = Ca(a) : (w("array" != b), b = a);
-        g && ka(g);
-        return b
-    }
-    r.cwrap = function(a, b, c) {
-        var d = Aa(a);
-        return function() {
-            return za(d, b, c, Array.pr)raw_html",R"raw_html(ototype.slice.call(arguments))
-        }
-    };
-
-    function Da(a, b, c) {
-        c = c || "i8";
-        "*" === c.charAt(c.length - 1) && (c = "i32");
-        switch (c) {
-            case "i1":
-                F[a] = b;
-                break;
-         )raw_html",R"raw_html(   case "i8":
-                F[a] = b;
-                break;
-            case "i16":
-                G[a >> 1] = b;
-                break;
-            case "i32":
-                H[a >> 2] = b;
-                break;
-            case "i64":
-             )raw_html",R"raw_html(   ya = [b >>> 0, (C = b, 1 <= +Ea(C) ? 0 < C ? (Fa(+Ga(C / 4294967296), 4294967295) | 0) >>> 0 : ~~+Ha((C - +(~~C >>> 0)) / 4294967296) >>> 0 : 0)];
-                H[a >> 2] = ya[0];
-                H[a + 4 >> 2] = ya[1];
-                break;
-         )raw_html",R"raw_html(   case "float":
-                Ia[a >> 2] = b;
-                break;
-            case "double":
-                Ja[a >> 3] = b;
-                break;
-            default:
-                B("invalid type for setValue: " + c)
-        }
-    }
-    r.setVal)raw_html",R"raw_html(ue = Da;
-    r.getValue = function(a, b) {
-        b = b || "i8";
-        "*" === b.charAt(b.length - 1) && (b = "i32");
-        switch (b) {
-            case "i1":
-                return F[a];
-            case "i8":
-                return F[a];
-          )raw_html",R"raw_html(  case "i16":
-                return G[a >> 1];
-            case "i32":
-                return H[a >> 2];
-            case "i64":
-                return H[a >> 2];
-            case "float":
-                return Ia[a >> 2];
-            case "double":
-    )raw_html",R"raw_html(            return Ja[a >> 3];
-            default:
-                B("invalid type for setValue: " + b)
-        }
-        return m
-    };
-    var I = 2,
-        Ka = 4;
-    r.ALLOC_NORMAL = 0;
-    r.ALLOC_STACK = 1;
-    r.ALLOC_STATIC = I;
-    r.ALLOC_DYN)raw_html",R"raw_html(AMIC = 3;
-    r.ALLOC_NONE = Ka;
-
-    function K(a, b, c, d) {
-        var f, g;
-        "number" === typeof a ? (f = l, g = a) : (f = p, g = a.length);
-        var h = "string" === typeof b ? b : m,
-            c = c == Ka ? d : [L, qa, ra, ta][c === i ? )raw_html",R"raw_html(I : c](Math.max(g, h ? 1 : b.length));
-        if (f) {
-            d = c;
-            w(0 == (c & 3));
-            for (a = c + (g & -4); d < a; d += 4) H[d >> 2] = 0;
-            for (a = c + g; d < a;) F[d++ | 0] = 0;
-            return c
-        }
-    )raw_html",R"raw_html(    if ("i8" === h) return a.subarray || a.slice ? M.set(a, c) : M.set(new Uint8Array(a), c), c;
-        for (var d = 0, k, t; d < g;) {
-            var j = a[d];
-            "function" === typeof j && (j = wa.ld(j));
-            f = h || b[d];
-           )raw_html",R"raw_html( 0 === f ? d++ : ("i64" == f && (f = "i32"), Da(c + d, j, f), t !== f && (k = la(f), t = f), d += k)
-        }
-        return c
-    }
-    r.allocate = K;
-
-    function Ca(a, b) {
-        for (var c = p, d, f = 0;;) {
-            d = M[a + f | 0];
-         )raw_html",R"raw_html(   if (128 <= d) c = l;
-            else if (0 == d && !b) break;
-            f++;
-            if (b && f == b) break
-        }
-        b || (b = f);
-        var g = "";
-        if (!c) {
-            for (; 0 < b;) d = String.fromCharCode.apply(String, M.s)raw_html",R"raw_html(ubarray(a, a + Math.min(b, 1024))), g = g ? g + d : d, a += 1024, b -= 1024;
-            return g
-        }
-        c = new pa;
-        for (f = 0; f < b; f++) d = M[a + f | 0], g += c.ea(d);
-        return g
-    }
-    r.Pointer_stringify = Ca;
-    r.UTF16)raw_html",R"raw_html(ToString = function(a) {
-        for (var b = 0, c = "";;) {
-            var d = G[a + 2 * b >> 1];
-            if (0 == d) return c;
-            ++b;
-            c += String.fromCharCode(d)
-        }
-    };
-    r.stringToUTF16 = function(a, b) {
-        f)raw_html",R"raw_html(or (var c = 0; c < a.length; ++c) G[b + 2 * c >> 1] = a.charCodeAt(c);
-        G[b + 2 * a.length >> 1] = 0
-    };
-    r.UTF32ToString = function(a) {
-        for (var b = 0, c = "";;) {
-            var d = H[a + 4 * b >> 2];
-            if (0 == d) return)raw_html",R"raw_html( c;
-            ++b;
-            65536 <= d ? (d -= 65536, c += String.fromCharCode(55296 | d >> 10, 56320 | d & 1023)) : c += String.fromCharCode(d)
-        }
-    };
-    r.stringToUTF32 = function(a, b) {
-        for (var c = 0, d = 0; d < a.length; ++d) )raw_html",R"raw_html({
-            var f = a.charCodeAt(d);
-            if (55296 <= f && 57343 >= f) var g = a.charCodeAt(++d),
-                f = 65536 + ((f & 1023) << 10) | g & 1023;
-            H[b + 4 * c >> 2] = f;
-            ++c
-        }
-        H[b + 4 * c >> 2] = )raw_html",R"raw_html(0
-    };
-
-    function La(a) {
-        try {
-            "number" === typeof a && (a = Ca(a));
-            if ("_" !== a[0] || "_" !== a[1] || "Z" !== a[2]) return a;
-            switch (a[3]) {
-                case "n":
-                    return "operato)raw_html",R"raw_html(r new()";
-                case "d":
-                    return "operator delete()"
-            }
-            var b = 3,
-                c = {
-                    v: "void",
-                    b: "bool",
-                    c: "char",
-                    s)raw_html",R"raw_html(: "short",
-                    i: "int",
-                    l: "long",
-                    f: "float",
-                    d: "double",
-                    w: "wchar_t",
-                    a: "signed char",
-                    h: "unsigned char",
-       )raw_html",R"raw_html(             t: "unsigned short",
-                    j: "unsigned int",
-                    m: "unsigned long",
-                    x: "long long",
-                    y: "unsigned long long",
-                    z: "..."
-                },
-              )raw_html",R"raw_html(  d = [],
-                f = l,
-                g = function(h, t, j) {
-                    var t = t || Infinity,
-                        z = "",
-                        A = [],
-                        n;
-                    if ("N" === a[b]) {
-         )raw_html",R"raw_html(               b++;
-                        "K" === a[b] && b++;
-                        for (n = [];
-                            "E" !== a[b];)
-                            if ("S" === a[b]) {
-                                b++;
-                          )raw_html",R"raw_html(      var v = a.indexOf("_", b);
-                                n.push(d[a.substring(b, v) || 0] || "?");
-                                b = v + 1
-                            } else if ("C" === a[b]) n.push(n[n.length - 1]), b += 2;
-                     )raw_html",R"raw_html(   else {
-                            var v = parseInt(a.substr(b)),
-                                E = v.toString().length;
-                            if (!v || !E) {
-                                b--;
-                                break
-           )raw_html",R"raw_html(                 }
-                            var da = a.substr(b + E, v);
-                            n.push(da);
-                            d.push(da);
-                            b += E + v
-                        }
-                        b++;
-      )raw_html",R"raw_html(                  n = n.join("::");
-                        t--;
-                        if (0 === t) return h ? [n] : n
-                    } else if (("K" === a[b] || f && "L" === a[b]) && b++, v = parseInt(a.substr(b))) E = v.toString().length, n = a.su)raw_html",R"raw_html(bstr(b + E, v), b += E + v;
-                    f = p;
-                    "I" === a[b] ? (b++, v = g(l), E = g(l, 1, l), z += E[0] + " " + n + "<" + v.join(", ") +
-                        ">") : z = n;
-                    a: for (; b < a.length && 0 < t--)raw_html",R"raw_html(;)
-                        if (n = a[b++], n in c) A.push(c[n]);
-                        else switch (n) {
-                            case "P":
-                                A.push(g(l, 1, l)[0] + "*");
-                                break;
-           )raw_html",R"raw_html(                 case "R":
-                                A.push(g(l, 1, l)[0] + "&");
-                                break;
-                            case "L":
-                                b++;
-                                v = a.indexOf("E", b) )raw_html",R"raw_html(- b;
-                                A.push(a.substr(b, v));
-                                b += v + 2;
-                                break;
-                            case "A":
-                                v = parseInt(a.substr(b));
-               )raw_html",R"raw_html(                 b += v.toString().length;
-                                "_" !== a[b] && e("?");
-                                b++;
-                                A.push(g(l, 1, l)[0] + " [" + v + "]");
-                                break;
-         )raw_html",R"raw_html(                   case "E":
-                                break a;
-                            default:
-                                z += "?" + n;
-                                break a
-                        }!j && (1 === A.length && "void" === A[)raw_html",R"raw_html(0]) && (A = []);
-                    return h ? A : z + ("(" + A.join(", ") + ")")
-                };
-            return g()
-        } catch (h) {
-            return a
-        }
-    }
-
-    function Ma() {
-        var a = Error().stack;
-        return a ? a)raw_html",R"raw_html(.replace(/__Z[\w\d_]+/g, function(a) {
-            var c = La(a);
-            return a === c ? a : a + " [" + c + "]"
-        }) : "(no stack trace available)"
-    }
-    var F, M, G, Na, H, Oa, Ia, Ja, Pa = 0,
-        x = 0,
-        Qa = 0,
-        u = 0,
-)raw_html",R"raw_html(        Ra = 0,
-        Sa = 0,
-        y = 0,
-        ua = r.TOTAL_MEMORY || 16777216;
-    w("undefined" !== typeof Int32Array && "undefined" !== typeof Float64Array && !!(new Int32Array(1)).subarray && !!(new Int32Array(1)).set, "Cannot fallback to non-t)raw_html",R"raw_html(yped array case: Code is too specialized");
-    var N = new ArrayBuffer(ua);
-    F = new Int8Array(N);
-    G = new Int16Array(N);
-    H = new Int32Array(N);
-    M = new Uint8Array(N);
-    Na = new Uint16Array(N);
-    Oa = new Uint32Array(N);
-    Ia = new F)raw_html",R"raw_html(loat32Array(N);
-    Ja = new Float64Array(N);
-    H[0] = 255;
-    w(255 === M[0] && 0 === M[3], "Typed arrays 2 must be run on a little-endian system");
-    r.HEAP = i;
-    r.HEAP8 = F;
-    r.HEAP16 = G;
-    r.HEAP32 = H;
-    r.HEAPU8 = M;
-    r.HEAPU16 = )raw_html",R"raw_html(Na;
-    r.HEAPU32 = Oa;
-    r.HEAPF32 = Ia;
-    r.HEAPF64 = Ja;
-
-    function O(a) {
-        for (; 0 < a.length;) {
-            var b = a.shift();
-            if ("function" == typeof b) b();
-            else {
-                var c = b.J;
-               )raw_html",R"raw_html( "number" === typeof c ? b.aa === i ? na("v", c) : na("vi", c, [b.aa]) : c(b.aa === i ? m : b.aa)
-            }
-        }
-    }
-    var Ta = [],
-        P = [],
-        Ua = [],
-        Va = [],
-        Wa = [],
-        Xa = p;
-
-    function Ya(a) {
-      )raw_html",R"raw_html(  Ta.unshift(a)
-    }
-    r.addOnPreRun = r.bd = Ya;
-    r.addOnInit = r.Zc = function(a) {
-        P.unshift(a)
-    };
-    r.addOnPreMain = r.ad = function(a) {
-        Ua.unshift(a)
-    };
-    r.addOnExit = r.Yc = function(a) {
-        Va.unshift(a)
-    )raw_html",R"raw_html(};
-
-    function Za(a) {
-        Wa.unshift(a)
-    }
-    r.addOnPostRun = r.$c = Za;
-
-    function D(a, b, c) {
-        a = (new pa).Sa(a);
-        c && (a.length = c);
-        b || a.push(0);
-        return a
-    }
-    r.intArrayFromString = D;
-    r.intA)raw_html",R"raw_html(rrayToString = function(a) {
-        for (var b = [], c = 0; c < a.length; c++) {
-            var d = a[c];
-            255 < d && (d &= 255);
-            b.push(String.fromCharCode(d))
-        }
-        return b.join("")
-    };
-    r.writeStringToMemory =)raw_html",R"raw_html( function(a, b, c) {
-        a = D(a, c);
-        for (c = 0; c < a.length;) F[b + c | 0] = a[c], c += 1
-    };
-
-    function Ba(a, b) {
-        for (var c = 0; c < a.length; c++) F[b + c | 0] = a[c]
-    }
-    r.writeArrayToMemory = Ba;
-    r.writeAsciiToM)raw_html",R"raw_html(emory = function(a, b, c) {
-        for (var d = 0; d < a.length; d++) F[b + d | 0] = a.charCodeAt(d);
-        c || (F[b + a.length | 0] = 0)
-    };
-    Math.imul || (Math.imul = function(a, b) {
-        var c = a & 65535,
-            d = b & 65535;
-      )raw_html",R"raw_html(  return c * d + ((a >>> 16) * d + c * (b >>> 16) << 16) | 0
-    });
-    Math.nd = Math.imul;
-    var Ea = Math.abs,
-        Ha = Math.ceil,
-        Ga = Math.floor,
-        Fa = Math.min,
-        Q = 0,
-        $a = m,
-        ab = m;
-
-    function bb() {)raw_html",R"raw_html(
-        Q++;
-        r.monitorRunDependencies && r.monitorRunDependencies(Q)
-    }
-    r.addRunDependency = bb;
-
-    function cb() {
-        Q--;
-        r.monitorRunDependencies && r.monitorRunDependencies(Q);
-        if (0 == Q && ($a !== m && (clearInt)raw_html",R"raw_html(erval($a), $a = m), ab)) {
-            var a = ab;
-            ab = m;
-            a()
-        }
-    }
-    r.removeRunDependency = cb;
-    r.preloadedImages = {};
-    r.preloadedAudios = {};
-    Pa = 8;
-    x = Pa + 528;
-    P.push({
-        J: function() )raw_html",R"raw_html({
-            db()
-        }
-    });
-    K([0, 0, 0, 0, 3, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "i8", Ka, 8);
-    var eb = va(K(12, "i8", I), 8);
-    w(0 == eb % 8);
-    r._memset = fb;
-    r._memcpy = gb;
-    v)raw_html",R"raw_html(ar hb = K([8, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 6, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0,)raw_html",R"raw_html( 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 7, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5, 0, 1, 0, 2, 0, 1, )raw_html",R"raw_html(0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 6, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0,
-        1, 0, 3, 0,)raw_html",R"raw_html( 1, 0, 2, 0, 1, 0
-    ], "i8", I);
-    r._llvm_cttz_i32 = ib;
-    var jb = 0;
-
-    function kb(a) {
-        return H[jb >> 2] = a
-    }
-
-    function lb(a) {
-        lb.Ka || (y = y + 4095 & -4096, lb.Ka = l, w(ta), lb.Ia = ta, ta = function() {
-          )raw_html",R"raw_html(  B("cannot dynamically allocate, sbrk now has control")
-        });
-        var b = y;
-        0 != a && lb.Ia(a);
-        return b
-    }
-    var R = {
-        L: 1,
-        Q: 2,
-        Lc: 3,
-        Gb: 4,
-        D: 5,
-        ma: 6,
-        Ya: 7,
- )raw_html",R"raw_html(       dc: 8,
-        Da: 9,
-        nb: 10,
-        ia: 11,
-        Vc: 11,
-        Fa: 12,
-        Ca: 13,
-        zb: 14,
-        pc: 15,
-        lb: 16,
-        ja: 17,
-        Wc: 18,
-        ka: 19,
-        rc: 20,
-        Y: 21,
-        C: 22,
-     )raw_html",R"raw_html(   Zb: 23,
-        Ea: 24,
-        vc: 25,
-        Sc: 26,
-        Ab: 27,
-        lc: 28,
-        $: 29,
-        Ic: 30,
-        Sb: 31,
-        Bc: 32,
-        wb: 33,
-        Fc: 34,
-        hc: 42,
-        Db: 43,
-        ob: 44,
-        Jb: 45,
-      )raw_html",R"raw_html(  Kb: 46,
-        Lb: 47,
-        Rb: 48,
-        Tc: 49,
-        bc: 50,
-        Ib: 51,
-        tb: 35,
-        ec: 37,
-        eb: 52,
-        hb: 53,
-        Xc: 54,
-        $b: 55,
-        ib: 56,
-        jb: 57,
-        ub: 35,
-        kb: 59,
-      )raw_html",R"raw_html(  nc: 60,
-        cc: 61,
-        Pc: 62,
-        mc: 63,
-        ic: 64,
-        jc: 65,
-        Hc: 66,
-        fc: 67,
-        ab: 68,
-        Mc: 69,
-        pb: 70,
-        Cc: 71,
-        Ub: 72,
-        xb: 73,
-        gb: 74,
-        wc: 76,
-      )raw_html",R"raw_html(  fb: 77,
-        Gc: 78,
-        Mb: 79,
-        Nb: 80,
-        Qb: 81,
-        Pb: 82,
-        Ob: 83,
-        oc: 38,
-        la: 39,
-        Vb: 36,
-        Z: 40,
-        xc: 95,
-        Ac: 96,
-        sb: 104,
-        ac: 105,
-        bb: 97,
-     )raw_html",R"raw_html(   Ec: 91,
-        tc: 88,
-        kc: 92,
-        Jc: 108,
-        rb: 111,
-        Za: 98,
-        qb: 103,
-        Yb: 101,
-        Wb: 100,
-        Qc: 110,
-        Bb: 112,
-        Cb: 113,
-        Fb: 115,
-        cb: 114,
-        vb: 89,
-        Tb:)raw_html",R"raw_html( 90,
-        Dc: 93,
-        Kc: 94,
-        $a: 99,
-        Xb: 102,
-        Hb: 106,
-        qc: 107,
-        Rc: 109,
-        Uc: 87,
-        yb: 122,
-        Nc: 116,
-        uc: 95,
-        gc: 123,
-        Eb: 84,
-        yc: 75,
-        mb: 125,
-   )raw_html",R"raw_html(     sc: 131,
-        zc: 130,
-        Oc: 86
-    };
-    r._strlen = mb;
-    var nb = {
-            "0": "Success",
-            1: "Not super-user",
-            2: "No such file or directory",
-            3: "No such process",
-            4: "Interrupted s)raw_html",R"raw_html(ystem call",
-            5: "I/O error",
-            6: "No such device or address",
-            7: "Arg list too long",
-            8: "Exec format error",
-            9: "Bad file number",
-            10: "No children",
-            11: "No more processes)raw_html",R"raw_html(",
-            12: "Not enough core",
-            13: "Permission denied",
-            14: "Bad address",
-            15: "Block device required",
-            16: "Mount device busy",
-            17: "File exists",
-            18: "Cross-device link",
-    )raw_html",R"raw_html(        19: "No such device",
-            20: "Not a directory",
-            21: "Is a directory",
-            22: "Invalid argument",
-            23: "Too many open files in system",
-            24: "Too many open files",
-            25: "Not a typewriter)raw_html",R"raw_html(",
-            26: "Text file busy",
-            27: "File too large",
-            28: "No space left on device",
-            29: "Illegal seek",
-            30: "Read only file system",
-            31: "Too many links",
-            32: "Broken pipe",
-    )raw_html",R"raw_html(        33: "Math arg out of domain of func",
-            34: "Math result not representable",
-            35: "File locking deadlock error",
-            36: "File or path name too long",
-            37: "No record locks available",
-            38: "Functi)raw_html",R"raw_html(on not implemented",
-            39: "Directory not empty",
-            40: "Too many symbolic links",
-            42: "No message of desired type",
-            43: "Identifier removed",
-            44: "Channel number out of range",
-            45: "Level)raw_html",R"raw_html( 2 not synchronized",
-            46: "Level 3 halted",
-            47: "Level 3 reset",
-            48: "Link number out of range",
-            49: "Protocol driver not attached",
-            50: "No CSI structure available",
-            51: "Level 2 halt)raw_html",R"raw_html(ed",
-            52: "Invalid exchange",
-            53: "Invalid request descriptor",
-            54: "Exchange full",
-            55: "No anode",
-            56: "Invalid request code",
-            57: "Invalid slot",
-            59: "Bad font file fmt",)raw_html",R"raw_html(
-            60: "Device not a stream",
-            61: "No data (for no delay io)",
-            62: "Timer expired",
-            63: "Out of streams resources",
-            64: "Machine is not on the network",
-            65: "Package not installed",
-    )raw_html",R"raw_html(        66: "The object is remote",
-            67: "The link has been severed",
-            68: "Advertise error",
-            69: "Srmount error",
-            70: "Communication error on send",
-            71: "Protocol error",
-            72: "Multihop )raw_html",R"raw_html(attempted",
-            73: "Cross mount point (not really error)",
-            74: "Trying to read unreadable message",
-            75: "Value too large for defined data type",
-            76: "Given log. name not unique",
-            77: "f.d. invalid fo)raw_html",R"raw_html(r this operation",
-            78: "Remote address changed",
-            79: "Can   access a needed shared lib",
-            80: "Accessing a corrupted shared lib",
-            81: ".lib section in a.out corrupted",
-            82: "Attempting to link in t)raw_html",R"raw_html(oo many libs",
-            83: "Attempting to exec a shared library",
-            84: "Illegal byte sequence",
-            86: "Streams pipe error",
-            87: "Too many users",
-            88: "Socket operation on non-socket",
-            89: "Destin)raw_html",R"raw_html(ation address required",
-            90: "Message too long",
-            91: "Protocol wrong type for socket",
-            92: "Protocol not available",
-            93: "Unknown protocol",
-            94: "Socket type not supported",
-            95: "Not s)raw_html",R"raw_html(upported",
-            96: "Protocol family not supported",
-            97: "Address family not supported by protocol family",
-            98: "Address already in use",
-            99: "Address not available",
-            100: "Network interface is not con)raw_html",R"raw_html(figured",
-            101: "Network is unreachable",
-            102: "Connection reset by network",
-            103: "Connection aborted",
-            104: "Connection reset by peer",
-            105: "No buffer space available",
-            106: "Socket )raw_html",R"raw_html(is already connected",
-            107: "Socket is not connected",
-            108: "Can't send after socket shutdown",
-            109: "Too many references",
-            110: "Connection timed out",
-            111: "Connection refused",
-            112:)raw_html",R"raw_html( "Host is down",
-            113: "Host is unreachable",
-            114: "Socket already connected",
-            115: "Connection already in progress",
-            116: "Stale file handle",
-            122: "Quota exceeded",
-            123: "No medium (i)raw_html",R"raw_html(n tape drive)",
-            125: "Operation canceled",
-            130: "Previous owner died",
-            131: "State not recoverable"
-        },
-        ob = [];
-
-    function pb(a, b) {
-        ob[a] = {
-            input: [],
-            G: [],
-       )raw_html",R"raw_html(     O: b
-        };
-        qb[a] = {
-            k: rb
-        }
-    }
-    var rb = {
-            open: function(a) {
-                var b = ob[a.e.U];
-                b || e(new S(R.ka));
-                a.p = b;
-                a.seekable = p
-        )raw_html",R"raw_html(    },
-            close: function(a) {
-                a.p.G.length && a.p.O.T(a.p, 10)
-            },
-            H: function(a, b, c, d) {
-                (!a.p || !a.p.O.ta) && e(new S(R.ma));
-                for (var f = 0, g = 0; g < d; g++) {
-      )raw_html",R"raw_html(              var h;
-                    try {
-                        h = a.p.O.ta(a.p)
-                    } catch (k) {
-                        e(new S(R.D))
-                    }
-                    h === i && 0 === f && e(new S(R.ia));
-               )raw_html",R"raw_html(     if (h === m || h === i) break;
-                    f++;
-                    b[c + g] = h
-                }
-                f && (a.e.timestamp = Date.now());
-                return f
-            },
-            write: function(a, b, c, d) {
-           )raw_html",R"raw_html(     (!a.p || !a.p.O.T) && e(new S(R.ma));
-                for (var f = 0; f < d; f++) try {
-                    a.p.O.T(a.p, b[c + f])
-                } catch (g) {
-                    e(new S(R.D))
-                }
-                d && (a.e.timestamp =
-)raw_html",R"raw_html(                    Date.now());
-                return f
-            }
-        },
-        T = {
-            u: m,
-            Ba: 1,
-            X: 2,
-            ha: 3,
-            B: function() {
-                return T.createNode(m, "/", 16895, 0)
-   )raw_html",R"raw_html(         },
-            createNode: function(a, b, c, d) {
-                (24576 === (c & 61440) || 4096 === (c & 61440)) && e(new S(R.L));
-                T.u || (T.u = {
-                    dir: {
-                        e: {
-                           )raw_html",R"raw_html( A: T.g.A,
-                            o: T.g.o,
-                            da: T.g.da,
-                            K: T.g.K,
-                            K: T.g.K,
-                            rename: T.g.rename,
-                            Aa: T.g.Aa,
-   )raw_html",R"raw_html(                         za: T.g.za,
-                            ya: T.g.ya,
-                            W: T.g.W
-                        },
-                        I: {
-                            F: T.k.F
-                        }
-                    },
-)raw_html",R"raw_html(                    file: {
-                        e: {
-                            A: T.g.A,
-                            o: T.g.o
-                        },
-                        I: {
-                            F: T.k.F,
-                            H:)raw_html",R"raw_html( T.k.H,
-                            write: T.k.write,
-                            na: T.k.na,
-                            va: T.k.va
-                        }
-                    },
-                    link: {
-                        e: {
-                 )raw_html",R"raw_html(           A: T.g.A,
-                            o: T.g.o,
-                            V: T.g.V
-                        },
-                        I: {}
-                    },
-                    qa: {
-                        e: {
-                         )raw_html",R"raw_html(   A: T.g.A,
-                            o: T.g.o
-                        },
-                        I: sb
-                    }
-                });
-                c = tb(a, b, c, d);
-                16384 === (c.mode & 61440) ? (c.g =
-                   )raw_html",R"raw_html( T.u.dir.e, c.k = T.u.dir.I, c.n = {}) : 32768 === (c.mode & 61440) ? (c.g = T.u.file.e, c.k = T.u.file.I, c.n = [], c.S = T.X) : 40960 === (c.mode & 61440) ? (c.g = T.u.link.e, c.k = T.u.link.I) : 8192 === (c.mode & 61440) && (c.g = T.u.qa.e, c.k = T.u.qa)raw_html",R"raw_html(.I);
-                c.timestamp = Date.now();
-                a && (a.n[b] = c);
-                return c
-            },
-            ba: function(a) {
-                a.S !== T.X && (a.n = Array.prototype.slice.call(a.n), a.S = T.X)
-            },
-       )raw_html",R"raw_html(     g: {
-                A: function(a) {
-                    var b = {};
-                    b.hd = 8192 === (a.mode & 61440) ? a.id : 1;
-                    b.od = a.id;
-                    b.mode = a.mode;
-                    b.td = 1;
-                )raw_html",R"raw_html(    b.uid = 0;
-                    b.md = 0;
-                    b.U = a.U;
-                    b.size = 16384 === (a.mode & 61440) ? 4096 : 32768 === (a.mode & 61440) ? a.n.length :
-                        40960 === (a.mode & 61440) ? a.link.length : 0;
- )raw_html",R"raw_html(                   b.dd = new Date(a.timestamp);
-                    b.sd = new Date(a.timestamp);
-                    b.gd = new Date(a.timestamp);
-                    b.Ja = 4096;
-                    b.ed = Math.ceil(b.size / b.Ja);
-                    r)raw_html",R"raw_html(eturn b
-                },
-                o: function(a, b) {
-                    b.mode !== i && (a.mode = b.mode);
-                    b.timestamp !== i && (a.timestamp = b.timestamp);
-                    if (b.size !== i) {
-                        T.ba)raw_html",R"raw_html((a);
-                        var c = a.n;
-                        if (b.size < c.length) c.length = b.size;
-                        else
-                            for (; b.size > c.length;) c.push(0)
-                    }
-                },
-             )raw_html",R"raw_html(   da: function() {
-                    e(ub[R.Q])
-                },
-                K: function(a, b, c, d) {
-                    return T.createNode(a, b, c, d)
-                },
-                rename: function(a, b, c) {
-                    if (16384)raw_html",R"raw_html( === (a.mode & 61440)) {
-                        var d;
-                        try {
-                            d = vb(b,
-                                c)
-                        } catch (f) {}
-                        if (d)
-                           )raw_html",R"raw_html( for (var g in d.n) e(new S(R.la))
-                    }
-                    delete a.parent.n[a.name];
-                    a.name = c;
-                    b.n[c] = a;
-                    a.parent = b
-                },
-                Aa: function(a, b) {)raw_html",R"raw_html(
-                    delete a.n[b]
-                },
-                za: function(a, b) {
-                    var c = vb(a, b),
-                        d;
-                    for (d in c.n) e(new S(R.la));
-                    delete a.n[b]
-               )raw_html",R"raw_html( },
-                ya: function(a) {
-                    var b = [".", ".."],
-                        c;
-                    for (c in a.n) a.n.hasOwnProperty(c) && b.push(c);
-                    return b
-                },
-                W: function(a, )raw_html",R"raw_html(b, c) {
-                    a = T.createNode(a, b, 41471, 0);
-                    a.link = c;
-                    return a
-                },
-                V: function(a) {
-                    40960 !== (a.mode & 61440) && e(new S(R.C));
-                )raw_html",R"raw_html(    return a.link
-                }
-            },
-            k: {
-                H: function(a, b, c, d, f) {
-                    a = a.e.n;
-                    if (f >= a.length) return 0;
-                    d = Math.min(a.length -
-                   )raw_html",R"raw_html(     f, d);
-                    w(0 <= d);
-                    if (8 < d && a.subarray) b.set(a.subarray(f, f + d), c);
-                    else
-                        for (var g = 0; g < d; g++) b[c + g] = a[f + g];
-                    return d
-         )raw_html",R"raw_html(       },
-                write: function(a, b, c, d, f, g) {
-                    var h = a.e;
-                    h.timestamp = Date.now();
-                    a = h.n;
-                    if (d && 0 === a.length && 0 === f && b.subarray) return g && 0 ==)raw_html",R"raw_html(= c ? (h.n = b, h.S = b.buffer === F.buffer ? T.Ba : T.ha) : (h.n = new Uint8Array(b.subarray(c, c + d)), h.S = T.ha), d;
-                    T.ba(h);
-                    for (a = h.n; a.length < f;) a.push(0);
-                    for (g = 0; g < d; g++) a)raw_html",R"raw_html([f + g] = b[c + g];
-                    return d
-                },
-                F: function(a, b, c) {
-                    1 === c ? b += a.position : 2 === c && 32768 === (a.e.mode & 61440) && (b += a.e.n.length);
-                    0 > b && e(new S()raw_html",R"raw_html(R.C));
-                    a.Va = [];
-                    return a.position = b
-                },
-                na: function(a, b, c) {
-                    T.ba(a.e);
-                    a = a.e.n;
-                    for (b += c; b > a.length;) a.push()raw_html",R"raw_html(0)
-                },
-                va: function(a, b, c, d, f, g, h) {
-                    32768 !== (a.e.mode & 61440) && e(new S(R.ka));
-                    a = a.e.n;
-                    if (!(h & 2) && (a.buffer === b || a.buffer === b.buffer)) f = )raw_html",R"raw_html(p, d = a.byteOffset;
-                    else {
-                        if (0 < f || f + d < a.length) a = a.subarray ? a.subarray(f, f + d) : Array.prototype.slice.call(a, f, f + d);
-                        f = l;
-                        (d = L(d)) || e(n)raw_html",R"raw_html(ew S(R.Fa));
-                        b.set(a, d)
-                    }
-                    return {
-                        wd: d,
-                        cd: f
-                    }
-                }
-            }
-        },
-        wb = K(1, "i32*", I),
-)raw_html",R"raw_html(        xb = K(1, "i32*", I),
-        yb = K(1, "i32*", I),
-        zb = m,
-        qb = [m],
-        Ab = [m],
-        Bb = 1,
-        Cb = m,
-        Db = l,
-        S = m,
-        ub = {};
-
-    function U(a, b) {
-        a = Eb("/", a);
-        b = b ||)raw_html",R"raw_html( {
-            fa: 0
-        };
-        8 < b.fa && e(new S(R.Z));
-        for (var c = Fb(a.split("/").filter(function(a) {
-                return !!a
-            }), p), d = zb, f = "/", g = 0; g < c.length; g++) {
-            var h = g === c.length - 1;)raw_html",R"raw_html(
-            if (h && b.parent) break;
-            d = vb(d, c[g]);
-            f = V(f + "/" + c[g]);
-            d.Pa && (d = d.B.root);
-            if (!h || b.N)
-                for (h = 0; 40960 === (d.mode & 61440);) {
-                    d = U(f, {
-)raw_html",R"raw_html(                        N: p
-                    }).e;
-                    d.g.V || e(new S(R.C));
-                    var d = d.g.V(d),
-                        k = Eb;
-                    var t = /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/])raw_html",R"raw_html(*)$/.exec(f).slice(1),
-                        f = t[0],
-                        t = t[1];
-                    !f && !t ? f = "." : (t && (t = t.substr(0, t.length - 1)), f += t);
-                    f = k(f, d);
-                    d = U(f, {
-            )raw_html",R"raw_html(            fa: b.fa
-                    }).e;
-                    40 < h++ && e(new S(R.Z))
-                }
-        }
-        return {
-            path: f,
-            e: d
-        }
-    }
-
-    function W(a) {
-        for (var b;;) {
-            if (a =)raw_html",R"raw_html(== a.parent) return a = a.B.Qa, !b ? a : "/" !== a[a.length - 1] ? a + "/" + b : a + b;
-            b = b ? a.name + "/" + b : a.name;
-            a = a.parent
-        }
-    }
-
-    function Gb(a, b) {
-        for (var c = 0, d = 0; d < b.length; d++) c = ()raw_html",R"raw_html(c << 5) - c + b.charCodeAt(d) | 0;
-        return (a + c >>> 0) % Cb.length
-    }
-
-    function vb(a, b) {
-        var c = Hb(a, "x");
-        c && e(new S(c));
-        for (c = Cb[Gb(a.id, b)]; c; c = c.Ra) {
-            var d = c.name;
-            if (c.)raw_html",R"raw_html(parent.id === a.id && d === b) return c
-        }
-        return a.g.da(a, b)
-    }
-
-    function tb(a, b, c, d) {
-        Ib || (Ib = function(a, b, c, d) {
-            this.id = Bb++;
-            this.name = b;
-            this.mode = c;
-            this)raw_html",R"raw_html(.g = {};
-            this.k = {};
-            this.U = d;
-            this.B = this.parent = m;
-            a || (a = this);
-            this.parent = a;
-            this.B = a.B;
-            a = Gb(this.parent.id, this.name);
-            this.Ra = Cb[a];
-)raw_html",R"raw_html(            Cb[a] = this
-        }, Ib.prototype = {}, Object.defineProperties(Ib.prototype, {
-            H: {
-                get: function() {
-                    return 365 === (this.mode & 365)
-                },
-                set: function(a) {
-   )raw_html",R"raw_html(                 a ? this.mode |= 365 : this.mode &= -366
-                }
-            },
-            write: {
-                get: function() {
-                    return 146 === (this.mode & 146)
-                },
-                set: function(a) {
-   )raw_html",R"raw_html(                 a ? this.mode |= 146 : this.mode &= -147
-                }
-            },
-            Oa: {
-                get: function() {
-                    return 16384 ===
-                        (this.mode & 61440)
-                }
-            },)raw_html",R"raw_html(
-            Na: {
-                get: function() {
-                    return 8192 === (this.mode & 61440)
-                }
-            }
-        }));
-        return new Ib(a, b, c, d)
-    }
-    var Jb = {
-        r: 0,
-        rs: 1052672,
-        "r+")raw_html",R"raw_html(: 2,
-        w: 577,
-        wx: 705,
-        xw: 705,
-        "w+": 578,
-        "wx+": 706,
-        "xw+": 706,
-        a: 1089,
-        ax: 1217,
-        xa: 1217,
-        "a+": 1090,
-        "ax+": 1218,
-        "xa+": 1218
-    };
-
-    function Hb(a, b)raw_html",R"raw_html() {
-        return Db ? 0 : -1 !== b.indexOf("r") && !(a.mode & 292) || -1 !== b.indexOf("w") && !(a.mode & 146) || -1 !== b.indexOf("x") && !(a.mode & 73) ? R.Ca : 0
-    }
-
-    function Kb(a, b) {
-        try {
-            return vb(a, b), R.ja
-        } )raw_html",R"raw_html(catch (c) {}
-        return Hb(a, "wx")
-    }
-    var sb = {
-        open: function(a) {
-            a.k = qb[a.e.U].k;
-            a.k.open && a.k.open(a)
-        },
-        F: function() {
-            e(new S(R.$))
-        }
-    };
-
-    function Lb(a, b,)raw_html",R"raw_html( c) {
-        var d = U(a, {
-                parent: l
-            }).e,
-            a = Mb(a),
-            f = Kb(d, a);
-        f && e(new S(f));
-        d.g.K || e(new S(R.L));
-        return d.g.K(d, a, b, c)
-    }
-
-    function Nb(a, b) {
-        b = )raw_html",R"raw_html((b !== i ? b : 438) & 4095;
-        b |= 32768;
-        return Lb(a, b, 0)
-    }
-
-    function X(a, b) {
-        b = (b !== i ? b : 511) & 1023;
-        b |= 16384;
-        return Lb(a, b, 0)
-    }
-
-    function Ob(a, b, c) {
-        "undefined" === typeof)raw_html",R"raw_html( c && (c = b, b = 438);
-        return Lb(a, b | 8192, c)
-    }
-
-    function Pb(a, b) {
-        var c = U(b, {
-                parent: l
-            }).e,
-            d = Mb(b),
-            f = Kb(c, d);
-        f && e(new S(f));
-        c.g.W || e(new S()raw_html",R"raw_html(R.L));
-        return c.g.W(c, d, a)
-    }
-
-    function Qb(a, b) {
-        var c;
-        c = "string" === typeof a ? U(a, {
-            N: l
-        }).e : a;
-        c.g.o || e(new S(R.L));
-        c.g.o(c, {
-            mode: b & 4095 | c.mode & -4096,)raw_html",R"raw_html(
-            timestamp: Date.now()
-        })
-    }
-
-    function Rb(a, b) {
-        var c, d;
-        "string" === typeof b ? (d = Jb[b], "undefined" === typeof d && e(Error("Unknown file open mode: " + b))) : d = b;
-        b = d;
-        c = b & 64 ? (")raw_html",R"raw_html(undefined" === typeof c ? 438 : c) & 4095 | 32768 : 0;
-        var f;
-        if ("object" === typeof a) f = a;
-        else {
-            a = V(a);
-            try {
-                f = U(a, {
-                    N: !(b & 131072)
-                }).e
-    )raw_html",R"raw_html(        } catch (g) {}
-        }
-        b & 64 && (f ? b & 128 && e(new S(R.ja)) : f = Lb(a, c, 0));
-        f || e(new S(R.Q));
-        8192 === (f.mode & 61440) && (b &= -513);
-        f ? 40960 === (f.mode & 61440) ? c = R.Z : 16384 === (f.mode & 61440)raw_html",R"raw_html() && (0 !== (b & 2097155) || b & 512) ? c = R.Y : (c = ["r", "w", "rw"][b & 2097155], b & 512 && (c += "w"), c = Hb(f, c)) : c = R.Q;
-        c && e(new S(c));
-        b & 512 && (c = f, c = "string" === typeof c ? U(c, {
-            N: l
-        }).e : c,)raw_html",R"raw_html( c.g.o || e(new S(R.L)), 16384 === (c.mode & 61440) && e(new S(R.Y)), 32768 !== (c.mode & 61440) && e(new S(R.C)), (d = Hb(c, "w")) && e(new S(d)), c.g.o(c, {
-            size: 0,
-            timestamp: Date.now()
-        }));
-        var b = b & -641,
-   )raw_html",R"raw_html(         h;
-        f = {
-            e: f,
-            path: W(f),
-            M: b,
-            seekable: l,
-            position: 0,
-            k: f.k,
-            Va: [],
-            error: p
-        };
-        Y || (Y = q(), Y.prototype = {}, Object.)raw_html",R"raw_html(defineProperties(Y.prototype, {
-            object: {
-                get: function() {
-                    return this.e
-                },
-                set: function(a) {
-                    this.e = a
-                }
-            },
-            qd: )raw_html",R"raw_html({
-                get: function() {
-                    return 1 !== (this.M & 2097155)
-                }
-            },
-            rd: {
-                get: function() {
-                    return 0 !==
-                        (this.M & 2097155)
-       )raw_html",R"raw_html(         }
-            },
-            pd: {
-                get: function() {
-                    return this.M & 1024
-                }
-            }
-        }));
-        if (f.__proto__) f.__proto__ = Y.prototype;
-        else {
-            c = new Y;
-  )raw_html",R"raw_html(          for (var k in f) c[k] = f[k];
-            f = c
-        }
-        a: {
-            k = i || 4096;
-            for (c = i || 1; c <= k; c++)
-                if (!Ab[c]) {
-                    h = c;
-                    break a
-                }
-   )raw_html",R"raw_html(         e(new S(R.Ea))
-        }
-        f.q = h;
-        h = Ab[h] = f;
-        h.k.open && h.k.open(h);
-        r.logReadFiles && !(b & 1) && (Sb || (Sb = {}), a in Sb || (Sb[a] = 1, r.printErr("read file: " + a)));
-        return h
-    }
-
-    function )raw_html",R"raw_html(Tb(a) {
-        try {
-            a.k.close && a.k.close(a)
-        } catch (b) {
-            e(b)
-        } finally {
-            Ab[a.q] = m
-        }
-    }
-
-    function Ub() {
-        S || (S = function(a) {
-            this.jd = a;
-            for (va)raw_html",R"raw_html(r b in R)
-                if (R[b] === a) {
-                    this.code = b;
-                    break
-                }
-            this.message = nb[a];
-            this.stack = Ma()
-        }, S.prototype = Error(), [R.Q].forEach(function(a) {
-       )raw_html",R"raw_html(     ub[a] = new S(a);
-            ub[a].stack = "<generic error, no stack>"
-        }))
-    }
-    var Vb;
-
-    function Wb(a, b) {
-        var c = 0;
-        a && (c |= 365);
-        b && (c |= 146);
-        return c
-    }
-
-    function Xb(a, b, c, d, f, )raw_html",R"raw_html(g) {
-        a = b ? V(("string" === typeof a ? a : W(a)) + "/" + b) : a;
-        d = Wb(d, f);
-        f = Nb(a, d);
-        if (c) {
-            if ("string" === typeof c) {
-                for (var a = Array(c.length), b = 0, h = c.length; b < h; ++b) a)raw_html",R"raw_html([b] = c.charCodeAt(b);
-                c = a
-            }
-            Qb(f, d | 146);
-            var a = Rb(f, "w"),
-                b = c,
-                h = c.length,
-                k = 0;
-            (0 > h || 0 > k) && e(new S(R.C));
-            0 )raw_html",R"raw_html(=== (a.M & 2097155) && e(new S(R.Da));
-            16384 === (a.e.mode & 61440) && e(new S(R.Y));
-            a.k.write || e(new S(R.C));
-            c = l;
-            "undefined" === typeof k ? (k = a.position, c = p) : a.seekable || e(new S(R.$));
-     )raw_html",R"raw_html(       a.M & 1024 && ((!a.seekable || !a.k.F) && e(new S(R.$)), a.k.F(a, 0, 2));
-            g =
-                a.k.write(a, b, 0, h, k, g);
-            c || (a.position += g);
-            Tb(a);
-            Qb(f, d)
-        }
-        return f
-    }
-
-    )raw_html",R"raw_html(function Z(a, b, c, d) {
-        a = V(("string" === typeof a ? a : W(a)) + "/" + b);
-        b = Wb(!!c, !!d);
-        Z.ua || (Z.ua = 64);
-        var f;
-        f = Z.ua++ << 8 | 0;
-        qb[f] = {
-            k: {
-                open: function(a) {
-)raw_html",R"raw_html(                    a.seekable = p
-                },
-                close: function() {
-                    d && (d.buffer && d.buffer.length) && d(10)
-                },
-                H: function(a, b, d, f) {
-                    for (var j = 0, z = 0)raw_html",R"raw_html(; z < f; z++) {
-                        var A;
-                        try {
-                            A = c()
-                        } catch (n) {
-                            e(new S(R.D))
-                        }
-                        A === i && 0 )raw_html",R"raw_html(=== j && e(new S(R.ia));
-                        if (A === m || A === i) break;
-                        j++;
-                        b[d + z] = A
-                    }
-                    j && (a.e.timestamp = Date.now());
-                    return j
-    )raw_html",R"raw_html(            },
-                write: function(a, b, c, f) {
-                    for (var j = 0; j < f; j++) try {
-                        d(b[c + j])
-                    } catch (z) {
-                        e(new S(R.D))
-                    }
-           )raw_html",R"raw_html(         f && (a.e.timestamp = Date.now());
-                    return j
-                }
-            }
-        };
-        return Ob(a, b, f)
-    }
-
-    function Yb(a) {
-        if (a.Na || a.Oa || a.link || a.n) return l;
-        var b = l;
-        "unde)raw_html",R"raw_html(fined" !== typeof XMLHttpRequest && e(Error("Lazy loading should have been performed (contents set) in createLazyFile, but it was not. Lazy loading only works in web workers. Use --embed-file or --preload-file in emcc on the main thread."));
-        if (r.)raw_html",R"raw_html(read) try {
-            a.n = D(r.read(a.url), l)
-        } catch (c) {
-            b = p
-        } else e(Error("Cannot load without read() or XMLHttpRequest."));
-        b || kb(R.D);
-        return b
-    }
-    var Ib, Y, Sb;
-
-    function Fb(a, b) {
-   )raw_html",R"raw_html(     for (var c = 0, d = a.length - 1; 0 <= d; d--) {
-            var f = a[d];
-            "." === f ? a.splice(d, 1) : ".." === f ? (a.splice(d, 1), c++) : c && (a.splice(d, 1), c--)
-        }
-        if (b)
-            for (; c--; c) a.unshift("..");
-  )raw_html",R"raw_html(      return a
-    }
-
-    function V(a) {
-        var b = "/" === a.charAt(0),
-            c = "/" === a.substr(-1),
-            a = Fb(a.split("/").filter(function(a) {
-                return !!a
-            }), !b).join("/");
-        !a && !b && (a = ".")raw_html",R"raw_html();
-        a && c && (a += "/");
-        return (b ? "/" : "") + a
-    }
-
-    function Mb(a) {
-        if ("/" === a) return "/";
-        var b = a.lastIndexOf("/");
-        return -1 === b ? a : a.substr(b + 1)
-    }
-
-    function Eb() {
-        for (var )raw_html",R"raw_html(a = "", b = p, c = arguments.length - 1; - 1 <= c && !b; c--) {
-            var d = 0 <= c ? arguments[c] : "/";
-            "string" !== typeof d && e(new TypeError("Arguments to path.resolve must be strings"));
-            d && (a = d + "/" + a, b = "/" )raw_html",R"raw_html(=== d.charAt(0))
-        }
-        a = Fb(a.split("/").filter(function(a) {
-            return !!a
-        }), !b).join("/");
-        return (b ? "/" : "") + a || "."
-    }
-    var Zb = p,
-        $b = p,
-        ac = p,
-        bc = p,
-        cc = i,
-   )raw_html",R"raw_html(     dc = i;
-
-    function ec(a) {
-        return {
-            jpg: "image/jpeg",
-            jpeg: "image/jpeg",
-            png: "image/png",
-            bmp: "image/bmp",
-            ogg: "audio/ogg",
-            wav: "audio/wav",
-            mp3: "aud)raw_html",R"raw_html(io/mpeg"
-        }[a.substr(a.lastIndexOf(".") + 1)]
-    }
-    var fc = [];
-
-    function gc() {
-        var a = r.canvas;
-        fc.forEach(function(b) {
-            b(a.width, a.height)
-        })
-    }
-
-    function hc() {
-        var a = r.canvas;
-   )raw_html",R"raw_html(     this.Xa = a.width;
-        this.Wa = a.height;
-        a.width = screen.width;
-        a.height = screen.height;
-        "undefined" != typeof SDL && (a = Oa[SDL.screen + 0 * ma >> 2], H[SDL.screen + 0 * ma >> 2] = a | 8388608);
-        gc()
-    }
-
-  )raw_html",R"raw_html(  function ic() {
-        var a = r.canvas;
-        a.width = this.Xa;
-        a.height = this.Wa;
-        "undefined" != typeof SDL && (a = Oa[SDL.screen + 0 * ma >> 2], H[SDL.screen + 0 * ma >> 2] = a & -8388609);
-        gc()
-    }
-    var jc, kc, lc, m)raw_html",R"raw_html(c, jb = ra(4);
-    H[jb >> 2] = 0;
-    r.requestFullScreen = function(a, b) {
-        function c() {
-            $b = p;
-            (document.webkitFullScreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFulls)raw_html",R"raw_html(creenElement || document.fullScreenElement || document.fullscreenElement) === d ? (d.pa = document.cancelFullScreen || document.mozCancelFullScreen || document.webkitCancelFullScreen, d.pa = d.pa.bind(document), cc && d.ga(), $b = l, dc && hc()) : dc && ic)raw_html",R"raw_html(();
-            if (r.onFullScreen) r.onFullScreen($b)
-        }
-        cc = a;
-        dc = b;
-        "undefined" === typeof cc && (cc = l);
-        "undefined" === typeof dc &&
-            (dc = p);
-        var d = r.canvas;
-        bc || (bc = l, docu)raw_html",R"raw_html(ment.addEventListener("fullscreenchange", c, p), document.addEventListener("mozfullscreenchange", c, p), document.addEventListener("webkitfullscreenchange", c, p));
-        d.Ta = d.requestFullScreen || d.mozRequestFullScreen || (d.webkitRequestFullScreen )raw_html",R"raw_html(? function() {
-            d.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)
-        } : m);
-        d.Ta()
-    };
-    r.requestAnimationFrame = function(a) {
-        "undefined" === typeof window ? setTimeout(a, 1E3 / 60) : (window.requestAnimationF)raw_html",R"raw_html(rame || (window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || window.setTimeout), window.requestAnimationF)raw_html",R"raw_html(rame(a))
-    };
-    r.setCanvasSize = function(a, b, c) {
-        var d = r.canvas;
-        d.width = a;
-        d.height = b;
-        c || gc()
-    };
-    r.pauseMainLoop = q();
-    r.resumeMainLoop = function() {
-        Zb && (Zb = p, m())
-    };
-    r.)raw_html",R"raw_html(getUserMedia = function() {
-        window.sa || (window.sa = navigator.getUserMedia || navigator.mozGetUserMedia);
-        window.sa(i)
-    };
-    Ub();
-    var Cb = Array(4096),
-        zb = tb(m, "/", 16895, 0),
-        nc = T,
-        oc = "/",
-       )raw_html",R"raw_html( pc;
-    oc && (pc = U(oc, {
-        N: p
-    }), oc = pc.path);
-    var qc = {
-            type: nc,
-            vd: {},
-            Qa: oc,
-            root: m
-        },
-        rc = nc.B(qc);
-    rc.B = qc;
-    qc.root = rc;
-    pc && (pc.e.B = qc, pc.)raw_html",R"raw_html(e.Pa = l, "/" === oc && (zb = qc.root));
-    X("/tmp");
-    X("/dev");
-    qb[259] = {
-        k: {
-            H: function() {
-                return 0
-            },
-            write: function() {
-                return 0
-            }
-        }
-    };
-)raw_html",R"raw_html(    Ob("/dev/null", 259);
-    pb(1280, {
-        ta: function(a) {
-            if (!a.input.length) {
-                var b = m;
-                if (ba) {
-                    if (b = process.stdin.read(), !b) {
-                        if (process.stdin._re)raw_html",R"raw_html(adableState && process.stdin._readableState.ended) return m;
-                        return
-                    }
-                } else "undefined" != typeof window && "function" == typeof window.prompt ? (b = window.prompt("Input: "), b !== m && (b += "\)raw_html",R"raw_html(n")) : "function" == typeof readline && (b = readline(), b !== m && (b += "\n"));
-                if (!b) return m;
-                a.input = D(b, l)
-            }
-            return a.input.shift()
-        },
-        T: function(a, b) {
-            b === )raw_html",R"raw_html(m || 10 === b ? (r.print(a.G.join("")), a.G = []) : a.G.push(sc.ea(b))
-        }
-    });
-    pb(1536, {
-        T: function(a, b) {
-            b === m || 10 === b ? (r.printErr(a.G.join("")), a.G = []) : a.G.push(sc.ea(b))
-        }
-    });
-    Ob("/dev/t)raw_html",R"raw_html(ty", 1280);
-    Ob("/dev/tty1", 1536);
-    X("/dev/shm");
-    X("/dev/shm/tmp");
-    P.unshift({
-        J: function() {
-            if (!r.noFSInit && !Vb) {
-                w(!Vb, "FS.init was previously called. If you want to initialize later with custo)raw_html",R"raw_html(m parameters, remove any earlier calls (note that one is automatically added to the generated code)");
-                Vb = l;
-                Ub();
-                r.stdin = r.stdin;
-                r.stdout = r.stdout;
-                r.stderr = r.stderr)raw_html",R"raw_html(;
-                r.stdin ? Z("/dev", "stdin", r.stdin) : Pb("/dev/tty", "/dev/stdin");
-                r.stdout ? Z("/dev", "stdout", m, r.stdout) : Pb("/dev/tty", "/dev/stdout");
-                r.stderr ? Z("/dev", "stderr", m, r.stderr) : Pb("/dev/tty1)raw_html",R"raw_html(", "/dev/stderr");
-                var a = Rb("/dev/stdin",
-                    "r");
-                H[wb >> 2] = a.q;
-                w(1 === a.q, "invalid handle for stdin (" + a.q + ")");
-                a = Rb("/dev/stdout", "w");
-                H[xb)raw_html",R"raw_html( >> 2] = a.q;
-                w(2 === a.q, "invalid handle for stdout (" + a.q + ")");
-                a = Rb("/dev/stderr", "w");
-                H[yb >> 2] = a.q;
-                w(3 === a.q, "invalid handle for stderr (" + a.q + ")")
-            }
-     )raw_html",R"raw_html(   }
-    });
-    Ua.push({
-        J: function() {
-            Db = p
-        }
-    });
-    Va.push({
-        J: function() {
-            Vb = p;
-            for (var a = 0; a < Ab.length; a++) {
-                var b = Ab[a];
-                b && Tb(b)
-  )raw_html",R"raw_html(          }
-        }
-    });
-    r.FS_createFolder = function(a, b, c, d) {
-        a = V(("string" === typeof a ? a : W(a)) + "/" + b);
-        return X(a, Wb(c, d))
-    };
-    r.FS_createPath = function(a, b) {
-        for (var a = "string" === typeof a)raw_html",R"raw_html( ? a : W(a), c = b.split("/").reverse(); c.length;) {
-            var d = c.pop();
-            if (d) {
-                var f = V(a + "/" + d);
-                try {
-                    X(f)
-                } catch (g) {}
-                a = f
-            )raw_html",R"raw_html(}
-        }
-        return f
-    };
-    r.FS_createDataFile = Xb;
-    r.FS_createPreloadedFile = function(a, b, c, d, f, g, h, k, t) {
-        function j() {
-            ac = document.pointerLockElement === n || document.mozPointerLockElement === n || docu)raw_html",R"raw_html(ment.webkitPointerLockElement === n
-        }
-
-        function z(c) {
-            function j(c) {
-                k || Xb(a, b, c, d, f, t);
-                g && g();
-                cb()
-            }
-            var n = p;
-            r.preloadPlugins.f)raw_html",R"raw_html(orEach(function(a) {
-                !n && a.canHandle(v) && (a.handle(c, v, j, function() {
-                    h && h();
-                    cb()
-                }), n = l)
-            });
-            n || j(c)
-        }
-        r.preloadPlugins || (r.pr)raw_html",R"raw_html(eloadPlugins = []);
-        if (!jc && !ea) {
-            jc = l;
-            try {
-                new Blob, kc = l
-            } catch (A) {
-                kc = p, console.log("warning: no blob constructor, cannot create blobs with mimetypes")
-         )raw_html",R"raw_html(   }
-            lc =
-                "undefined" != typeof MozBlobBuilder ? MozBlobBuilder : "undefined" != typeof WebKitBlobBuilder ? WebKitBlobBuilder : !kc ? console.log("warning: no BlobBuilder") : m;
-            mc = "undefined" != typeof window ? wi)raw_html",R"raw_html(ndow.URL ? window.URL : window.webkitURL : i;
-            !r.wa && "undefined" === typeof mc && (console.log("warning: Browser does not support creating object URLs. Built-in browser image decoding will not be available."), r.wa = l);
-            r.preload)raw_html",R"raw_html(Plugins.push({
-                canHandle: function(a) {
-                    return !r.wa && /\.(jpg|jpeg|png|bmp)$/i.test(a)
-                },
-                handle: function(a, b,
-                    c, d) {
-                    var f = m;
-              )raw_html",R"raw_html(      if (kc) try {
-                        f = new Blob([a], {
-                            type: ec(b)
-                        }), f.size !== a.length && (f = new Blob([(new Uint8Array(a)).buffer], {
-                            type: ec(b)
-               )raw_html",R"raw_html(         }))
-                    } catch (g) {
-                        var h = "Blob constructor present but fails: " + g + "; falling back to blob builder";
-                        oa || (oa = {});
-                        oa[h] || (oa[h] = 1, r.P(h))
-    )raw_html",R"raw_html(                }
-                    f || (f = new lc, f.append((new Uint8Array(a)).buffer), f = f.getBlob());
-                    var j = mc.createObjectURL(f),
-                        n = new Image;
-                    n.onload = function() {
-          )raw_html",R"raw_html(              w(n.complete, "Image " + b + " could not be decoded");
-                        var d = document.createElement("canvas");
-                        d.width = n.width;
-                        d.height = n.height;
-                        d.getCont)raw_html",R"raw_html(ext("2d").drawImage(n,
-                            0, 0);
-                        r.preloadedImages[b] = d;
-                        mc.revokeObjectURL(j);
-                        c && c(a)
-                    };
-                    n.onerror = function() {)raw_html",R"raw_html(
-                        console.log("Image " + j + " could not be decoded");
-                        d && d()
-                    };
-                    n.src = j
-                }
-            });
-            r.preloadPlugins.push({
-                canHan)raw_html",R"raw_html(dle: function(a) {
-                    return !r.ud && a.substr(-4) in {
-                        ".ogg": 1,
-                        ".wav": 1,
-                        ".mp3": 1
-                    }
-                },
-                handle: function(a, b,)raw_html",R"raw_html( c, d) {
-                    function f(d) {
-                        h || (h = l, r.preloadedAudios[b] = d, c && c(a))
-                    }
-
-                    function g() {
-                        h || (h = l, r.preloadedAudios[b] = new Audio, d && d())raw_html",R"raw_html()
-                    }
-                    var h = p;
-                    if (kc) {
-                        try {
-                            var j = new Blob([a], {
-                                type: ec(b)
-                            })
-              )raw_html",R"raw_html(          } catch (n) {
-                            return g()
-                        }
-                        var j = mc.createObjectURL(j),
-                            k = new Audio;
-                        k.addEventListener("canplaythrough",
-        )raw_html",R"raw_html(                    function() {
-                                f(k)
-                            }, p);
-                        k.onerror = function() {
-                            if (!h) {
-                                console.log("warning: browser co)raw_html",R"raw_html(uld not fully decode audio " + b + ", trying slower base64 approach");
-                                for (var c = "", d = 0, g = 0, j = 0; j < a.length; j++) {
-                                    d = d << 8 | a[j];
-                                    for)raw_html",R"raw_html( (g += 8; 6 <= g;) var n = d >> g - 6 & 63,
-                                        g = g - 6,
-                                        c = c + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [n]
-                                }
-        )raw_html",R"raw_html(                        2 == g ? (c += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [(d & 3) << 4], c += "==") : 4 == g && (c += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [(d & 15) << 2], c += "=");
-          )raw_html",R"raw_html(                      k.src = "data:audio/x-" + b.substr(-3) + ";base64," + c;
-                                f(k)
-                            }
-                        };
-                        k.src = j;
-                        setTimeout(function() {
-)raw_html",R"raw_html(                            xa || f(k)
-                        }, 1E4)
-                    } else return g()
-                }
-            });
-            var n = r.canvas;
-            n.ga = n.requestPointerLock || n.mozRequestPointerLock || n.webkitReque)raw_html",R"raw_html(stPointerLock;
-            n.ra = document.exitPointerLock || document.mozExitPointerLock || document.webkitExitPointerLock || q();
-            n.ra = n.ra.bind(document);
-            document.addEventListener("pointerlockchange", j, p);
-            docume)raw_html",R"raw_html(nt.addEventListener("mozpointerlockchange", j, p);
-            document.addEventListener("webkitpointerlockchange", j, p);
-            r.elementPointerLock &&
-                n.addEventListener("click", function(a) {
-                    !ac && n.ga && (n.g)raw_html",R"raw_html(a(), a.preventDefault())
-                }, p)
-        }
-        var v = b ? Eb(V(a + "/" + b)) : a;
-        bb();
-        if ("string" == typeof c) {
-            var E = h,
-                da = function() {
-                    E ? E() : e('Loading data fi)raw_html",R"raw_html(le "' + c + '" failed.')
-                },
-                J = new XMLHttpRequest;
-            J.open("GET", c, l);
-            J.responseType = "arraybuffer";
-            J.onload = function() {
-                if (200 == J.status || 0 == J.status && J.r)raw_html",R"raw_html(esponse) {
-                    var a = J.response;
-                    w(a, 'Loading data file "' + c + '" failed (no arrayBuffer).');
-                    a = new Uint8Array(a);
-                    z(a);
-                    cb()
-                } else da())raw_html",R"raw_html(
-            };
-            J.onerror = da;
-            J.send(m);
-            bb()
-        } else z(c)
-    };
-    r.FS_createLazyFile = function(a, b, c, d, f) {
-        var g, h;
-        "undefined" !== typeof XMLHttpRequest ? (ea || e("Cannot do synchro)raw_html",R"raw_html(nous binary XHRs outside webworkers in modern browsers. Use --embed-file or --preload-file in emcc"), g = function() {
-            this.ca = p;
-            this.R = []
-        }, g.prototype.get = function(a) {
-            if (!(a > this.length - 1 || 0 > )raw_html",R"raw_html(a)) {
-                var b = a % this.La;
-                return this.Ma(Math.floor(a / this.La))[b]
-            }
-        }, g.prototype.Ua = function(a) {
-            this.Ma = a
-        }, g.prototype.oa = function() {
-            var a = new XMLHttpRe)raw_html",R"raw_html(quest;
-            a.open("HEAD", c, p);
-            a.send(m);
-            200 <= a.status && 300 > a.status ||
-                304 === a.status || e(Error("Couldn't load " + c + ". Status: " + a.status));
-            var b = Number(a.getResponseHeader("C)raw_html",R"raw_html(ontent-length")),
-                d, f = 1048576;
-            if (!((d = a.getResponseHeader("Accept-Ranges")) && "bytes" === d)) f = b;
-            var g = this;
-            g.Ua(function(a) {
-                var d = a * f,
-                    h = (a + 1))raw_html",R"raw_html( * f - 1,
-                    h = Math.min(h, b - 1);
-                if ("undefined" === typeof g.R[a]) {
-                    var k = g.R;
-                    d > h && e(Error("invalid range (" + d + ", " + h + ") or no bytes requested!"));
-              )raw_html",R"raw_html(      h > b - 1 && e(Error("only " + b + " bytes available! programmer error!"));
-                    var j = new XMLHttpRequest;
-                    j.open("GET", c, p);
-                    b !== f && j.setRequestHeader("Range",
-                        "b)raw_html",R"raw_html(ytes=" + d + "-" + h);
-                    "undefined" != typeof Uint8Array && (j.responseType = "arraybuffer");
-                    j.overrideMimeType && j.overrideMimeType("text/plain; charset=x-user-defined");
-                    j.send(m);
-            )raw_html",R"raw_html(        200 <= j.status && 300 > j.status || 304 === j.status || e(Error("Couldn't load " + c + ". Status: " + j.status));
-                    d = j.response !== i ? new Uint8Array(j.response || []) : D(j.responseText || "", l);
-                    k[a] = )raw_html",R"raw_html(d
-                }
-                "undefined" === typeof g.R[a] && e(Error("doXHR failed!"));
-                return g.R[a]
-            });
-            this.Ha = b;
-            this.Ga = f;
-            this.ca = l
-        }, g = new g, Object.definePrope)raw_html",R"raw_html(rty(g, "length", {
-            get: function() {
-                this.ca ||
-                    this.oa();
-                return this.Ha
-            }
-        }), Object.defineProperty(g, "chunkSize", {
-            get: function() {
-                this.c)raw_html",R"raw_html(a || this.oa();
-                return this.Ga
-            }
-        }), h = i) : (h = c, g = i);
-        var k, a = V(("string" === typeof a ? a : W(a)) + "/" + b);
-        k = Nb(a, Wb(d, f));
-        g ? k.n = g : h && (k.n = m, k.url = h);
-        var )raw_html",R"raw_html(t = {};
-        Object.keys(k.k).forEach(function(a) {
-            var b = k.k[a];
-            t[a] = function() {
-                Yb(k) || e(new S(R.D));
-                return b.apply(m, arguments)
-            }
-        });
-        t.H = function(a, b, c)raw_html",R"raw_html(, d, f) {
-            Yb(k) || e(new S(R.D));
-            a = a.e.n;
-            if (f >= a.length) return 0;
-            d = Math.min(a.length - f, d);
-            w(0 <= d);
-            if (a.slice)
-                for (var g = 0; g < d; g++) b[c + g] = )raw_html",R"raw_html(a[f + g];
-            else
-                for (g = 0; g < d; g++) b[c + g] = a.get(f + g);
-            return d
-        };
-        k.k = t;
-        return k
-    };
-    r.FS_createLink = function(a, b, c) {
-        a = V(("string" === typeof a ? a : W(a)) )raw_html",R"raw_html(+ "/" + b);
-        return Pb(c, a)
-    };
-    r.FS_createDevice = Z;
-    P.unshift({
-        J: q()
-    });
-    Va.push({
-        J: q()
-    });
-    var sc = new pa;
-    ba && (require("fs"), process.platform.match(/^win/));
-    Qa = u = va(x);
-    Ra = Q)raw_html",R"raw_html(a + 5242880;
-    Sa = y = va(Ra);
-    w(Sa < ua);
-    Fa = Math.min;
-    var $ = (function(global, env, buffer) {
-            // EMSCRIPTEN_START_ASM
-            "use asm";
-            var a = new global.Int8Array(buffer);
-            var b = new global.In)raw_html",R"raw_html(t16Array(buffer);
-            var c = new global.Int32Array(buffer);
-            var d = new global.Uint8Array(buffer);
-            var e = new global.Uint16Array(buffer);
-            var f = new global.Uint32Array(buffer);
-            var g = new global.F)raw_html",R"raw_html(loat32Array(buffer);
-            var h = new global.Float64Array(buffer);
-            var i = env.STACKTOP | 0;
-            var j = env.STACK_MAX | 0;
-            var k = env.tempDoublePtr | 0;
-            var l = env.ABORT | 0;
-            var m = env.ctt)raw_html",R"raw_html(z_i8 | 0;
-            var n = env.ctlz_i8 | 0;
-            var o = +env.NaN;
-            var p = +env.Infinity;
-            var q = 0;
-            var r = 0;
-            var s = 0;
-            var t = 0;
-            var u = 0,
-                v = 0,
-      )raw_html",R"raw_html(          w = 0,
-                x = 0,
-                y = 0.0,
-                z = 0,
-                A = 0,
-                B = 0,
-                C = 0.0;
-            var D = 0;
-            var E = 0;
-            var F = 0;
-            var G = 0;
-     )raw_html",R"raw_html(       var H = 0;
-            var I = 0;
-            var J = 0;
-            var K = 0;
-            var L = 0;
-            var M = 0;
-            var N = global.Math.floor;
-            var O = global.Math.abs;
-            var P = global.Math.sqrt;
-         )raw_html",R"raw_html(   var Q = global.Math.pow;
-            var R = global.Math.cos;
-            var S = global.Math.sin;
-            var T = global.Math.tan;
-            var U = global.Math.acos;
-            var V = global.Math.asin;
-            var W = global.Math.atan;
-   )raw_html",R"raw_html(         var X = global.Math.atan2;
-            var Y = global.Math.exp;
-            var Z = global.Math.log;
-            var _ = global.Math.ceil;
-            var $ = global.Math.imul;
-            var aa = env.abort;
-            var ab = env.assert;
-     )raw_html",R"raw_html(       var ac = env.asmPrintInt;
-            var ad = env.asmPrintFloat;
-            var ae = env.min;
-            var af = env.invoke_ii;
-            var ag = env.invoke_v;
-            var ah = env.invoke_iii;
-            var ai = env.invoke_vi;
-         )raw_html",R"raw_html(   var aj = env._sysconf;
-            var ak = env._sbrk;
-            var al = env.___setErrNo;
-            var am = env.___errno_location;
-            var an = env._abort;
-            var ao = env._time;
-            var ap = env._fflush;
-            var a)raw_html",R"raw_html(q = 0.0;
-            // EMSCRIPTEN_START_FUNCS
-            function av(a) {
-                a = a | 0;
-                var b = 0;
-                b = i;
-                i = i + a | 0;
-                i = i + 7 & -8;
-                return b | 0
-           )raw_html",R"raw_html( }
-
-            function aw() {
-                return i | 0
-            }
-
-            function ax(a) {
-                a = a | 0;
-                i = a
-            }
-
-            function ay(a, b) {
-                a = a | 0;
-                b = b | 0;
- )raw_html",R"raw_html(               if ((q | 0) == 0) {
-                    q = a;
-                    r = b
-                }
-            }
-
-            function az(b) {
-                b = b | 0;
-                a[k] = a[b];
-                a[k + 1 | 0] = a[b + 1 | 0];
-     )raw_html",R"raw_html(           a[k + 2 | 0] = a[b + 2 | 0];
-                a[k + 3 | 0] = a[b + 3 | 0]
-            }
-
-            function aA(b) {
-                b = b | 0;
-                a[k] = a[b];
-                a[k + 1 | 0] = a[b + 1 | 0];
-                a[k + 2 | 0)raw_html",R"raw_html(] = a[b + 2 | 0];
-                a[k + 3 | 0] = a[b + 3 | 0];
-                a[k + 4 | 0] = a[b + 4 | 0];
-                a[k + 5 | 0] = a[b + 5 | 0];
-                a[k + 6 | 0] = a[b + 6 | 0];
-                a[k + 7 | 0] = a[b + 7 | 0]
-            }
-)raw_html",R"raw_html(
-            function aB(a) {
-                a = a | 0;
-                D = a
-            }
-
-            function aC(a) {
-                a = a | 0;
-                E = a
-            }
-
-            function aD(a) {
-                a = a | 0;
-             )raw_html",R"raw_html(   F = a
-            }
-
-            function aE(a) {
-                a = a | 0;
-                G = a
-            }
-
-            function aF(a) {
-                a = a | 0;
-                H = a
-            }
-
-            function aG(a) {
-                a)raw_html",R"raw_html( = a | 0;
-                I = a
-            }
-
-            function aH(a) {
-                a = a | 0;
-                J = a
-            }
-
-            function aI(a) {
-                a = a | 0;
-                K = a
-            }
-
-            function aJ)raw_html",R"raw_html((a) {
-                a = a | 0;
-                L = a
-            }
-
-            function aK(a) {
-                a = a | 0;
-                M = a
-            }
-
-            function aL() {}
-
-            function aM(f, g, h) {
-                f = f | 0;
- )raw_html",R"raw_html(               g = g | 0;
-                h = h | 0;
-                var j = 0,
-                    k = 0,
-                    l = 0,
-                    m = 0,
-                    n = 0,
-                    o = 0,
-                    p = 0,
-              )raw_html",R"raw_html(      q = 0,
-                    r = 0,
-                    s = 0,
-                    t = 0,
-                    u = 0,
-                    w = 0,
-                    x = 0,
-                    y = 0,
-                    z = 0,
-                    A = 0,
-)raw_html",R"raw_html(                    B = 0,
-                    C = 0,
-                    D = 0,
-                    E = 0,
-                    F = 0,
-                    G = 0,
-                    H = 0,
-                    I = 0,
-                    J = 0,
-             )raw_html",R"raw_html(       K = 0,
-                    L = 0,
-                    M = 0,
-                    N = 0,
-                    O = 0,
-                    P = 0,
-                    Q = 0,
-                    R = 0,
-                    S = 0,
-                    T = 0,)raw_html",R"raw_html(
-                    U = 0,
-                    V = 0,
-                    W = 0,
-                    X = 0,
-                    Y = 0,
-                    Z = 0,
-                    _ = 0,
-                    aa = 0,
-                    ab = 0,
-          )raw_html",R"raw_html(          ac = 0,
-                    ad = 0,
-                    ae = 0,
-                    af = 0,
-                    ag = 0,
-                    ah = 0,
-                    ai = 0,
-                    aj = 0,
-                    ak = 0,
-              )raw_html",R"raw_html(      al = 0,
-                    am = 0,
-                    an = 0,
-                    ao = 0,
-                    ap = 0,
-                    aq = 0,
-                    ar = 0,
-                    as = 0,
-                    at = 0,
-                  )raw_html",R"raw_html(  au = 0,
-                    av = 0,
-                    aw = 0,
-                    ax = 0,
-                    ay = 0,
-                    az = 0,
-                    aA = 0,
-                    aB = 0,
-                    aC = 0,
-                    aD)raw_html",R"raw_html( = 0,
-                    aE = 0,
-                    aF = 0,
-                    aG = 0;
-                j = i;
-                i = i + 16384 | 0;
-                k = j | 0;
-                l = k;
-                aR(l | 0, 0, 16384) | 0;
-                l)raw_html",R"raw_html( = f + h | 0;
-                m = h - 12 | 0;
-                n = f + m | 0;
-                o = f + (h - 5) | 0;
-                p = h >>> 0 > 2113929216 >>> 0;
-                if ((h | 0) >= 65547) {
-                    if (p) {
-                        q)raw_html",R"raw_html( = 0;
-                        i = j;
-                        return q | 0
-                    }
-                    r = f;
-                    c[k + (($(d[r] | d[r + 1 | 0] << 8 | d[r + 2 | 0] << 16 | d[r + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 20 << 2) )raw_html",R"raw_html(>> 2] = f;
-                    L6: do {
-                        if ((m | 0) < 2) {
-                            s = f;
-                            t = g
-                        } else {
-                            r = f + (h - 8) | 0;
-                      )raw_html",R"raw_html(      u = f + (h - 6) | 0;
-                            w = g;
-                            x = f;
-                            y = f;
-                            z = f + 2 | 0;
-                            while (1) {
-                                A = y + 1)raw_html",R"raw_html( | 0;
-                                B = A;
-                                C = A;
-                                A = d[B] | d[B + 1 | 0] << 8 | d[B + 2 | 0] << 16 | d[B + 3 | 0] << 24 | 0;
-                                B = 68;
-                        )raw_html",R"raw_html(        D = z;
-                                while (1) {
-                                    E = ($(A, -1640531535) | 0) >>> 20;
-                                    F = D;
-                                    G = d[F] | d[F + 1 | 0] << 8 | d[F + 2 | 0] <<)raw_html",R"raw_html( 16 | d[F + 3 | 0] << 24 | 0;
-                                    F = k + (E << 2) | 0;
-                                    E = c[F >> 2] | 0;
-                                    c[F >> 2] = C;
-                                    if ((E + 65535 | 0) >>> 0 )raw_html",R"raw_html(>= C >>> 0) {
-                                        F = E;
-                                        H = C;
-                                        if ((d[F] | d[F + 1 | 0] << 8 | d[F + 2 | 0] << 16 | d[F + 3 | 0] << 24 | 0) == (d[H] | d[H + 1 | 0] << 8 | )raw_html",R"raw_html(d[H + 2 | 0] << 16 | d[H + 3 | 0] << 24 | 0)) {
-                                            I = C;
-                                            J = E;
-                                            break
-                                        }
-              )raw_html",R"raw_html(                      }
-                                    E = D + (B >> 6) | 0;
-                                    if (E >>> 0 > n >>> 0) {
-                                        s = x;
-                                        t = w;
-                   )raw_html",R"raw_html(                     break L6
-                                    } else {
-                                        C = D;
-                                        A = G;
-                                        B = B + 1 | 0;
-                                )raw_html",R"raw_html(        D = E
-                                    }
-                                }
-                                while (1) {
-                                    if (!(I >>> 0 > x >>> 0 & J >>> 0 > f >>> 0)) {
-                                        br)raw_html",R"raw_html(eak
-                                    }
-                                    D = I - 1 | 0;
-                                    B = J - 1 | 0;
-                                    if ((a[D] | 0) == (a[B] | 0)) {
-                                        I = )raw_html",R"raw_html(D;
-                                        J = B
-                                    } else {
-                                        break
-                                    }
-                                }
-                                B = I;
-     )raw_html",R"raw_html(                           D = x;
-                                A = B - D | 0;
-                                C = w + 1 | 0;
-                                if ((A | 0) > 14) {
-                                    E = A - 15 | 0;
-                        )raw_html",R"raw_html(            a[w] = -16;
-                                    if ((E | 0) > 254) {
-                                        G = B - 270 - D | 0;
-                                        D = (G >>> 0) / 255 | 0;
-                                        B = D + 1)raw_html",R"raw_html( | 0;
-                                        aR(C | 0, -1 | 0, B | 0) | 0;
-                                        K = G + (D * -255 | 0) & 255;
-                                        L = w + (D + 2) | 0
-                                    } else {
-     )raw_html",R"raw_html(                                   K = E & 255;
-                                        L = C
-                                    }
-                                    a[L] = K;
-                                    M = L + 1 | 0
-                            )raw_html",R"raw_html(    } else {
-                                    a[w] = A << 4 & 255;
-                                    M = C
-                                }
-                                C = M + A | 0;
-                                A = x;
-                        )raw_html",R"raw_html(        E = M;
-                                while (1) {
-                                    D = A;
-                                    G = E;
-                                    v = d[D] | d[D + 1 | 0] << 8 | d[D + 2 | 0] << 16 | d[D + 3 | 0] << 24 | 0;)raw_html",R"raw_html(
-                                    a[G] = v & 255;
-                                    v = v >> 8;
-                                    a[G + 1 | 0] = v & 255;
-                                    v = v >> 8;
-                                    a[G + 2 | 0)raw_html",R"raw_html(] = v & 255;
-                                    v = v >> 8;
-                                    a[G + 3 | 0] = v & 255;
-                                    G = A + 4 | 0;
-                                    D = E + 4 | 0;
-                                 )raw_html",R"raw_html(   v = d[G] | d[G + 1 | 0] << 8 | d[G + 2 | 0] << 16 | d[G + 3 | 0] << 24 | 0;
-                                    a[D] = v & 255;
-                                    v = v >> 8;
-                                    a[D + 1 | 0] = v & 255;
-                 )raw_html",R"raw_html(                   v = v >> 8;
-                                    a[D + 2 | 0] = v & 255;
-                                    v = v >> 8;
-                                    a[D + 3 | 0] = v & 255;
-                                    D = E + 8 | 0;
-      )raw_html",R"raw_html(                              if (D >>> 0 < C >>> 0) {
-                                        A = A + 8 | 0;
-                                        E = D
-                                    } else {
-                                        N = I;
-        )raw_html",R"raw_html(                                O = C;
-                                        P = J;
-                                        Q = w;
-                                        break
-                                    }
-                                }
-     )raw_html",R"raw_html(                           while (1) {
-                                    C = O;
-                                    v = N - P & 65535;
-                                    a[C] = v & 255;
-                                    v = v >> 8;
-                   )raw_html",R"raw_html(                 a[C + 1 | 0] = v & 255;
-                                    C = O + 2 | 0;
-                                    E = N + 4 | 0;
-                                    A = E;
-                                    D = P;
-                           )raw_html",R"raw_html(         while (1) {
-                                        R = D + 4 | 0;
-                                        if (A >>> 0 >= r >>> 0) {
-                                            S = 68;
-                                            break
-            )raw_html",R"raw_html(                            }
-                                        G = R;
-                                        T = d[G] | d[G + 1 | 0] << 8 | d[G + 2 | 0] << 16 | d[G + 3 | 0] << 24 | 0;
-                                        G = A;
-                )raw_html",R"raw_html(                        U = d[G] | d[G + 1 | 0] << 8 | d[G + 2 | 0] << 16 | d[G + 3 | 0] << 24 | 0;
-                                        if ((T | 0) == (U | 0)) {
-                                            A = A + 4 | 0;
-                               )raw_html",R"raw_html(             D = R
-                                        } else {
-                                            S = 67;
-                                            break
-                                        }
-                                    }
-      )raw_html",R"raw_html(                              do {
-                                        if ((S | 0) == 67) {
-                                            S = 0;
-                                            V = A + ((aT(U ^ T | 0) | 0) >>> 3) | 0
-                         )raw_html",R"raw_html(               } else if ((S | 0) == 68) {
-                                            S = 0;
-                                            do {
-                                                if (A >>> 0 < u >>> 0) {
-                                        )raw_html",R"raw_html(            G = R;
-                                                    B = A;
-                                                    if ((d[G] | d[G + 1 | 0] << 8) << 16 >> 16 << 16 >> 16 != (d[B] | d[B + 1 | 0] << 8) << 16 >> 16 << 16 >> 16) {
-              )raw_html",R"raw_html(                                          W = A;
-                                                        X = R;
-                                                        break
-                                                    }
-                            )raw_html",R"raw_html(                        W = A + 2 | 0;
-                                                    X = D + 6 | 0
-                                                } else {
-                                                    W = A;
-                                   )raw_html",R"raw_html(                 X = R
-                                                }
-                                            } while (0);
-                                            if (W >>> 0 >= o >>> 0) {
-                                                V = W;
- )raw_html",R"raw_html(                                               break
-                                            }
-                                            V = (a[X] | 0) == (a[W] | 0) ? W + 1 | 0 : W
-                                        }
-                          )raw_html",R"raw_html(          } while (0);
-                                    A = V;
-                                    D = E;
-                                    B = A - D | 0;
-                                    G = a[Q] | 0;
-                                    if ((B | 0)raw_html",R"raw_html() > 14) {
-                                        a[Q] = G + 15 & 255;
-                                        H = B - 15 | 0;
-                                        if ((H | 0) > 509) {
-                                            F = A - 525 - D | 0;
-   )raw_html",R"raw_html(                                         D = (F >>> 0) / 510 | 0;
-                                            Y = F + (D * -510 | 0) | 0;
-                                            F = D << 1;
-                                            D = H;
-           )raw_html",R"raw_html(                                 Z = C;
-                                            while (1) {
-                                                a[Z] = -1;
-                                                a[Z + 1 | 0] = -1;
-                                  )raw_html",R"raw_html(              _ = D - 510 | 0;
-                                                if ((_ | 0) > 509) {
-                                                    D = _;
-                                                    Z = Z + 2 | 0
-                               )raw_html",R"raw_html(                 } else {
-                                                    break
-                                                }
-                                            }
-                                            aa = Y;
-                        )raw_html",R"raw_html(                    ab = O + (F + 4) | 0
-                                        } else {
-                                            aa = H;
-                                            ab = C
-                                        }
-                     )raw_html",R"raw_html(                   if ((aa | 0) > 254) {
-                                            a[ab] = -1;
-                                            ac = ab + 1 | 0;
-                                            ad = aa + 1 & 255
-                                    )raw_html",R"raw_html(    } else {
-                                            ac = ab;
-                                            ad = aa & 255
-                                        }
-                                        a[ac] = ad;
-                                      )raw_html",R"raw_html(  ae = ac + 1 | 0
-                                    } else {
-                                        a[Q] = (G & 255) + B & 255;
-                                        ae = C
-                                    }
-                                    if ()raw_html",R"raw_html(V >>> 0 > n >>> 0) {
-                                        s = V;
-                                        t = ae;
-                                        break L6
-                                    }
-                                    Z = V - 2 | 0;
-  )raw_html",R"raw_html(                                  D = Z;
-                                    c[k + (($(d[D] | d[D + 1 | 0] << 8 | d[D + 2 | 0] << 16 | d[D + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 20 << 2) >> 2] = Z;
-                                    Z = V;
-            )raw_html",R"raw_html(                        D = k + (($(d[Z] | d[Z + 1 | 0] << 8 | d[Z + 2 | 0] << 16 | d[Z + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 20 << 2) | 0;
-                                    E = c[D >> 2] | 0;
-                                    c[D >> 2] = A;
-      )raw_html",R"raw_html(                              if ((E + 65535 | 0) >>> 0 < V >>> 0) {
-                                        break
-                                    }
-                                    D = E;
-                                    if ((d[D] | d[D + 1 | 0])raw_html",R"raw_html( << 8 | d[D + 2 | 0] << 16 | d[D + 3 | 0] << 24 | 0) != (d[Z] | d[Z + 1 | 0] << 8 | d[Z + 2 | 0] << 16 | d[Z + 3 | 0] << 24 | 0)) {
-                                        break
-                                    }
-                                    a[ae)raw_html",R"raw_html(] = 0;
-                                    N = V;
-                                    O = ae + 1 | 0;
-                                    P = E;
-                                    Q = ae
-                                }
-                                E )raw_html",R"raw_html(= V + 2 | 0;
-                                if (E >>> 0 > n >>> 0) {
-                                    s = V;
-                                    t = ae;
-                                    break
-                                } else {
-                )raw_html",R"raw_html(                    w = ae;
-                                    x = V;
-                                    y = V;
-                                    z = E
-                                }
-                            }
-                        }
-          )raw_html",R"raw_html(          } while (0);
-                    V = l;
-                    ae = s;
-                    Q = V - ae | 0;
-                    if ((Q | 0) > 14) {
-                        a[t] = -16;
-                        P = Q - 15 | 0;
-                        O )raw_html",R"raw_html(= t + 1 | 0;
-                        if ((P | 0) > 254) {
-                            N = V - 270 - ae | 0;
-                            ae = (N >>> 0) / 255 | 0;
-                            V = ae + 2 | 0;
-                            ac = ae + 1 | 0;
-     )raw_html",R"raw_html(                       aR(O | 0, -1 | 0, ac | 0) | 0;
-                            af = N + (ae * -255 | 0) & 255;
-                            ag = t + V | 0
-                        } else {
-                            af = P & 255;
-                        )raw_html",R"raw_html(    ag = O
-                        }
-                        a[ag] = af;
-                        ah = ag
-                    } else {
-                        a[t] = Q << 4 & 255;
-                        ah = t
-                    }
-                    t = )raw_html",R"raw_html(ah + 1 | 0;
-                    aS(t | 0, s | 0, Q) | 0;
-                    q = ah + (Q + 1) - g | 0;
-                    i = j;
-                    return q | 0
-                }
-                if (p) {
-                    q = 0;
-                    i =)raw_html",R"raw_html( j;
-                    return q | 0
-                }
-                L72: do {
-                    if ((h | 0) < 13) {
-                        ai = g;
-                        aj = f
-                    } else {
-                        p = f;
-            )raw_html",R"raw_html(            Q = k;
-                        b[Q + (($(d[p] | d[p + 1 | 0] << 8 | d[p + 2 | 0] << 16 | d[p + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 19 << 1) >> 1] = 0;
-                        if ((m | 0) < 2) {
-                            ai = g;
-          )raw_html",R"raw_html(                  aj = f;
-                            break
-                        }
-                        p = f;
-                        ah = f + (h - 8) | 0;
-                        s = f + (h - 6) | 0;
-                        t = f;
-                 )raw_html",R"raw_html(       ag = g;
-                        af = f;
-                        O = f + 2 | 0;
-                        while (1) {
-                            P = af + 1 | 0;
-                            V = P;
-                            ae = d[V] | d[V + 1 | 0] <<)raw_html",R"raw_html( 8 | d[V + 2 | 0] << 16 | d[V + 3 | 0] << 24 | 0;
-                            V = P;
-                            P = 68;
-                            N = O;
-                            while (1) {
-                                ac = ($(ae, -1640531535) | 0)raw_html",R"raw_html() >>> 19;
-                                ad = N;
-                                aa = d[ad] | d[ad + 1 | 0] << 8 | d[ad + 2 | 0] << 16 | d[ad + 3 | 0] << 24 | 0;
-                                ad = Q + (ac << 1) | 0;
-                                ac = )raw_html",R"raw_html(e[ad >> 1] | 0;
-                                ab = f + ac | 0;
-                                b[ad >> 1] = V - p & 65535;
-                                if ((f + (ac + 65535) | 0) >>> 0 >= V >>> 0) {
-                                    ac = ab;
-       )raw_html",R"raw_html(                             ad = V;
-                                    if ((d[ac] | d[ac + 1 | 0] << 8 | d[ac + 2 | 0] << 16 | d[ac + 3 | 0] << 24 | 0) == (d[ad] | d[ad + 1 | 0] << 8 | d[ad + 2 | 0] << 16 | d[ad + 3 | 0] << 24 | 0)) {
-                   )raw_html",R"raw_html(                     ak = ab;
-                                        al = V;
-                                        break
-                                    }
-                                }
-                                ab = N + (P >> 6) | 0;
-     )raw_html",R"raw_html(                           if (ab >>> 0 > n >>> 0) {
-                                    ai = ag;
-                                    aj = t;
-                                    break L72
-                                } else {
-                           )raw_html",R"raw_html(         ae = aa;
-                                    V = N;
-                                    P = P + 1 | 0;
-                                    N = ab
-                                }
-                            }
-                            while (1))raw_html",R"raw_html( {
-                                if (!(al >>> 0 > t >>> 0 & ak >>> 0 > f >>> 0)) {
-                                    break
-                                }
-                                N = al - 1 | 0;
-                                P = ak - 1 | 0;)raw_html",R"raw_html(
-                                if ((a[N] | 0) == (a[P] | 0)) {
-                                    ak = P;
-                                    al = N
-                                } else {
-                                    break
-                     )raw_html",R"raw_html(           }
-                            }
-                            N = al;
-                            P = t;
-                            V = N - P | 0;
-                            ae = ag + 1 | 0;
-                            if ((V | 0) > 14) {
-      )raw_html",R"raw_html(                          ab = V - 15 | 0;
-                                a[ag] = -16;
-                                if ((ab | 0) > 254) {
-                                    aa = N - 270 - P | 0;
-                                    P = (aa >>> 0) / 255)raw_html",R"raw_html( | 0;
-                                    N = P + 1 | 0;
-                                    aR(ae | 0, -1 | 0, N | 0) | 0;
-                                    am = ag + (P + 2) | 0;
-                                    an = aa + (P * -255 | 0) & 255
-      )raw_html",R"raw_html(                          } else {
-                                    am = ae;
-                                    an = ab & 255
-                                }
-                                a[am] = an;
-                                ao = am + 1 | 0
-)raw_html",R"raw_html(                            } else {
-                                a[ag] = V << 4 & 255;
-                                ao = ae
-                            }
-                            ae = ao + V | 0;
-                            V = ao;
-              )raw_html",R"raw_html(              ab = t;
-                            while (1) {
-                                P = ab;
-                                aa = V;
-                                v = d[P] | d[P + 1 | 0] << 8 | d[P + 2 | 0] << 16 | d[P + 3 | 0] << 24 | 0;
-      )raw_html",R"raw_html(                          a[aa] = v & 255;
-                                v = v >> 8;
-                                a[aa + 1 | 0] = v & 255;
-                                v = v >> 8;
-                                a[aa + 2 | 0] = v & 255;
-           )raw_html",R"raw_html(                     v = v >> 8;
-                                a[aa + 3 | 0] = v & 255;
-                                aa = ab + 4 | 0;
-                                P = V + 4 | 0;
-                                v = d[aa] | d[aa + 1 | 0] << 8 | d[aa )raw_html",R"raw_html(+ 2 | 0] << 16 | d[aa + 3 | 0] << 24 | 0;
-                                a[P] = v & 255;
-                                v = v >> 8;
-                                a[P + 1 | 0] = v & 255;
-                                v = v >> 8;
-                      )raw_html",R"raw_html(          a[P + 2 | 0] = v & 255;
-                                v = v >> 8;
-                                a[P + 3 | 0] = v & 255;
-                                P = V + 8 | 0;
-                                if (P >>> 0 < ae >>> 0) {
-                 )raw_html",R"raw_html(                   V = P;
-                                    ab = ab + 8 | 0
-                                } else {
-                                    ap = ag;
-                                    aq = ak;
-                                    ar = ae;
-  )raw_html",R"raw_html(                                  as = al;
-                                    break
-                                }
-                            }
-                            while (1) {
-                                ae = ar;
-                          )raw_html",R"raw_html(      v = as - aq & 65535;
-                                a[ae] = v & 255;
-                                v = v >> 8;
-                                a[ae + 1 | 0] = v & 255;
-                                ae = ar + 2 | 0;
-                              )raw_html",R"raw_html(  ab = as + 4 | 0;
-                                V = aq;
-                                P = ab;
-                                while (1) {
-                                    at = V + 4 | 0;
-                                    if (P >>> 0 >= ah >>> 0) )raw_html",R"raw_html({
-                                        S = 23;
-                                        break
-                                    }
-                                    aa = at;
-                                    au = d[aa] | d[aa + 1 | 0] << 8 | d[aa + )raw_html",R"raw_html(2 | 0] << 16 | d[aa + 3 | 0] << 24 | 0;
-                                    aa = P;
-                                    av = d[aa] | d[aa + 1 | 0] << 8 | d[aa + 2 | 0] << 16 | d[aa + 3 | 0] << 24 | 0;
-                                    if ((au | 0) == (av)raw_html",R"raw_html( | 0)) {
-                                        V = at;
-                                        P = P + 4 | 0
-                                    } else {
-                                        S = 22;
-                                        break
-      )raw_html",R"raw_html(                              }
-                                }
-                                do {
-                                    if ((S | 0) == 22) {
-                                        S = 0;
-                                        aw = P + )raw_html",R"raw_html(((aT(av ^ au | 0) | 0) >>> 3) | 0
-                                    } else if ((S | 0) == 23) {
-                                        S = 0;
-                                        do {
-                                            if (P >>> 0 < s >>> 0))raw_html",R"raw_html( {
-                                                A = at;
-                                                C = P;
-                                                if ((d[A] | d[A + 1 | 0] << 8) << 16 >> 16 << 16 >> 16 != (d[C] | d[C + 1 | 0] << 8) << 16 >> )raw_html",R"raw_html(16 << 16 >> 16) {
-                                                    ax = at;
-                                                    ay = P;
-                                                    break
-                                                }
-         )raw_html",R"raw_html(                                       ax = V + 6 | 0;
-                                                ay = P + 2 | 0
-                                            } else {
-                                                ax = at;
-                            )raw_html",R"raw_html(                    ay = P
-                                            }
-                                        } while (0);
-                                        if (ay >>> 0 >= o >>> 0) {
-                                            aw = ay;
-          )raw_html",R"raw_html(                                  break
-                                        }
-                                        aw = (a[ax] | 0) == (a[ay] | 0) ? ay + 1 | 0 : ay
-                                    }
-                                } while (0);
- )raw_html",R"raw_html(                               P = aw;
-                                V = ab;
-                                C = P - V | 0;
-                                A = a[ap] | 0;
-                                if ((C | 0) > 14) {
-                               )raw_html",R"raw_html(     a[ap] = A + 15 & 255;
-                                    B = C - 15 | 0;
-                                    if ((B | 0) > 509) {
-                                        G = P - 525 - V | 0;
-                                        V = (G >>> 0) / 510)raw_html",R"raw_html( | 0;
-                                        H = G + (V * -510 | 0) | 0;
-                                        G = V << 1;
-                                        V = ae;
-                                        F = B;
-                                   )raw_html",R"raw_html(     while (1) {
-                                            a[V] = -1;
-                                            a[V + 1 | 0] = -1;
-                                            Y = F - 510 | 0;
-                                            if ((Y | 0) > 50)raw_html",R"raw_html(9) {
-                                                V = V + 2 | 0;
-                                                F = Y
-                                            } else {
-                                                break
-                           )raw_html",R"raw_html(                 }
-                                        }
-                                        az = ar + (G + 4) | 0;
-                                        aA = H
-                                    } else {
-                                        )raw_html",R"raw_html(az = ae;
-                                        aA = B
-                                    }
-                                    if ((aA | 0) > 254) {
-                                        a[az] = -1;
-                                        aB = aA + 1 )raw_html",R"raw_html(& 255;
-                                        aC = az + 1 | 0
-                                    } else {
-                                        aB = aA & 255;
-                                        aC = az
-                                    }
-       )raw_html",R"raw_html(                             a[aC] = aB;
-                                    aD = aC + 1 | 0
-                                } else {
-                                    a[ap] = (A & 255) + C & 255;
-                                    aD = ae
-             )raw_html",R"raw_html(                   }
-                                if (aw >>> 0 > n >>> 0) {
-                                    ai = aD;
-                                    aj = aw;
-                                    break L72
-                                }
-       )raw_html",R"raw_html(                         F = aw - 2 | 0;
-                                V = F;
-                                b[Q + (($(d[V] | d[V + 1 | 0] << 8 | d[V + 2 | 0] << 16 | d[V + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 19 << 1) >> 1] = F - p & 65535;
-        )raw_html",R"raw_html(                        F = aw;
-                                V = Q + (($(d[F] | d[F + 1 | 0] << 8 | d[F + 2 | 0] << 16 | d[F + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 19 << 1) | 0;
-                                ab = e[V >> 1] | 0;
-                    )raw_html",R"raw_html(            Y = f + ab | 0;
-                                b[V >> 1] = P - p & 65535;
-                                if ((f + (ab + 65535) | 0) >>> 0 < aw >>> 0) {
-                                    break
-                                }
-              )raw_html",R"raw_html(                  ab = Y;
-                                if ((d[ab] | d[ab + 1 | 0] << 8 | d[ab + 2 | 0] << 16 | d[ab + 3 | 0] << 24 | 0) != (d[F] | d[F + 1 | 0] << 8 | d[F + 2 | 0] << 16 | d[F + 3 | 0] << 24 | 0)) {
-                                    br)raw_html",R"raw_html(eak
-                                }
-                                a[aD] = 0;
-                                ap = aD;
-                                aq = Y;
-                                ar = aD + 1 | 0;
-                                as = aw
-     )raw_html",R"raw_html(                       }
-                            Y = aw + 2 | 0;
-                            if (Y >>> 0 > n >>> 0) {
-                                ai = aD;
-                                aj = aw;
-                                break
-              )raw_html",R"raw_html(              } else {
-                                t = aw;
-                                ag = aD;
-                                af = aw;
-                                O = Y
-                            }
-                        }
-                 )raw_html",R"raw_html(   }
-                } while (0);
-                aw = l;
-                l = aj;
-                aD = aw - l | 0;
-                if ((aD | 0) > 14) {
-                    a[ai] = -16;
-                    n = aD - 15 | 0;
-                    as = ai + 1 | )raw_html",R"raw_html(0;
-                    if ((n | 0) > 254) {
-                        ar = aw - 270 - l | 0;
-                        l = (ar >>> 0) / 255 | 0;
-                        aw = l + 2 | 0;
-                        aq = l + 1 | 0;
-                        aR(as | 0, )raw_html",R"raw_html(-1 | 0, aq | 0) | 0;
-                        aE = ar + (l * -255 | 0) & 255;
-                        aF = ai + aw | 0
-                    } else {
-                        aE = n & 255;
-                        aF = as
-                    }
-                 )raw_html",R"raw_html(   a[aF] = aE;
-                    aG = aF
-                } else {
-                    a[ai] = aD << 4 & 255;
-                    aG = ai
-                }
-                ai = aG + 1 | 0;
-                aS(ai | 0, aj | 0, aD) | 0;
-                q = aG)raw_html",R"raw_html( + (aD + 1) - g | 0;
-                i = j;
-                return q | 0
-            }
-
-            function aN(b, e, f, g) {
-                b = b | 0;
-                e = e | 0;
-                f = f | 0;
-                g = g | 0;
-                var h )raw_html",R"raw_html(= 0,
-                    i = 0,
-                    j = 0,
-                    k = 0,
-                    l = 0,
-                    m = 0,
-                    n = 0,
-                    o = 0,
-                    p = 0,
-                    q = 0,
-        )raw_html",R"raw_html(            r = 0,
-                    s = 0,
-                    t = 0,
-                    u = 0,
-                    w = 0,
-                    x = 0,
-                    y = 0,
-                    z = 0,
-                    A = 0,
-                    B)raw_html",R"raw_html( = 0,
-                    C = 0,
-                    D = 0,
-                    E = 0,
-                    F = 0,
-                    G = 0,
-                    H = 0,
-                    I = 0,
-                    J = 0,
-                    K = 0,
-       )raw_html",R"raw_html(             L = 0,
-                    M = 0,
-                    N = 0,
-                    O = 0,
-                    P = 0,
-                    Q = 0,
-                    R = 0,
-                    S = 0,
-                    T = 0;
-                h = )raw_html",R"raw_html(b + f | 0;
-                i = e + g | 0;
-                if ((g | 0) == 0) {
-                    if ((f | 0) != 1) {
-                        j = -1;
-                        return j | 0
-                    }
-                    j = ((a[b] | 0) != 0) << 31)raw_html",R"raw_html( >> 31;
-                    return j | 0
-                }
-                k = e + (g - 12) | 0;
-                l = b + (f - 8) | 0;
-                m = e + (g - 8) | 0;
-                n = e + (g - 5) | 0;
-                g = b + (f - 6) | 0;
-           )raw_html",R"raw_html(     f = b;
-                o = e;
-                L143: while (1) {
-                    p = f + 1 | 0;
-                    q = d[f] | 0;
-                    r = q >>> 4;
-                    do {
-                        if ((r | 0) == 15) {
-               )raw_html",R"raw_html(             if (p >>> 0 < h >>> 0) {
-                                s = 15;
-                                t = p
-                            } else {
-                                u = p;
-                                w = 15;
-                        )raw_html",R"raw_html(        break
-                            }
-                            while (1) {
-                                x = t + 1 | 0;
-                                y = a[t] | 0;
-                                z = (y & 255) + s | 0;
-                        )raw_html",R"raw_html(        if (x >>> 0 < h >>> 0 & y << 24 >> 24 == -1) {
-                                    s = z;
-                                    t = x
-                                } else {
-                                    u = x;
-                                )raw_html",R"raw_html(    w = z;
-                                    break
-                                }
-                            }
-                        } else {
-                            u = p;
-                            w = r
-                        }
-           )raw_html",R"raw_html(         } while (0);
-                    A = o + w | 0;
-                    B = u + w | 0;
-                    if (A >>> 0 > k >>> 0 | B >>> 0 > l >>> 0) {
-                        C = 106;
-                        break
-                    } else {
-       )raw_html",R"raw_html(                 D = u;
-                        E = o
-                    }
-                    while (1) {
-                        r = D;
-                        p = E;
-                        v = d[r] | d[r + 1 | 0] << 8 | d[r + 2 | 0] << 16 | d[r + 3 | )raw_html",R"raw_html(0] << 24 | 0;
-                        a[p] = v & 255;
-                        v = v >> 8;
-                        a[p + 1 | 0] = v & 255;
-                        v = v >> 8;
-                        a[p + 2 | 0] = v & 255;
-                        v = v >> 8)raw_html",R"raw_html(;
-                        a[p + 3 | 0] = v & 255;
-                        p = D + 4 | 0;
-                        r = E + 4 | 0;
-                        v = d[p] | d[p + 1 | 0] << 8 | d[p + 2 | 0] << 16 | d[p + 3 | 0] << 24 | 0;
-                        a[r])raw_html",R"raw_html( = v & 255;
-                        v = v >> 8;
-                        a[r + 1 | 0] = v & 255;
-                        v = v >> 8;
-                        a[r + 2 | 0] = v & 255;
-                        v = v >> 8;
-                        a[r + 3 | 0] = v)raw_html",R"raw_html( & 255;
-                        F = E + 8 | 0;
-                        if (F >>> 0 < A >>> 0) {
-                            D = D + 8 | 0;
-                            E = F
-                        } else {
-                            break
-                )raw_html",R"raw_html(        }
-                    }
-                    r = A;
-                    p = r - F | 0;
-                    z = D + (p + 8) | 0;
-                    x = w - ((d[z] | d[z + 1 | 0] << 8) << 16 >> 16 & 65535) | 0;
-                    z = o + x | 0;
-    )raw_html",R"raw_html(                y = D + (p + 10) | 0;
-                    if (z >>> 0 < e >>> 0) {
-                        G = y;
-                        break
-                    }
-                    p = q & 15;
-                    L154: do {
-                        if )raw_html",R"raw_html(((p | 0) == 15) {
-                            H = y;
-                            I = 15;
-                            while (1) {
-                                if (H >>> 0 >= g >>> 0) {
-                                    J = H;
-                          )raw_html",R"raw_html(          K = I;
-                                    break L154
-                                }
-                                L = H + 1 | 0;
-                                M = a[H] | 0;
-                                N = (M & 255) + I | 0;
-          )raw_html",R"raw_html(                      if (M << 24 >> 24 == -1) {
-                                    H = L;
-                                    I = N
-                                } else {
-                                    J = L;
-                                    K )raw_html",R"raw_html(= N;
-                                    break
-                                }
-                            }
-                        } else {
-                            J = y;
-                            K = p
-                        }
-                 )raw_html",R"raw_html(   } while (0);
-                    if ((r - z | 0) < 4) {
-                        a[A] = a[z] | 0;
-                        a[o + (w + 1) | 0] = a[o + (x + 1) | 0] | 0;
-                        a[o + (w + 2) | 0] = a[o + (x + 2) | 0] | 0;
-                  )raw_html",R"raw_html(      a[o + (w + 3) | 0] = a[o + (x + 3) | 0] | 0;
-                        p = o + (w + 4) | 0;
-                        y = x + 4 | 0;
-                        q = o + (y - (c[8 + (p - (o + y) << 2) >> 2] | 0)) | 0;
-                        y = q;
-          )raw_html",R"raw_html(              I = p;
-                        v = d[y] | d[y + 1 | 0] << 8 | d[y + 2 | 0] << 16 | d[y + 3 | 0] << 24 | 0;
-                        a[I] = v & 255;
-                        v = v >> 8;
-                        a[I + 1 | 0] = v & 255;
-           )raw_html",R"raw_html(             v = v >> 8;
-                        a[I + 2 | 0] = v & 255;
-                        v = v >> 8;
-                        a[I + 3 | 0] = v & 255;
-                        O = q;
-                        P = p
-                    } else {
-         )raw_html",R"raw_html(               p = z;
-                        q = A;
-                        v = d[p] | d[p + 1 | 0] << 8 | d[p + 2 | 0] << 16 | d[p + 3 | 0] << 24 | 0;
-                        a[q] = v & 255;
-                        v = v >> 8;
-                        a[q)raw_html",R"raw_html( + 1 | 0] = v & 255;
-                        v = v >> 8;
-                        a[q + 2 | 0] = v & 255;
-                        v = v >> 8;
-                        a[q + 3 | 0] = v & 255;
-                        O = o + (x + 4) | 0;
-                      )raw_html",R"raw_html(  P = o + (w + 4) | 0
-                    }
-                    q = P + K | 0;
-                    if (q >>> 0 <= m >>> 0) {
-                        p = O;
-                        I = P;
-                        while (1) {
-                            y = p)raw_html",R"raw_html(;
-                            H = I;
-                            v = d[y] | d[y + 1 | 0] << 8 | d[y + 2 | 0] << 16 | d[y + 3 | 0] << 24 | 0;
-                            a[H] = v & 255;
-                            v = v >> 8;
-                            a[H)raw_html",R"raw_html( + 1 | 0] = v & 255;
-                            v = v >> 8;
-                            a[H + 2 | 0] = v & 255;
-                            v = v >> 8;
-                            a[H + 3 | 0] = v & 255;
-                            H = p + 4 | 0;
-        )raw_html",R"raw_html(                    y = I + 4 | 0;
-                            v = d[H] | d[H + 1 | 0] << 8 | d[H + 2 | 0] << 16 | d[H + 3 | 0] << 24 | 0;
-                            a[y] = v & 255;
-                            v = v >> 8;
-                            a[y +)raw_html",R"raw_html( 1 | 0] = v & 255;
-                            v = v >> 8;
-                            a[y + 2 | 0] = v & 255;
-                            v = v >> 8;
-                            a[y + 3 | 0] = v & 255;
-                            y = I + 8 | 0;
-          )raw_html",R"raw_html(                  if (y >>> 0 < q >>> 0) {
-                                p = p + 8 | 0;
-                                I = y
-                            } else {
-                                f = J;
-                                o = q;
-             )raw_html",R"raw_html(                   continue L143
-                            }
-                        }
-                    }
-                    if (q >>> 0 > n >>> 0) {
-                        G = J;
-                        break
-                    } else {
-          )raw_html",R"raw_html(              Q = O;
-                        R = P
-                    }
-                    do {
-                        I = Q;
-                        p = R;
-                        v = d[I] | d[I + 1 | 0] << 8 | d[I + 2 | 0] << 16 | d[I + 3 | 0] << 24 |)raw_html",R"raw_html( 0;
-                        a[p] = v & 255;
-                        v = v >> 8;
-                        a[p + 1 | 0] = v & 255;
-                        v = v >> 8;
-                        a[p + 2 | 0] = v & 255;
-                        v = v >> 8;
-        )raw_html",R"raw_html(                a[p + 3 | 0] = v & 255;
-                        p = Q + 4 | 0;
-                        I = R + 4 | 0;
-                        v = d[p] | d[p + 1 | 0] << 8 | d[p + 2 | 0] << 16 | d[p + 3 | 0] << 24 | 0;
-                        a[I] = v & 255)raw_html",R"raw_html(;
-                        v = v >> 8;
-                        a[I + 1 | 0] = v & 255;
-                        v = v >> 8;
-                        a[I + 2 | 0] = v & 255;
-                        v = v >> 8;
-                        a[I + 3 | 0] = v & 255;
-  )raw_html",R"raw_html(                      R = R + 8 | 0;
-                        Q = Q + 8 | 0;
-                    } while (R >>> 0 < m >>> 0);
-                    if (R >>> 0 < q >>> 0) {
-                        S = R;
-                        T = Q
-                    } els)raw_html",R"raw_html(e {
-                        f = J;
-                        o = q;
-                        continue
-                    }
-                    while (1) {
-                        I = S + 1 | 0;
-                        a[S] = a[T] | 0;
-                       )raw_html",R"raw_html( if (I >>> 0 < q >>> 0) {
-                            S = I;
-                            T = T + 1 | 0
-                        } else {
-                            f = J;
-                            o = q;
-                            continue L143
-        )raw_html",R"raw_html(                }
-                    }
-                }
-                do {
-                    if ((C | 0) == 106) {
-                        if ((B | 0) != (h | 0) | A >>> 0 > i >>> 0) {
-                            G = u;
-                            br)raw_html",R"raw_html(eak
-                        }
-                        aS(o | 0, u | 0, w) | 0;
-                        j = A - e | 0;
-                        return j | 0
-                    }
-                } while (0);
-                j = b - 1 - G | 0;
-               )raw_html",R"raw_html( return j | 0
-            }
-
-            function aO(a, b, e) {
-                a = a | 0;
-                b = b | 0;
-                e = e | 0;
-                var f = 0,
-                    g = 0,
-                    h = 0,
-                    i = 0,
-   )raw_html",R"raw_html(                 j = 0,
-                    k = 0,
-                    l = 0,
-                    m = 0,
-                    n = 0,
-                    o = 0,
-                    p = 0,
-                    q = 0,
-                    r = 0,
-                )raw_html",R"raw_html(    s = 0,
-                    t = 0,
-                    u = 0,
-                    v = 0,
-                    w = 0,
-                    x = 0,
-                    y = 0,
-                    z = 0,
-                    A = 0,
-                    B = 0,
-  )raw_html",R"raw_html(                  C = 0,
-                    D = 0,
-                    E = 0,
-                    F = 0,
-                    G = 0,
-                    H = 0;
-                f = a + b | 0;
-                g = (b | 0) > 15;
-                if ((a & 3 | 0))raw_html",R"raw_html( == 0) {
-                    if (g) {
-                        h = a + (b - 16) | 0;
-                        i = a;
-                        j = e + 606290984 | 0;
-                        k = e - 2048144777 | 0;
-                        l = e;
-               )raw_html",R"raw_html(         m = e + 1640531535 | 0;
-                        do {
-                            n = i;
-                            o = ($(d[n] | d[n + 1 | 0] << 8 | d[n + 2 | 0] << 16 | d[n + 3 | 0] << 24 | 0, -2048144777) | 0) + j | 0;
-                         )raw_html",R"raw_html(   p = o << 13 | o >>> 19;
-                            j = $(p, -1640531535) | 0;
-                            o = i + 4 | 0;
-                            n = ($(d[o] | d[o + 1 | 0] << 8 | d[o + 2 | 0] << 16 | d[o + 3 | 0] << 24 | 0, -2048144777) | 0) + k | )raw_html",R"raw_html(0;
-                            q = n << 13 | n >>> 19;
-                            k = $(q, -1640531535) | 0;
-                            n = i + 8 | 0;
-                            o = ($(d[n] | d[n + 1 | 0] << 8 | d[n + 2 | 0] << 16 | d[n + 3 | 0] << 24 |)raw_html",R"raw_html( 0, -2048144777) | 0) + l | 0;
-                            r = o << 13 | o >>> 19;
-                            l = $(r, -1640531535) | 0;
-                            o = i + 12 | 0;
-                            n = ($(d[o] | d[o + 1 | 0] << 8 | d[o + 2 | 0])raw_html",R"raw_html( << 16 | d[o + 3 | 0] << 24 | 0, -2048144777) | 0) + m | 0;
-                            s = n << 13 | n >>> 19;
-                            m = $(s, -1640531535) | 0;
-                            i = i + 16 | 0;
-                        } while (i >>> 0 <= h)raw_html",R"raw_html( >>> 0);
-                        t = i;
-                        u = (k >>> 25 | ($(q, 465361024) | 0)) + (j >>> 31 | ($(p, 1013904226) | 0)) + (l >>> 20 | ($(r, 2006650880) | 0)) + (m >>> 14 | ($(s, -423362560) | 0)) | 0
-                    } else {
-      )raw_html",R"raw_html(                  t = a;
-                        u = e + 374761393 | 0
-                    }
-                    s = u + b | 0;
-                    u = a + (b - 4) | 0;
-                    if (t >>> 0 > u >>> 0) {
-                        v = s;
-           )raw_html",R"raw_html(             w = t
-                    } else {
-                        m = s;
-                        s = t;
-                        while (1) {
-                            t = s;
-                            r = ($(d[t] | d[t + 1 | 0] << 8 | d[t + 2 | 0] )raw_html",R"raw_html(<< 16 | d[t + 3 | 0] << 24 | 0, -1028477379) | 0) + m | 0;
-                            t = $(r << 17 | r >>> 15, 668265263) | 0;
-                            r = s + 4 | 0;
-                            if (r >>> 0 > u >>> 0) {
-                               )raw_html",R"raw_html( v = t;
-                                w = r;
-                                break
-                            } else {
-                                m = t;
-                                s = r
-                            }
-                        }
- )raw_html",R"raw_html(                   }
-                    if (w >>> 0 < f >>> 0) {
-                        s = v;
-                        m = w;
-                        while (1) {
-                            w = ($(d[m] | 0, 374761393) | 0) + s | 0;
-                      )raw_html",R"raw_html(      u = $(w << 11 | w >>> 21, -1640531535) | 0;
-                            w = m + 1 | 0;
-                            if (w >>> 0 < f >>> 0) {
-                                s = u;
-                                m = w
-                            } els)raw_html",R"raw_html(e {
-                                x = u;
-                                break
-                            }
-                        }
-                    } else {
-                        x = v
-                    }
-                    v = $(x >>> 15 ^ x)raw_html",R"raw_html(, -2048144777) | 0;
-                    x = $(v >>> 13 ^ v, -1028477379) | 0;
-                    y = x >>> 16 ^ x;
-                    return y | 0
-                } else {
-                    if (g) {
-                        g = a + (b - 16) | 0;
-       )raw_html",R"raw_html(                 x = e + 1640531535 | 0;
-                        v = e;
-                        m = e - 2048144777 | 0;
-                        s = e + 606290984 | 0;
-                        u = a;
-                        do {
-                            w)raw_html",R"raw_html( = ($(c[u >> 2] | 0, -2048144777) | 0) + s | 0;
-                            z = w << 13 | w >>> 19;
-                            s = $(z, -1640531535) | 0;
-                            w = ($(c[u + 4 >> 2] | 0, -2048144777) | 0) + m | 0;
-                    )raw_html",R"raw_html(        A = w << 13 | w >>> 19;
-                            m = $(A, -1640531535) | 0;
-                            w = ($(c[u + 8 >> 2] | 0, -2048144777) | 0) + v | 0;
-                            B = w << 13 | w >>> 19;
-                            v = $(B,)raw_html",R"raw_html( -1640531535) | 0;
-                            w = ($(c[u + 12 >> 2] | 0, -2048144777) | 0) + x | 0;
-                            C = w << 13 | w >>> 19;
-                            x = $(C, -1640531535) | 0;
-                            u = u + 16 | 0;
-    )raw_html",R"raw_html(                    } while (u >>> 0 <= g >>> 0);
-                        D = (m >>> 25 | ($(A, 465361024) | 0)) + (s >>> 31 | ($(z, 1013904226) | 0)) + (v >>> 20 | ($(B, 2006650880) | 0)) + (x >>> 14 | ($(C, -423362560) | 0)) | 0;
-                        )raw_html",R"raw_html(E = u
-                    } else {
-                        D = e + 374761393 | 0;
-                        E = a
-                    }
-                    e = D + b | 0;
-                    D = a + (b - 4) | 0;
-                    if (E >>> 0 > D >>> 0) {
- )raw_html",R"raw_html(                       F = E;
-                        G = e
-                    } else {
-                        b = E;
-                        E = e;
-                        while (1) {
-                            e = ($(c[b >> 2] | 0, -1028477379) | 0) +)raw_html",R"raw_html( E | 0;
-                            a = $(e << 17 | e >>> 15, 668265263) | 0;
-                            e = b + 4 | 0;
-                            if (e >>> 0 > D >>> 0) {
-                                F = e;
-                                G = a;
-    )raw_html",R"raw_html(                            break
-                            } else {
-                                b = e;
-                                E = a
-                            }
-                        }
-                    }
-                    if (F >>> )raw_html",R"raw_html(0 < f >>> 0) {
-                        E = F;
-                        F = G;
-                        while (1) {
-                            b = ($(d[E] | 0, 374761393) | 0) + F | 0;
-                            D = $(b << 11 | b >>> 21, -1640531535) | 0;
- )raw_html",R"raw_html(                           b = E + 1 | 0;
-                            if (b >>> 0 < f >>> 0) {
-                                E = b;
-                                F = D
-                            } else {
-                                H = D;
-        )raw_html",R"raw_html(                        break
-                            }
-                        }
-                    } else {
-                        H = G
-                    }
-                    G = $(H >>> 15 ^ H, -2048144777) | 0;
-                    H = $(G >>>)raw_html",R"raw_html( 13 ^ G, -1028477379) | 0;
-                    y = H >>> 16 ^ H;
-                    return y | 0
-                }
-                return 0
-            }
-
-            function aP(a) {
-                a = a | 0;
-                var b = 0,
-                 )raw_html",R"raw_html(   d = 0,
-                    e = 0,
-                    f = 0,
-                    g = 0,
-                    h = 0,
-                    i = 0,
-                    j = 0,
-                    k = 0,
-                    l = 0,
-                    m = 0,
-   )raw_html",R"raw_html(                 n = 0,
-                    o = 0,
-                    p = 0,
-                    q = 0,
-                    r = 0,
-                    s = 0,
-                    t = 0,
-                    u = 0,
-                    v = 0,
-                )raw_html",R"raw_html(    w = 0,
-                    x = 0,
-                    y = 0,
-                    z = 0,
-                    A = 0,
-                    B = 0,
-                    C = 0,
-                    D = 0,
-                    E = 0,
-                    F = 0,
-  )raw_html",R"raw_html(                  G = 0,
-                    H = 0,
-                    I = 0,
-                    J = 0,
-                    K = 0,
-                    L = 0,
-                    M = 0,
-                    N = 0,
-                    O = 0,
-               )raw_html",R"raw_html(     P = 0,
-                    Q = 0,
-                    R = 0,
-                    S = 0,
-                    T = 0,
-                    U = 0,
-                    V = 0,
-                    W = 0,
-                    X = 0,
-                    Y = 0,
- )raw_html",R"raw_html(                   Z = 0,
-                    _ = 0,
-                    $ = 0,
-                    aa = 0,
-                    ab = 0,
-                    ac = 0,
-                    ad = 0,
-                    ae = 0,
-                    af = 0,
-        )raw_html",R"raw_html(            ag = 0,
-                    ah = 0,
-                    ai = 0,
-                    al = 0,
-                    ap = 0,
-                    aq = 0,
-                    ar = 0,
-                    as = 0,
-                    at = 0,
-            )raw_html",R"raw_html(        au = 0,
-                    av = 0,
-                    aw = 0,
-                    ax = 0,
-                    ay = 0,
-                    az = 0,
-                    aA = 0,
-                    aB = 0,
-                    aC = 0,
-                )raw_html",R"raw_html(    aD = 0,
-                    aE = 0,
-                    aF = 0,
-                    aG = 0,
-                    aH = 0,
-                    aI = 0,
-                    aJ = 0,
-                    aK = 0,
-                    aL = 0;
-                do {)raw_html",R"raw_html(
-                    if (a >>> 0 < 245 >>> 0) {
-                        if (a >>> 0 < 11 >>> 0) {
-                            b = 16
-                        } else {
-                            b = a + 11 & -8
-                        }
-                    )raw_html",R"raw_html(    d = b >>> 3;
-                        e = c[16] | 0;
-                        f = e >>> (d >>> 0);
-                        if ((f & 3 | 0) != 0) {
-                            g = (f & 1 ^ 1) + d | 0;
-                            h = g << 1;
-              )raw_html",R"raw_html(              i = 104 + (h << 2) | 0;
-                            j = 104 + (h + 2 << 2) | 0;
-                            h = c[j >> 2] | 0;
-                            k = h + 8 | 0;
-                            l = c[k >> 2] | 0;
-                         )raw_html",R"raw_html(   do {
-                                if ((i | 0) == (l | 0)) {
-                                    c[16] = e & ~(1 << g)
-                                } else {
-                                    if (l >>> 0 < (c[20] | 0) >>> 0) {
-                    )raw_html",R"raw_html(                    an();
-                                        return 0
-                                    }
-                                    m = l + 12 | 0;
-                                    if ((c[m >> 2] | 0) == (h | 0)) {
-                     )raw_html",R"raw_html(                   c[m >> 2] = i;
-                                        c[j >> 2] = l;
-                                        break
-                                    } else {
-                                        an();
-                              )raw_html",R"raw_html(          return 0
-                                    }
-                                }
-                            } while (0);
-                            l = g << 3;
-                            c[h + 4 >> 2] = l | 3;
-                            j = h)raw_html",R"raw_html( + (l | 4) | 0;
-                            c[j >> 2] = c[j >> 2] | 1;
-                            n = k;
-                            return n | 0
-                        }
-                        if (b >>> 0 <= (c[18] | 0) >>> 0) {
-                       )raw_html",R"raw_html(     o = b;
-                            break
-                        }
-                        if ((f | 0) != 0) {
-                            j = 2 << d;
-                            l = f << d & (j | -j);
-                            j = (l & -l) - 1 | 0;)raw_html",R"raw_html(
-                            l = j >>> 12 & 16;
-                            i = j >>> (l >>> 0);
-                            j = i >>> 5 & 8;
-                            m = i >>> (j >>> 0);
-                            i = m >>> 2 & 4;
-                    )raw_html",R"raw_html(        p = m >>> (i >>> 0);
-                            m = p >>> 1 & 2;
-                            q = p >>> (m >>> 0);
-                            p = q >>> 1 & 1;
-                            r = (j | l | i | m | p) + (q >>> (p >>> 0)) | 0;
-           )raw_html",R"raw_html(                 p = r << 1;
-                            q = 104 + (p << 2) | 0;
-                            m = 104 + (p + 2 << 2) | 0;
-                            p = c[m >> 2] | 0;
-                            i = p + 8 | 0;
-                            l)raw_html",R"raw_html( = c[i >> 2] | 0;
-                            do {
-                                if ((q | 0) == (l | 0)) {
-                                    c[16] = e & ~(1 << r)
-                                } else {
-                                    if (l >>> 0 )raw_html",R"raw_html(< (c[20] | 0) >>> 0) {
-                                        an();
-                                        return 0
-                                    }
-                                    j = l + 12 | 0;
-                                    if ((c[j >> )raw_html",R"raw_html(2] | 0) == (p | 0)) {
-                                        c[j >> 2] = q;
-                                        c[m >> 2] = l;
-                                        break
-                                    } else {
-                                 )raw_html",R"raw_html(       an();
-                                        return 0
-                                    }
-                                }
-                            } while (0);
-                            l = r << 3;
-                            m = l - b | 0)raw_html",R"raw_html(;
-                            c[p + 4 >> 2] = b | 3;
-                            q = p;
-                            e = q + b | 0;
-                            c[q + (b | 4) >> 2] = m | 1;
-                            c[q + l >> 2] = m;
-                     )raw_html",R"raw_html(       l = c[18] | 0;
-                            if ((l | 0) != 0) {
-                                q = c[21] | 0;
-                                d = l >>> 3;
-                                l = d << 1;
-                                f = 104 + (l << 2))raw_html",R"raw_html( | 0;
-                                k = c[16] | 0;
-                                h = 1 << d;
-                                do {
-                                    if ((k & h | 0) == 0) {
-                                        c[16] = k | h;
-       )raw_html",R"raw_html(                                 s = f;
-                                        t = 104 + (l + 2 << 2) | 0
-                                    } else {
-                                        d = 104 + (l + 2 << 2) | 0;
-                                    )raw_html",R"raw_html(    g = c[d >> 2] | 0;
-                                        if (g >>> 0 >= (c[20] | 0) >>> 0) {
-                                            s = g;
-                                            t = d;
-                                            break
-     )raw_html",R"raw_html(                                   }
-                                        an();
-                                        return 0
-                                    }
-                                } while (0);
-                                c[t >> 2])raw_html",R"raw_html( = q;
-                                c[s + 12 >> 2] = q;
-                                c[q + 8 >> 2] = s;
-                                c[q + 12 >> 2] = f
-                            }
-                            c[18] = m;
-                           )raw_html",R"raw_html( c[21] = e;
-                            n = i;
-                            return n | 0
-                        }
-                        l = c[17] | 0;
-                        if ((l | 0) == 0) {
-                            o = b;
-                        )raw_html",R"raw_html(    break
-                        }
-                        h = (l & -l) - 1 | 0;
-                        l = h >>> 12 & 16;
-                        k = h >>> (l >>> 0);
-                        h = k >>> 5 & 8;
-                        p = k >>> (h >>> 0);
-)raw_html",R"raw_html(                        k = p >>> 2 & 4;
-                        r = p >>> (k >>> 0);
-                        p = r >>> 1 & 2;
-                        d = r >>> (p >>> 0);
-                        r = d >>> 1 & 1;
-                        g = c[368 + ((h | l)raw_html",R"raw_html( | k | p | r) + (d >>> (r >>> 0)) << 2) >> 2] | 0;
-                        r = g;
-                        d = g;
-                        p = (c[g + 4 >> 2] & -8) - b | 0;
-                        while (1) {
-                            g = c[r + 16 >> 2] | )raw_html",R"raw_html(0;
-                            if ((g | 0) == 0) {
-                                k = c[r + 20 >> 2] | 0;
-                                if ((k | 0) == 0) {
-                                    break
-                                } else {
-              )raw_html",R"raw_html(                      u = k
-                                }
-                            } else {
-                                u = g
-                            }
-                            g = (c[u + 4 >> 2] & -8) - b | 0;
-                           )raw_html",R"raw_html( k = g >>> 0 < p >>> 0;
-                            r = u;
-                            d = k ? u : d;
-                            p = k ? g : p
-                        }
-                        r = d;
-                        i = c[20] | 0;
-                )raw_html",R"raw_html(        if (r >>> 0 < i >>> 0) {
-                            an();
-                            return 0
-                        }
-                        e = r + b | 0;
-                        m = e;
-                        if (r >>> 0 >= e >>> 0) {
-      )raw_html",R"raw_html(                      an();
-                            return 0
-                        }
-                        e = c[d + 24 >> 2] | 0;
-                        f = c[d + 12 >> 2] | 0;
-                        do {
-                            if ((f | 0) )raw_html",R"raw_html(== (d | 0)) {
-                                q = d + 20 | 0;
-                                g = c[q >> 2] | 0;
-                                if ((g | 0) == 0) {
-                                    k = d + 16 | 0;
-                                    l =)raw_html",R"raw_html( c[k >> 2] | 0;
-                                    if ((l | 0) == 0) {
-                                        v = 0;
-                                        break
-                                    } else {
-                                        w = l;)raw_html",R"raw_html(
-                                        x = k
-                                    }
-                                } else {
-                                    w = g;
-                                    x = q
-                                }
-           )raw_html",R"raw_html(                     while (1) {
-                                    q = w + 20 | 0;
-                                    g = c[q >> 2] | 0;
-                                    if ((g | 0) != 0) {
-                                        w = g;
-             )raw_html",R"raw_html(                           x = q;
-                                        continue
-                                    }
-                                    q = w + 16 | 0;
-                                    g = c[q >> 2] | 0;
-                            )raw_html",R"raw_html(        if ((g | 0) == 0) {
-                                        break
-                                    } else {
-                                        w = g;
-                                        x = q
-                                    }
-      )raw_html",R"raw_html(                          }
-                                if (x >>> 0 < i >>> 0) {
-                                    an();
-                                    return 0
-                                } else {
-                                    c[x >> )raw_html",R"raw_html(2] = 0;
-                                    v = w;
-                                    break
-                                }
-                            } else {
-                                q = c[d + 8 >> 2] | 0;
-                                if (q)raw_html",R"raw_html( >>> 0 < i >>> 0) {
-                                    an();
-                                    return 0
-                                }
-                                g = q + 12 | 0;
-                                if ((c[g >> 2] | 0) != (d | 0)) {
- )raw_html",R"raw_html(                                   an();
-                                    return 0
-                                }
-                                k = f + 8 | 0;
-                                if ((c[k >> 2] | 0) == (d | 0)) {
-                       )raw_html",R"raw_html(             c[g >> 2] = f;
-                                    c[k >> 2] = q;
-                                    v = f;
-                                    break
-                                } else {
-                                    an();
-         )raw_html",R"raw_html(                           return 0
-                                }
-                            }
-                        } while (0);
-                        L292: do {
-                            if ((e | 0) != 0) {
-                                f = )raw_html",R"raw_html(d + 28 | 0;
-                                i = 368 + (c[f >> 2] << 2) | 0;
-                                do {
-                                    if ((d | 0) == (c[i >> 2] | 0)) {
-                                        c[i >> 2] = v;
-                  )raw_html",R"raw_html(                      if ((v | 0) != 0) {
-                                            break
-                                        }
-                                        c[17] = c[17] & ~(1 << c[f >> 2]);
-                                        break L)raw_html",R"raw_html(292
-                                    } else {
-                                        if (e >>> 0 < (c[20] | 0) >>> 0) {
-                                            an();
-                                            return 0
-                             )raw_html",R"raw_html(           }
-                                        q = e + 16 | 0;
-                                        if ((c[q >> 2] | 0) == (d | 0)) {
-                                            c[q >> 2] = v
-                                        } else {
-      )raw_html",R"raw_html(                                      c[e + 20 >> 2] = v
-                                        }
-                                        if ((v | 0) == 0) {
-                                            break L292
-                                        }
-)raw_html",R"raw_html(                                    }
-                                } while (0);
-                                if (v >>> 0 < (c[20] | 0) >>> 0) {
-                                    an();
-                                    return 0
-                   )raw_html",R"raw_html(             }
-                                c[v + 24 >> 2] = e;
-                                f = c[d + 16 >> 2] | 0;
-                                do {
-                                    if ((f | 0) != 0) {
-                                        )raw_html",R"raw_html(if (f >>> 0 < (c[20] | 0) >>> 0) {
-                                            an();
-                                            return 0
-                                        } else {
-                                            c[v + 16 >> 2] = f;
-     )raw_html",R"raw_html(                                       c[f + 24 >> 2] = v;
-                                            break
-                                        }
-                                    }
-                                } while (0);
-                      )raw_html",R"raw_html(          f = c[d + 20 >> 2] | 0;
-                                if ((f | 0) == 0) {
-                                    break
-                                }
-                                if (f >>> 0 < (c[20] | 0) >>> 0) {
-                           )raw_html",R"raw_html(         an();
-                                    return 0
-                                } else {
-                                    c[v + 20 >> 2] = f;
-                                    c[f + 24 >> 2] = v;
-                                    break
- )raw_html",R"raw_html(                               }
-                            }
-                        } while (0);
-                        if (p >>> 0 < 16 >>> 0) {
-                            e = p + b | 0;
-                            c[d + 4 >> 2] = e | 3;
-            )raw_html",R"raw_html(                f = r + (e + 4) | 0;
-                            c[f >> 2] = c[f >> 2] | 1
-                        } else {
-                            c[d + 4 >> 2] = b | 3;
-                            c[r + (b | 4) >> 2] = p | 1;
-                        )raw_html",R"raw_html(    c[r + (p + b) >> 2] = p;
-                            f = c[18] | 0;
-                            if ((f | 0) != 0) {
-                                e = c[21] | 0;
-                                i = f >>> 3;
-                                f = i << 1;
-)raw_html",R"raw_html(                                q = 104 + (f << 2) | 0;
-                                k = c[16] | 0;
-                                g = 1 << i;
-                                do {
-                                    if ((k & g | 0) == 0) {
-            )raw_html",R"raw_html(                            c[16] = k | g;
-                                        y = q;
-                                        z = 104 + (f + 2 << 2) | 0
-                                    } else {
-                                        i = 104 + (f +)raw_html",R"raw_html( 2 << 2) | 0;
-                                        l = c[i >> 2] | 0;
-                                        if (l >>> 0 >= (c[20] | 0) >>> 0) {
-                                            y = l;
-                                            z = i;
-     )raw_html",R"raw_html(                                       break
-                                        }
-                                        an();
-                                        return 0
-                                    }
-                                } wh)raw_html",R"raw_html(ile (0);
-                                c[z >> 2] = e;
-                                c[y + 12 >> 2] = e;
-                                c[e + 8 >> 2] = y;
-                                c[e + 12 >> 2] = q
-                            }
-                )raw_html",R"raw_html(            c[18] = p;
-                            c[21] = m
-                        }
-                        f = d + 8 | 0;
-                        if ((f | 0) == 0) {
-                            o = b;
-                            break
-                 )raw_html",R"raw_html(       } else {
-                            n = f
-                        }
-                        return n | 0
-                    } else {
-                        if (a >>> 0 > 4294967231 >>> 0) {
-                            o = -1;
-                    )raw_html",R"raw_html(        break
-                        }
-                        f = a + 11 | 0;
-                        g = f & -8;
-                        k = c[17] | 0;
-                        if ((k | 0) == 0) {
-                            o = g;
-                      )raw_html",R"raw_html(      break
-                        }
-                        r = -g | 0;
-                        i = f >>> 8;
-                        do {
-                            if ((i | 0) == 0) {
-                                A = 0
-                            } )raw_html",R"raw_html(else {
-                                if (g >>> 0 > 16777215 >>> 0) {
-                                    A = 31;
-                                    break
-                                }
-                                f = (i + 1048320 | 0) >>> 16 & 8;)raw_html",R"raw_html(
-                                l = i << f;
-                                h = (l + 520192 | 0) >>> 16 & 4;
-                                j = l << h;
-                                l = (j + 245760 | 0) >>> 16 & 2;
-                                B = 1)raw_html",R"raw_html(4 - (h | f | l) + (j << l >>> 15) | 0;
-                                A = g >>> ((B + 7 | 0) >>> 0) & 1 | B << 1
-                            }
-                        } while (0);
-                        i = c[368 + (A << 2) >> 2] | 0;
-                   )raw_html",R"raw_html(     L340: do {
-                            if ((i | 0) == 0) {
-                                C = 0;
-                                D = r;
-                                E = 0
-                            } else {
-                                if ((A )raw_html",R"raw_html(| 0) == 31) {
-                                    F = 0
-                                } else {
-                                    F = 25 - (A >>> 1) | 0
-                                }
-                                d = 0;
-                           )raw_html",R"raw_html(     m = r;
-                                p = i;
-                                q = g << F;
-                                e = 0;
-                                while (1) {
-                                    B = c[p + 4 >> 2] & -8;
-                  )raw_html",R"raw_html(                  l = B - g | 0;
-                                    if (l >>> 0 < m >>> 0) {
-                                        if ((B | 0) == (g | 0)) {
-                                            C = p;
-                                            D)raw_html",R"raw_html( = l;
-                                            E = p;
-                                            break L340
-                                        } else {
-                                            G = p;
-                                            )raw_html",R"raw_html(H = l
-                                        }
-                                    } else {
-                                        G = d;
-                                        H = m
-                                    }
-                                )raw_html",R"raw_html(    l = c[p + 20 >> 2] | 0;
-                                    B = c[p + 16 + (q >>> 31 << 2) >> 2] | 0;
-                                    j = (l | 0) == 0 | (l | 0) == (B | 0) ? e : l;
-                                    if ((B | 0) == 0) {
-           )raw_html",R"raw_html(                             C = G;
-                                        D = H;
-                                        E = j;
-                                        break
-                                    } else {
-                                   )raw_html",R"raw_html(     d = G;
-                                        m = H;
-                                        p = B;
-                                        q = q << 1;
-                                        e = j
-                                    }
-              )raw_html",R"raw_html(                  }
-                            }
-                        } while (0);
-                        if ((E | 0) == 0 & (C | 0) == 0) {
-                            i = 2 << A;
-                            r = k & (i | -i);
-                        )raw_html",R"raw_html(    if ((r | 0) == 0) {
-                                o = g;
-                                break
-                            }
-                            i = (r & -r) - 1 | 0;
-                            r = i >>> 12 & 16;
-                            )raw_html",R"raw_html(e = i >>> (r >>> 0);
-                            i = e >>> 5 & 8;
-                            q = e >>> (i >>> 0);
-                            e = q >>> 2 & 4;
-                            p = q >>> (e >>> 0);
-                            q = p >>> 1 & 2;
-  )raw_html",R"raw_html(                          m = p >>> (q >>> 0);
-                            p = m >>> 1 & 1;
-                            I = c[368 + ((i | r | e | q | p) + (m >>> (p >>> 0)) << 2) >> 2] | 0
-                        } else {
-                            I = E
-)raw_html",R"raw_html(                        }
-                        if ((I | 0) == 0) {
-                            J = D;
-                            K = C
-                        } else {
-                            p = I;
-                            m = D;
-              )raw_html",R"raw_html(              q = C;
-                            while (1) {
-                                e = (c[p + 4 >> 2] & -8) - g | 0;
-                                r = e >>> 0 < m >>> 0;
-                                i = r ? e : m;
-                           )raw_html",R"raw_html(     e = r ? p : q;
-                                r = c[p + 16 >> 2] | 0;
-                                if ((r | 0) != 0) {
-                                    p = r;
-                                    m = i;
-                                    q = e;)raw_html",R"raw_html(
-                                    continue
-                                }
-                                r = c[p + 20 >> 2] | 0;
-                                if ((r | 0) == 0) {
-                                    J = i;
-                         )raw_html",R"raw_html(           K = e;
-                                    break
-                                } else {
-                                    p = r;
-                                    m = i;
-                                    q = e
-                           )raw_html",R"raw_html(     }
-                            }
-                        }
-                        if ((K | 0) == 0) {
-                            o = g;
-                            break
-                        }
-                        if (J >>> 0 >= ((c[18] | 0) - )raw_html",R"raw_html(g | 0) >>> 0) {
-                            o = g;
-                            break
-                        }
-                        q = K;
-                        m = c[20] | 0;
-                        if (q >>> 0 < m >>> 0) {
-                          )raw_html",R"raw_html(  an();
-                            return 0
-                        }
-                        p = q + g | 0;
-                        k = p;
-                        if (q >>> 0 >= p >>> 0) {
-                            an();
-                            ret)raw_html",R"raw_html(urn 0
-                        }
-                        e = c[K + 24 >> 2] | 0;
-                        i = c[K + 12 >> 2] | 0;
-                        do {
-                            if ((i | 0) == (K | 0)) {
-                                r = K + 20 | )raw_html",R"raw_html(0;
-                                d = c[r >> 2] | 0;
-                                if ((d | 0) == 0) {
-                                    j = K + 16 | 0;
-                                    B = c[j >> 2] | 0;
-                                    if ((B )raw_html",R"raw_html(| 0) == 0) {
-                                        L = 0;
-                                        break
-                                    } else {
-                                        M = B;
-                                        N = j
-            )raw_html",R"raw_html(                        }
-                                } else {
-                                    M = d;
-                                    N = r
-                                }
-                                while (1) {
-                          )raw_html",R"raw_html(          r = M + 20 | 0;
-                                    d = c[r >> 2] | 0;
-                                    if ((d | 0) != 0) {
-                                        M = d;
-                                        N = r;
-                         )raw_html",R"raw_html(               continue
-                                    }
-                                    r = M + 16 | 0;
-                                    d = c[r >> 2] | 0;
-                                    if ((d | 0) == 0) {
-                               )raw_html",R"raw_html(         break
-                                    } else {
-                                        M = d;
-                                        N = r
-                                    }
-                                }
-                               )raw_html",R"raw_html( if (N >>> 0 < m >>> 0) {
-                                    an();
-                                    return 0
-                                } else {
-                                    c[N >> 2] = 0;
-                                    L = M;
-        )raw_html",R"raw_html(                            break
-                                }
-                            } else {
-                                r = c[K + 8 >> 2] | 0;
-                                if (r >>> 0 < m >>> 0) {
-                                    an()raw_html",R"raw_html();
-                                    return 0
-                                }
-                                d = r + 12 | 0;
-                                if ((c[d >> 2] | 0) != (K | 0)) {
-                                    an();
-                  )raw_html",R"raw_html(                  return 0
-                                }
-                                j = i + 8 | 0;
-                                if ((c[j >> 2] | 0) == (K | 0)) {
-                                    c[d >> 2] = i;
-                               )raw_html",R"raw_html(     c[j >> 2] = r;
-                                    L = i;
-                                    break
-                                } else {
-                                    an();
-                                    return 0
-                       )raw_html",R"raw_html(         }
-                            }
-                        } while (0);
-                        L390: do {
-                            if ((e | 0) != 0) {
-                                i = K + 28 | 0;
-                                m = 368 + (c[i )raw_html",R"raw_html(>> 2] << 2) | 0;
-                                do {
-                                    if ((K | 0) == (c[m >> 2] | 0)) {
-                                        c[m >> 2] = L;
-                                        if ((L | 0) != 0) {
-                 )raw_html",R"raw_html(                           break
-                                        }
-                                        c[17] = c[17] & ~(1 << c[i >> 2]);
-                                        break L390
-                                    } else {
-          )raw_html",R"raw_html(                              if (e >>> 0 < (c[20] | 0) >>> 0) {
-                                            an();
-                                            return 0
-                                        }
-                                        r = e )raw_html",R"raw_html(+ 16 | 0;
-                                        if ((c[r >> 2] | 0) == (K | 0)) {
-                                            c[r >> 2] = L
-                                        } else {
-                                            c[e + 20 >> 2] = L
-  )raw_html",R"raw_html(                                      }
-                                        if ((L | 0) == 0) {
-                                            break L390
-                                        }
-                                    }
-                     )raw_html",R"raw_html(           } while (0);
-                                if (L >>> 0 < (c[20] | 0) >>> 0) {
-                                    an();
-                                    return 0
-                                }
-                                c[L + 24 >> )raw_html",R"raw_html(2] = e;
-                                i = c[K + 16 >> 2] | 0;
-                                do {
-                                    if ((i | 0) != 0) {
-                                        if (i >>> 0 < (c[20] | 0) >>> 0) {
-                        )raw_html",R"raw_html(                    an();
-                                            return 0
-                                        } else {
-                                            c[L + 16 >> 2] = i;
-                                            c[i + 24 >> 2] = L;
-)raw_html",R"raw_html(                                            break
-                                        }
-                                    }
-                                } while (0);
-                                i = c[K + 20 >> 2] | 0;
-                         )raw_html",R"raw_html(       if ((i | 0) == 0) {
-                                    break
-                                }
-                                if (i >>> 0 < (c[20] | 0) >>> 0) {
-                                    an();
-                                    return 0)raw_html",R"raw_html(
-                                } else {
-                                    c[L + 20 >> 2] = i;
-                                    c[i + 24 >> 2] = L;
-                                    break
-                                }
-                          )raw_html",R"raw_html(  }
-                        } while (0);
-                        do {
-                            if (J >>> 0 < 16 >>> 0) {
-                                e = J + g | 0;
-                                c[K + 4 >> 2] = e | 3;
-                              )raw_html",R"raw_html(  i = q + (e + 4) | 0;
-                                c[i >> 2] = c[i >> 2] | 1
-                            } else {
-                                c[K + 4 >> 2] = g | 3;
-                                c[q + (g | 4) >> 2] = J | 1;
-                      )raw_html",R"raw_html(          c[q + (J + g) >> 2] = J;
-                                i = J >>> 3;
-                                if (J >>> 0 < 256 >>> 0) {
-                                    e = i << 1;
-                                    m = 104 + (e << 2) | 0;
-         )raw_html",R"raw_html(                           r = c[16] | 0;
-                                    j = 1 << i;
-                                    do {
-                                        if ((r & j | 0) == 0) {
-                                            c[16] = r | j;
-  )raw_html",R"raw_html(                                          O = m;
-                                            P = 104 + (e + 2 << 2) | 0
-                                        } else {
-                                            i = 104 + (e + 2 << 2) | 0;
-               )raw_html",R"raw_html(                             d = c[i >> 2] | 0;
-                                            if (d >>> 0 >= (c[20] | 0) >>> 0) {
-                                                O = d;
-                                                P = i;
-                  )raw_html",R"raw_html(                              break
-                                            }
-                                            an();
-                                            return 0
-                                        }
-                             )raw_html",R"raw_html(       } while (0);
-                                    c[P >> 2] = k;
-                                    c[O + 12 >> 2] = k;
-                                    c[q + (g + 8) >> 2] = O;
-                                    c[q + (g + 12) >> 2] = m;
-      )raw_html",R"raw_html(                              break
-                                }
-                                e = p;
-                                j = J >>> 8;
-                                do {
-                                    if ((j | 0) == 0) {
-         )raw_html",R"raw_html(                               Q = 0
-                                    } else {
-                                        if (J >>> 0 > 16777215 >>> 0) {
-                                            Q = 31;
-                                            break
-)raw_html",R"raw_html(                                        }
-                                        r = (j + 1048320 | 0) >>> 16 & 8;
-                                        i = j << r;
-                                        d = (i + 520192 | 0) >>> 16 & 4;
-               )raw_html",R"raw_html(                         B = i << d;
-                                        i = (B + 245760 | 0) >>> 16 & 2;
-                                        l = 14 - (d | r | i) + (B << i >>> 15) | 0;
-                                        Q = J >>> ((l + 7 | 0))raw_html",R"raw_html( >>> 0) & 1 | l << 1
-                                    }
-                                } while (0);
-                                j = 368 + (Q << 2) | 0;
-                                c[q + (g + 28) >> 2] = Q;
-                                c[q + )raw_html",R"raw_html((g + 20) >> 2] = 0;
-                                c[q + (g + 16) >> 2] = 0;
-                                m = c[17] | 0;
-                                l = 1 << Q;
-                                if ((m & l | 0) == 0) {
-                               )raw_html",R"raw_html(     c[17] = m | l;
-                                    c[j >> 2] = e;
-                                    c[q + (g + 24) >> 2] = j;
-                                    c[q + (g + 12) >> 2] = e;
-                                    c[q + (g + 8) >> 2] = e;
-)raw_html",R"raw_html(                                    break
-                                }
-                                if ((Q | 0) == 31) {
-                                    R = 0
-                                } else {
-                                    R = 25 -)raw_html",R"raw_html( (Q >>> 1) | 0
-                                }
-                                l = J << R;
-                                m = c[j >> 2] | 0;
-                                while (1) {
-                                    if ((c[m + 4 >> 2] & -8 | 0) == )raw_html",R"raw_html((J | 0)) {
-                                        break
-                                    }
-                                    S = m + 16 + (l >>> 31 << 2) | 0;
-                                    j = c[S >> 2] | 0;
-                                    )raw_html",R"raw_html(if ((j | 0) == 0) {
-                                        T = 302;
-                                        break
-                                    } else {
-                                        l = l << 1;
-                                        m = )raw_html",R"raw_html(j
-                                    }
-                                }
-                                if ((T | 0) == 302) {
-                                    if (S >>> 0 < (c[20] | 0) >>> 0) {
-                                        an();
-           )raw_html",R"raw_html(                             return 0
-                                    } else {
-                                        c[S >> 2] = e;
-                                        c[q + (g + 24) >> 2] = m;
-                                        c[q + (g + 1)raw_html",R"raw_html(2) >> 2] = e;
-                                        c[q + (g + 8) >> 2] = e;
-                                        break
-                                    }
-                                }
-                                l = m + 8 | 0;
-            )raw_html",R"raw_html(                    j = c[l >> 2] | 0;
-                                i = c[20] | 0;
-                                if (m >>> 0 < i >>> 0) {
-                                    an();
-                                    return 0
-                          )raw_html",R"raw_html(      }
-                                if (j >>> 0 < i >>> 0) {
-                                    an();
-                                    return 0
-                                } else {
-                                    c[j + 12 >> 2] = e;
-       )raw_html",R"raw_html(                             c[l >> 2] = e;
-                                    c[q + (g + 8) >> 2] = j;
-                                    c[q + (g + 12) >> 2] = m;
-                                    c[q + (g + 24) >> 2] = 0;
-                           )raw_html",R"raw_html(         break
-                                }
-                            }
-                        } while (0);
-                        q = K + 8 | 0;
-                        if ((q | 0) == 0) {
-                            o = g;
-                      )raw_html",R"raw_html(      break
-                        } else {
-                            n = q
-                        }
-                        return n | 0
-                    }
-                } while (0);
-                K = c[18] | 0;
-                if (o >>> 0 <= K)raw_html",R"raw_html( >>> 0) {
-                    S = K - o | 0;
-                    J = c[21] | 0;
-                    if (S >>> 0 > 15 >>> 0) {
-                        R = J;
-                        c[21] = R + o;
-                        c[18] = S;
-                        c)raw_html",R"raw_html([R + (o + 4) >> 2] = S | 1;
-                        c[R + K >> 2] = S;
-                        c[J + 4 >> 2] = o | 3
-                    } else {
-                        c[18] = 0;
-                        c[21] = 0;
-                        c[J + 4 >> 2] = )raw_html",R"raw_html(K | 3;
-                        S = J + (K + 4) | 0;
-                        c[S >> 2] = c[S >> 2] | 1
-                    }
-                    n = J + 8 | 0;
-                    return n | 0
-                }
-                J = c[19] | 0;
-               )raw_html",R"raw_html( if (o >>> 0 < J >>> 0) {
-                    S = J - o | 0;
-                    c[19] = S;
-                    J = c[22] | 0;
-                    K = J;
-                    c[22] = K + o;
-                    c[K + (o + 4) >> 2] = S | 1;
-                  )raw_html",R"raw_html(  c[J + 4 >> 2] = o | 3;
-                    n = J + 8 | 0;
-                    return n | 0
-                }
-                do {
-                    if ((c[10] | 0) == 0) {
-                        J = aj(30) | 0;
-                        if ((J - 1 & J |)raw_html",R"raw_html( 0) == 0) {
-                            c[12] = J;
-                            c[11] = J;
-                            c[13] = -1;
-                            c[14] = -1;
-                            c[15] = 0;
-                            c[127] = 0;
-       )raw_html",R"raw_html(                     c[10] = (ao(0) | 0) & -16 ^ 1431655768;
-                            break
-                        } else {
-                            an();
-                            return 0
-                        }
-                    }
-         )raw_html",R"raw_html(       } while (0);
-                J = o + 48 | 0;
-                S = c[12] | 0;
-                K = o + 47 | 0;
-                R = S + K | 0;
-                Q = -S | 0;
-                S = R & Q;
-                if (S >>> 0 <= o >>> 0) {
-             )raw_html",R"raw_html(       n = 0;
-                    return n | 0
-                }
-                O = c[126] | 0;
-                do {
-                    if ((O | 0) != 0) {
-                        P = c[124] | 0;
-                        L = P + S | 0;
-                   )raw_html",R"raw_html(     if (L >>> 0 <= P >>> 0 | L >>> 0 > O >>> 0) {
-                            n = 0
-                        } else {
-                            break
-                        }
-                        return n | 0
-                    }
-                } w)raw_html",R"raw_html(hile (0);
-                L482: do {
-                    if ((c[127] & 4 | 0) == 0) {
-                        O = c[22] | 0;
-                        L484: do {
-                            if ((O | 0) == 0) {
-                                T = 332
-        )raw_html",R"raw_html(                    } else {
-                                L = O;
-                                P = 512;
-                                while (1) {
-                                    U = P | 0;
-                                    M = c[U >> 2] | 0;
- )raw_html",R"raw_html(                                   if (M >>> 0 <= L >>> 0) {
-                                        V = P + 4 | 0;
-                                        if ((M + (c[V >> 2] | 0) | 0) >>> 0 > L >>> 0) {
-                                            break
- )raw_html",R"raw_html(                                       }
-                                    }
-                                    M = c[P + 8 >> 2] | 0;
-                                    if ((M | 0) == 0) {
-                                        T = 332;
-             )raw_html",R"raw_html(                           break L484
-                                    } else {
-                                        P = M
-                                    }
-                                }
-                                if ((P | 0) == 0) {
-   )raw_html",R"raw_html(                                 T = 332;
-                                    break
-                                }
-                                L = R - (c[19] | 0) & Q;
-                                if (L >>> 0 >= 2147483647 >>> 0) {
-              )raw_html",R"raw_html(                      W = 0;
-                                    break
-                                }
-                                m = ak(L | 0) | 0;
-                                e = (m | 0) == ((c[U >> 2] | 0) + (c[V >> 2] | 0) | 0);
-            )raw_html",R"raw_html(                    X = e ? m : -1;
-                                Y = e ? L : 0;
-                                Z = m;
-                                _ = L;
-                                T = 341
-                            }
-                        })raw_html",R"raw_html( while (0);
-                        do {
-                            if ((T | 0) == 332) {
-                                O = ak(0) | 0;
-                                if ((O | 0) == -1) {
-                                    W = 0;
-                      )raw_html",R"raw_html(              break
-                                }
-                                g = O;
-                                L = c[11] | 0;
-                                m = L - 1 | 0;
-                                if ((m & g | 0) == 0) {
-             )raw_html",R"raw_html(                       $ = S
-                                } else {
-                                    $ = S - g + (m + g & -L) | 0
-                                }
-                                L = c[124] | 0;
-                                g = L +)raw_html",R"raw_html( $ | 0;
-                                if (!($ >>> 0 > o >>> 0 & $ >>> 0 < 2147483647 >>> 0)) {
-                                    W = 0;
-                                    break
-                                }
-                                m = c[12)raw_html",R"raw_html(6] | 0;
-                                if ((m | 0) != 0) {
-                                    if (g >>> 0 <= L >>> 0 | g >>> 0 > m >>> 0) {
-                                        W = 0;
-                                        break
-                     )raw_html",R"raw_html(               }
-                                }
-                                m = ak($ | 0) | 0;
-                                g = (m | 0) == (O | 0);
-                                X = g ? O : -1;
-                                Y = g ? $ : 0;
-   )raw_html",R"raw_html(                             Z = m;
-                                _ = $;
-                                T = 341
-                            }
-                        } while (0);
-                        L504: do {
-                            if ((T | 0))raw_html",R"raw_html( == 341) {
-                                m = -_ | 0;
-                                if ((X | 0) != -1) {
-                                    aa = Y;
-                                    ab = X;
-                                    T = 352;
-               )raw_html",R"raw_html(                     break L482
-                                }
-                                do {
-                                    if ((Z | 0) != -1 & _ >>> 0 < 2147483647 >>> 0 & _ >>> 0 < J >>> 0) {
-                                        g = c[1)raw_html",R"raw_html(2] | 0;
-                                        O = K - _ + g & -g;
-                                        if (O >>> 0 >= 2147483647 >>> 0) {
-                                            ac = _;
-                                            break
-           )raw_html",R"raw_html(                             }
-                                        if ((ak(O | 0) | 0) == -1) {
-                                            ak(m | 0) | 0;
-                                            W = Y;
-                                            br)raw_html",R"raw_html(eak L504
-                                        } else {
-                                            ac = O + _ | 0;
-                                            break
-                                        }
-                                    } else {
- )raw_html",R"raw_html(                                       ac = _
-                                    }
-                                } while (0);
-                                if ((Z | 0) == -1) {
-                                    W = Y
-                                )raw_html",R"raw_html(} else {
-                                    aa = ac;
-                                    ab = Z;
-                                    T = 352;
-                                    break L482
-                                }
-                            }
-  )raw_html",R"raw_html(                      } while (0);
-                        c[127] = c[127] | 4;
-                        ad = W;
-                        T = 349
-                    } else {
-                        ad = 0;
-                        T = 349
-                   )raw_html",R"raw_html( }
-                } while (0);
-                do {
-                    if ((T | 0) == 349) {
-                        if (S >>> 0 >= 2147483647 >>> 0) {
-                            break
-                        }
-                        W = ak(S | 0) | 0;)raw_html",R"raw_html(
-                        Z = ak(0) | 0;
-                        if (!((Z | 0) != -1 & (W | 0) != -1 & W >>> 0 < Z >>> 0)) {
-                            break
-                        }
-                        ac = Z - W | 0;
-                        Z = ac >)raw_html",R"raw_html(>> 0 > (o + 40 | 0) >>> 0;
-                        Y = Z ? W : -1;
-                        if ((Y | 0) != -1) {
-                            aa = Z ? ac : ad;
-                            ab = Y;
-                            T = 352
-                        }
-)raw_html",R"raw_html(                    }
-                } while (0);
-                do {
-                    if ((T | 0) == 352) {
-                        ad = (c[124] | 0) + aa | 0;
-                        c[124] = ad;
-                        if (ad >>> 0 > (c[125] | 0) >)raw_html",R"raw_html(>> 0) {
-                            c[125] = ad
-                        }
-                        ad = c[22] | 0;
-                        L524: do {
-                            if ((ad | 0) == 0) {
-                                S = c[20] | 0;
-           )raw_html",R"raw_html(                     if ((S | 0) == 0 | ab >>> 0 < S >>> 0) {
-                                    c[20] = ab
-                                }
-                                c[128] = ab;
-                                c[129] = aa;
-                       )raw_html",R"raw_html(         c[131] = 0;
-                                c[25] = c[10];
-                                c[24] = -1;
-                                S = 0;
-                                do {
-                                    Y = S << 1;
-                    )raw_html",R"raw_html(                ac = 104 + (Y << 2) | 0;
-                                    c[104 + (Y + 3 << 2) >> 2] = ac;
-                                    c[104 + (Y + 2 << 2) >> 2] = ac;
-                                    S = S + 1 | 0;
-                          )raw_html",R"raw_html(      } while (S >>> 0 < 32 >>> 0);
-                                S = ab + 8 | 0;
-                                if ((S & 7 | 0) == 0) {
-                                    ae = 0
-                                } else {
-                                )raw_html",R"raw_html(    ae = -S & 7
-                                }
-                                S = aa - 40 - ae | 0;
-                                c[22] = ab + ae;
-                                c[19] = S;
-                                c[ab + (ae + 4) >> 2] = S | )raw_html",R"raw_html(1;
-                                c[ab + (aa - 36) >> 2] = 40;
-                                c[23] = c[14]
-                            } else {
-                                S = 512;
-                                while (1) {
-                        )raw_html",R"raw_html(            af = c[S >> 2] | 0;
-                                    ag = S + 4 | 0;
-                                    ah = c[ag >> 2] | 0;
-                                    if ((ab | 0) == (af + ah | 0)) {
-                                        T = 36)raw_html",R"raw_html(4;
-                                        break
-                                    }
-                                    ac = c[S + 8 >> 2] | 0;
-                                    if ((ac | 0) == 0) {
-                                        break
-      )raw_html",R"raw_html(                              } else {
-                                        S = ac
-                                    }
-                                }
-                                do {
-                                    if ((T | 0) == 364) {
-   )raw_html",R"raw_html(                                     if ((c[S + 12 >> 2] & 8 | 0) != 0) {
-                                            break
-                                        }
-                                        ac = ad;
-                                        i)raw_html",R"raw_html(f (!(ac >>> 0 >= af >>> 0 & ac >>> 0 < ab >>> 0)) {
-                                            break
-                                        }
-                                        c[ag >> 2] = ah + aa;
-                                        ac = c[22])raw_html",R"raw_html( | 0;
-                                        Y = (c[19] | 0) + aa | 0;
-                                        Z = ac;
-                                        W = ac + 8 | 0;
-                                        if ((W & 7 | 0) == 0) {
-                )raw_html",R"raw_html(                            ai = 0
-                                        } else {
-                                            ai = -W & 7
-                                        }
-                                        W = Y - ai | 0;
-                  )raw_html",R"raw_html(                      c[22] = Z + ai;
-                                        c[19] = W;
-                                        c[Z + (ai + 4) >> 2] = W | 1;
-                                        c[Z + (Y + 4) >> 2] = 40;
-                               )raw_html",R"raw_html(         c[23] = c[14];
-                                        break L524
-                                    }
-                                } while (0);
-                                if (ab >>> 0 < (c[20] | 0) >>> 0) {
-                              )raw_html",R"raw_html(      c[20] = ab
-                                }
-                                S = ab + aa | 0;
-                                Y = 512;
-                                while (1) {
-                                    al = Y | 0;
-                       )raw_html",R"raw_html(             if ((c[al >> 2] | 0) == (S | 0)) {
-                                        T = 374;
-                                        break
-                                    }
-                                    Z = c[Y + 8 >> 2] | 0;
-                )raw_html",R"raw_html(                    if ((Z | 0) == 0) {
-                                        break
-                                    } else {
-                                        Y = Z
-                                    }
-                                }
-       )raw_html",R"raw_html(                         do {
-                                    if ((T | 0) == 374) {
-                                        if ((c[Y + 12 >> 2] & 8 | 0) != 0) {
-                                            break
-                                        })raw_html",R"raw_html(
-                                        c[al >> 2] = ab;
-                                        S = Y + 4 | 0;
-                                        c[S >> 2] = (c[S >> 2] | 0) + aa;
-                                        S = ab + 8 | 0;
-             )raw_html",R"raw_html(                           if ((S & 7 | 0) == 0) {
-                                            ap = 0
-                                        } else {
-                                            ap = -S & 7
-                                        }
-       )raw_html",R"raw_html(                                 S = ab + (aa + 8) | 0;
-                                        if ((S & 7 | 0) == 0) {
-                                            aq = 0
-                                        } else {
-                                    )raw_html",R"raw_html(        aq = -S & 7
-                                        }
-                                        S = ab + (aq + aa) | 0;
-                                        Z = S;
-                                        W = ap + o | 0;
-                           )raw_html",R"raw_html(             ac = ab + W | 0;
-                                        _ = ac;
-                                        K = S - (ab + ap) - o | 0;
-                                        c[ab + (ap + 4) >> 2] = o | 3;
-                                        )raw_html",R"raw_html(do {
-                                            if ((Z | 0) == (c[22] | 0)) {
-                                                J = (c[19] | 0) + K | 0;
-                                                c[19] = J;
-                                             )raw_html",R"raw_html(   c[22] = _;
-                                                c[ab + (W + 4) >> 2] = J | 1
-                                            } else {
-                                                if ((Z | 0) == (c[21] | 0)) {
-                                  )raw_html",R"raw_html(                  J = (c[18] | 0) + K | 0;
-                                                    c[18] = J;
-                                                    c[21] = _;
-                                                    c[ab + (W + 4) >> 2] = J | 1;
-     )raw_html",R"raw_html(                                               c[ab + (J + W) >> 2] = J;
-                                                    break
-                                                }
-                                                J = aa + 4 | 0;
-           )raw_html",R"raw_html(                                     X = c[ab + (J + aq) >> 2] | 0;
-                                                if ((X & 3 | 0) == 1) {
-                                                    $ = X & -8;
-                                                    )raw_html",R"raw_html(V = X >>> 3;
-                                                    L569: do {
-                                                        if (X >>> 0 < 256 >>> 0) {
-                                                            U = c[ab + ((aq | 8) + aa) >> 2] | 0;)raw_html",R"raw_html(
-                                                            Q = c[ab + (aa + 12 + aq) >> 2] | 0;
-                                                            R = 104 + (V << 1 << 2) | 0;
-                                                            do {
-    )raw_html",R"raw_html(                                                            if ((U | 0) != (R | 0)) {
-                                                                    if (U >>> 0 < (c[20] | 0) >>> 0) {
-                                                                   )raw_html",R"raw_html(     an();
-                                                                        return 0
-                                                                    }
-                                                                    if ((c[U + 12 >> 2] | 0) =)raw_html",R"raw_html(= (Z | 0)) {
-                                                                        break
-                                                                    }
-                                                                    an();
-                     )raw_html",R"raw_html(                                               return 0
-                                                                }
-                                                            } while (0);
-                                                            i)raw_html",R"raw_html(f ((Q | 0) == (U | 0)) {
-                                                                c[16] = c[16] & ~(1 << V);
-                                                                break
-                                                            }
-        )raw_html",R"raw_html(                                                    do {
-                                                                if ((Q | 0) == (R | 0)) {
-                                                                    ar = Q + 8 | 0
-                          )raw_html",R"raw_html(                                      } else {
-                                                                    if (Q >>> 0 < (c[20] | 0) >>> 0) {
-                                                                        an();
-                            )raw_html",R"raw_html(                                            return 0
-                                                                    }
-                                                                    m = Q + 8 | 0;
-                                                  )raw_html",R"raw_html(                  if ((c[m >> 2] | 0) == (Z | 0)) {
-                                                                        ar = m;
-                                                                        break
-                                              )raw_html",R"raw_html(                      }
-                                                                    an();
-                                                                    return 0
-                                                                }
-               )raw_html",R"raw_html(                                             } while (0);
-                                                            c[U + 12 >> 2] = Q;
-                                                            c[ar >> 2] = U
-                                           )raw_html",R"raw_html(             } else {
-                                                            R = S;
-                                                            m = c[ab + ((aq | 24) + aa) >> 2] | 0;
-                                                            P = c[ab)raw_html",R"raw_html( + (aa + 12 + aq) >> 2] | 0;
-                                                            do {
-                                                                if ((P | 0) == (R | 0)) {
-                                                                    O = )raw_html",R"raw_html(aq | 16;
-                                                                    g = ab + (J + O) | 0;
-                                                                    L = c[g >> 2] | 0;
-                                                                    if)raw_html",R"raw_html( ((L | 0) == 0) {
-                                                                        e = ab + (O + aa) | 0;
-                                                                        O = c[e >> 2] | 0;
-                                                    )raw_html",R"raw_html(                    if ((O | 0) == 0) {
-                                                                            as = 0;
-                                                                            break
-                                                  )raw_html",R"raw_html(                      } else {
-                                                                            at = O;
-                                                                            au = e
-                                                          )raw_html",R"raw_html(              }
-                                                                    } else {
-                                                                        at = L;
-                                                                        au = g
-    )raw_html",R"raw_html(                                                                }
-                                                                    while (1) {
-                                                                        g = at + 20 | 0;
-                     )raw_html",R"raw_html(                                                   L = c[g >> 2] | 0;
-                                                                        if ((L | 0) != 0) {
-                                                                            at = L;
-          )raw_html",R"raw_html(                                                                  au = g;
-                                                                            continue
-                                                                        }
-                       )raw_html",R"raw_html(                                                 g = at + 16 | 0;
-                                                                        L = c[g >> 2] | 0;
-                                                                        if ((L | 0) == 0) {
-       )raw_html",R"raw_html(                                                                     break
-                                                                        } else {
-                                                                            at = L;
-                )raw_html",R"raw_html(                                                            au = g
-                                                                        }
-                                                                    }
-                                             )raw_html",R"raw_html(                       if (au >>> 0 < (c[20] | 0) >>> 0) {
-                                                                        an();
-                                                                        return 0
-                                      )raw_html",R"raw_html(                              } else {
-                                                                        c[au >> 2] = 0;
-                                                                        as = at;
-                                                )raw_html",R"raw_html(                        break
-                                                                    }
-                                                                } else {
-                                                                    g = c[ab + ((aq)raw_html",R"raw_html( | 8) + aa) >> 2] | 0;
-                                                                    if (g >>> 0 < (c[20] | 0) >>> 0) {
-                                                                        an();
-                                                    )raw_html",R"raw_html(                    return 0
-                                                                    }
-                                                                    L = g + 12 | 0;
-                                                                    if (()raw_html",R"raw_html(c[L >> 2] | 0) != (R | 0)) {
-                                                                        an();
-                                                                        return 0
-                                                                    )raw_html",R"raw_html(}
-                                                                    e = P + 8 | 0;
-                                                                    if ((c[e >> 2] | 0) == (R | 0)) {
-                                                                     )raw_html",R"raw_html(   c[L >> 2] = P;
-                                                                        c[e >> 2] = g;
-                                                                        as = P;
-                                                                       )raw_html",R"raw_html( break
-                                                                    } else {
-                                                                        an();
-                                                                        return 0
-             )raw_html",R"raw_html(                                                       }
-                                                                }
-                                                            } while (0);
-                                                            )raw_html",R"raw_html(if ((m | 0) == 0) {
-                                                                break
-                                                            }
-                                                            P = ab + (aa + 28 + aq) | 0;
-               )raw_html",R"raw_html(                                             U = 368 + (c[P >> 2] << 2) | 0;
-                                                            do {
-                                                                if ((R | 0) == (c[U >> 2] | 0)) {
-                )raw_html",R"raw_html(                                                    c[U >> 2] = as;
-                                                                    if ((as | 0) != 0) {
-                                                                        break
-                     )raw_html",R"raw_html(                                               }
-                                                                    c[17] = c[17] & ~(1 << c[P >> 2]);
-                                                                    break L569
-                         )raw_html",R"raw_html(                                       } else {
-                                                                    if (m >>> 0 < (c[20] | 0) >>> 0) {
-                                                                        an();
-                           )raw_html",R"raw_html(                                             return 0
-                                                                    }
-                                                                    Q = m + 16 | 0;
-                                                )raw_html",R"raw_html(                    if ((c[Q >> 2] | 0) == (R | 0)) {
-                                                                        c[Q >> 2] = as
-                                                                    } else {
-                                      )raw_html",R"raw_html(                                  c[m + 20 >> 2] = as
-                                                                    }
-                                                                    if ((as | 0) == 0) {
-                                           )raw_html",R"raw_html(                             break L569
-                                                                    }
-                                                                }
-                                                            } while (0);
-       )raw_html",R"raw_html(                                                     if (as >>> 0 < (c[20] | 0) >>> 0) {
-                                                                an();
-                                                                return 0
-                        )raw_html",R"raw_html(                                    }
-                                                            c[as + 24 >> 2] = m;
-                                                            R = aq | 16;
-                                                            P = )raw_html",R"raw_html(c[ab + (R + aa) >> 2] | 0;
-                                                            do {
-                                                                if ((P | 0) != 0) {
-                                                                    if (P >>> 0 )raw_html",R"raw_html(< (c[20] | 0) >>> 0) {
-                                                                        an();
-                                                                        return 0
-                                                                    } else)raw_html",R"raw_html( {
-                                                                        c[as + 16 >> 2] = P;
-                                                                        c[P + 24 >> 2] = as;
-                                                                   )raw_html",R"raw_html(     break
-                                                                    }
-                                                                }
-                                                            } while (0);
-                                    )raw_html",R"raw_html(                        P = c[ab + (J + R) >> 2] | 0;
-                                                            if ((P | 0) == 0) {
-                                                                break
-                                                    )raw_html",R"raw_html(        }
-                                                            if (P >>> 0 < (c[20] | 0) >>> 0) {
-                                                                an();
-                                                                return 0
-        )raw_html",R"raw_html(                                                    } else {
-                                                                c[as + 20 >> 2] = P;
-                                                                c[P + 24 >> 2] = as;
-                         )raw_html",R"raw_html(                                       break
-                                                            }
-                                                        }
-                                                    } while (0);
-                          )raw_html",R"raw_html(                          av = ab + (($ | aq) + aa) | 0;
-                                                    aw = $ + K | 0
-                                                } else {
-                                                    av = Z;
-               )raw_html",R"raw_html(                                     aw = K
-                                                }
-                                                J = av + 4 | 0;
-                                                c[J >> 2] = c[J >> 2] & -2;
-                      )raw_html",R"raw_html(                          c[ab + (W + 4) >> 2] = aw | 1;
-                                                c[ab + (aw + W) >> 2] = aw;
-                                                J = aw >>> 3;
-                                                if (aw >>> 0 )raw_html",R"raw_html(< 256 >>> 0) {
-                                                    V = J << 1;
-                                                    X = 104 + (V << 2) | 0;
-                                                    P = c[16] | 0;
-                                  )raw_html",R"raw_html(                  m = 1 << J;
-                                                    do {
-                                                        if ((P & m | 0) == 0) {
-                                                            c[16] = P | m;
-              )raw_html",R"raw_html(                                              ax = X;
-                                                            ay = 104 + (V + 2 << 2) | 0
-                                                        } else {
-                                                 )raw_html",R"raw_html(           J = 104 + (V + 2 << 2) | 0;
-                                                            U = c[J >> 2] | 0;
-                                                            if (U >>> 0 >= (c[20] | 0) >>> 0) {
-                                          )raw_html",R"raw_html(                      ax = U;
-                                                                ay = J;
-                                                                break
-                                                            }
-                      )raw_html",R"raw_html(                                      an();
-                                                            return 0
-                                                        }
-                                                    } while (0);
-                    )raw_html",R"raw_html(                                c[ay >> 2] = _;
-                                                    c[ax + 12 >> 2] = _;
-                                                    c[ab + (W + 8) >> 2] = ax;
-                                                    c[ab)raw_html",R"raw_html( + (W + 12) >> 2] = X;
-                                                    break
-                                                }
-                                                V = ac;
-                                                m = aw >>> 8;
-       )raw_html",R"raw_html(                                         do {
-                                                    if ((m | 0) == 0) {
-                                                        az = 0
-                                                    } else {
-              )raw_html",R"raw_html(                                          if (aw >>> 0 > 16777215 >>> 0) {
-                                                            az = 31;
-                                                            break
-                                              )raw_html",R"raw_html(          }
-                                                        P = (m + 1048320 | 0) >>> 16 & 8;
-                                                        $ = m << P;
-                                                        J = ($ + 520192 | 0) >>> 16 & )raw_html",R"raw_html(4;
-                                                        U = $ << J;
-                                                        $ = (U + 245760 | 0) >>> 16 & 2;
-                                                        Q = 14 - (J | P | $) + (U << $ >>> 15) |)raw_html",R"raw_html( 0;
-                                                        az = aw >>> ((Q + 7 | 0) >>> 0) & 1 | Q << 1
-                                                    }
-                                                } while (0);
-                                    )raw_html",R"raw_html(            m = 368 + (az << 2) | 0;
-                                                c[ab + (W + 28) >> 2] = az;
-                                                c[ab + (W + 20) >> 2] = 0;
-                                                c[ab + (W + 16) >> 2)raw_html",R"raw_html(] = 0;
-                                                X = c[17] | 0;
-                                                Q = 1 << az;
-                                                if ((X & Q | 0) == 0) {
-                                                    c)raw_html",R"raw_html([17] = X | Q;
-                                                    c[m >> 2] = V;
-                                                    c[ab + (W + 24) >> 2] = m;
-                                                    c[ab + (W + 12) >> 2] = V;
-                 )raw_html",R"raw_html(                                   c[ab + (W + 8) >> 2] = V;
-                                                    break
-                                                }
-                                                if ((az | 0) == 31) {
-                 )raw_html",R"raw_html(                                   aA = 0
-                                                } else {
-                                                    aA = 25 - (az >>> 1) | 0
-                                                }
-                              )raw_html",R"raw_html(                  Q = aw << aA;
-                                                X = c[m >> 2] | 0;
-                                                while (1) {
-                                                    if ((c[X + 4 >> 2] & -8 | 0) == (aw | 0)) {
- )raw_html",R"raw_html(                                                       break
-                                                    }
-                                                    aB = X + 16 + (Q >>> 31 << 2) | 0;
-                                                    m )raw_html",R"raw_html(= c[aB >> 2] | 0;
-                                                    if ((m | 0) == 0) {
-                                                        T = 447;
-                                                        break
-                                       )raw_html",R"raw_html(             } else {
-                                                        Q = Q << 1;
-                                                        X = m
-                                                    }
-                                                }
-)raw_html",R"raw_html(                                                if ((T | 0) == 447) {
-                                                    if (aB >>> 0 < (c[20] | 0) >>> 0) {
-                                                        an();
-                                    )raw_html",R"raw_html(                    return 0
-                                                    } else {
-                                                        c[aB >> 2] = V;
-                                                        c[ab + (W + 24) >> 2] = X;
-           )raw_html",R"raw_html(                                             c[ab + (W + 12) >> 2] = V;
-                                                        c[ab + (W + 8) >> 2] = V;
-                                                        break
-                                        )raw_html",R"raw_html(            }
-                                                }
-                                                Q = X + 8 | 0;
-                                                m = c[Q >> 2] | 0;
-                                                $ = c[20] | 0;)raw_html",R"raw_html(
-                                                if (X >>> 0 < $ >>> 0) {
-                                                    an();
-                                                    return 0
-                                                }
-             )raw_html",R"raw_html(                                   if (m >>> 0 < $ >>> 0) {
-                                                    an();
-                                                    return 0
-                                                } else {
-                    )raw_html",R"raw_html(                                c[m + 12 >> 2] = V;
-                                                    c[Q >> 2] = V;
-                                                    c[ab + (W + 8) >> 2] = m;
-                                                    c[ab + )raw_html",R"raw_html((W + 12) >> 2] = X;
-                                                    c[ab + (W + 24) >> 2] = 0;
-                                                    break
-                                                }
-                                            }
-   )raw_html",R"raw_html(                                     } while (0);
-                                        n = ab + (ap | 8) | 0;
-                                        return n | 0
-                                    }
-                                } while (0);
-       )raw_html",R"raw_html(                         Y = ad;
-                                W = 512;
-                                while (1) {
-                                    aC = c[W >> 2] | 0;
-                                    if (aC >>> 0 <= Y >>> 0) {
-                   )raw_html",R"raw_html(                     aD = c[W + 4 >> 2] | 0;
-                                        aE = aC + aD | 0;
-                                        if (aE >>> 0 > Y >>> 0) {
-                                            break
-                                     )raw_html",R"raw_html(   }
-                                    }
-                                    W = c[W + 8 >> 2] | 0
-                                }
-                                W = aC + (aD - 39) | 0;
-                                if ((W & 7 | 0) == 0) {
-         )raw_html",R"raw_html(                           aF = 0
-                                } else {
-                                    aF = -W & 7
-                                }
-                                W = aC + (aD - 47 + aF) | 0;
-                                ac = W)raw_html",R"raw_html( >>> 0 < (ad + 16 | 0) >>> 0 ? Y : W;
-                                W = ac + 8 | 0;
-                                _ = ab + 8 | 0;
-                                if ((_ & 7 | 0) == 0) {
-                                    aG = 0
-                       )raw_html",R"raw_html(         } else {
-                                    aG = -_ & 7
-                                }
-                                _ = aa - 40 - aG | 0;
-                                c[22] = ab + aG;
-                                c[19] = _;
-          )raw_html",R"raw_html(                      c[ab + (aG + 4) >> 2] = _ | 1;
-                                c[ab + (aa - 36) >> 2] = 40;
-                                c[23] = c[14];
-                                c[ac + 4 >> 2] = 27;
-                                c[W >> 2] )raw_html",R"raw_html(= c[128];
-                                c[W + 4 >> 2] = c[129];
-                                c[W + 8 >> 2] = c[130];
-                                c[W + 12 >> 2] = c[131];
-                                c[128] = ab;
-                                )raw_html",R"raw_html(c[129] = aa;
-                                c[131] = 0;
-                                c[130] = W;
-                                W = ac + 28 | 0;
-                                c[W >> 2] = 7;
-                                if ((ac + 32 | 0) >>> 0 < a)raw_html",R"raw_html(E >>> 0) {
-                                    _ = W;
-                                    while (1) {
-                                        W = _ + 4 | 0;
-                                        c[W >> 2] = 7;
-                                        if ()raw_html",R"raw_html((_ + 8 | 0) >>> 0 < aE >>> 0) {
-                                            _ = W
-                                        } else {
-                                            break
-                                        }
-                                 )raw_html",R"raw_html(   }
-                                }
-                                if ((ac | 0) == (Y | 0)) {
-                                    break
-                                }
-                                _ = ac - ad | 0;
-                                W)raw_html",R"raw_html( = Y + (_ + 4) | 0;
-                                c[W >> 2] = c[W >> 2] & -2;
-                                c[ad + 4 >> 2] = _ | 1;
-                                c[Y + _ >> 2] = _;
-                                W = _ >>> 3;
-                        )raw_html",R"raw_html(        if (_ >>> 0 < 256 >>> 0) {
-                                    K = W << 1;
-                                    Z = 104 + (K << 2) | 0;
-                                    S = c[16] | 0;
-                                    m = 1 << W;
-              )raw_html",R"raw_html(                      do {
-                                        if ((S & m | 0) == 0) {
-                                            c[16] = S | m;
-                                            aH = Z;
-                                            aI = 104 +)raw_html",R"raw_html( (K + 2 << 2) | 0
-                                        } else {
-                                            W = 104 + (K + 2 << 2) | 0;
-                                            Q = c[W >> 2] | 0;
-                                            if (Q >>> )raw_html",R"raw_html(0 >= (c[20] | 0) >>> 0) {
-                                                aH = Q;
-                                                aI = W;
-                                                break
-                                            }
-                  )raw_html",R"raw_html(                          an();
-                                            return 0
-                                        }
-                                    } while (0);
-                                    c[aI >> 2] = ad;
-                           )raw_html",R"raw_html(         c[aH + 12 >> 2] = ad;
-                                    c[ad + 8 >> 2] = aH;
-                                    c[ad + 12 >> 2] = Z;
-                                    break
-                                }
-                                K =)raw_html",R"raw_html( ad;
-                                m = _ >>> 8;
-                                do {
-                                    if ((m | 0) == 0) {
-                                        aJ = 0
-                                    } else {
-                     )raw_html",R"raw_html(                   if (_ >>> 0 > 16777215 >>> 0) {
-                                            aJ = 31;
-                                            break
-                                        }
-                                        S = (m + 1048320 | 0)raw_html",R"raw_html() >>> 16 & 8;
-                                        Y = m << S;
-                                        ac = (Y + 520192 | 0) >>> 16 & 4;
-                                        W = Y << ac;
-                                        Y = (W + 245760 | 0) >>)raw_html",R"raw_html(> 16 & 2;
-                                        Q = 14 - (ac | S | Y) + (W << Y >>> 15) | 0;
-                                        aJ = _ >>> ((Q + 7 | 0) >>> 0) & 1 | Q << 1
-                                    }
-                                } while)raw_html",R"raw_html( (0);
-                                m = 368 + (aJ << 2) | 0;
-                                c[ad + 28 >> 2] = aJ;
-                                c[ad + 20 >> 2] = 0;
-                                c[ad + 16 >> 2] = 0;
-                                Z)raw_html",R"raw_html( = c[17] | 0;
-                                Q = 1 << aJ;
-                                if ((Z & Q | 0) == 0) {
-                                    c[17] = Z | Q;
-                                    c[m >> 2] = K;
-                                    c[a)raw_html",R"raw_html(d + 24 >> 2] = m;
-                                    c[ad + 12 >> 2] = ad;
-                                    c[ad + 8 >> 2] = ad;
-                                    break
-                                }
-                                if ((aJ | 0) ==)raw_html",R"raw_html( 31) {
-                                    aK = 0
-                                } else {
-                                    aK = 25 - (aJ >>> 1) | 0
-                                }
-                                Q = _ << aK;
-                         )raw_html",R"raw_html(       Z = c[m >> 2] | 0;
-                                while (1) {
-                                    if ((c[Z + 4 >> 2] & -8 | 0) == (_ | 0)) {
-                                        break
-                                    }
-                       )raw_html",R"raw_html(             aL = Z + 16 + (Q >>> 31 << 2) | 0;
-                                    m = c[aL >> 2] | 0;
-                                    if ((m | 0) == 0) {
-                                        T = 482;
-                                        break
- )raw_html",R"raw_html(                                   } else {
-                                        Q = Q << 1;
-                                        Z = m
-                                    }
-                                }
-                                if ((T | 0)raw_html",R"raw_html() == 482) {
-                                    if (aL >>> 0 < (c[20] | 0) >>> 0) {
-                                        an();
-                                        return 0
-                                    } else {
-                                )raw_html",R"raw_html(        c[aL >> 2] = K;
-                                        c[ad + 24 >> 2] = Z;
-                                        c[ad + 12 >> 2] = ad;
-                                        c[ad + 8 >> 2] = ad;
-                                        break
-  )raw_html",R"raw_html(                                  }
-                                }
-                                Q = Z + 8 | 0;
-                                _ = c[Q >> 2] | 0;
-                                m = c[20] | 0;
-                                if (Z >>>)raw_html",R"raw_html( 0 < m >>> 0) {
-                                    an();
-                                    return 0
-                                }
-                                if (_ >>> 0 < m >>> 0) {
-                                    an();
-                    )raw_html",R"raw_html(                return 0
-                                } else {
-                                    c[_ + 12 >> 2] = K;
-                                    c[Q >> 2] = K;
-                                    c[ad + 8 >> 2] = _;
-                           )raw_html",R"raw_html(         c[ad + 12 >> 2] = Z;
-                                    c[ad + 24 >> 2] = 0;
-                                    break
-                                }
-                            }
-                        } while (0);
-                        ad)raw_html",R"raw_html( = c[19] | 0;
-                        if (ad >>> 0 <= o >>> 0) {
-                            break
-                        }
-                        _ = ad - o | 0;
-                        c[19] = _;
-                        ad = c[22] | 0;
-                )raw_html",R"raw_html(        Q = ad;
-                        c[22] = Q + o;
-                        c[Q + (o + 4) >> 2] = _ | 1;
-                        c[ad + 4 >> 2] = o | 3;
-                        n = ad + 8 | 0;
-                        return n | 0
-                    }
- )raw_html",R"raw_html(               } while (0);
-                c[(am() | 0) >> 2] = 12;
-                n = 0;
-                return n | 0
-            }
-
-            function aQ(a) {
-                a = a | 0;
-                var b = 0,
-                    d = 0,
-          )raw_html",R"raw_html(          e = 0,
-                    f = 0,
-                    g = 0,
-                    h = 0,
-                    i = 0,
-                    j = 0,
-                    k = 0,
-                    l = 0,
-                    m = 0,
-                    n =)raw_html",R"raw_html( 0,
-                    o = 0,
-                    p = 0,
-                    q = 0,
-                    r = 0,
-                    s = 0,
-                    t = 0,
-                    u = 0,
-                    v = 0,
-                    w = 0,
-         )raw_html",R"raw_html(           x = 0,
-                    y = 0,
-                    z = 0,
-                    A = 0,
-                    B = 0,
-                    C = 0,
-                    D = 0,
-                    E = 0,
-                    F = 0,
-                    G )raw_html",R"raw_html(= 0,
-                    H = 0,
-                    I = 0,
-                    J = 0,
-                    K = 0,
-                    L = 0,
-                    M = 0,
-                    N = 0,
-                    O = 0;
-                if ((a | 0) == 0) {)raw_html",R"raw_html(
-                    return
-                }
-                b = a - 8 | 0;
-                d = b;
-                e = c[20] | 0;
-                if (b >>> 0 < e >>> 0) {
-                    an()
-                }
-                f = c[a - 4 >> 2] | 0;
-  )raw_html",R"raw_html(              g = f & 3;
-                if ((g | 0) == 1) {
-                    an()
-                }
-                h = f & -8;
-                i = a + (h - 8) | 0;
-                j = i;
-                L741: do {
-                    if ((f & 1 | 0) =)raw_html",R"raw_html(= 0) {
-                        k = c[b >> 2] | 0;
-                        if ((g | 0) == 0) {
-                            return
-                        }
-                        l = -8 - k | 0;
-                        m = a + l | 0;
-                      )raw_html",R"raw_html(  n = m;
-                        o = k + h | 0;
-                        if (m >>> 0 < e >>> 0) {
-                            an()
-                        }
-                        if ((n | 0) == (c[21] | 0)) {
-                            p = a + (h - 4) | )raw_html",R"raw_html(0;
-                            if ((c[p >> 2] & 3 | 0) != 3) {
-                                q = n;
-                                r = o;
-                                break
-                            }
-                            c[18] = o;
-        )raw_html",R"raw_html(                    c[p >> 2] = c[p >> 2] & -2;
-                            c[a + (l + 4) >> 2] = o | 1;
-                            c[i >> 2] = o;
-                            return
-                        }
-                        p = k >>> 3;
-          )raw_html",R"raw_html(              if (k >>> 0 < 256 >>> 0) {
-                            k = c[a + (l + 8) >> 2] | 0;
-                            s = c[a + (l + 12) >> 2] | 0;
-                            t = 104 + (p << 1 << 2) | 0;
-                            do {
-          )raw_html",R"raw_html(                      if ((k | 0) != (t | 0)) {
-                                    if (k >>> 0 < e >>> 0) {
-                                        an()
-                                    }
-                                    if ((c[k + 12 >> 2] | 0) == )raw_html",R"raw_html((n | 0)) {
-                                        break
-                                    }
-                                    an()
-                                }
-                            } while (0);
-                            if ((s | 0) == (k)raw_html",R"raw_html( | 0)) {
-                                c[16] = c[16] & ~(1 << p);
-                                q = n;
-                                r = o;
-                                break
-                            }
-                            do {
-         )raw_html",R"raw_html(                       if ((s | 0) == (t | 0)) {
-                                    u = s + 8 | 0
-                                } else {
-                                    if (s >>> 0 < e >>> 0) {
-                                        an()
-          )raw_html",R"raw_html(                          }
-                                    v = s + 8 | 0;
-                                    if ((c[v >> 2] | 0) == (n | 0)) {
-                                        u = v;
-                                        break
-              )raw_html",R"raw_html(                      }
-                                    an()
-                                }
-                            } while (0);
-                            c[k + 12 >> 2] = s;
-                            c[u >> 2] = k;
-                         )raw_html",R"raw_html(   q = n;
-                            r = o;
-                            break
-                        }
-                        t = m;
-                        p = c[a + (l + 24) >> 2] | 0;
-                        v = c[a + (l + 12) >> 2] | 0;
-            )raw_html",R"raw_html(            do {
-                            if ((v | 0) == (t | 0)) {
-                                w = a + (l + 20) | 0;
-                                x = c[w >> 2] | 0;
-                                if ((x | 0) == 0) {
-                            )raw_html",R"raw_html(        y = a + (l + 16) | 0;
-                                    z = c[y >> 2] | 0;
-                                    if ((z | 0) == 0) {
-                                        A = 0;
-                                        break
-                      )raw_html",R"raw_html(              } else {
-                                        B = z;
-                                        C = y
-                                    }
-                                } else {
-                                    B = x;
-                  )raw_html",R"raw_html(                  C = w
-                                }
-                                while (1) {
-                                    w = B + 20 | 0;
-                                    x = c[w >> 2] | 0;
-                                    if ((x | 0))raw_html",R"raw_html( != 0) {
-                                        B = x;
-                                        C = w;
-                                        continue
-                                    }
-                                    w = B + 16 | 0;
-              )raw_html",R"raw_html(                      x = c[w >> 2] | 0;
-                                    if ((x | 0) == 0) {
-                                        break
-                                    } else {
-                                        B = x;
-                     )raw_html",R"raw_html(                   C = w
-                                    }
-                                }
-                                if (C >>> 0 < e >>> 0) {
-                                    an()
-                                } else {
-                    )raw_html",R"raw_html(                c[C >> 2] = 0;
-                                    A = B;
-                                    break
-                                }
-                            } else {
-                                w = c[a + (l + 8) >> 2] | 0;
-        )raw_html",R"raw_html(                        if (w >>> 0 < e >>> 0) {
-                                    an()
-                                }
-                                x = w + 12 | 0;
-                                if ((c[x >> 2] | 0) != (t | 0)) {
-                  )raw_html",R"raw_html(                  an()
-                                }
-                                y = v + 8 | 0;
-                                if ((c[y >> 2] | 0) == (t | 0)) {
-                                    c[x >> 2] = v;
-                                   )raw_html",R"raw_html( c[y >> 2] = w;
-                                    A = v;
-                                    break
-                                } else {
-                                    an()
-                                }
-                            }
-         )raw_html",R"raw_html(               } while (0);
-                        if ((p | 0) == 0) {
-                            q = n;
-                            r = o;
-                            break
-                        }
-                        v = a + (l + 28) | 0;
-        )raw_html",R"raw_html(                m = 368 + (c[v >> 2] << 2) | 0;
-                        do {
-                            if ((t | 0) == (c[m >> 2] | 0)) {
-                                c[m >> 2] = A;
-                                if ((A | 0) != 0) {
-                  )raw_html",R"raw_html(                  break
-                                }
-                                c[17] = c[17] & ~(1 << c[v >> 2]);
-                                q = n;
-                                r = o;
-                                break L741
-          )raw_html",R"raw_html(                  } else {
-                                if (p >>> 0 < (c[20] | 0) >>> 0) {
-                                    an()
-                                }
-                                k = p + 16 | 0;
-                                if ((c[)raw_html",R"raw_html(k >> 2] | 0) == (t | 0)) {
-                                    c[k >> 2] = A
-                                } else {
-                                    c[p + 20 >> 2] = A
-                                }
-                                if ((A | 0) == 0))raw_html",R"raw_html( {
-                                    q = n;
-                                    r = o;
-                                    break L741
-                                }
-                            }
-                        } while (0);
-                   )raw_html",R"raw_html(     if (A >>> 0 < (c[20] | 0) >>> 0) {
-                            an()
-                        }
-                        c[A + 24 >> 2] = p;
-                        t = c[a + (l + 16) >> 2] | 0;
-                        do {
-                            if)raw_html",R"raw_html( ((t | 0) != 0) {
-                                if (t >>> 0 < (c[20] | 0) >>> 0) {
-                                    an()
-                                } else {
-                                    c[A + 16 >> 2] = t;
-                                 )raw_html",R"raw_html(   c[t + 24 >> 2] = A;
-                                    break
-                                }
-                            }
-                        } while (0);
-                        t = c[a + (l + 20) >> 2] | 0;
-                        if ((t | 0) )raw_html",R"raw_html(== 0) {
-                            q = n;
-                            r = o;
-                            break
-                        }
-                        if (t >>> 0 < (c[20] | 0) >>> 0) {
-                            an()
-                        } )raw_html",R"raw_html(else {
-                            c[A + 20 >> 2] = t;
-                            c[t + 24 >> 2] = A;
-                            q = n;
-                            r = o;
-                            break
-                        }
-                    } e)raw_html",R"raw_html(lse {
-                        q = d;
-                        r = h
-                    }
-                } while (0);
-                d = q;
-                if (d >>> 0 >= i >>> 0) {
-                    an()
-                }
-                A = a + (h - 4)raw_html",R"raw_html() | 0;
-                e = c[A >> 2] | 0;
-                if ((e & 1 | 0) == 0) {
-                    an()
-                }
-                do {
-                    if ((e & 2 | 0) == 0) {
-                        if ((j | 0) == (c[22] | 0)) {
-            )raw_html",R"raw_html(                B = (c[19] | 0) + r | 0;
-                            c[19] = B;
-                            c[22] = q;
-                            c[q + 4 >> 2] = B | 1;
-                            if ((q | 0) != (c[21] | 0)) {
-                            )raw_html",R"raw_html(    return
-                            }
-                            c[21] = 0;
-                            c[18] = 0;
-                            return
-                        }
-                        if ((j | 0) == (c[21] | 0)) {
-                      )raw_html",R"raw_html(      B = (c[18] | 0) + r | 0;
-                            c[18] = B;
-                            c[21] = q;
-                            c[q + 4 >> 2] = B | 1;
-                            c[d + B >> 2] = B;
-                            return
-              )raw_html",R"raw_html(          }
-                        B = (e & -8) + r | 0;
-                        C = e >>> 3;
-                        L843: do {
-                            if (e >>> 0 < 256 >>> 0) {
-                                u = c[a + h >> 2] | 0;
-                )raw_html",R"raw_html(                g = c[a + (h | 4) >> 2] | 0;
-                                b = 104 + (C << 1 << 2) | 0;
-                                do {
-                                    if ((u | 0) != (b | 0)) {
-                                        if (u >>> 0)raw_html",R"raw_html( < (c[20] | 0) >>> 0) {
-                                            an()
-                                        }
-                                        if ((c[u + 12 >> 2] | 0) == (j | 0)) {
-                                            break
-            )raw_html",R"raw_html(                            }
-                                        an()
-                                    }
-                                } while (0);
-                                if ((g | 0) == (u | 0)) {
-                                    c[16)raw_html",R"raw_html(] = c[16] & ~(1 << C);
-                                    break
-                                }
-                                do {
-                                    if ((g | 0) == (b | 0)) {
-                                        D = g + 8 | 0
-    )raw_html",R"raw_html(                                } else {
-                                        if (g >>> 0 < (c[20] | 0) >>> 0) {
-                                            an()
-                                        }
-                                        f = g + 8)raw_html",R"raw_html( | 0;
-                                        if ((c[f >> 2] | 0) == (j | 0)) {
-                                            D = f;
-                                            break
-                                        }
-                                 )raw_html",R"raw_html(       an()
-                                    }
-                                } while (0);
-                                c[u + 12 >> 2] = g;
-                                c[D >> 2] = u
-                            } else {
-                          )raw_html",R"raw_html(      b = i;
-                                f = c[a + (h + 16) >> 2] | 0;
-                                t = c[a + (h | 4) >> 2] | 0;
-                                do {
-                                    if ((t | 0) == (b | 0)) {
-                     )raw_html",R"raw_html(                   p = a + (h + 12) | 0;
-                                        v = c[p >> 2] | 0;
-                                        if ((v | 0) == 0) {
-                                            m = a + (h + 8) | 0;
-                               )raw_html",R"raw_html(             k = c[m >> 2] | 0;
-                                            if ((k | 0) == 0) {
-                                                E = 0;
-                                                break
-                                            } else )raw_html",R"raw_html({
-                                                F = k;
-                                                G = m
-                                            }
-                                        } else {
-                                            F = v;)raw_html",R"raw_html(
-                                            G = p
-                                        }
-                                        while (1) {
-                                            p = F + 20 | 0;
-                                            v = c[p)raw_html",R"raw_html( >> 2] | 0;
-                                            if ((v | 0) != 0) {
-                                                F = v;
-                                                G = p;
-                                                continue
-             )raw_html",R"raw_html(                               }
-                                            p = F + 16 | 0;
-                                            v = c[p >> 2] | 0;
-                                            if ((v | 0) == 0) {
-                                    )raw_html",R"raw_html(            break
-                                            } else {
-                                                F = v;
-                                                G = p
-                                            }
-                              )raw_html",R"raw_html(          }
-                                        if (G >>> 0 < (c[20] | 0) >>> 0) {
-                                            an()
-                                        } else {
-                                            c[G >> 2] = 0;
-            )raw_html",R"raw_html(                                E = F;
-                                            break
-                                        }
-                                    } else {
-                                        p = c[a + h >> 2] | 0;
-                 )raw_html",R"raw_html(                       if (p >>> 0 < (c[20] | 0) >>> 0) {
-                                            an()
-                                        }
-                                        v = p + 12 | 0;
-                                        if ((c[v >>)raw_html",R"raw_html( 2] | 0) != (b | 0)) {
-                                            an()
-                                        }
-                                        m = t + 8 | 0;
-                                        if ((c[m >> 2] | 0) == (b | 0)) {
-             )raw_html",R"raw_html(                               c[v >> 2] = t;
-                                            c[m >> 2] = p;
-                                            E = t;
-                                            break
-                                        } else {
- )raw_html",R"raw_html(                                           an()
-                                        }
-                                    }
-                                } while (0);
-                                if ((f | 0) == 0) {
-                               )raw_html",R"raw_html(     break
-                                }
-                                t = a + (h + 20) | 0;
-                                u = 368 + (c[t >> 2] << 2) | 0;
-                                do {
-                                    if ((b | 0) == (c[u )raw_html",R"raw_html(>> 2] | 0)) {
-                                        c[u >> 2] = E;
-                                        if ((E | 0) != 0) {
-                                            break
-                                        }
-                                   )raw_html",R"raw_html(     c[17] = c[17] & ~(1 << c[t >> 2]);
-                                        break L843
-                                    } else {
-                                        if (f >>> 0 < (c[20] | 0) >>> 0) {
-                                            a)raw_html",R"raw_html(n()
-                                        }
-                                        g = f + 16 | 0;
-                                        if ((c[g >> 2] | 0) == (b | 0)) {
-                                            c[g >> 2] = E
-                      )raw_html",R"raw_html(                  } else {
-                                            c[f + 20 >> 2] = E
-                                        }
-                                        if ((E | 0) == 0) {
-                                            break L843
-         )raw_html",R"raw_html(                               }
-                                    }
-                                } while (0);
-                                if (E >>> 0 < (c[20] | 0) >>> 0) {
-                                    an()
-                                )raw_html",R"raw_html(}
-                                c[E + 24 >> 2] = f;
-                                b = c[a + (h + 8) >> 2] | 0;
-                                do {
-                                    if ((b | 0) != 0) {
-                                        if (b >>)raw_html",R"raw_html(> 0 < (c[20] | 0) >>> 0) {
-                                            an()
-                                        } else {
-                                            c[E + 16 >> 2] = b;
-                                            c[b + 24 >> 2] = E;
-   )raw_html",R"raw_html(                                         break
-                                        }
-                                    }
-                                } while (0);
-                                b = c[a + (h + 12) >> 2] | 0;
-                      )raw_html",R"raw_html(          if ((b | 0) == 0) {
-                                    break
-                                }
-                                if (b >>> 0 < (c[20] | 0) >>> 0) {
-                                    an()
-                                } else {
- )raw_html",R"raw_html(                                   c[E + 20 >> 2] = b;
-                                    c[b + 24 >> 2] = E;
-                                    break
-                                }
-                            }
-                        } while (0);
-  )raw_html",R"raw_html(                      c[q + 4 >> 2] = B | 1;
-                        c[d + B >> 2] = B;
-                        if ((q | 0) != (c[21] | 0)) {
-                            H = B;
-                            break
-                        }
-                   )raw_html",R"raw_html(     c[18] = B;
-                        return
-                    } else {
-                        c[A >> 2] = e & -2;
-                        c[q + 4 >> 2] = r | 1;
-                        c[d + r >> 2] = r;
-                        H = r
-                )raw_html",R"raw_html(    }
-                } while (0);
-                r = H >>> 3;
-                if (H >>> 0 < 256 >>> 0) {
-                    d = r << 1;
-                    e = 104 + (d << 2) | 0;
-                    A = c[16] | 0;
-                    E = 1 << r;
-      )raw_html",R"raw_html(              do {
-                        if ((A & E | 0) == 0) {
-                            c[16] = A | E;
-                            I = e;
-                            J = 104 + (d + 2 << 2) | 0
-                        } else {
-                       )raw_html",R"raw_html(     r = 104 + (d + 2 << 2) | 0;
-                            h = c[r >> 2] | 0;
-                            if (h >>> 0 >= (c[20] | 0) >>> 0) {
-                                I = h;
-                                J = r;
-                                br)raw_html",R"raw_html(eak
-                            }
-                            an()
-                        }
-                    } while (0);
-                    c[J >> 2] = q;
-                    c[I + 12 >> 2] = q;
-                    c[q + 8 >> 2] = I;
-                )raw_html",R"raw_html(    c[q + 12 >> 2] = e;
-                    return
-                }
-                e = q;
-                I = H >>> 8;
-                do {
-                    if ((I | 0) == 0) {
-                        K = 0
-                    } else {
-               )raw_html",R"raw_html(         if (H >>> 0 > 16777215 >>> 0) {
-                            K = 31;
-                            break
-                        }
-                        J = (I + 1048320 | 0) >>> 16 & 8;
-                        d = I << J;
-                        E)raw_html",R"raw_html( = (d + 520192 | 0) >>> 16 & 4;
-                        A = d << E;
-                        d = (A + 245760 | 0) >>> 16 & 2;
-                        r = 14 - (E | J | d) + (A << d >>> 15) | 0;
-                        K = H >>> ((r + 7 | 0) >>> 0) & 1 | r <)raw_html",R"raw_html(< 1
-                    }
-                } while (0);
-                I = 368 + (K << 2) | 0;
-                c[q + 28 >> 2] = K;
-                c[q + 20 >> 2] = 0;
-                c[q + 16 >> 2] = 0;
-                r = c[17] | 0;
-                d = 1 )raw_html",R"raw_html(<< K;
-                do {
-                    if ((r & d | 0) == 0) {
-                        c[17] = r | d;
-                        c[I >> 2] = e;
-                        c[q + 24 >> 2] = I;
-                        c[q + 12 >> 2] = q;
-                   )raw_html",R"raw_html(     c[q + 8 >> 2] = q
-                    } else {
-                        if ((K | 0) == 31) {
-                            L = 0
-                        } else {
-                            L = 25 - (K >>> 1) | 0
-                        }
-               )raw_html",R"raw_html(         A = H << L;
-                        J = c[I >> 2] | 0;
-                        while (1) {
-                            if ((c[J + 4 >> 2] & -8 | 0) == (H | 0)) {
-                                break
-                            }
-                 )raw_html",R"raw_html(           M = J + 16 + (A >>> 31 << 2) | 0;
-                            E = c[M >> 2] | 0;
-                            if ((E | 0) == 0) {
-                                N = 659;
-                                break
-                            } else {
-)raw_html",R"raw_html(                                A = A << 1;
-                                J = E
-                            }
-                        }
-                        if ((N | 0) == 659) {
-                            if (M >>> 0 < (c[20] | 0) >>> 0) {
-         )raw_html",R"raw_html(                       an()
-                            } else {
-                                c[M >> 2] = e;
-                                c[q + 24 >> 2] = J;
-                                c[q + 12 >> 2] = q;
-                                c[q + 8 )raw_html",R"raw_html(>> 2] = q;
-                                break
-                            }
-                        }
-                        A = J + 8 | 0;
-                        B = c[A >> 2] | 0;
-                        E = c[20] | 0;
-                        if (J )raw_html",R"raw_html(>>> 0 < E >>> 0) {
-                            an()
-                        }
-                        if (B >>> 0 < E >>> 0) {
-                            an()
-                        } else {
-                            c[B + 12 >> 2] = e;
-               )raw_html",R"raw_html(             c[A >> 2] = e;
-                            c[q + 8 >> 2] = B;
-                            c[q + 12 >> 2] = J;
-                            c[q + 24 >> 2] = 0;
-                            break
-                        }
-                    }
-   )raw_html",R"raw_html(             } while (0);
-                q = (c[24] | 0) - 1 | 0;
-                c[24] = q;
-                if ((q | 0) == 0) {
-                    O = 520
-                } else {
-                    return
-                }
-                while (1) {
-)raw_html",R"raw_html(                    q = c[O >> 2] | 0;
-                    if ((q | 0) == 0) {
-                        break
-                    } else {
-                        O = q + 8 | 0
-                    }
-                }
-                c[24] = -1;
-            )raw_html",R"raw_html(    return
-            }
-
-            function aR(b, d, e) {
-                b = b | 0;
-                d = d | 0;
-                e = e | 0;
-                var f = 0,
-                    g = 0,
-                    h = 0,
-                    i = 0;
-      )raw_html",R"raw_html(          f = b + e | 0;
-                if ((e | 0) >= 20) {
-                    d = d & 255;
-                    g = b & 3;
-                    h = d | d << 8 | d << 16 | d << 24;
-                    i = f & ~3;
-                    if (g) {
-             )raw_html",R"raw_html(           g = b + 4 - g | 0;
-                        while ((b | 0) < (g | 0)) {
-                            a[b] = d;
-                            b = b + 1 | 0
-                        }
-                    }
-                    while ((b | 0) < (i | 0)) )raw_html",R"raw_html({
-                        c[b >> 2] = h;
-                        b = b + 4 | 0
-                    }
-                }
-                while ((b | 0) < (f | 0)) {
-                    a[b] = d;
-                    b = b + 1 | 0
-                }
-           )raw_html",R"raw_html(     return b - e | 0
-            }
-
-            function aS(b, d, e) {
-                b = b | 0;
-                d = d | 0;
-                e = e | 0;
-                var f = 0;
-                f = b | 0;
-                if ((b & 3) == (d & 3)) {
-       )raw_html",R"raw_html(             while (b & 3) {
-                        if ((e | 0) == 0) return f | 0;
-                        a[b] = a[d] | 0;
-                        b = b + 1 | 0;
-                        d = d + 1 | 0;
-                        e = e - 1 | 0
-              )raw_html",R"raw_html(      }
-                    while ((e | 0) >= 4) {
-                        c[b >> 2] = c[d >> 2];
-                        b = b + 4 | 0;
-                        d = d + 4 | 0;
-                        e = e - 4 | 0
-                    }
-                }
-  )raw_html",R"raw_html(              while ((e | 0) > 0) {
-                    a[b] = a[d] | 0;
-                    b = b + 1 | 0;
-                    d = d + 1 | 0;
-                    e = e - 1 | 0
-                }
-                return f | 0
-            }
-
-            funct)raw_html",R"raw_html(ion aT(b) {
-                b = b | 0;
-                var c = 0;
-                c = a[m + (b & 255) | 0] | 0;
-                if ((c | 0) < 8) return c | 0;
-                c = a[m + (b >> 8 & 255) | 0] | 0;
-                if ((c | 0) < 8) return c + 8 )raw_html",R"raw_html(| 0;
-                c = a[m + (b >> 16 & 255) | 0] | 0;
-                if ((c | 0) < 8) return c + 16 | 0;
-                return (a[m + (b >>> 24) | 0] | 0) + 24 | 0
-            }
-
-            function aU(b) {
-                b = b | 0;
-                )raw_html",R"raw_html(var c = 0;
-                c = b;
-                while (a[c] | 0) {
-                    c = c + 1 | 0
-                }
-                return c - b | 0
-            }
-
-            function aV(a, b) {
-                a = a | 0;
-                b = b | 0;
- )raw_html",R"raw_html(               return ar[a & 1](b | 0) | 0
-            }
-
-            function aW(a) {
-                a = a | 0;
-                as[a & 1]()
-            }
-
-            function aX(a, b, c) {
-                a = a | 0;
-                b = b | 0;
-          )raw_html",R"raw_html(      c = c | 0;
-                return at[a & 1](b | 0, c | 0) | 0
-            }
-
-            function aY(a, b) {
-                a = a | 0;
-                b = b | 0;
-                au[a & 1](b | 0)
-            }
-
-            function aZ(a) {
-          )raw_html",R"raw_html(      a = a | 0;
-                aa(0);
-                return 0
-            }
-
-            function a_() {
-                aa(1)
-            }
-
-            function a$(a, b) {
-                a = a | 0;
-                b = b | 0;
-                aa(2);
-  )raw_html",R"raw_html(              return 0
-            }
-
-            function a0(a) {
-                    a = a | 0;
-                    aa(3)
-                }
-                // EMSCRIPTEN_END_FUNCS
-            var ar = [aZ, aZ];
-            var as = [a_, a_];
-            )raw_html",R"raw_html(var at = [a$, a$];
-            var au = [a0, a0];
-            return {
-                _strlen: aU,
-                _free: aQ,
-                _XXH32: aO,
-                _memset: aR,
-                _llvm_cttz_i32: aT,
-                _malloc: aP,
-       )raw_html",R"raw_html(         _LZ4_decompress_safe: aN,
-                _memcpy: aS,
-                _LZ4_compress: aM,
-                runPostSets: aL,
-                stackAlloc: av,
-                stackSave: aw,
-                stackRestore: ax,
-                setThrew: a)raw_html",R"raw_html(y,
-                setTempRet0: aB,
-                setTempRet1: aC,
-                setTempRet2: aD,
-                setTempRet3: aE,
-                setTempRet4: aF,
-                setTempRet5: aG,
-                setTempRet6: aH,
-                setTem)raw_html",R"raw_html(pRet7: aI,
-                setTempRet8: aJ,
-                setTempRet9: aK,
-                dynCall_ii: aV,
-                dynCall_v: aW,
-                dynCall_iii: aX,
-                dynCall_vi: aY
-            }
-            // EMSCRIPTEN_END_ASM
-    )raw_html",R"raw_html(    })({
-            Math: Math,
-            Int8Array: Int8Array,
-            Int16Array: Int16Array,
-            Int32Array: Int32Array,
-            Uint8Array: Uint8Array,
-            Uint16Array: Uint16Array,
-            Uint32Array: Uint32Array,
-     )raw_html",R"raw_html(       Float32Array: Float32Array,
-            Float64Array: Float64Array
-        }, {
-            abort: B,
-            assert: w,
-            asmPrintInt: function(a, b) {
-                r.print("int " + a + "," + b)
-            },
-            asmPrintF)raw_html",R"raw_html(loat: function(a, b) {
-                r.print("float " + a + "," + b)
-            },
-            min: Fa,
-            invoke_ii: function(a, b) {
-                try {
-                    return r.dynCall_ii(a, b)
-                } catch (c) {
-           )raw_html",R"raw_html(         "number" !== typeof c && "longjmp" !== c && e(c), $.setThrew(1, 0)
-                }
-            },
-            invoke_v: function(a) {
-                try {
-                    r.dynCall_v(a)
-                } catch (b) {
-                    "num)raw_html",R"raw_html(ber" !==
-                    typeof b && "longjmp" !== b && e(b), $.setThrew(1, 0)
-                }
-            },
-            invoke_iii: function(a, b, c) {
-                try {
-                    return r.dynCall_iii(a, b, c)
-                } catch )raw_html",R"raw_html((d) {
-                    "number" !== typeof d && "longjmp" !== d && e(d), $.setThrew(1, 0)
-                }
-            },
-            invoke_vi: function(a, b) {
-                try {
-                    r.dynCall_vi(a, b)
-                } catch (c) {)raw_html",R"raw_html(
-                    "number" !== typeof c && "longjmp" !== c && e(c), $.setThrew(1, 0)
-                }
-            },
-            _sysconf: function(a) {
-                switch (a) {
-                    case 30:
-                        return 4096;
-    )raw_html",R"raw_html(                case 132:
-                    case 133:
-                    case 12:
-                    case 137:
-                    case 138:
-                    case 15:
-                    case 235:
-                    case 16:
-                    cas)raw_html",R"raw_html(e 17:
-                    case 18:
-                    case 19:
-                    case 20:
-                    case 149:
-                    case 13:
-                    case 10:
-                    case 236:
-                    case 153:
-               )raw_html",R"raw_html(     case 9:
-                    case 21:
-                    case 22:
-                    case 159:
-                    case 154:
-                    case 14:
-                    case 77:
-                    case 78:
-                    case 139:
-        )raw_html",R"raw_html(            case 80:
-                    case 81:
-                    case 79:
-                    case 82:
-                    case 68:
-                    case 67:
-                    case 164:
-                    case 11:
-                    case 29:
-  )raw_html",R"raw_html(                  case 47:
-                    case 48:
-                    case 95:
-                    case 52:
-                    case 51:
-                    case 46:
-                        return 200809;
-                    case 27:
-                )raw_html",R"raw_html(    case 246:
-                    case 127:
-                    case 128:
-                    case 23:
-                    case 24:
-                    case 160:
-                    case 161:
-                    case 181:
-                    case 182:
-    )raw_html",R"raw_html(                case 242:
-                    case 183:
-                    case 184:
-                    case 243:
-                    case 244:
-                    case 245:
-                    case 165:
-                    case 178:
-                    )raw_html",R"raw_html(case 179:
-                    case 49:
-                    case 50:
-                    case 168:
-                    case 169:
-                    case 175:
-                    case 170:
-                    case 171:
-                    case 172:
-        )raw_html",R"raw_html(            case 97:
-                    case 76:
-                    case 32:
-                    case 173:
-                    case 35:
-                        return -1;
-                    case 176:
-                    case 177:
-                    cas)raw_html",R"raw_html(e 7:
-                    case 155:
-                    case 8:
-                    case 157:
-                    case 125:
-                    case 126:
-                    case 92:
-                    case 93:
-                    case 129:
-               )raw_html",R"raw_html(     case 130:
-                    case 131:
-                    case 94:
-                    case 91:
-                        return 1;
-                    case 74:
-                    case 60:
-                    case 69:
-                    case 70:
-   )raw_html",R"raw_html(                 case 4:
-                        return 1024;
-                    case 31:
-                    case 42:
-                    case 72:
-                        return 32;
-                    case 87:
-                    case 26:
-              )raw_html",R"raw_html(      case 33:
-                        return 2147483647;
-                    case 34:
-                    case 1:
-                        return 47839;
-                    case 38:
-                    case 36:
-                        return 99;
-          )raw_html",R"raw_html(          case 43:
-                    case 37:
-                        return 2048;
-                    case 0:
-                        return 2097152;
-                    case 3:
-                        return 65536;
-                    case 28:
-        )raw_html",R"raw_html(                return 32768;
-                    case 44:
-                        return 32767;
-                    case 75:
-                        return 16384;
-                    case 39:
-                        return 1E3;
-                    case 89)raw_html",R"raw_html(:
-                        return 700;
-                    case 71:
-                        return 256;
-                    case 40:
-                        return 255;
-                    case 2:
-                        return 100;
-                    case)raw_html",R"raw_html( 180:
-                        return 64;
-                    case 25:
-                        return 20;
-                    case 5:
-                        return 16;
-                    case 6:
-                        return 6;
-                    case 7)raw_html",R"raw_html(3:
-                        return 4;
-                    case 84:
-                        return 1
-                }
-                kb(R.C);
-                return -1
-            },
-            _sbrk: lb,
-            ___setErrNo: kb,
-            ___errno_)raw_html",R"raw_html(location: function() {
-                return jb
-            },
-            _abort: function() {
-                r.abort()
-            },
-            _time: function(a) {
-                var b = Math.floor(Date.now() / 1E3);
-                a && (H[a >> 2])raw_html",R"raw_html( = b);
-                return b
-            },
-            _fflush: q(),
-            STACKTOP: u,
-            STACK_MAX: Ra,
-            tempDoublePtr: eb,
-            ABORT: xa,
-            cttz_i8: hb,
-            ctlz_i8: 1,
-            NaN: NaN,
-      )raw_html",R"raw_html(      Infinity: Infinity
-        }, N),
-        mb = r._strlen = $._strlen,
-        tc = r._free = $._free,
-        uc = r._XXH32 = $._XXH32,
-        fb = r._memset = $._memset,
-        ib = r._llvm_cttz_i32 = $._llvm_cttz_i32,
-        L = r._malloc = $._m)raw_html",R"raw_html(alloc,
-        vc = r._LZ4_decompress_safe = $._LZ4_decompress_safe,
-        gb = r._memcpy = $._memcpy,
-        wc = r._LZ4_compress = $._LZ4_compress,
-        db = r.runPostSets = $.runPostSets;
-    r.dynCall_ii = $.dynCall_ii;
-    r.dynCall_v = $.dynCal)raw_html",R"raw_html(l_v;
-    r.dynCall_iii = $.dynCall_iii;
-    r.dynCall_vi = $.dynCall_vi;
-    qa = function(a) {
-        return $.stackAlloc(a)
-    };
-    ja = function() {
-        return $.stackSave()
-    };
-    ka = function(a) {
-        $.stackRestore(a)
-    };
-
-    fun)raw_html",R"raw_html(ction xc(a) {
-        this.name = "ExitStatus";
-        this.message = "Program terminated with exit(" + a + ")";
-        this.status = a
-    }
-    xc.prototype = Error();
-    var yc, zc = m,
-        ab = function Ac() {
-            !r.calledRun && Bc && C)raw_html",R"raw_html(c();
-            r.calledRun || (ab = Ac)
-        };
-    r.callMain = r.fd = function(a) {
-        function b() {
-            for (var a = 0; 3 > a; a++) d.push(0)
-        }
-        w(0 == Q, "cannot call main when async dependencies remain! (listen on __A)raw_html",R"raw_html(TMAIN__)");
-        w(0 == Ta.length, "cannot call main when preRun functions remain to be called");
-        a = a || [];
-        ca && zc !== m && r.P("preload time: " + (Date.now() - zc) + " ms");
-        Xa || (Xa = l, O(P));
-        var c = a.length + )raw_html",R"raw_html(1,
-            d = [K(D("/bin/this.program"), "i8", 0)];
-        b();
-        for (var f = 0; f < c - 1; f += 1) d.push(K(D(a[f]), "i8", 0)), b();
-        d.push(0);
-        d = K(d, "i32", 0);
-        yc = u;
-        try {
-            var g = r._main(c, d)raw_html",R"raw_html(, 0);
-            r.noExitRuntime || Dc(g)
-        } catch (h) {
-            h instanceof
-            xc || ("SimulateInfiniteLoop" == h ? r.noExitRuntime = l : (h && ("object" === typeof h && h.stack) && r.P("exception thrown: " + [h, h.stack]), e(h)))
-  )raw_html",R"raw_html(      } finally {}
-    };
-
-    function Cc(a) {
-        function b() {
-            Xa || (Xa = l, O(P));
-            O(Ua);
-            r.calledRun = l;
-            r._main && Bc && r.callMain(a);
-            if (r.postRun)
-                for ("function" )raw_html",R"raw_html(== typeof r.postRun && (r.postRun = [r.postRun]); r.postRun.length;) Za(r.postRun.shift());
-            O(Wa)
-        }
-        a = a || r.arguments;
-        zc === m && (zc = Date.now());
-        if (0 < Q) r.P("run() called, but dependencies remain, so n)raw_html",R"raw_html(ot running");
-        else {
-            if (r.preRun)
-                for ("function" == typeof r.preRun && (r.preRun = [r.preRun]); r.preRun.length;) Ya(r.preRun.shift());
-            O(Ta);
-            0 < Q || (r.setStatus ? (r.setStatus("Running..."),)raw_html",R"raw_html( setTimeout(function() {
-                setTimeout(function() {
-                        r.setStatus("")
-                    },
-                    1);
-                xa || b()
-            }, 1)) : b())
-        }
-    }
-    r.run = r.xd = Cc;
-
-    function)raw_html",R"raw_html( Dc(a) {
-        xa = l;
-        u = yc;
-        O(Va);
-        e(new xc(a))
-    }
-    r.exit = r.kd = Dc;
-
-    function B(a) {
-        a && (r.print(a), r.P(a));
-        xa = l;
-        e("abort() at " + Ma())
-    }
-    r.abort = r.abort = B;
-    if (r.pr)raw_html",R"raw_html(eInit)
-        for ("function" == typeof r.preInit && (r.preInit = [r.preInit]); 0 < r.preInit.length;) r.preInit.pop()();
-    var Bc = l;
-    r.noInitialRun && (Bc = p);
-    Cc();
-
-    function Ec(a) {
-        return a + (a / 255 | 0) + 16
-    }
-    var F)raw_html",R"raw_html(c = [m, m, m, m, 65536, 262144, 1048576, 4194304],
-        Gc = this;
-    Gc.decompress = function(a) {
-        var g = new DataView(a.buffer, a.byteOffset, a.byteLength);
-        3131965165 !== g.getUint32(0, true) && e(Error("lz4: invalid magic number")))raw_html",R"raw_html(;
-        var size = g.getUint32(4, true);
-        var csize = g.getUint32(8, true);
-        var inbuf = L(csize);
-        var outbuf = L(size);
-        M.set(a.subarray(12), inbuf);
-        vc(inbuf, outbuf, csize, size) !== size && e(Error("lz4: error de)raw_html",R"raw_html(compress"));
-        var buf = new Uint8Array(M.subarray(outbuf, outbuf + size));
-        tc(inbuf);
-        tc(outbuf);
-        return buf;
-    };
-    r._LZ4_compressBound = Ec;
-    "function" === typeof define && define.amd ? define("lz4", function() {
- )raw_html",R"raw_html(       return Gc
-    }) : ba && (module.exports = Gc);
+	function e(a) {
+		throw a;
+	}
+	var i)raw_html",R"raw_html( = void 0,
+		l = !0,
+		m = null,
+		p = !1;
+
+	function q() {
+		return function() {}
+	}
+	var r = {
+			TOTAL_MEMORY: 13656760
+		},
+		aa = {},
+		s;
+	for (s in r) r.hasOwnProperty(s) && (aa[s] = r[s]);
+	var ba = "object" === typeof process && "function" === typ)raw_html",R"raw_html(eof require,
+		ca = "object" === typeof window,
+		ea = "function" === typeof importScripts,
+		fa = !ca && !ba && !ea;
+	if (ba) {
+		r.print = function(a) {
+			process.stdout.write(a + "\n")
+		};
+		r.printErr = function(a) {
+			process.stderr.write(a + "\n"))raw_html",R"raw_html(
+		};
+		var ga = require("fs"),
+			ha = require("path");
+		r.read = function(a, b) {
+			var a = ha.normalize(a),
+				c = ga.readFileSync(a);
+			!c && a != ha.resolve(a) && (a = path.join(__dirname, "..", "src", a), c = ga.readFileSync(a));
+			c && !b && (c)raw_html",R"raw_html( = c.toString());
+			return c
+		};
+		r.readBinary = function(a) {
+			return r.read(a, l)
+		};
+		r.load = function(a) {
+			ia(read(a))
+		};
+		r.arguments = process.argv.slice(2);
+		module.exports = r
+	} else fa ? (r.print = print, "undefined" != typeof prin)raw_html",R"raw_html(tErr &&
+		(r.printErr = printErr), r.read = "undefined" != typeof read ? read : function() {
+			e("no read() available (jsc?)")
+		}, r.readBinary = function(a) {
+			return read(a, "binary")
+		}, "undefined" != typeof scriptArgs ? r.arguments = scriptArgs :)raw_html",R"raw_html( "undefined" != typeof arguments && (r.arguments = arguments), this.Module = r, eval("if (typeof gc === 'function' && gc.toString().indexOf('[native code]') > 0) var gc = undefined")) : ca || ea ? (r.read = function(a) {
+			var b = new XMLHttpRequest;
+			b)raw_html",R"raw_html(.open("GET", a, p);
+			b.send(m);
+			return b.responseText
+		}, "undefined" != typeof arguments &&
+		(r.arguments = arguments), "undefined" !== typeof console ? (r.print = function(a) {
+			console.log(a)
+		}, r.printErr = function(a) {
+			console.log(a)
+		)raw_html",R"raw_html(}) : r.print = q(), ca ? this.Module = r : r.load = importScripts) : e("Unknown runtime environment. Where are we?");
+
+	function ia(a) {
+		eval.call(m, a)
+	}
+	"undefined" == !r.load && r.read && (r.load = function(a) {
+		ia(r.read(a))
+	});
+	r.print || (r.p)raw_html",R"raw_html(rint = q());
+	r.printErr || (r.printErr = r.print);
+	r.arguments || (r.arguments = []);
+	r.print = r.print;
+	r.P = r.printErr;
+	r.preRun = [];
+	r.postRun = [];
+	for (s in aa) aa.hasOwnProperty(s) && (r[s] = aa[s]);
+
+	function ja() {
+		return u
+	}
+
+	functio)raw_html",R"raw_html(n ka(a) {
+		u = a
+	}
+
+	function la(a) {
+		switch (a) {
+			case "i1":
+			case "i8":
+				return 1;
+			case "i16":
+				return 2;
+			case "i32":
+				return 4;
+			case "i64":
+				return 8;
+			case "float":
+				return 4;
+			case "double":
+				return 8;
+			defaul)raw_html",R"raw_html(t:
+				return "*" === a[a.length - 1] ? ma : "i" === a[0] ? (a = parseInt(a.substr(1)), w(0 === a % 8), a / 8) : 0
+		}
+	}
+
+	function na(a, b, c) {
+		c && c.length ? (c.splice || (c = Array.prototype.slice.call(c)), c.splice(0, 0, b), r["dynCall_" + a].appl)raw_html",R"raw_html(y(m, c)) : r["dynCall_" + a].call(m, b)
+	}
+	var oa;
+
+	function pa() {
+		var a = [],
+			b = 0;
+		this.ea = function(c) {
+			c &= 255;
+			if (0 == a.length) {
+				if (0 == (c & 128)) return String.fromCharCode(c);
+				a.push(c);
+				b = 192 == (c & 224) ? 1 )raw_html",R"raw_html(: 224 == (c & 240) ? 2 : 3;
+				return ""
+			}
+			if (b && (a.push(c), b--, 0 < b)) return "";
+			var c = a[0],
+				d = a[1],
+				f = a[2],
+				g = a[3];
+			2 == a.length ? c = String.fromCharCode((c & 31) << 6 | d & 63) : 3 == a.length ? c = String.fromCh)raw_html",R"raw_html(arCode((c & 15) << 12 | (d & 63) << 6 | f & 63) : (c = (c & 7) << 18 | (d & 63) << 12 | (f & 63) << 6 | g & 63, c = String.fromCharCode(Math.floor((c - 65536) / 1024) + 55296, (c - 65536) % 1024 + 56320));
+			a.length = 0;
+			return c
+		};
+		this.Sa = func)raw_html",R"raw_html(tion(a) {
+			for (var a =
+					unescape(encodeURIComponent(a)), b = [], f = 0; f < a.length; f++) b.push(a.charCodeAt(f));
+			return b
+		}
+	}
+
+	function qa(a) {
+		var b = u;
+		u = u + a | 0;
+		u = u + 7 & -8;
+		return b
+	}
+
+	function ra(a) {
+		var b = x;
+	)raw_html",R"raw_html(	x = x + a | 0;
+		x = x + 7 & -8;
+		return b
+	}
+
+	function ta(a) {
+		var b = y;
+		y = y + a | 0;
+		y = y + 7 & -8;
+		y >= ua && B("Cannot enlarge memory arrays in asm.js. Either (1) compile with -s TOTAL_MEMORY=X with X higher than the current value " + ua)raw_html",R"raw_html( + ", or (2) set Module.TOTAL_MEMORY before the program runs.");
+		return b
+	}
+
+	function va(a, b) {
+		return Math.ceil(a / (b ? b : 8)) * (b ? b : 8)
+	}
+	var ma = 4,
+		wa = {},
+		xa = p,
+		C, ya;
+
+	function w(a, b) {
+		a || B("Assertion failed: " + b)
+	}
+)raw_html",R"raw_html(	r.ccall = function(a, b, c, d) {
+		return za(Aa(a), b, c, d)
+	};
+
+	function Aa(a) {
+		try {
+			var b = r["_" + a];
+			b || (b = eval("_" + a))
+		} catch (c) {}
+		w(b, "Cannot call unknown function " + a + " (perhaps LLVM optimizations or closure removed i)raw_html",R"raw_html(t?)");
+		return b
+	}
+
+	function za(a, b, c, d) {
+		function f(a, b) {
+			if ("string" == b) {
+				if (a === m || a === i || 0 === a) return 0;
+				a = D(a);
+				b = "array"
+			}
+			if ("array" == b) {
+				g || (g = ja());
+				var c = qa(a.length);
+				Ba(a)raw_html",R"raw_html(, c);
+				return c
+			}
+			return a
+		}
+		var g = 0,
+			h = 0,
+			d = d ? d.map(function(a) {
+				return f(a, c[h++])
+			}) : [];
+		a = a.apply(m, d);
+		"string" == b ? b = Ca(a) : (w("array" != b), b = a);
+		g && ka(g);
+		return b
+	}
+	r.cwrap = function(a)raw_html",R"raw_html(, b, c) {
+		var d = Aa(a);
+		return function() {
+			return za(d, b, c, Array.prototype.slice.call(arguments))
+		}
+	};
+
+	function Da(a, b, c) {
+		c = c || "i8";
+		"*" === c.charAt(c.length - 1) && (c = "i32");
+		switch (c) {
+			case "i1":
+				F[a] = b;
+				)raw_html",R"raw_html(break;
+			case "i8":
+				F[a] = b;
+				break;
+			case "i16":
+				G[a >> 1] = b;
+				break;
+			case "i32":
+				H[a >> 2] = b;
+				break;
+			case "i64":
+				ya = [b >>> 0, (C = b, 1 <= +Ea(C) ? 0 < C ? (Fa(+Ga(C / 4294967296), 4294967295) | 0) >>> 0 : ~~+Ha()raw_html",R"raw_html((C - +(~~C >>> 0)) / 4294967296) >>> 0 : 0)];
+				H[a >> 2] = ya[0];
+				H[a + 4 >> 2] = ya[1];
+				break;
+			case "float":
+				Ia[a >> 2] = b;
+				break;
+			case "double":
+				Ja[a >> 3] = b;
+				break;
+			default:
+				B("invalid type for setValue: " + c))raw_html",R"raw_html(
+		}
+	}
+	r.setValue = Da;
+	r.getValue = function(a, b) {
+		b = b || "i8";
+		"*" === b.charAt(b.length - 1) && (b = "i32");
+		switch (b) {
+			case "i1":
+				return F[a];
+			case "i8":
+				return F[a];
+			case "i16":
+				return G[a >> 1];
+			case "i32":
+				)raw_html",R"raw_html(return H[a >> 2];
+			case "i64":
+				return H[a >> 2];
+			case "float":
+				return Ia[a >> 2];
+			case "double":
+				return Ja[a >> 3];
+			default:
+				B("invalid type for setValue: " + b)
+		}
+		return m
+	};
+	var I = 2,
+		Ka = 4;
+	r.ALLOC_NORMAL = 0;
+	r.AL)raw_html",R"raw_html(LOC_STACK = 1;
+	r.ALLOC_STATIC = I;
+	r.ALLOC_DYNAMIC = 3;
+	r.ALLOC_NONE = Ka;
+
+	function K(a, b, c, d) {
+		var f, g;
+		"number" === typeof a ? (f = l, g = a) : (f = p, g = a.length);
+		var h = "string" === typeof b ? b : m,
+			c = c == Ka ? d : [L, qa, ra,)raw_html",R"raw_html( ta][c === i ? I : c](Math.max(g, h ? 1 : b.length));
+		if (f) {
+			d = c;
+			w(0 == (c & 3));
+			for (a = c + (g & -4); d < a; d += 4) H[d >> 2] = 0;
+			for (a = c + g; d < a;) F[d++ | 0] = 0;
+			return c
+		}
+		if ("i8" === h) return a.subarray || a.slice)raw_html",R"raw_html( ? M.set(a, c) : M.set(new Uint8Array(a), c), c;
+		for (var d = 0, k, t; d < g;) {
+			var j = a[d];
+			"function" === typeof j && (j = wa.ld(j));
+			f = h || b[d];
+			0 === f ? d++ : ("i64" == f && (f = "i32"), Da(c + d, j, f), t !== f && (k = la(f), t = f)raw_html",R"raw_html(), d += k)
+		}
+		return c
+	}
+	r.allocate = K;
+
+	function Ca(a, b) {
+		for (var c = p, d, f = 0;;) {
+			d = M[a + f | 0];
+			if (128 <= d) c = l;
+			else if (0 == d && !b) break;
+			f++;
+			if (b && f == b) break
+		}
+		b || (b = f);
+		var g = "";
+		if (!c) )raw_html",R"raw_html({
+			for (; 0 < b;) d = String.fromCharCode.apply(String, M.subarray(a, a + Math.min(b, 1024))), g = g ? g + d : d, a += 1024, b -= 1024;
+			return g
+		}
+		c = new pa;
+		for (f = 0; f < b; f++) d = M[a + f | 0], g += c.ea(d);
+		return g
+	}
+	r.Pointer_strin)raw_html",R"raw_html(gify = Ca;
+	r.UTF16ToString = function(a) {
+		for (var b = 0, c = "";;) {
+			var d = G[a + 2 * b >> 1];
+			if (0 == d) return c;
+			++b;
+			c += String.fromCharCode(d)
+		}
+	};
+	r.stringToUTF16 = function(a, b) {
+		for (var c = 0; c < a.length; ++c) G[b + 2)raw_html",R"raw_html( * c >> 1] = a.charCodeAt(c);
+		G[b + 2 * a.length >> 1] = 0
+	};
+	r.UTF32ToString = function(a) {
+		for (var b = 0, c = "";;) {
+			var d = H[a + 4 * b >> 2];
+			if (0 == d) return c;
+			++b;
+			65536 <= d ? (d -= 65536, c += String.fromCharCode(55296 | d >)raw_html",R"raw_html(> 10, 56320 | d & 1023)) : c += String.fromCharCode(d)
+		}
+	};
+	r.stringToUTF32 = function(a, b) {
+		for (var c = 0, d = 0; d < a.length; ++d) {
+			var f = a.charCodeAt(d);
+			if (55296 <= f && 57343 >= f) var g = a.charCodeAt(++d),
+				f = 65536 + ((f & 1)raw_html",R"raw_html(023) << 10) | g & 1023;
+			H[b + 4 * c >> 2] = f;
+			++c
+		}
+		H[b + 4 * c >> 2] = 0
+	};
+
+	function La(a) {
+		try {
+			"number" === typeof a && (a = Ca(a));
+			if ("_" !== a[0] || "_" !== a[1] || "Z" !== a[2]) return a;
+			switch (a[3]) {
+				case "n":
+			)raw_html",R"raw_html(		return "operator new()";
+				case "d":
+					return "operator delete()"
+			}
+			var b = 3,
+				c = {
+					v: "void",
+					b: "bool",
+					c: "char",
+					s: "short",
+					i: "int",
+					l: "long",
+					f: "float",
+					d: "double",
+					w: "wchar_t",
+				)raw_html",R"raw_html(	a: "signed char",
+					h: "unsigned char",
+					t: "unsigned short",
+					j: "unsigned int",
+					m: "unsigned long",
+					x: "long long",
+					y: "unsigned long long",
+					z: "..."
+				},
+				d = [],
+				f = l,
+				g = function(h, t, j) {
+					var t = t)raw_html",R"raw_html( || Infinity,
+						z = "",
+						A = [],
+						n;
+					if ("N" === a[b]) {
+						b++;
+						"K" === a[b] && b++;
+						for (n = [];
+							"E" !== a[b];)
+							if ("S" === a[b]) {
+								b++;
+								var v = a.indexOf("_", b);
+								n.push(d[a.substri)raw_html",R"raw_html(ng(b, v) || 0] || "?");
+								b = v + 1
+							} else if ("C" === a[b]) n.push(n[n.length - 1]), b += 2;
+						else {
+							var v = parseInt(a.substr(b)),
+								E = v.toString().length;
+							if (!v || !E) {
+								b--;
+								break
+							}
+						)raw_html",R"raw_html(	var da = a.substr(b + E, v);
+							n.push(da);
+							d.push(da);
+							b += E + v
+						}
+						b++;
+						n = n.join("::");
+						t--;
+						if (0 === t) return h ? [n] : n
+					} else if (("K" === a[b] || f && "L" === a[b]) && b++, v = parseInt(a.sub)raw_html",R"raw_html(str(b))) E = v.toString().length, n = a.substr(b + E, v), b += E + v;
+					f = p;
+					"I" === a[b] ? (b++, v = g(l), E = g(l, 1, l), z += E[0] + " " + n + "<" + v.join(", ") +
+						">") : z = n;
+					a: for (; b < a.length && 0 < t--;)
+						if (n = a[b+)raw_html",R"raw_html(+], n in c) A.push(c[n]);
+						else switch (n) {
+							case "P":
+								A.push(g(l, 1, l)[0] + "*");
+								break;
+							case "R":
+								A.push(g(l, 1, l)[0] + "&");
+								break;
+							case "L":
+								b++;
+								v = a.indexOf("E", b) - b;
+			)raw_html",R"raw_html(					A.push(a.substr(b, v));
+								b += v + 2;
+								break;
+							case "A":
+								v = parseInt(a.substr(b));
+								b += v.toString().length;
+								"_" !== a[b] && e("?");
+								b++;
+								A.push(g(l, 1, l)[0] + " [" + v + "]");
+								break)raw_html",R"raw_html(;
+							case "E":
+								break a;
+							default:
+								z += "?" + n;
+								break a
+						}!j && (1 === A.length && "void" === A[0]) && (A = []);
+					return h ? A : z + ("(" + A.join(", ") + ")")
+				};
+			return g()
+		} catch (h) {
+			return a
+		}
+)raw_html",R"raw_html(	}
+
+	function Ma() {
+		var a = Error().stack;
+		return a ? a.replace(/__Z[\w\d_]+/g, function(a) {
+			var c = La(a);
+			return a === c ? a : a + " [" + c + "]"
+		}) : "(no stack trace available)"
+	}
+	var F, M, G, Na, H, Oa, Ia, Ja, Pa = 0,
+		x = 0,
+		Qa = )raw_html",R"raw_html(0,
+		u = 0,
+		Ra = 0,
+		Sa = 0,
+		y = 0,
+		ua = r.TOTAL_MEMORY || 16777216;
+	w("undefined" !== typeof Int32Array && "undefined" !== typeof Float64Array && !!(new Int32Array(1)).subarray && !!(new Int32Array(1)).set, "Cannot fallback to non-typed array case)raw_html",R"raw_html(: Code is too specialized");
+	var N = new ArrayBuffer(ua);
+	F = new Int8Array(N);
+	G = new Int16Array(N);
+	H = new Int32Array(N);
+	M = new Uint8Array(N);
+	Na = new Uint16Array(N);
+	Oa = new Uint32Array(N);
+	Ia = new Float32Array(N);
+	Ja = new Float64Array()raw_html",R"raw_html(N);
+	H[0] = 255;
+	w(255 === M[0] && 0 === M[3], "Typed arrays 2 must be run on a little-endian system");
+	r.HEAP = i;
+	r.HEAP8 = F;
+	r.HEAP16 = G;
+	r.HEAP32 = H;
+	r.HEAPU8 = M;
+	r.HEAPU16 = Na;
+	r.HEAPU32 = Oa;
+	r.HEAPF32 = Ia;
+	r.HEAPF64 = Ja;
+
+	function )raw_html",R"raw_html(O(a) {
+		for (; 0 < a.length;) {
+			var b = a.shift();
+			if ("function" == typeof b) b();
+			else {
+				var c = b.J;
+				"number" === typeof c ? b.aa === i ? na("v", c) : na("vi", c, [b.aa]) : c(b.aa === i ? m : b.aa)
+			}
+		}
+	}
+	var Ta = [],
+		P = [],
+	)raw_html",R"raw_html(	Ua = [],
+		Va = [],
+		Wa = [],
+		Xa = p;
+
+	function Ya(a) {
+		Ta.unshift(a)
+	}
+	r.addOnPreRun = r.bd = Ya;
+	r.addOnInit = r.Zc = function(a) {
+		P.unshift(a)
+	};
+	r.addOnPreMain = r.ad = function(a) {
+		Ua.unshift(a)
+	};
+	r.addOnExit = r.Yc = function(a) )raw_html",R"raw_html({
+		Va.unshift(a)
+	};
+
+	function Za(a) {
+		Wa.unshift(a)
+	}
+	r.addOnPostRun = r.$c = Za;
+
+	function D(a, b, c) {
+		a = (new pa).Sa(a);
+		c && (a.length = c);
+		b || a.push(0);
+		return a
+	}
+	r.intArrayFromString = D;
+	r.intArrayToString = function(a) {
+		f)raw_html",R"raw_html(or (var b = [], c = 0; c < a.length; c++) {
+			var d = a[c];
+			255 < d && (d &= 255);
+			b.push(String.fromCharCode(d))
+		}
+		return b.join("")
+	};
+	r.writeStringToMemory = function(a, b, c) {
+		a = D(a, c);
+		for (c = 0; c < a.length;) F[b + c | 0] = a[c)raw_html",R"raw_html(], c += 1
+	};
+
+	function Ba(a, b) {
+		for (var c = 0; c < a.length; c++) F[b + c | 0] = a[c]
+	}
+	r.writeArrayToMemory = Ba;
+	r.writeAsciiToMemory = function(a, b, c) {
+		for (var d = 0; d < a.length; d++) F[b + d | 0] = a.charCodeAt(d);
+		c || (F[b + a.len)raw_html",R"raw_html(gth | 0] = 0)
+	};
+	Math.imul || (Math.imul = function(a, b) {
+		var c = a & 65535,
+			d = b & 65535;
+		return c * d + ((a >>> 16) * d + c * (b >>> 16) << 16) | 0
+	});
+	Math.nd = Math.imul;
+	var Ea = Math.abs,
+		Ha = Math.ceil,
+		Ga = Math.floor,
+		Fa = Mat)raw_html",R"raw_html(h.min,
+		Q = 0,
+		$a = m,
+		ab = m;
+
+	function bb() {
+		Q++;
+		r.monitorRunDependencies && r.monitorRunDependencies(Q)
+	}
+	r.addRunDependency = bb;
+
+	function cb() {
+		Q--;
+		r.monitorRunDependencies && r.monitorRunDependencies(Q);
+		if (0 == Q && ($a !== )raw_html",R"raw_html(m && (clearInterval($a), $a = m), ab)) {
+			var a = ab;
+			ab = m;
+			a()
+		}
+	}
+	r.removeRunDependency = cb;
+	r.preloadedImages = {};
+	r.preloadedAudios = {};
+	Pa = 8;
+	x = Pa + 528;
+	P.push({
+		J: function() {
+			db()
+		}
+	});
+	K([0, 0, 0, 0, 3, 0, 0, 0,)raw_html",R"raw_html( 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], "i8", Ka, 8);
+	var eb = va(K(12, "i8", I), 8);
+	w(0 == eb % 8);
+	r._memset = fb;
+	r._memcpy = gb;
+	var hb = K([8, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0,)raw_html",R"raw_html( 3, 0, 1, 0, 2, 0, 1, 0, 5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 6, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, )raw_html",R"raw_html(0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 7, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 6, 0, 1)raw_html",R"raw_html(, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 5, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0, 4, 0, 1, 0, 2, 0,
+		1, 0, 3, 0, 1, 0, 2, 0, 1, 0
+	], "i8", I);
+	r._llvm_cttz_i32 = ib;
+	var jb = 0;
+
+	function kb(a) {
+)raw_html",R"raw_html(		return H[jb >> 2] = a
+	}
+
+	function lb(a) {
+		lb.Ka || (y = y + 4095 & -4096, lb.Ka = l, w(ta), lb.Ia = ta, ta = function() {
+			B("cannot dynamically allocate, sbrk now has control")
+		});
+		var b = y;
+		0 != a && lb.Ia(a);
+		return b
+	}
+	var R = {
+		L:)raw_html",R"raw_html( 1,
+		Q: 2,
+		Lc: 3,
+		Gb: 4,
+		D: 5,
+		ma: 6,
+		Ya: 7,
+		dc: 8,
+		Da: 9,
+		nb: 10,
+		ia: 11,
+		Vc: 11,
+		Fa: 12,
+		Ca: 13,
+		zb: 14,
+		pc: 15,
+		lb: 16,
+		ja: 17,
+		Wc: 18,
+		ka: 19,
+		rc: 20,
+		Y: 21,
+		C: 22,
+		Zb: 23,
+		Ea: 24,
+		vc: 25,
+		Sc: 26,
+		Ab)raw_html",R"raw_html(: 27,
+		lc: 28,
+		$: 29,
+		Ic: 30,
+		Sb: 31,
+		Bc: 32,
+		wb: 33,
+		Fc: 34,
+		hc: 42,
+		Db: 43,
+		ob: 44,
+		Jb: 45,
+		Kb: 46,
+		Lb: 47,
+		Rb: 48,
+		Tc: 49,
+		bc: 50,
+		Ib: 51,
+		tb: 35,
+		ec: 37,
+		eb: 52,
+		hb: 53,
+		Xc: 54,
+		$b: 55,
+		ib: 56,
+		jb: 57,
+	)raw_html",R"raw_html(	ub: 35,
+		kb: 59,
+		nc: 60,
+		cc: 61,
+		Pc: 62,
+		mc: 63,
+		ic: 64,
+		jc: 65,
+		Hc: 66,
+		fc: 67,
+		ab: 68,
+		Mc: 69,
+		pb: 70,
+		Cc: 71,
+		Ub: 72,
+		xb: 73,
+		gb: 74,
+		wc: 76,
+		fb: 77,
+		Gc: 78,
+		Mb: 79,
+		Nb: 80,
+		Qb: 81,
+		Pb: 82,
+		Ob: 83,
+		oc: 3)raw_html",R"raw_html(8,
+		la: 39,
+		Vb: 36,
+		Z: 40,
+		xc: 95,
+		Ac: 96,
+		sb: 104,
+		ac: 105,
+		bb: 97,
+		Ec: 91,
+		tc: 88,
+		kc: 92,
+		Jc: 108,
+		rb: 111,
+		Za: 98,
+		qb: 103,
+		Yb: 101,
+		Wb: 100,
+		Qc: 110,
+		Bb: 112,
+		Cb: 113,
+		Fb: 115,
+		cb: 114,
+		vb: 89,
+		Tb: 90,
+		)raw_html",R"raw_html(Dc: 93,
+		Kc: 94,
+		$a: 99,
+		Xb: 102,
+		Hb: 106,
+		qc: 107,
+		Rc: 109,
+		Uc: 87,
+		yb: 122,
+		Nc: 116,
+		uc: 95,
+		gc: 123,
+		Eb: 84,
+		yc: 75,
+		mb: 125,
+		sc: 131,
+		zc: 130,
+		Oc: 86
+	};
+	r._strlen = mb;
+	var nb = {
+			"0": "Success",
+			1: "Not super-)raw_html",R"raw_html(user",
+			2: "No such file or directory",
+			3: "No such process",
+			4: "Interrupted system call",
+			5: "I/O error",
+			6: "No such device or address",
+			7: "Arg list too long",
+			8: "Exec format error",
+			9: "Bad file number",
+			10: "No children",
+	)raw_html",R"raw_html(		11: "No more processes",
+			12: "Not enough core",
+			13: "Permission denied",
+			14: "Bad address",
+			15: "Block device required",
+			16: "Mount device busy",
+			17: "File exists",
+			18: "Cross-device link",
+			19: "No such device",
+			20: "Not a dire)raw_html",R"raw_html(ctory",
+			21: "Is a directory",
+			22: "Invalid argument",
+			23: "Too many open files in system",
+			24: "Too many open files",
+			25: "Not a typewriter",
+			26: "Text file busy",
+			27: "File too large",
+			28: "No space left on device",
+			29: "Illegal)raw_html",R"raw_html( seek",
+			30: "Read only file system",
+			31: "Too many links",
+			32: "Broken pipe",
+			33: "Math arg out of domain of func",
+			34: "Math result not representable",
+			35: "File locking deadlock error",
+			36: "File or path name too long",
+			37: "No re)raw_html",R"raw_html(cord locks available",
+			38: "Function not implemented",
+			39: "Directory not empty",
+			40: "Too many symbolic links",
+			42: "No message of desired type",
+			43: "Identifier removed",
+			44: "Channel number out of range",
+			45: "Level 2 not synchroniz)raw_html",R"raw_html(ed",
+			46: "Level 3 halted",
+			47: "Level 3 reset",
+			48: "Link number out of range",
+			49: "Protocol driver not attached",
+			50: "No CSI structure available",
+			51: "Level 2 halted",
+			52: "Invalid exchange",
+			53: "Invalid request descriptor",
+		)raw_html",R"raw_html(	54: "Exchange full",
+			55: "No anode",
+			56: "Invalid request code",
+			57: "Invalid slot",
+			59: "Bad font file fmt",
+			60: "Device not a stream",
+			61: "No data (for no delay io)",
+			62: "Timer expired",
+			63: "Out of streams resources",
+			64: ")raw_html",R"raw_html(Machine is not on the network",
+			65: "Package not installed",
+			66: "The object is remote",
+			67: "The link has been severed",
+			68: "Advertise error",
+			69: "Srmount error",
+			70: "Communication error on send",
+			71: "Protocol error",
+			72: "Mult)raw_html",R"raw_html(ihop attempted",
+			73: "Cross mount point (not really error)",
+			74: "Trying to read unreadable message",
+			75: "Value too large for defined data type",
+			76: "Given log. name not unique",
+			77: "f.d. invalid for this operation",
+			78: "Remote addres)raw_html",R"raw_html(s changed",
+			79: "Can   access a needed shared lib",
+			80: "Accessing a corrupted shared lib",
+			81: ".lib section in a.out corrupted",
+			82: "Attempting to link in too many libs",
+			83: "Attempting to exec a shared library",
+			84: "Illegal byte seq)raw_html",R"raw_html(uence",
+			86: "Streams pipe error",
+			87: "Too many users",
+			88: "Socket operation on non-socket",
+			89: "Destination address required",
+			90: "Message too long",
+			91: "Protocol wrong type for socket",
+			92: "Protocol not available",
+			93: "Unkno)raw_html",R"raw_html(wn protocol",
+			94: "Socket type not supported",
+			95: "Not supported",
+			96: "Protocol family not supported",
+			97: "Address family not supported by protocol family",
+			98: "Address already in use",
+			99: "Address not available",
+			100: "Network in)raw_html",R"raw_html(terface is not configured",
+			101: "Network is unreachable",
+			102: "Connection reset by network",
+			103: "Connection aborted",
+			104: "Connection reset by peer",
+			105: "No buffer space available",
+			106: "Socket is already connected",
+			107: "Sock)raw_html",R"raw_html(et is not connected",
+			108: "Can't send after socket shutdown",
+			109: "Too many references",
+			110: "Connection timed out",
+			111: "Connection refused",
+			112: "Host is down",
+			113: "Host is unreachable",
+			114: "Socket already connected",
+			115)raw_html",R"raw_html(: "Connection already in progress",
+			116: "Stale file handle",
+			122: "Quota exceeded",
+			123: "No medium (in tape drive)",
+			125: "Operation canceled",
+			130: "Previous owner died",
+			131: "State not recoverable"
+		},
+		ob = [];
+
+	function pb(a, b))raw_html",R"raw_html( {
+		ob[a] = {
+			input: [],
+			G: [],
+			O: b
+		};
+		qb[a] = {
+			k: rb
+		}
+	}
+	var rb = {
+			open: function(a) {
+				var b = ob[a.e.U];
+				b || e(new S(R.ka));
+				a.p = b;
+				a.seekable = p
+			},
+			close: function(a) {
+				a.p.G.length && a.p.O.T(a.p)raw_html",R"raw_html(, 10)
+			},
+			H: function(a, b, c, d) {
+				(!a.p || !a.p.O.ta) && e(new S(R.ma));
+				for (var f = 0, g = 0; g < d; g++) {
+					var h;
+					try {
+						h = a.p.O.ta(a.p)
+					} catch (k) {
+						e(new S(R.D))
+					}
+					h === i && 0 === f && e(new S(R.i)raw_html",R"raw_html(a));
+					if (h === m || h === i) break;
+					f++;
+					b[c + g] = h
+				}
+				f && (a.e.timestamp = Date.now());
+				return f
+			},
+			write: function(a, b, c, d) {
+				(!a.p || !a.p.O.T) && e(new S(R.ma));
+				for (var f = 0; f < d; f++) try {
+					a.p.O)raw_html",R"raw_html(.T(a.p, b[c + f])
+				} catch (g) {
+					e(new S(R.D))
+				}
+				d && (a.e.timestamp =
+					Date.now());
+				return f
+			}
+		},
+		T = {
+			u: m,
+			Ba: 1,
+			X: 2,
+			ha: 3,
+			B: function() {
+				return T.createNode(m, "/", 16895, 0)
+			},
+			createNode: )raw_html",R"raw_html(function(a, b, c, d) {
+				(24576 === (c & 61440) || 4096 === (c & 61440)) && e(new S(R.L));
+				T.u || (T.u = {
+					dir: {
+						e: {
+							A: T.g.A,
+							o: T.g.o,
+							da: T.g.da,
+							K: T.g.K,
+							K: T.g.K,
+							rename: T.g.rename,
+						)raw_html",R"raw_html(	Aa: T.g.Aa,
+							za: T.g.za,
+							ya: T.g.ya,
+							W: T.g.W
+						},
+						I: {
+							F: T.k.F
+						}
+					},
+					file: {
+						e: {
+							A: T.g.A,
+							o: T.g.o
+						},
+						I: {
+							F: T.k.F,
+							H: T.k.H,
+							write: T.k.write,
+	)raw_html",R"raw_html(						na: T.k.na,
+							va: T.k.va
+						}
+					},
+					link: {
+						e: {
+							A: T.g.A,
+							o: T.g.o,
+							V: T.g.V
+						},
+						I: {}
+					},
+					qa: {
+						e: {
+							A: T.g.A,
+							o: T.g.o
+						},
+						I: sb
+					}
+				});
+				c = tb)raw_html",R"raw_html((a, b, c, d);
+				16384 === (c.mode & 61440) ? (c.g =
+					T.u.dir.e, c.k = T.u.dir.I, c.n = {}) : 32768 === (c.mode & 61440) ? (c.g = T.u.file.e, c.k = T.u.file.I, c.n = [], c.S = T.X) : 40960 === (c.mode & 61440) ? (c.g = T.u.link.e, c.k = T.u.link.I) : )raw_html",R"raw_html(8192 === (c.mode & 61440) && (c.g = T.u.qa.e, c.k = T.u.qa.I);
+				c.timestamp = Date.now();
+				a && (a.n[b] = c);
+				return c
+			},
+			ba: function(a) {
+				a.S !== T.X && (a.n = Array.prototype.slice.call(a.n), a.S = T.X)
+			},
+			g: {
+				A: function()raw_html",R"raw_html(a) {
+					var b = {};
+					b.hd = 8192 === (a.mode & 61440) ? a.id : 1;
+					b.od = a.id;
+					b.mode = a.mode;
+					b.td = 1;
+					b.uid = 0;
+					b.md = 0;
+					b.U = a.U;
+					b.size = 16384 === (a.mode & 61440) ? 4096 : 32768 === (a.mode & 61440) ? a.n)raw_html",R"raw_html(.length :
+						40960 === (a.mode & 61440) ? a.link.length : 0;
+					b.dd = new Date(a.timestamp);
+					b.sd = new Date(a.timestamp);
+					b.gd = new Date(a.timestamp);
+					b.Ja = 4096;
+					b.ed = Math.ceil(b.size / b.Ja);
+					return b
+				},
+				o: fun)raw_html",R"raw_html(ction(a, b) {
+					b.mode !== i && (a.mode = b.mode);
+					b.timestamp !== i && (a.timestamp = b.timestamp);
+					if (b.size !== i) {
+						T.ba(a);
+						var c = a.n;
+						if (b.size < c.length) c.length = b.size;
+						else
+							for (; b.size > c.leng)raw_html",R"raw_html(th;) c.push(0)
+					}
+				},
+				da: function() {
+					e(ub[R.Q])
+				},
+				K: function(a, b, c, d) {
+					return T.createNode(a, b, c, d)
+				},
+				rename: function(a, b, c) {
+					if (16384 === (a.mode & 61440)) {
+						var d;
+						try {
+							d = vb)raw_html",R"raw_html((b,
+								c)
+						} catch (f) {}
+						if (d)
+							for (var g in d.n) e(new S(R.la))
+					}
+					delete a.parent.n[a.name];
+					a.name = c;
+					b.n[c] = a;
+					a.parent = b
+				},
+				Aa: function(a, b) {
+					delete a.n[b]
+				},
+				za: function()raw_html",R"raw_html(a, b) {
+					var c = vb(a, b),
+						d;
+					for (d in c.n) e(new S(R.la));
+					delete a.n[b]
+				},
+				ya: function(a) {
+					var b = [".", ".."],
+						c;
+					for (c in a.n) a.n.hasOwnProperty(c) && b.push(c);
+					return b
+				},
+				W: function(a, b)raw_html",R"raw_html(, c) {
+					a = T.createNode(a, b, 41471, 0);
+					a.link = c;
+					return a
+				},
+				V: function(a) {
+					40960 !== (a.mode & 61440) && e(new S(R.C));
+					return a.link
+				}
+			},
+			k: {
+				H: function(a, b, c, d, f) {
+					a = a.e.n;
+					if (f >=)raw_html",R"raw_html( a.length) return 0;
+					d = Math.min(a.length -
+						f, d);
+					w(0 <= d);
+					if (8 < d && a.subarray) b.set(a.subarray(f, f + d), c);
+					else
+						for (var g = 0; g < d; g++) b[c + g] = a[f + g];
+					return d
+				},
+				write: function(a, b, c, )raw_html",R"raw_html(d, f, g) {
+					var h = a.e;
+					h.timestamp = Date.now();
+					a = h.n;
+					if (d && 0 === a.length && 0 === f && b.subarray) return g && 0 === c ? (h.n = b, h.S = b.buffer === F.buffer ? T.Ba : T.ha) : (h.n = new Uint8Array(b.subarray(c, c + d)), h.S =)raw_html",R"raw_html( T.ha), d;
+					T.ba(h);
+					for (a = h.n; a.length < f;) a.push(0);
+					for (g = 0; g < d; g++) a[f + g] = b[c + g];
+					return d
+				},
+				F: function(a, b, c) {
+					1 === c ? b += a.position : 2 === c && 32768 === (a.e.mode & 61440) && (b += a.e.n.)raw_html",R"raw_html(length);
+					0 > b && e(new S(R.C));
+					a.Va = [];
+					return a.position = b
+				},
+				na: function(a, b, c) {
+					T.ba(a.e);
+					a = a.e.n;
+					for (b += c; b > a.length;) a.push(0)
+				},
+				va: function(a, b, c, d, f, g, h) {
+					32768 !== (a.)raw_html",R"raw_html(e.mode & 61440) && e(new S(R.ka));
+					a = a.e.n;
+					if (!(h & 2) && (a.buffer === b || a.buffer === b.buffer)) f = p, d = a.byteOffset;
+					else {
+						if (0 < f || f + d < a.length) a = a.subarray ? a.subarray(f, f + d) : Array.prototype.slice.call()raw_html",R"raw_html(a, f, f + d);
+						f = l;
+						(d = L(d)) || e(new S(R.Fa));
+						b.set(a, d)
+					}
+					return {
+						wd: d,
+						cd: f
+					}
+				}
+			}
+		},
+		wb = K(1, "i32*", I),
+		xb = K(1, "i32*", I),
+		yb = K(1, "i32*", I),
+		zb = m,
+		qb = [m],
+		Ab = [m],
+)raw_html",R"raw_html(		Bb = 1,
+		Cb = m,
+		Db = l,
+		S = m,
+		ub = {};
+
+	function U(a, b) {
+		a = Eb("/", a);
+		b = b || {
+			fa: 0
+		};
+		8 < b.fa && e(new S(R.Z));
+		for (var c = Fb(a.split("/").filter(function(a) {
+				return !!a
+			}), p), d = zb, f = "/", g = 0; g < c.len)raw_html",R"raw_html(gth; g++) {
+			var h = g === c.length - 1;
+			if (h && b.parent) break;
+			d = vb(d, c[g]);
+			f = V(f + "/" + c[g]);
+			d.Pa && (d = d.B.root);
+			if (!h || b.N)
+				for (h = 0; 40960 === (d.mode & 61440);) {
+					d = U(f, {
+						N: p
+					}).e;
+					d.g)raw_html",R"raw_html(.V || e(new S(R.C));
+					var d = d.g.V(d),
+						k = Eb;
+					var t = /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/.exec(f).slice(1),
+						f = t[0],
+						t = t[1];
+					!f && !t ? f = "." : (t && (t = t.substr(0, t.length - 1)), f += t)raw_html",R"raw_html();
+					f = k(f, d);
+					d = U(f, {
+						fa: b.fa
+					}).e;
+					40 < h++ && e(new S(R.Z))
+				}
+		}
+		return {
+			path: f,
+			e: d
+		}
+	}
+
+	function W(a) {
+		for (var b;;) {
+			if (a === a.parent) return a = a.B.Qa, !b ? a : "/" !== a[a.length - 1] ? a)raw_html",R"raw_html( + "/" + b : a + b;
+			b = b ? a.name + "/" + b : a.name;
+			a = a.parent
+		}
+	}
+
+	function Gb(a, b) {
+		for (var c = 0, d = 0; d < b.length; d++) c = (c << 5) - c + b.charCodeAt(d) | 0;
+		return (a + c >>> 0) % Cb.length
+	}
+
+	function vb(a, b) {
+		var c =)raw_html",R"raw_html( Hb(a, "x");
+		c && e(new S(c));
+		for (c = Cb[Gb(a.id, b)]; c; c = c.Ra) {
+			var d = c.name;
+			if (c.parent.id === a.id && d === b) return c
+		}
+		return a.g.da(a, b)
+	}
+
+	function tb(a, b, c, d) {
+		Ib || (Ib = function(a, b, c, d) {
+			this.id = Bb++;)raw_html",R"raw_html(
+			this.name = b;
+			this.mode = c;
+			this.g = {};
+			this.k = {};
+			this.U = d;
+			this.B = this.parent = m;
+			a || (a = this);
+			this.parent = a;
+			this.B = a.B;
+			a = Gb(this.parent.id, this.name);
+			this.Ra = Cb[a];
+			Cb[a] = this
+		}, Ib.prot)raw_html",R"raw_html(otype = {}, Object.defineProperties(Ib.prototype, {
+			H: {
+				get: function() {
+					return 365 === (this.mode & 365)
+				},
+				set: function(a) {
+					a ? this.mode |= 365 : this.mode &= -366
+				}
+			},
+			write: {
+				get: function() {
+					return 14)raw_html",R"raw_html(6 === (this.mode & 146)
+				},
+				set: function(a) {
+					a ? this.mode |= 146 : this.mode &= -147
+				}
+			},
+			Oa: {
+				get: function() {
+					return 16384 ===
+						(this.mode & 61440)
+				}
+			},
+			Na: {
+				get: function() {
+					return 8192 === ()raw_html",R"raw_html(this.mode & 61440)
+				}
+			}
+		}));
+		return new Ib(a, b, c, d)
+	}
+	var Jb = {
+		r: 0,
+		rs: 1052672,
+		"r+": 2,
+		w: 577,
+		wx: 705,
+		xw: 705,
+		"w+": 578,
+		"wx+": 706,
+		"xw+": 706,
+		a: 1089,
+		ax: 1217,
+		xa: 1217,
+		"a+": 1090,
+		"ax+": 1218,
+		"xa)raw_html",R"raw_html(+": 1218
+	};
+
+	function Hb(a, b) {
+		return Db ? 0 : -1 !== b.indexOf("r") && !(a.mode & 292) || -1 !== b.indexOf("w") && !(a.mode & 146) || -1 !== b.indexOf("x") && !(a.mode & 73) ? R.Ca : 0
+	}
+
+	function Kb(a, b) {
+		try {
+			return vb(a, b), R.ja
+		} ca)raw_html",R"raw_html(tch (c) {}
+		return Hb(a, "wx")
+	}
+	var sb = {
+		open: function(a) {
+			a.k = qb[a.e.U].k;
+			a.k.open && a.k.open(a)
+		},
+		F: function() {
+			e(new S(R.$))
+		}
+	};
+
+	function Lb(a, b, c) {
+		var d = U(a, {
+				parent: l
+			}).e,
+			a = Mb(a),
+			f = Kb(d)raw_html",R"raw_html(, a);
+		f && e(new S(f));
+		d.g.K || e(new S(R.L));
+		return d.g.K(d, a, b, c)
+	}
+
+	function Nb(a, b) {
+		b = (b !== i ? b : 438) & 4095;
+		b |= 32768;
+		return Lb(a, b, 0)
+	}
+
+	function X(a, b) {
+		b = (b !== i ? b : 511) & 1023;
+		b |= 16384;
+		return Lb)raw_html",R"raw_html((a, b, 0)
+	}
+
+	function Ob(a, b, c) {
+		"undefined" === typeof c && (c = b, b = 438);
+		return Lb(a, b | 8192, c)
+	}
+
+	function Pb(a, b) {
+		var c = U(b, {
+				parent: l
+			}).e,
+			d = Mb(b),
+			f = Kb(c, d);
+		f && e(new S(f));
+		c.g.W || e(new S(R.L));
+)raw_html",R"raw_html(		return c.g.W(c, d, a)
+	}
+
+	function Qb(a, b) {
+		var c;
+		c = "string" === typeof a ? U(a, {
+			N: l
+		}).e : a;
+		c.g.o || e(new S(R.L));
+		c.g.o(c, {
+			mode: b & 4095 | c.mode & -4096,
+			timestamp: Date.now()
+		})
+	}
+
+	function Rb(a, b) {
+		var c, d;)raw_html",R"raw_html(
+		"string" === typeof b ? (d = Jb[b], "undefined" === typeof d && e(Error("Unknown file open mode: " + b))) : d = b;
+		b = d;
+		c = b & 64 ? ("undefined" === typeof c ? 438 : c) & 4095 | 32768 : 0;
+		var f;
+		if ("object" === typeof a) f = a;
+		else {
+			)raw_html",R"raw_html(a = V(a);
+			try {
+				f = U(a, {
+					N: !(b & 131072)
+				}).e
+			} catch (g) {}
+		}
+		b & 64 && (f ? b & 128 && e(new S(R.ja)) : f = Lb(a, c, 0));
+		f || e(new S(R.Q));
+		8192 === (f.mode & 61440) && (b &= -513);
+		f ? 40960 === (f.mode & 61440) ? c = R)raw_html",R"raw_html(.Z : 16384 === (f.mode & 61440) && (0 !== (b & 2097155) || b & 512) ? c = R.Y : (c = ["r", "w", "rw"][b & 2097155], b & 512 && (c += "w"), c = Hb(f, c)) : c = R.Q;
+		c && e(new S(c));
+		b & 512 && (c = f, c = "string" === typeof c ? U(c, {
+			N: l
+		}).e :)raw_html",R"raw_html( c, c.g.o || e(new S(R.L)), 16384 === (c.mode & 61440) && e(new S(R.Y)), 32768 !== (c.mode & 61440) && e(new S(R.C)), (d = Hb(c, "w")) && e(new S(d)), c.g.o(c, {
+			size: 0,
+			timestamp: Date.now()
+		}));
+		var b = b & -641,
+			h;
+		f = {
+			e: f,
+			path)raw_html",R"raw_html(: W(f),
+			M: b,
+			seekable: l,
+			position: 0,
+			k: f.k,
+			Va: [],
+			error: p
+		};
+		Y || (Y = q(), Y.prototype = {}, Object.defineProperties(Y.prototype, {
+			object: {
+				get: function() {
+					return this.e
+				},
+				set: function(a) {
+					this.)raw_html",R"raw_html(e = a
+				}
+			},
+			qd: {
+				get: function() {
+					return 1 !== (this.M & 2097155)
+				}
+			},
+			rd: {
+				get: function() {
+					return 0 !==
+						(this.M & 2097155)
+				}
+			},
+			pd: {
+				get: function() {
+					return this.M & 1024
+				}
+			}
+		}))raw_html",R"raw_html();
+		if (f.__proto__) f.__proto__ = Y.prototype;
+		else {
+			c = new Y;
+			for (var k in f) c[k] = f[k];
+			f = c
+		}
+		a: {
+			k = i || 4096;
+			for (c = i || 1; c <= k; c++)
+				if (!Ab[c]) {
+					h = c;
+					break a
+				}
+			e(new S(R.Ea))
+		}
+		f.q = h)raw_html",R"raw_html(;
+		h = Ab[h] = f;
+		h.k.open && h.k.open(h);
+		r.logReadFiles && !(b & 1) && (Sb || (Sb = {}), a in Sb || (Sb[a] = 1, r.printErr("read file: " + a)));
+		return h
+	}
+
+	function Tb(a) {
+		try {
+			a.k.close && a.k.close(a)
+		} catch (b) {
+			e(b)
+		} finall)raw_html",R"raw_html(y {
+			Ab[a.q] = m
+		}
+	}
+
+	function Ub() {
+		S || (S = function(a) {
+			this.jd = a;
+			for (var b in R)
+				if (R[b] === a) {
+					this.code = b;
+					break
+				}
+			this.message = nb[a];
+			this.stack = Ma()
+		}, S.prototype = Error(), [R.Q].forEach(fun)raw_html",R"raw_html(ction(a) {
+			ub[a] = new S(a);
+			ub[a].stack = "<generic error, no stack>"
+		}))
+	}
+	var Vb;
+
+	function Wb(a, b) {
+		var c = 0;
+		a && (c |= 365);
+		b && (c |= 146);
+		return c
+	}
+
+	function Xb(a, b, c, d, f, g) {
+		a = b ? V(("string" === typeof a ? a :)raw_html",R"raw_html( W(a)) + "/" + b) : a;
+		d = Wb(d, f);
+		f = Nb(a, d);
+		if (c) {
+			if ("string" === typeof c) {
+				for (var a = Array(c.length), b = 0, h = c.length; b < h; ++b) a[b] = c.charCodeAt(b);
+				c = a
+			}
+			Qb(f, d | 146);
+			var a = Rb(f, "w"),
+				b = c,)raw_html",R"raw_html(
+				h = c.length,
+				k = 0;
+			(0 > h || 0 > k) && e(new S(R.C));
+			0 === (a.M & 2097155) && e(new S(R.Da));
+			16384 === (a.e.mode & 61440) && e(new S(R.Y));
+			a.k.write || e(new S(R.C));
+			c = l;
+			"undefined" === typeof k ? (k = a.position, c = p))raw_html",R"raw_html( : a.seekable || e(new S(R.$));
+			a.M & 1024 && ((!a.seekable || !a.k.F) && e(new S(R.$)), a.k.F(a, 0, 2));
+			g =
+				a.k.write(a, b, 0, h, k, g);
+			c || (a.position += g);
+			Tb(a);
+			Qb(f, d)
+		}
+		return f
+	}
+
+	function Z(a, b, c, d) {
+		a = V(("str)raw_html",R"raw_html(ing" === typeof a ? a : W(a)) + "/" + b);
+		b = Wb(!!c, !!d);
+		Z.ua || (Z.ua = 64);
+		var f;
+		f = Z.ua++ << 8 | 0;
+		qb[f] = {
+			k: {
+				open: function(a) {
+					a.seekable = p
+				},
+				close: function() {
+					d && (d.buffer && d.buffer.length) && d)raw_html",R"raw_html((10)
+				},
+				H: function(a, b, d, f) {
+					for (var j = 0, z = 0; z < f; z++) {
+						var A;
+						try {
+							A = c()
+						} catch (n) {
+							e(new S(R.D))
+						}
+						A === i && 0 === j && e(new S(R.ia));
+						if (A === m || A === i) break;
+		)raw_html",R"raw_html(				j++;
+						b[d + z] = A
+					}
+					j && (a.e.timestamp = Date.now());
+					return j
+				},
+				write: function(a, b, c, f) {
+					for (var j = 0; j < f; j++) try {
+						d(b[c + j])
+					} catch (z) {
+						e(new S(R.D))
+					}
+					f && (a.e.timestam)raw_html",R"raw_html(p = Date.now());
+					return j
+				}
+			}
+		};
+		return Ob(a, b, f)
+	}
+
+	function Yb(a) {
+		if (a.Na || a.Oa || a.link || a.n) return l;
+		var b = l;
+		"undefined" !== typeof XMLHttpRequest && e(Error("Lazy loading should have been performed (contents set))raw_html",R"raw_html( in createLazyFile, but it was not. Lazy loading only works in web workers. Use --embed-file or --preload-file in emcc on the main thread."));
+		if (r.read) try {
+			a.n = D(r.read(a.url), l)
+		} catch (c) {
+			b = p
+		} else e(Error("Cannot load without r)raw_html",R"raw_html(ead() or XMLHttpRequest."));
+		b || kb(R.D);
+		return b
+	}
+	var Ib, Y, Sb;
+
+	function Fb(a, b) {
+		for (var c = 0, d = a.length - 1; 0 <= d; d--) {
+			var f = a[d];
+			"." === f ? a.splice(d, 1) : ".." === f ? (a.splice(d, 1), c++) : c && (a.splice(d, 1), )raw_html",R"raw_html(c--)
+		}
+		if (b)
+			for (; c--; c) a.unshift("..");
+		return a
+	}
+
+	function V(a) {
+		var b = "/" === a.charAt(0),
+			c = "/" === a.substr(-1),
+			a = Fb(a.split("/").filter(function(a) {
+				return !!a
+			}), !b).join("/");
+		!a && !b && (a = ".");
+		a &)raw_html",R"raw_html(& c && (a += "/");
+		return (b ? "/" : "") + a
+	}
+
+	function Mb(a) {
+		if ("/" === a) return "/";
+		var b = a.lastIndexOf("/");
+		return -1 === b ? a : a.substr(b + 1)
+	}
+
+	function Eb() {
+		for (var a = "", b = p, c = arguments.length - 1; - 1 <= c && !b;)raw_html",R"raw_html( c--) {
+			var d = 0 <= c ? arguments[c] : "/";
+			"string" !== typeof d && e(new TypeError("Arguments to path.resolve must be strings"));
+			d && (a = d + "/" + a, b = "/" === d.charAt(0))
+		}
+		a = Fb(a.split("/").filter(function(a) {
+			return !!a
+		}),)raw_html",R"raw_html( !b).join("/");
+		return (b ? "/" : "") + a || "."
+	}
+	var Zb = p,
+		$b = p,
+		ac = p,
+		bc = p,
+		cc = i,
+		dc = i;
+
+	function ec(a) {
+		return {
+			jpg: "image/jpeg",
+			jpeg: "image/jpeg",
+			png: "image/png",
+			bmp: "image/bmp",
+			ogg: "audio/ogg",
+	)raw_html",R"raw_html(		wav: "audio/wav",
+			mp3: "audio/mpeg"
+		}[a.substr(a.lastIndexOf(".") + 1)]
+	}
+	var fc = [];
+
+	function gc() {
+		var a = r.canvas;
+		fc.forEach(function(b) {
+			b(a.width, a.height)
+		})
+	}
+
+	function hc() {
+		var a = r.canvas;
+		this.Xa = a.width;
+		th)raw_html",R"raw_html(is.Wa = a.height;
+		a.width = screen.width;
+		a.height = screen.height;
+		"undefined" != typeof SDL && (a = Oa[SDL.screen + 0 * ma >> 2], H[SDL.screen + 0 * ma >> 2] = a | 8388608);
+		gc()
+	}
+
+	function ic() {
+		var a = r.canvas;
+		a.width = this.Xa;
+		a.h)raw_html",R"raw_html(eight = this.Wa;
+		"undefined" != typeof SDL && (a = Oa[SDL.screen + 0 * ma >> 2], H[SDL.screen + 0 * ma >> 2] = a & -8388609);
+		gc()
+	}
+	var jc, kc, lc, mc, jb = ra(4);
+	H[jb >> 2] = 0;
+	r.requestFullScreen = function(a, b) {
+		function c() {
+			$b = p;
+)raw_html",R"raw_html(			(document.webkitFullScreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.mozFullscreenElement || document.fullScreenElement || document.fullscreenElement) === d ? (d.pa = document.cancelFullScreen || document.mo)raw_html",R"raw_html(zCancelFullScreen || document.webkitCancelFullScreen, d.pa = d.pa.bind(document), cc && d.ga(), $b = l, dc && hc()) : dc && ic();
+			if (r.onFullScreen) r.onFullScreen($b)
+		}
+		cc = a;
+		dc = b;
+		"undefined" === typeof cc && (cc = l);
+		"undefined" === t)raw_html",R"raw_html(ypeof dc &&
+			(dc = p);
+		var d = r.canvas;
+		bc || (bc = l, document.addEventListener("fullscreenchange", c, p), document.addEventListener("mozfullscreenchange", c, p), document.addEventListener("webkitfullscreenchange", c, p));
+		d.Ta = d.requestFullScr)raw_html",R"raw_html(een || d.mozRequestFullScreen || (d.webkitRequestFullScreen ? function() {
+			d.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT)
+		} : m);
+		d.Ta()
+	};
+	r.requestAnimationFrame = function(a) {
+		"undefined" === typeof window ? setTimeout(a, 1E3 / 60) )raw_html",R"raw_html(: (window.requestAnimationFrame || (window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || window.setTimeout)raw_html",R"raw_html(), window.requestAnimationFrame(a))
+	};
+	r.setCanvasSize = function(a, b, c) {
+		var d = r.canvas;
+		d.width = a;
+		d.height = b;
+		c || gc()
+	};
+	r.pauseMainLoop = q();
+	r.resumeMainLoop = function() {
+		Zb && (Zb = p, m())
+	};
+	r.getUserMedia = function()raw_html",R"raw_html() {
+		window.sa || (window.sa = navigator.getUserMedia || navigator.mozGetUserMedia);
+		window.sa(i)
+	};
+	Ub();
+	var Cb = Array(4096),
+		zb = tb(m, "/", 16895, 0),
+		nc = T,
+		oc = "/",
+		pc;
+	oc && (pc = U(oc, {
+		N: p
+	}), oc = pc.path);
+	var qc = {
+			t)raw_html",R"raw_html(ype: nc,
+			vd: {},
+			Qa: oc,
+			root: m
+		},
+		rc = nc.B(qc);
+	rc.B = qc;
+	qc.root = rc;
+	pc && (pc.e.B = qc, pc.e.Pa = l, "/" === oc && (zb = qc.root));
+	X("/tmp");
+	X("/dev");
+	qb[259] = {
+		k: {
+			H: function() {
+				return 0
+			},
+			write: function)raw_html",R"raw_html(() {
+				return 0
+			}
+		}
+	};
+	Ob("/dev/null", 259);
+	pb(1280, {
+		ta: function(a) {
+			if (!a.input.length) {
+				var b = m;
+				if (ba) {
+					if (b = process.stdin.read(), !b) {
+						if (process.stdin._readableState && process.stdin._readableState.end)raw_html",R"raw_html(ed) return m;
+						return
+					}
+				} else "undefined" != typeof window && "function" == typeof window.prompt ? (b = window.prompt("Input: "), b !== m && (b += "\n")) : "function" == typeof readline && (b = readline(), b !== m && (b += "\n"));
+				if (!b)raw_html",R"raw_html() return m;
+				a.input = D(b, l)
+			}
+			return a.input.shift()
+		},
+		T: function(a, b) {
+			b === m || 10 === b ? (r.print(a.G.join("")), a.G = []) : a.G.push(sc.ea(b))
+		}
+	});
+	pb(1536, {
+		T: function(a, b) {
+			b === m || 10 === b ? (r.printErr(a.G.)raw_html",R"raw_html(join("")), a.G = []) : a.G.push(sc.ea(b))
+		}
+	});
+	Ob("/dev/tty", 1280);
+	Ob("/dev/tty1", 1536);
+	X("/dev/shm");
+	X("/dev/shm/tmp");
+	P.unshift({
+		J: function() {
+			if (!r.noFSInit && !Vb) {
+				w(!Vb, "FS.init was previously called. If you want to init)raw_html",R"raw_html(ialize later with custom parameters, remove any earlier calls (note that one is automatically added to the generated code)");
+				Vb = l;
+				Ub();
+				r.stdin = r.stdin;
+				r.stdout = r.stdout;
+				r.stderr = r.stderr;
+				r.stdin ? Z("/dev", "stdin", r.)raw_html",R"raw_html(stdin) : Pb("/dev/tty", "/dev/stdin");
+				r.stdout ? Z("/dev", "stdout", m, r.stdout) : Pb("/dev/tty", "/dev/stdout");
+				r.stderr ? Z("/dev", "stderr", m, r.stderr) : Pb("/dev/tty1", "/dev/stderr");
+				var a = Rb("/dev/stdin",
+					"r");
+				H[wb >> 2])raw_html",R"raw_html( = a.q;
+				w(1 === a.q, "invalid handle for stdin (" + a.q + ")");
+				a = Rb("/dev/stdout", "w");
+				H[xb >> 2] = a.q;
+				w(2 === a.q, "invalid handle for stdout (" + a.q + ")");
+				a = Rb("/dev/stderr", "w");
+				H[yb >> 2] = a.q;
+				w(3 === a.q, "i)raw_html",R"raw_html(nvalid handle for stderr (" + a.q + ")")
+			}
+		}
+	});
+	Ua.push({
+		J: function() {
+			Db = p
+		}
+	});
+	Va.push({
+		J: function() {
+			Vb = p;
+			for (var a = 0; a < Ab.length; a++) {
+				var b = Ab[a];
+				b && Tb(b)
+			}
+		}
+	});
+	r.FS_createFolder = fun)raw_html",R"raw_html(ction(a, b, c, d) {
+		a = V(("string" === typeof a ? a : W(a)) + "/" + b);
+		return X(a, Wb(c, d))
+	};
+	r.FS_createPath = function(a, b) {
+		for (var a = "string" === typeof a ? a : W(a), c = b.split("/").reverse(); c.length;) {
+			var d = c.pop();
+			if ()raw_html",R"raw_html(d) {
+				var f = V(a + "/" + d);
+				try {
+					X(f)
+				} catch (g) {}
+				a = f
+			}
+		}
+		return f
+	};
+	r.FS_createDataFile = Xb;
+	r.FS_createPreloadedFile = function(a, b, c, d, f, g, h, k, t) {
+		function j() {
+			ac = document.pointerLockElement === )raw_html",R"raw_html(n || document.mozPointerLockElement === n || document.webkitPointerLockElement === n
+		}
+
+		function z(c) {
+			function j(c) {
+				k || Xb(a, b, c, d, f, t);
+				g && g();
+				cb()
+			}
+			var n = p;
+			r.preloadPlugins.forEach(function(a) {
+				!n && a.ca)raw_html",R"raw_html(nHandle(v) && (a.handle(c, v, j, function() {
+					h && h();
+					cb()
+				}), n = l)
+			});
+			n || j(c)
+		}
+		r.preloadPlugins || (r.preloadPlugins = []);
+		if (!jc && !ea) {
+			jc = l;
+			try {
+				new Blob, kc = l
+			} catch (A) {
+				kc = p, console.l)raw_html",R"raw_html(og("warning: no blob constructor, cannot create blobs with mimetypes")
+			}
+			lc =
+				"undefined" != typeof MozBlobBuilder ? MozBlobBuilder : "undefined" != typeof WebKitBlobBuilder ? WebKitBlobBuilder : !kc ? console.log("warning: no BlobBuilder") : m;
+)raw_html",R"raw_html(			mc = "undefined" != typeof window ? window.URL ? window.URL : window.webkitURL : i;
+			!r.wa && "undefined" === typeof mc && (console.log("warning: Browser does not support creating object URLs. Built-in browser image decoding will not be available."), )raw_html",R"raw_html(r.wa = l);
+			r.preloadPlugins.push({
+				canHandle: function(a) {
+					return !r.wa && /\.(jpg|jpeg|png|bmp)$/i.test(a)
+				},
+				handle: function(a, b,
+					c, d) {
+					var f = m;
+					if (kc) try {
+						f = new Blob([a], {
+							type: ec(b)
+						}))raw_html",R"raw_html(, f.size !== a.length && (f = new Blob([(new Uint8Array(a)).buffer], {
+							type: ec(b)
+						}))
+					} catch (g) {
+						var h = "Blob constructor present but fails: " + g + "; falling back to blob builder";
+						oa || (oa = {});
+						oa[h] || (oa[h])raw_html",R"raw_html( = 1, r.P(h))
+					}
+					f || (f = new lc, f.append((new Uint8Array(a)).buffer), f = f.getBlob());
+					var j = mc.createObjectURL(f),
+						n = new Image;
+					n.onload = function() {
+						w(n.complete, "Image " + b + " could not be decoded");
+						var)raw_html",R"raw_html( d = document.createElement("canvas");
+						d.width = n.width;
+						d.height = n.height;
+						d.getContext("2d").drawImage(n,
+							0, 0);
+						r.preloadedImages[b] = d;
+						mc.revokeObjectURL(j);
+						c && c(a)
+					};
+					n.onerror = function() )raw_html",R"raw_html({
+						console.log("Image " + j + " could not be decoded");
+						d && d()
+					};
+					n.src = j
+				}
+			});
+			r.preloadPlugins.push({
+				canHandle: function(a) {
+					return !r.ud && a.substr(-4) in {
+						".ogg": 1,
+						".wav": 1,
+						".mp3": 1)raw_html",R"raw_html(
+					}
+				},
+				handle: function(a, b, c, d) {
+					function f(d) {
+						h || (h = l, r.preloadedAudios[b] = d, c && c(a))
+					}
+
+					function g() {
+						h || (h = l, r.preloadedAudios[b] = new Audio, d && d())
+					}
+					var h = p;
+					if (kc) {
+)raw_html",R"raw_html(						try {
+							var j = new Blob([a], {
+								type: ec(b)
+							})
+						} catch (n) {
+							return g()
+						}
+						var j = mc.createObjectURL(j),
+							k = new Audio;
+						k.addEventListener("canplaythrough",
+							function() {
+								f(k)
+		)raw_html",R"raw_html(					}, p);
+						k.onerror = function() {
+							if (!h) {
+								console.log("warning: browser could not fully decode audio " + b + ", trying slower base64 approach");
+								for (var c = "", d = 0, g = 0, j = 0; j < a.length; j++) {
+									d = d << )raw_html",R"raw_html(8 | a[j];
+									for (g += 8; 6 <= g;) var n = d >> g - 6 & 63,
+										g = g - 6,
+										c = c + "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [n]
+								}
+								2 == g ? (c += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrst)raw_html",R"raw_html(uvwxyz0123456789+/" [(d & 3) << 4], c += "==") : 4 == g && (c += "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/" [(d & 15) << 2], c += "=");
+								k.src = "data:audio/x-" + b.substr(-3) + ";base64," + c;
+								f(k)
+							}
+						};
+)raw_html",R"raw_html(						k.src = j;
+						setTimeout(function() {
+							xa || f(k)
+						}, 1E4)
+					} else return g()
+				}
+			});
+			var n = r.canvas;
+			n.ga = n.requestPointerLock || n.mozRequestPointerLock || n.webkitRequestPointerLock;
+			n.ra = document.exitPointerL)raw_html",R"raw_html(ock || document.mozExitPointerLock || document.webkitExitPointerLock || q();
+			n.ra = n.ra.bind(document);
+			document.addEventListener("pointerlockchange", j, p);
+			document.addEventListener("mozpointerlockchange", j, p);
+			document.addEventListener("w)raw_html",R"raw_html(ebkitpointerlockchange", j, p);
+			r.elementPointerLock &&
+				n.addEventListener("click", function(a) {
+					!ac && n.ga && (n.ga(), a.preventDefault())
+				}, p)
+		}
+		var v = b ? Eb(V(a + "/" + b)) : a;
+		bb();
+		if ("string" == typeof c) {
+			var E = h)raw_html",R"raw_html(,
+				da = function() {
+					E ? E() : e('Loading data file "' + c + '" failed.')
+				},
+				J = new XMLHttpRequest;
+			J.open("GET", c, l);
+			J.responseType = "arraybuffer";
+			J.onload = function() {
+				if (200 == J.status || 0 == J.status && J.respons)raw_html",R"raw_html(e) {
+					var a = J.response;
+					w(a, 'Loading data file "' + c + '" failed (no arrayBuffer).');
+					a = new Uint8Array(a);
+					z(a);
+					cb()
+				} else da()
+			};
+			J.onerror = da;
+			J.send(m);
+			bb()
+		} else z(c)
+	};
+	r.FS_createLazyFile = func)raw_html",R"raw_html(tion(a, b, c, d, f) {
+		var g, h;
+		"undefined" !== typeof XMLHttpRequest ? (ea || e("Cannot do synchronous binary XHRs outside webworkers in modern browsers. Use --embed-file or --preload-file in emcc"), g = function() {
+			this.ca = p;
+			this.R = []
+		})raw_html",R"raw_html(, g.prototype.get = function(a) {
+			if (!(a > this.length - 1 || 0 > a)) {
+				var b = a % this.La;
+				return this.Ma(Math.floor(a / this.La))[b]
+			}
+		}, g.prototype.Ua = function(a) {
+			this.Ma = a
+		}, g.prototype.oa = function() {
+			var a = new XM)raw_html",R"raw_html(LHttpRequest;
+			a.open("HEAD", c, p);
+			a.send(m);
+			200 <= a.status && 300 > a.status ||
+				304 === a.status || e(Error("Couldn't load " + c + ". Status: " + a.status));
+			var b = Number(a.getResponseHeader("Content-length")),
+				d, f = 1048576;
+			)raw_html",R"raw_html(if (!((d = a.getResponseHeader("Accept-Ranges")) && "bytes" === d)) f = b;
+			var g = this;
+			g.Ua(function(a) {
+				var d = a * f,
+					h = (a + 1) * f - 1,
+					h = Math.min(h, b - 1);
+				if ("undefined" === typeof g.R[a]) {
+					var k = g.R;
+					d > )raw_html",R"raw_html(h && e(Error("invalid range (" + d + ", " + h + ") or no bytes requested!"));
+					h > b - 1 && e(Error("only " + b + " bytes available! programmer error!"));
+					var j = new XMLHttpRequest;
+					j.open("GET", c, p);
+					b !== f && j.setRequestHeader("Ra)raw_html",R"raw_html(nge",
+						"bytes=" + d + "-" + h);
+					"undefined" != typeof Uint8Array && (j.responseType = "arraybuffer");
+					j.overrideMimeType && j.overrideMimeType("text/plain; charset=x-user-defined");
+					j.send(m);
+					200 <= j.status && 300 > j.status || 3)raw_html",R"raw_html(04 === j.status || e(Error("Couldn't load " + c + ". Status: " + j.status));
+					d = j.response !== i ? new Uint8Array(j.response || []) : D(j.responseText || "", l);
+					k[a] = d
+				}
+				"undefined" === typeof g.R[a] && e(Error("doXHR failed!"));
+				)raw_html",R"raw_html(return g.R[a]
+			});
+			this.Ha = b;
+			this.Ga = f;
+			this.ca = l
+		}, g = new g, Object.defineProperty(g, "length", {
+			get: function() {
+				this.ca ||
+					this.oa();
+				return this.Ha
+			}
+		}), Object.defineProperty(g, "chunkSize", {
+			get: funct)raw_html",R"raw_html(ion() {
+				this.ca || this.oa();
+				return this.Ga
+			}
+		}), h = i) : (h = c, g = i);
+		var k, a = V(("string" === typeof a ? a : W(a)) + "/" + b);
+		k = Nb(a, Wb(d, f));
+		g ? k.n = g : h && (k.n = m, k.url = h);
+		var t = {};
+		Object.keys(k.k).forEac)raw_html",R"raw_html(h(function(a) {
+			var b = k.k[a];
+			t[a] = function() {
+				Yb(k) || e(new S(R.D));
+				return b.apply(m, arguments)
+			}
+		});
+		t.H = function(a, b, c, d, f) {
+			Yb(k) || e(new S(R.D));
+			a = a.e.n;
+			if (f >= a.length) return 0;
+			d = Math.min(a.l)raw_html",R"raw_html(ength - f, d);
+			w(0 <= d);
+			if (a.slice)
+				for (var g = 0; g < d; g++) b[c + g] = a[f + g];
+			else
+				for (g = 0; g < d; g++) b[c + g] = a.get(f + g);
+			return d
+		};
+		k.k = t;
+		return k
+	};
+	r.FS_createLink = function(a, b, c) {
+		a = V(("strin)raw_html",R"raw_html(g" === typeof a ? a : W(a)) + "/" + b);
+		return Pb(c, a)
+	};
+	r.FS_createDevice = Z;
+	P.unshift({
+		J: q()
+	});
+	Va.push({
+		J: q()
+	});
+	var sc = new pa;
+	ba && (require("fs"), process.platform.match(/^win/));
+	Qa = u = va(x);
+	Ra = Qa + 5242880;
+	Sa = y)raw_html",R"raw_html( = va(Ra);
+	w(Sa < ua);
+	Fa = Math.min;
+	var $ = (function(global, env, buffer) {
+			// EMSCRIPTEN_START_ASM
+			"use asm";
+			var a = new global.Int8Array(buffer);
+			var b = new global.Int16Array(buffer);
+			var c = new global.Int32Array(buffer);
+			var d)raw_html",R"raw_html( = new global.Uint8Array(buffer);
+			var e = new global.Uint16Array(buffer);
+			var f = new global.Uint32Array(buffer);
+			var g = new global.Float32Array(buffer);
+			var h = new global.Float64Array(buffer);
+			var i = env.STACKTOP | 0;
+			var j = env.STAC)raw_html",R"raw_html(K_MAX | 0;
+			var k = env.tempDoublePtr | 0;
+			var l = env.ABORT | 0;
+			var m = env.cttz_i8 | 0;
+			var n = env.ctlz_i8 | 0;
+			var o = +env.NaN;
+			var p = +env.Infinity;
+			var q = 0;
+			var r = 0;
+			var s = 0;
+			var t = 0;
+			var u = 0,
+				v = 0,
+	)raw_html",R"raw_html(			w = 0,
+				x = 0,
+				y = 0.0,
+				z = 0,
+				A = 0,
+				B = 0,
+				C = 0.0;
+			var D = 0;
+			var E = 0;
+			var F = 0;
+			var G = 0;
+			var H = 0;
+			var I = 0;
+			var J = 0;
+			var K = 0;
+			var L = 0;
+			var M = 0;
+			var N = global.Math.floor;
+			var)raw_html",R"raw_html( O = global.Math.abs;
+			var P = global.Math.sqrt;
+			var Q = global.Math.pow;
+			var R = global.Math.cos;
+			var S = global.Math.sin;
+			var T = global.Math.tan;
+			var U = global.Math.acos;
+			var V = global.Math.asin;
+			var W = global.Math.atan;
+			var)raw_html",R"raw_html( X = global.Math.atan2;
+			var Y = global.Math.exp;
+			var Z = global.Math.log;
+			var _ = global.Math.ceil;
+			var $ = global.Math.imul;
+			var aa = env.abort;
+			var ab = env.assert;
+			var ac = env.asmPrintInt;
+			var ad = env.asmPrintFloat;
+			var ae =)raw_html",R"raw_html( env.min;
+			var af = env.invoke_ii;
+			var ag = env.invoke_v;
+			var ah = env.invoke_iii;
+			var ai = env.invoke_vi;
+			var aj = env._sysconf;
+			var ak = env._sbrk;
+			var al = env.___setErrNo;
+			var am = env.___errno_location;
+			var an = env._abort;
+	)raw_html",R"raw_html(		var ao = env._time;
+			var ap = env._fflush;
+			var aq = 0.0;
+			// EMSCRIPTEN_START_FUNCS
+			function av(a) {
+				a = a | 0;
+				var b = 0;
+				b = i;
+				i = i + a | 0;
+				i = i + 7 & -8;
+				return b | 0
+			}
+
+			function aw() {
+				return i | 0
+			})raw_html",R"raw_html(
+
+			function ax(a) {
+				a = a | 0;
+				i = a
+			}
+
+			function ay(a, b) {
+				a = a | 0;
+				b = b | 0;
+				if ((q | 0) == 0) {
+					q = a;
+					r = b
+				}
+			}
+
+			function az(b) {
+				b = b | 0;
+				a[k] = a[b];
+				a[k + 1 | 0] = a[b + 1 | 0];
+				a[)raw_html",R"raw_html(k + 2 | 0] = a[b + 2 | 0];
+				a[k + 3 | 0] = a[b + 3 | 0]
+			}
+
+			function aA(b) {
+				b = b | 0;
+				a[k] = a[b];
+				a[k + 1 | 0] = a[b + 1 | 0];
+				a[k + 2 | 0] = a[b + 2 | 0];
+				a[k + 3 | 0] = a[b + 3 | 0];
+				a[k + 4 | 0] = a[b + 4 | 0];
+				a[k)raw_html",R"raw_html( + 5 | 0] = a[b + 5 | 0];
+				a[k + 6 | 0] = a[b + 6 | 0];
+				a[k + 7 | 0] = a[b + 7 | 0]
+			}
+
+			function aB(a) {
+				a = a | 0;
+				D = a
+			}
+
+			function aC(a) {
+				a = a | 0;
+				E = a
+			}
+
+			function aD(a) {
+				a = a | 0;
+				F = a
+			}
+
+			fun)raw_html",R"raw_html(ction aE(a) {
+				a = a | 0;
+				G = a
+			}
+
+			function aF(a) {
+				a = a | 0;
+				H = a
+			}
+
+			function aG(a) {
+				a = a | 0;
+				I = a
+			}
+
+			function aH(a) {
+				a = a | 0;
+				J = a
+			}
+
+			function aI(a) {
+				a = a | 0;
+				K = a
+			}
+
+			func)raw_html",R"raw_html(tion aJ(a) {
+				a = a | 0;
+				L = a
+			}
+
+			function aK(a) {
+				a = a | 0;
+				M = a
+			}
+
+			function aL() {}
+
+			function aM(f, g, h) {
+				f = f | 0;
+				g = g | 0;
+				h = h | 0;
+				var j = 0,
+					k = 0,
+					l = 0,
+					m = 0,
+					n = 0,
+					o)raw_html",R"raw_html( = 0,
+					p = 0,
+					q = 0,
+					r = 0,
+					s = 0,
+					t = 0,
+					u = 0,
+					w = 0,
+					x = 0,
+					y = 0,
+					z = 0,
+					A = 0,
+					B = 0,
+					C = 0,
+					D = 0,
+					E = 0,
+					F = 0,
+					G = 0,
+					H = 0,
+					I = 0,
+					J = 0,
+					K = 0)raw_html",R"raw_html(,
+					L = 0,
+					M = 0,
+					N = 0,
+					O = 0,
+					P = 0,
+					Q = 0,
+					R = 0,
+					S = 0,
+					T = 0,
+					U = 0,
+					V = 0,
+					W = 0,
+					X = 0,
+					Y = 0,
+					Z = 0,
+					_ = 0,
+					aa = 0,
+					ab = 0,
+					ac = 0,
+					ad = 0,
+					ae = )raw_html",R"raw_html(0,
+					af = 0,
+					ag = 0,
+					ah = 0,
+					ai = 0,
+					aj = 0,
+					ak = 0,
+					al = 0,
+					am = 0,
+					an = 0,
+					ao = 0,
+					ap = 0,
+					aq = 0,
+					ar = 0,
+					as = 0,
+					at = 0,
+					au = 0,
+					av = 0,
+					aw = 0,
+					ax = 0,
+					a)raw_html",R"raw_html(y = 0,
+					az = 0,
+					aA = 0,
+					aB = 0,
+					aC = 0,
+					aD = 0,
+					aE = 0,
+					aF = 0,
+					aG = 0;
+				j = i;
+				i = i + 16384 | 0;
+				k = j | 0;
+				l = k;
+				aR(l | 0, 0, 16384) | 0;
+				l = f + h | 0;
+				m = h - 12 | 0;
+				n = f + m | 0)raw_html",R"raw_html(;
+				o = f + (h - 5) | 0;
+				p = h >>> 0 > 2113929216 >>> 0;
+				if ((h | 0) >= 65547) {
+					if (p) {
+						q = 0;
+						i = j;
+						return q | 0
+					}
+					r = f;
+					c[k + (($(d[r] | d[r + 1 | 0] << 8 | d[r + 2 | 0] << 16 | d[r + 3 | 0] << 24 | 0, )raw_html",R"raw_html(-1640531535) | 0) >>> 20 << 2) >> 2] = f;
+					L6: do {
+						if ((m | 0) < 2) {
+							s = f;
+							t = g
+						} else {
+							r = f + (h - 8) | 0;
+							u = f + (h - 6) | 0;
+							w = g;
+							x = f;
+							y = f;
+							z = f + 2 | 0;
+							while )raw_html",R"raw_html((1) {
+								A = y + 1 | 0;
+								B = A;
+								C = A;
+								A = d[B] | d[B + 1 | 0] << 8 | d[B + 2 | 0] << 16 | d[B + 3 | 0] << 24 | 0;
+								B = 68;
+								D = z;
+								while (1) {
+									E = ($(A, -1640531535) | 0) >>> 20;
+									F = D;
+	)raw_html",R"raw_html(								G = d[F] | d[F + 1 | 0] << 8 | d[F + 2 | 0] << 16 | d[F + 3 | 0] << 24 | 0;
+									F = k + (E << 2) | 0;
+									E = c[F >> 2] | 0;
+									c[F >> 2] = C;
+									if ((E + 65535 | 0) >>> 0 >= C >>> 0) {
+										F = E;
+										H = C;
+						)raw_html",R"raw_html(				if ((d[F] | d[F + 1 | 0] << 8 | d[F + 2 | 0] << 16 | d[F + 3 | 0] << 24 | 0) == (d[H] | d[H + 1 | 0] << 8 | d[H + 2 | 0] << 16 | d[H + 3 | 0] << 24 | 0)) {
+											I = C;
+											J = E;
+											break
+										}
+									}
+									E = D + (B )raw_html",R"raw_html(>> 6) | 0;
+									if (E >>> 0 > n >>> 0) {
+										s = x;
+										t = w;
+										break L6
+									} else {
+										C = D;
+										A = G;
+										B = B + 1 | 0;
+										D = E
+									}
+								}
+								while (1) {
+									if (!(I >>> 0 >)raw_html",R"raw_html( x >>> 0 & J >>> 0 > f >>> 0)) {
+										break
+									}
+									D = I - 1 | 0;
+									B = J - 1 | 0;
+									if ((a[D] | 0) == (a[B] | 0)) {
+										I = D;
+										J = B
+									} else {
+										break
+									}
+								}
+								B = I;
+				)raw_html",R"raw_html(				D = x;
+								A = B - D | 0;
+								C = w + 1 | 0;
+								if ((A | 0) > 14) {
+									E = A - 15 | 0;
+									a[w] = -16;
+									if ((E | 0) > 254) {
+										G = B - 270 - D | 0;
+										D = (G >>> 0) / 255 | 0;
+										B = D + 1 | 0;
+				)raw_html",R"raw_html(						aR(C | 0, -1 | 0, B | 0) | 0;
+										K = G + (D * -255 | 0) & 255;
+										L = w + (D + 2) | 0
+									} else {
+										K = E & 255;
+										L = C
+									}
+									a[L] = K;
+									M = L + 1 | 0
+								} else {
+									a[w] = A << 4 )raw_html",R"raw_html(& 255;
+									M = C
+								}
+								C = M + A | 0;
+								A = x;
+								E = M;
+								while (1) {
+									D = A;
+									G = E;
+									v = d[D] | d[D + 1 | 0] << 8 | d[D + 2 | 0] << 16 | d[D + 3 | 0] << 24 | 0;
+									a[G] = v & 255;
+									)raw_html",R"raw_html(v = v >> 8;
+									a[G + 1 | 0] = v & 255;
+									v = v >> 8;
+									a[G + 2 | 0] = v & 255;
+									v = v >> 8;
+									a[G + 3 | 0] = v & 255;
+									G = A + 4 | 0;
+									D = E + 4 | 0;
+									v = d[G] | d[G + 1 | 0] << 8 | d[G + 2 | 0] <<)raw_html",R"raw_html( 16 | d[G + 3 | 0] << 24 | 0;
+									a[D] = v & 255;
+									v = v >> 8;
+									a[D + 1 | 0] = v & 255;
+									v = v >> 8;
+									a[D + 2 | 0] = v & 255;
+									v = v >> 8;
+									a[D + 3 | 0] = v & 255;
+									D = E + 8 | 0;
+									if (D )raw_html",R"raw_html(>>> 0 < C >>> 0) {
+										A = A + 8 | 0;
+										E = D
+									} else {
+										N = I;
+										O = C;
+										P = J;
+										Q = w;
+										break
+									}
+								}
+								while (1) {
+									C = O;
+									v = N - P & 65535;
+									)raw_html",R"raw_html(a[C] = v & 255;
+									v = v >> 8;
+									a[C + 1 | 0] = v & 255;
+									C = O + 2 | 0;
+									E = N + 4 | 0;
+									A = E;
+									D = P;
+									while (1) {
+										R = D + 4 | 0;
+										if (A >>> 0 >= r >>> 0) {
+											S = 68;
+					)raw_html",R"raw_html(						break
+										}
+										G = R;
+										T = d[G] | d[G + 1 | 0] << 8 | d[G + 2 | 0] << 16 | d[G + 3 | 0] << 24 | 0;
+										G = A;
+										U = d[G] | d[G + 1 | 0] << 8 | d[G + 2 | 0] << 16 | d[G + 3 | 0] << 24 | 0;
+										if ((T | 0) == ()raw_html",R"raw_html(U | 0)) {
+											A = A + 4 | 0;
+											D = R
+										} else {
+											S = 67;
+											break
+										}
+									}
+									do {
+										if ((S | 0) == 67) {
+											S = 0;
+											V = A + ((aT(U ^ T | 0) | 0) >>> 3) | 0
+										})raw_html",R"raw_html( else if ((S | 0) == 68) {
+											S = 0;
+											do {
+												if (A >>> 0 < u >>> 0) {
+													G = R;
+													B = A;
+													if ((d[G] | d[G + 1 | 0] << 8) << 16 >> 16 << 16 >> 16 != (d[B] | d[B + 1 | 0] << 8) << 16 >> 16 << 16 >>)raw_html",R"raw_html( 16) {
+														W = A;
+														X = R;
+														break
+													}
+													W = A + 2 | 0;
+													X = D + 6 | 0
+												} else {
+													W = A;
+													X = R
+												}
+											} while (0);
+											if (W >>)raw_html",R"raw_html(> 0 >= o >>> 0) {
+												V = W;
+												break
+											}
+											V = (a[X] | 0) == (a[W] | 0) ? W + 1 | 0 : W
+										}
+									} while (0);
+									A = V;
+									D = E;
+									B = A - D | 0;
+									G = a[Q] | 0;
+									if ((B | 0)raw_html",R"raw_html() > 14) {
+										a[Q] = G + 15 & 255;
+										H = B - 15 | 0;
+										if ((H | 0) > 509) {
+											F = A - 525 - D | 0;
+											D = (F >>> 0) / 510 | 0;
+											Y = F + (D * -510 | 0) | 0;
+											F = D << 1;
+											D = H;
+										)raw_html",R"raw_html(	Z = C;
+											while (1) {
+												a[Z] = -1;
+												a[Z + 1 | 0] = -1;
+												_ = D - 510 | 0;
+												if ((_ | 0) > 509) {
+													D = _;
+													Z = Z + 2 | 0
+												} else {
+													break
+												}
+								)raw_html",R"raw_html(			}
+											aa = Y;
+											ab = O + (F + 4) | 0
+										} else {
+											aa = H;
+											ab = C
+										}
+										if ((aa | 0) > 254) {
+											a[ab] = -1;
+											ac = ab + 1 | 0;
+											ad = aa + 1 & 255
+										} else {
+	)raw_html",R"raw_html(										ac = ab;
+											ad = aa & 255
+										}
+										a[ac] = ad;
+										ae = ac + 1 | 0
+									} else {
+										a[Q] = (G & 255) + B & 255;
+										ae = C
+									}
+									if (V >>> 0 > n >>> 0) {
+										s = V;
+										t = ae;)raw_html",R"raw_html(
+										break L6
+									}
+									Z = V - 2 | 0;
+									D = Z;
+									c[k + (($(d[D] | d[D + 1 | 0] << 8 | d[D + 2 | 0] << 16 | d[D + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 20 << 2) >> 2] = Z;
+									Z = V;
+									D = k + (($(d[Z] | d[Z + 1 )raw_html",R"raw_html(| 0] << 8 | d[Z + 2 | 0] << 16 | d[Z + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 20 << 2) | 0;
+									E = c[D >> 2] | 0;
+									c[D >> 2] = A;
+									if ((E + 65535 | 0) >>> 0 < V >>> 0) {
+										break
+									}
+									D = E;
+									if ((d[D] |)raw_html",R"raw_html( d[D + 1 | 0] << 8 | d[D + 2 | 0] << 16 | d[D + 3 | 0] << 24 | 0) != (d[Z] | d[Z + 1 | 0] << 8 | d[Z + 2 | 0] << 16 | d[Z + 3 | 0] << 24 | 0)) {
+										break
+									}
+									a[ae] = 0;
+									N = V;
+									O = ae + 1 | 0;
+									P = E;
+							)raw_html",R"raw_html(		Q = ae
+								}
+								E = V + 2 | 0;
+								if (E >>> 0 > n >>> 0) {
+									s = V;
+									t = ae;
+									break
+								} else {
+									w = ae;
+									x = V;
+									y = V;
+									z = E
+								}
+							}
+						}
+					} while (0);
+					V )raw_html",R"raw_html(= l;
+					ae = s;
+					Q = V - ae | 0;
+					if ((Q | 0) > 14) {
+						a[t] = -16;
+						P = Q - 15 | 0;
+						O = t + 1 | 0;
+						if ((P | 0) > 254) {
+							N = V - 270 - ae | 0;
+							ae = (N >>> 0) / 255 | 0;
+							V = ae + 2 | 0;
+							ac = ae + 1 )raw_html",R"raw_html(| 0;
+							aR(O | 0, -1 | 0, ac | 0) | 0;
+							af = N + (ae * -255 | 0) & 255;
+							ag = t + V | 0
+						} else {
+							af = P & 255;
+							ag = O
+						}
+						a[ag] = af;
+						ah = ag
+					} else {
+						a[t] = Q << 4 & 255;
+						ah = t
+					}
+	)raw_html",R"raw_html(				t = ah + 1 | 0;
+					aS(t | 0, s | 0, Q) | 0;
+					q = ah + (Q + 1) - g | 0;
+					i = j;
+					return q | 0
+				}
+				if (p) {
+					q = 0;
+					i = j;
+					return q | 0
+				}
+				L72: do {
+					if ((h | 0) < 13) {
+						ai = g;
+						aj = f
+					} else )raw_html",R"raw_html({
+						p = f;
+						Q = k;
+						b[Q + (($(d[p] | d[p + 1 | 0] << 8 | d[p + 2 | 0] << 16 | d[p + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 19 << 1) >> 1] = 0;
+						if ((m | 0) < 2) {
+							ai = g;
+							aj = f;
+							break
+						}
+						p = f;
+						ah )raw_html",R"raw_html(= f + (h - 8) | 0;
+						s = f + (h - 6) | 0;
+						t = f;
+						ag = g;
+						af = f;
+						O = f + 2 | 0;
+						while (1) {
+							P = af + 1 | 0;
+							V = P;
+							ae = d[V] | d[V + 1 | 0] << 8 | d[V + 2 | 0] << 16 | d[V + 3 | 0] << 24 | 0;
+							V )raw_html",R"raw_html(= P;
+							P = 68;
+							N = O;
+							while (1) {
+								ac = ($(ae, -1640531535) | 0) >>> 19;
+								ad = N;
+								aa = d[ad] | d[ad + 1 | 0] << 8 | d[ad + 2 | 0] << 16 | d[ad + 3 | 0] << 24 | 0;
+								ad = Q + (ac << 1) | 0;
+								ac = e[ad >>)raw_html",R"raw_html( 1] | 0;
+								ab = f + ac | 0;
+								b[ad >> 1] = V - p & 65535;
+								if ((f + (ac + 65535) | 0) >>> 0 >= V >>> 0) {
+									ac = ab;
+									ad = V;
+									if ((d[ac] | d[ac + 1 | 0] << 8 | d[ac + 2 | 0] << 16 | d[ac + 3 | 0] << 24 | 0) == (d[)raw_html",R"raw_html(ad] | d[ad + 1 | 0] << 8 | d[ad + 2 | 0] << 16 | d[ad + 3 | 0] << 24 | 0)) {
+										ak = ab;
+										al = V;
+										break
+									}
+								}
+								ab = N + (P >> 6) | 0;
+								if (ab >>> 0 > n >>> 0) {
+									ai = ag;
+									aj = t;
+					)raw_html",R"raw_html(				break L72
+								} else {
+									ae = aa;
+									V = N;
+									P = P + 1 | 0;
+									N = ab
+								}
+							}
+							while (1) {
+								if (!(al >>> 0 > t >>> 0 & ak >>> 0 > f >>> 0)) {
+									break
+								}
+								N = al - 1 | 0;
+						)raw_html",R"raw_html(		P = ak - 1 | 0;
+								if ((a[N] | 0) == (a[P] | 0)) {
+									ak = P;
+									al = N
+								} else {
+									break
+								}
+							}
+							N = al;
+							P = t;
+							V = N - P | 0;
+							ae = ag + 1 | 0;
+							if ((V | 0) > 14) {
+								ab =)raw_html",R"raw_html( V - 15 | 0;
+								a[ag] = -16;
+								if ((ab | 0) > 254) {
+									aa = N - 270 - P | 0;
+									P = (aa >>> 0) / 255 | 0;
+									N = P + 1 | 0;
+									aR(ae | 0, -1 | 0, N | 0) | 0;
+									am = ag + (P + 2) | 0;
+									an = aa + (P * -255 |)raw_html",R"raw_html( 0) & 255
+								} else {
+									am = ae;
+									an = ab & 255
+								}
+								a[am] = an;
+								ao = am + 1 | 0
+							} else {
+								a[ag] = V << 4 & 255;
+								ao = ae
+							}
+							ae = ao + V | 0;
+							V = ao;
+							ab = t;
+							wh)raw_html",R"raw_html(ile (1) {
+								P = ab;
+								aa = V;
+								v = d[P] | d[P + 1 | 0] << 8 | d[P + 2 | 0] << 16 | d[P + 3 | 0] << 24 | 0;
+								a[aa] = v & 255;
+								v = v >> 8;
+								a[aa + 1 | 0] = v & 255;
+								v = v >> 8;
+								a[aa + 2 | 0] = v & 255;)raw_html",R"raw_html(
+								v = v >> 8;
+								a[aa + 3 | 0] = v & 255;
+								aa = ab + 4 | 0;
+								P = V + 4 | 0;
+								v = d[aa] | d[aa + 1 | 0] << 8 | d[aa + 2 | 0] << 16 | d[aa + 3 | 0] << 24 | 0;
+								a[P] = v & 255;
+								v = v >> 8;
+								a[P + 1 | 0] =)raw_html",R"raw_html( v & 255;
+								v = v >> 8;
+								a[P + 2 | 0] = v & 255;
+								v = v >> 8;
+								a[P + 3 | 0] = v & 255;
+								P = V + 8 | 0;
+								if (P >>> 0 < ae >>> 0) {
+									V = P;
+									ab = ab + 8 | 0
+								} else {
+									ap = ag;
+									)raw_html",R"raw_html(aq = ak;
+									ar = ae;
+									as = al;
+									break
+								}
+							}
+							while (1) {
+								ae = ar;
+								v = as - aq & 65535;
+								a[ae] = v & 255;
+								v = v >> 8;
+								a[ae + 1 | 0] = v & 255;
+								ae = ar + 2 | 0;
+								a)raw_html",R"raw_html(b = as + 4 | 0;
+								V = aq;
+								P = ab;
+								while (1) {
+									at = V + 4 | 0;
+									if (P >>> 0 >= ah >>> 0) {
+										S = 23;
+										break
+									}
+									aa = at;
+									au = d[aa] | d[aa + 1 | 0] << 8 | d[aa + 2 | 0] << 16 |)raw_html",R"raw_html( d[aa + 3 | 0] << 24 | 0;
+									aa = P;
+									av = d[aa] | d[aa + 1 | 0] << 8 | d[aa + 2 | 0] << 16 | d[aa + 3 | 0] << 24 | 0;
+									if ((au | 0) == (av | 0)) {
+										V = at;
+										P = P + 4 | 0
+									} else {
+										S = 22;
+								)raw_html",R"raw_html(		break
+									}
+								}
+								do {
+									if ((S | 0) == 22) {
+										S = 0;
+										aw = P + ((aT(av ^ au | 0) | 0) >>> 3) | 0
+									} else if ((S | 0) == 23) {
+										S = 0;
+										do {
+											if (P >>> 0 < s >>> 0) {
+									)raw_html",R"raw_html(			A = at;
+												C = P;
+												if ((d[A] | d[A + 1 | 0] << 8) << 16 >> 16 << 16 >> 16 != (d[C] | d[C + 1 | 0] << 8) << 16 >> 16 << 16 >> 16) {
+													ax = at;
+													ay = P;
+													break
+												}
+												ax = V + 6 | 0)raw_html",R"raw_html(;
+												ay = P + 2 | 0
+											} else {
+												ax = at;
+												ay = P
+											}
+										} while (0);
+										if (ay >>> 0 >= o >>> 0) {
+											aw = ay;
+											break
+										}
+										aw = (a[ax] | 0) == (a[ay] | 0) ? a)raw_html",R"raw_html(y + 1 | 0 : ay
+									}
+								} while (0);
+								P = aw;
+								V = ab;
+								C = P - V | 0;
+								A = a[ap] | 0;
+								if ((C | 0) > 14) {
+									a[ap] = A + 15 & 255;
+									B = C - 15 | 0;
+									if ((B | 0) > 509) {
+										G = P -)raw_html",R"raw_html( 525 - V | 0;
+										V = (G >>> 0) / 510 | 0;
+										H = G + (V * -510 | 0) | 0;
+										G = V << 1;
+										V = ae;
+										F = B;
+										while (1) {
+											a[V] = -1;
+											a[V + 1 | 0] = -1;
+											Y = F - 510 | 0;
+										)raw_html",R"raw_html(	if ((Y | 0) > 509) {
+												V = V + 2 | 0;
+												F = Y
+											} else {
+												break
+											}
+										}
+										az = ar + (G + 4) | 0;
+										aA = H
+									} else {
+										az = ae;
+										aA = B
+									}
+									if)raw_html",R"raw_html( ((aA | 0) > 254) {
+										a[az] = -1;
+										aB = aA + 1 & 255;
+										aC = az + 1 | 0
+									} else {
+										aB = aA & 255;
+										aC = az
+									}
+									a[aC] = aB;
+									aD = aC + 1 | 0
+								} else {
+									a[ap] = (A & 25)raw_html",R"raw_html(5) + C & 255;
+									aD = ae
+								}
+								if (aw >>> 0 > n >>> 0) {
+									ai = aD;
+									aj = aw;
+									break L72
+								}
+								F = aw - 2 | 0;
+								V = F;
+								b[Q + (($(d[V] | d[V + 1 | 0] << 8 | d[V + 2 | 0] << 16 | d[V + 3 | 0)raw_html",R"raw_html(] << 24 | 0, -1640531535) | 0) >>> 19 << 1) >> 1] = F - p & 65535;
+								F = aw;
+								V = Q + (($(d[F] | d[F + 1 | 0] << 8 | d[F + 2 | 0] << 16 | d[F + 3 | 0] << 24 | 0, -1640531535) | 0) >>> 19 << 1) | 0;
+								ab = e[V >> 1] | 0;
+								Y = f + a)raw_html",R"raw_html(b | 0;
+								b[V >> 1] = P - p & 65535;
+								if ((f + (ab + 65535) | 0) >>> 0 < aw >>> 0) {
+									break
+								}
+								ab = Y;
+								if ((d[ab] | d[ab + 1 | 0] << 8 | d[ab + 2 | 0] << 16 | d[ab + 3 | 0] << 24 | 0) != (d[F] | d[F + 1 | 0] << 8 )raw_html",R"raw_html(| d[F + 2 | 0] << 16 | d[F + 3 | 0] << 24 | 0)) {
+									break
+								}
+								a[aD] = 0;
+								ap = aD;
+								aq = Y;
+								ar = aD + 1 | 0;
+								as = aw
+							}
+							Y = aw + 2 | 0;
+							if (Y >>> 0 > n >>> 0) {
+								ai = aD;
+							)raw_html",R"raw_html(	aj = aw;
+								break
+							} else {
+								t = aw;
+								ag = aD;
+								af = aw;
+								O = Y
+							}
+						}
+					}
+				} while (0);
+				aw = l;
+				l = aj;
+				aD = aw - l | 0;
+				if ((aD | 0) > 14) {
+					a[ai] = -16;
+					n = aD - 15 | 0;
+	)raw_html",R"raw_html(				as = ai + 1 | 0;
+					if ((n | 0) > 254) {
+						ar = aw - 270 - l | 0;
+						l = (ar >>> 0) / 255 | 0;
+						aw = l + 2 | 0;
+						aq = l + 1 | 0;
+						aR(as | 0, -1 | 0, aq | 0) | 0;
+						aE = ar + (l * -255 | 0) & 255;
+						aF = ai + aw | 0
+					)raw_html",R"raw_html(} else {
+						aE = n & 255;
+						aF = as
+					}
+					a[aF] = aE;
+					aG = aF
+				} else {
+					a[ai] = aD << 4 & 255;
+					aG = ai
+				}
+				ai = aG + 1 | 0;
+				aS(ai | 0, aj | 0, aD) | 0;
+				q = aG + (aD + 1) - g | 0;
+				i = j;
+				return q | 0
+			})raw_html",R"raw_html(
+
+			function aN(b, e, f, g) {
+				b = b | 0;
+				e = e | 0;
+				f = f | 0;
+				g = g | 0;
+				var h = 0,
+					i = 0,
+					j = 0,
+					k = 0,
+					l = 0,
+					m = 0,
+					n = 0,
+					o = 0,
+					p = 0,
+					q = 0,
+					r = 0,
+					s = 0,
+					t = 0,
+					u)raw_html",R"raw_html( = 0,
+					w = 0,
+					x = 0,
+					y = 0,
+					z = 0,
+					A = 0,
+					B = 0,
+					C = 0,
+					D = 0,
+					E = 0,
+					F = 0,
+					G = 0,
+					H = 0,
+					I = 0,
+					J = 0,
+					K = 0,
+					L = 0,
+					M = 0,
+					N = 0,
+					O = 0,
+					P = 0,
+					Q = 0)raw_html",R"raw_html(,
+					R = 0,
+					S = 0,
+					T = 0;
+				h = b + f | 0;
+				i = e + g | 0;
+				if ((g | 0) == 0) {
+					if ((f | 0) != 1) {
+						j = -1;
+						return j | 0
+					}
+					j = ((a[b] | 0) != 0) << 31 >> 31;
+					return j | 0
+				}
+				k = e + (g - 12) | 0;
+	)raw_html",R"raw_html(			l = b + (f - 8) | 0;
+				m = e + (g - 8) | 0;
+				n = e + (g - 5) | 0;
+				g = b + (f - 6) | 0;
+				f = b;
+				o = e;
+				L143: while (1) {
+					p = f + 1 | 0;
+					q = d[f] | 0;
+					r = q >>> 4;
+					do {
+						if ((r | 0) == 15) {
+							if (p >>> 0 )raw_html",R"raw_html(< h >>> 0) {
+								s = 15;
+								t = p
+							} else {
+								u = p;
+								w = 15;
+								break
+							}
+							while (1) {
+								x = t + 1 | 0;
+								y = a[t] | 0;
+								z = (y & 255) + s | 0;
+								if (x >>> 0 < h >>> 0 & y << 24 >> 24 ==)raw_html",R"raw_html( -1) {
+									s = z;
+									t = x
+								} else {
+									u = x;
+									w = z;
+									break
+								}
+							}
+						} else {
+							u = p;
+							w = r
+						}
+					} while (0);
+					A = o + w | 0;
+					B = u + w | 0;
+					if (A >>> 0 > k >>> 0 )raw_html",R"raw_html(| B >>> 0 > l >>> 0) {
+						C = 106;
+						break
+					} else {
+						D = u;
+						E = o
+					}
+					while (1) {
+						r = D;
+						p = E;
+						v = d[r] | d[r + 1 | 0] << 8 | d[r + 2 | 0] << 16 | d[r + 3 | 0] << 24 | 0;
+						a[p] = v & 255;
+						v = v >)raw_html",R"raw_html(> 8;
+						a[p + 1 | 0] = v & 255;
+						v = v >> 8;
+						a[p + 2 | 0] = v & 255;
+						v = v >> 8;
+						a[p + 3 | 0] = v & 255;
+						p = D + 4 | 0;
+						r = E + 4 | 0;
+						v = d[p] | d[p + 1 | 0] << 8 | d[p + 2 | 0] << 16 | d[p + 3 | 0] << 24 | 0;
+	)raw_html",R"raw_html(					a[r] = v & 255;
+						v = v >> 8;
+						a[r + 1 | 0] = v & 255;
+						v = v >> 8;
+						a[r + 2 | 0] = v & 255;
+						v = v >> 8;
+						a[r + 3 | 0] = v & 255;
+						F = E + 8 | 0;
+						if (F >>> 0 < A >>> 0) {
+							D = D + 8 | 0;
+							E = F
+				)raw_html",R"raw_html(		} else {
+							break
+						}
+					}
+					r = A;
+					p = r - F | 0;
+					z = D + (p + 8) | 0;
+					x = w - ((d[z] | d[z + 1 | 0] << 8) << 16 >> 16 & 65535) | 0;
+					z = o + x | 0;
+					y = D + (p + 10) | 0;
+					if (z >>> 0 < e >>> 0) {
+						G = y;
+		)raw_html",R"raw_html(				break
+					}
+					p = q & 15;
+					L154: do {
+						if ((p | 0) == 15) {
+							H = y;
+							I = 15;
+							while (1) {
+								if (H >>> 0 >= g >>> 0) {
+									J = H;
+									K = I;
+									break L154
+								}
+								L = H + 1 | 0;
+								M = )raw_html",R"raw_html(a[H] | 0;
+								N = (M & 255) + I | 0;
+								if (M << 24 >> 24 == -1) {
+									H = L;
+									I = N
+								} else {
+									J = L;
+									K = N;
+									break
+								}
+							}
+						} else {
+							J = y;
+							K = p
+						}
+					} while (0))raw_html",R"raw_html(;
+					if ((r - z | 0) < 4) {
+						a[A] = a[z] | 0;
+						a[o + (w + 1) | 0] = a[o + (x + 1) | 0] | 0;
+						a[o + (w + 2) | 0] = a[o + (x + 2) | 0] | 0;
+						a[o + (w + 3) | 0] = a[o + (x + 3) | 0] | 0;
+						p = o + (w + 4) | 0;
+						y = x + 4 | 0;
+		)raw_html",R"raw_html(				q = o + (y - (c[8 + (p - (o + y) << 2) >> 2] | 0)) | 0;
+						y = q;
+						I = p;
+						v = d[y] | d[y + 1 | 0] << 8 | d[y + 2 | 0] << 16 | d[y + 3 | 0] << 24 | 0;
+						a[I] = v & 255;
+						v = v >> 8;
+						a[I + 1 | 0] = v & 255;
+						v = v >> 8;
+)raw_html",R"raw_html(						a[I + 2 | 0] = v & 255;
+						v = v >> 8;
+						a[I + 3 | 0] = v & 255;
+						O = q;
+						P = p
+					} else {
+						p = z;
+						q = A;
+						v = d[p] | d[p + 1 | 0] << 8 | d[p + 2 | 0] << 16 | d[p + 3 | 0] << 24 | 0;
+						a[q] = v & 255;
+						v =)raw_html",R"raw_html( v >> 8;
+						a[q + 1 | 0] = v & 255;
+						v = v >> 8;
+						a[q + 2 | 0] = v & 255;
+						v = v >> 8;
+						a[q + 3 | 0] = v & 255;
+						O = o + (x + 4) | 0;
+						P = o + (w + 4) | 0
+					}
+					q = P + K | 0;
+					if (q >>> 0 <= m >>> 0) {
+						p = )raw_html",R"raw_html(O;
+						I = P;
+						while (1) {
+							y = p;
+							H = I;
+							v = d[y] | d[y + 1 | 0] << 8 | d[y + 2 | 0] << 16 | d[y + 3 | 0] << 24 | 0;
+							a[H] = v & 255;
+							v = v >> 8;
+							a[H + 1 | 0] = v & 255;
+							v = v >> 8;
+							a[H + 2 | 0])raw_html",R"raw_html( = v & 255;
+							v = v >> 8;
+							a[H + 3 | 0] = v & 255;
+							H = p + 4 | 0;
+							y = I + 4 | 0;
+							v = d[H] | d[H + 1 | 0] << 8 | d[H + 2 | 0] << 16 | d[H + 3 | 0] << 24 | 0;
+							a[y] = v & 255;
+							v = v >> 8;
+							a[y + 1 | 0] = v &)raw_html",R"raw_html( 255;
+							v = v >> 8;
+							a[y + 2 | 0] = v & 255;
+							v = v >> 8;
+							a[y + 3 | 0] = v & 255;
+							y = I + 8 | 0;
+							if (y >>> 0 < q >>> 0) {
+								p = p + 8 | 0;
+								I = y
+							} else {
+								f = J;
+								o = q;
+								conti)raw_html",R"raw_html(nue L143
+							}
+						}
+					}
+					if (q >>> 0 > n >>> 0) {
+						G = J;
+						break
+					} else {
+						Q = O;
+						R = P
+					}
+					do {
+						I = Q;
+						p = R;
+						v = d[I] | d[I + 1 | 0] << 8 | d[I + 2 | 0] << 16 | d[I + 3 | 0] << 24 | 0;
+				)raw_html",R"raw_html(		a[p] = v & 255;
+						v = v >> 8;
+						a[p + 1 | 0] = v & 255;
+						v = v >> 8;
+						a[p + 2 | 0] = v & 255;
+						v = v >> 8;
+						a[p + 3 | 0] = v & 255;
+						p = Q + 4 | 0;
+						I = R + 4 | 0;
+						v = d[p] | d[p + 1 | 0] << 8 | d[p + 2 | 0] <<)raw_html",R"raw_html( 16 | d[p + 3 | 0] << 24 | 0;
+						a[I] = v & 255;
+						v = v >> 8;
+						a[I + 1 | 0] = v & 255;
+						v = v >> 8;
+						a[I + 2 | 0] = v & 255;
+						v = v >> 8;
+						a[I + 3 | 0] = v & 255;
+						R = R + 8 | 0;
+						Q = Q + 8 | 0;
+					} while (R >>)raw_html",R"raw_html(> 0 < m >>> 0);
+					if (R >>> 0 < q >>> 0) {
+						S = R;
+						T = Q
+					} else {
+						f = J;
+						o = q;
+						continue
+					}
+					while (1) {
+						I = S + 1 | 0;
+						a[S] = a[T] | 0;
+						if (I >>> 0 < q >>> 0) {
+							S = I;
+							T = T + 1 )raw_html",R"raw_html(| 0
+						} else {
+							f = J;
+							o = q;
+							continue L143
+						}
+					}
+				}
+				do {
+					if ((C | 0) == 106) {
+						if ((B | 0) != (h | 0) | A >>> 0 > i >>> 0) {
+							G = u;
+							break
+						}
+						aS(o | 0, u | 0, w) | 0;
+						j = A -)raw_html",R"raw_html( e | 0;
+						return j | 0
+					}
+				} while (0);
+				j = b - 1 - G | 0;
+				return j | 0
+			}
+
+			function aO(a, b, e) {
+				a = a | 0;
+				b = b | 0;
+				e = e | 0;
+				var f = 0,
+					g = 0,
+					h = 0,
+					i = 0,
+					j = 0,
+					k = 0,
+					l = 0,
+	)raw_html",R"raw_html(				m = 0,
+					n = 0,
+					o = 0,
+					p = 0,
+					q = 0,
+					r = 0,
+					s = 0,
+					t = 0,
+					u = 0,
+					v = 0,
+					w = 0,
+					x = 0,
+					y = 0,
+					z = 0,
+					A = 0,
+					B = 0,
+					C = 0,
+					D = 0,
+					E = 0,
+					F = 0,
+					G = 0,
+					)raw_html",R"raw_html(H = 0;
+				f = a + b | 0;
+				g = (b | 0) > 15;
+				if ((a & 3 | 0) == 0) {
+					if (g) {
+						h = a + (b - 16) | 0;
+						i = a;
+						j = e + 606290984 | 0;
+						k = e - 2048144777 | 0;
+						l = e;
+						m = e + 1640531535 | 0;
+						do {
+							n = i)raw_html",R"raw_html(;
+							o = ($(d[n] | d[n + 1 | 0] << 8 | d[n + 2 | 0] << 16 | d[n + 3 | 0] << 24 | 0, -2048144777) | 0) + j | 0;
+							p = o << 13 | o >>> 19;
+							j = $(p, -1640531535) | 0;
+							o = i + 4 | 0;
+							n = ($(d[o] | d[o + 1 | 0] << 8 | d[o + 2 | 0] )raw_html",R"raw_html(<< 16 | d[o + 3 | 0] << 24 | 0, -2048144777) | 0) + k | 0;
+							q = n << 13 | n >>> 19;
+							k = $(q, -1640531535) | 0;
+							n = i + 8 | 0;
+							o = ($(d[n] | d[n + 1 | 0] << 8 | d[n + 2 | 0] << 16 | d[n + 3 | 0] << 24 | 0, -2048144777) | 0) + l | )raw_html",R"raw_html(0;
+							r = o << 13 | o >>> 19;
+							l = $(r, -1640531535) | 0;
+							o = i + 12 | 0;
+							n = ($(d[o] | d[o + 1 | 0] << 8 | d[o + 2 | 0] << 16 | d[o + 3 | 0] << 24 | 0, -2048144777) | 0) + m | 0;
+							s = n << 13 | n >>> 19;
+							m = $(s, -1640)raw_html",R"raw_html(531535) | 0;
+							i = i + 16 | 0;
+						} while (i >>> 0 <= h >>> 0);
+						t = i;
+						u = (k >>> 25 | ($(q, 465361024) | 0)) + (j >>> 31 | ($(p, 1013904226) | 0)) + (l >>> 20 | ($(r, 2006650880) | 0)) + (m >>> 14 | ($(s, -423362560) | 0)) | 0
+					} e)raw_html",R"raw_html(lse {
+						t = a;
+						u = e + 374761393 | 0
+					}
+					s = u + b | 0;
+					u = a + (b - 4) | 0;
+					if (t >>> 0 > u >>> 0) {
+						v = s;
+						w = t
+					} else {
+						m = s;
+						s = t;
+						while (1) {
+							t = s;
+							r = ($(d[t] | d[t + 1 )raw_html",R"raw_html(| 0] << 8 | d[t + 2 | 0] << 16 | d[t + 3 | 0] << 24 | 0, -1028477379) | 0) + m | 0;
+							t = $(r << 17 | r >>> 15, 668265263) | 0;
+							r = s + 4 | 0;
+							if (r >>> 0 > u >>> 0) {
+								v = t;
+								w = r;
+								break
+							} else {
+								m)raw_html",R"raw_html( = t;
+								s = r
+							}
+						}
+					}
+					if (w >>> 0 < f >>> 0) {
+						s = v;
+						m = w;
+						while (1) {
+							w = ($(d[m] | 0, 374761393) | 0) + s | 0;
+							u = $(w << 11 | w >>> 21, -1640531535) | 0;
+							w = m + 1 | 0;
+							if (w >>>)raw_html",R"raw_html( 0 < f >>> 0) {
+								s = u;
+								m = w
+							} else {
+								x = u;
+								break
+							}
+						}
+					} else {
+						x = v
+					}
+					v = $(x >>> 15 ^ x, -2048144777) | 0;
+					x = $(v >>> 13 ^ v, -1028477379) | 0;
+					y = x >>> 16 ^ x;
+					re)raw_html",R"raw_html(turn y | 0
+				} else {
+					if (g) {
+						g = a + (b - 16) | 0;
+						x = e + 1640531535 | 0;
+						v = e;
+						m = e - 2048144777 | 0;
+						s = e + 606290984 | 0;
+						u = a;
+						do {
+							w = ($(c[u >> 2] | 0, -2048144777) | 0) + s | 0;
+							z)raw_html",R"raw_html( = w << 13 | w >>> 19;
+							s = $(z, -1640531535) | 0;
+							w = ($(c[u + 4 >> 2] | 0, -2048144777) | 0) + m | 0;
+							A = w << 13 | w >>> 19;
+							m = $(A, -1640531535) | 0;
+							w = ($(c[u + 8 >> 2] | 0, -2048144777) | 0) + v | 0;
+							B = w <)raw_html",R"raw_html(< 13 | w >>> 19;
+							v = $(B, -1640531535) | 0;
+							w = ($(c[u + 12 >> 2] | 0, -2048144777) | 0) + x | 0;
+							C = w << 13 | w >>> 19;
+							x = $(C, -1640531535) | 0;
+							u = u + 16 | 0;
+						} while (u >>> 0 <= g >>> 0);
+						D = (m >>> 25 )raw_html",R"raw_html(| ($(A, 465361024) | 0)) + (s >>> 31 | ($(z, 1013904226) | 0)) + (v >>> 20 | ($(B, 2006650880) | 0)) + (x >>> 14 | ($(C, -423362560) | 0)) | 0;
+						E = u
+					} else {
+						D = e + 374761393 | 0;
+						E = a
+					}
+					e = D + b | 0;
+					D = a + (b - )raw_html",R"raw_html(4) | 0;
+					if (E >>> 0 > D >>> 0) {
+						F = E;
+						G = e
+					} else {
+						b = E;
+						E = e;
+						while (1) {
+							e = ($(c[b >> 2] | 0, -1028477379) | 0) + E | 0;
+							a = $(e << 17 | e >>> 15, 668265263) | 0;
+							e = b + 4 | 0;
+							i)raw_html",R"raw_html(f (e >>> 0 > D >>> 0) {
+								F = e;
+								G = a;
+								break
+							} else {
+								b = e;
+								E = a
+							}
+						}
+					}
+					if (F >>> 0 < f >>> 0) {
+						E = F;
+						F = G;
+						while (1) {
+							b = ($(d[E] | 0, 374761393) | 0) + F |)raw_html",R"raw_html( 0;
+							D = $(b << 11 | b >>> 21, -1640531535) | 0;
+							b = E + 1 | 0;
+							if (b >>> 0 < f >>> 0) {
+								E = b;
+								F = D
+							} else {
+								H = D;
+								break
+							}
+						}
+					} else {
+						H = G
+					}
+					G = $(H >>> 15 ^ H)raw_html",R"raw_html(, -2048144777) | 0;
+					H = $(G >>> 13 ^ G, -1028477379) | 0;
+					y = H >>> 16 ^ H;
+					return y | 0
+				}
+				return 0
+			}
+
+			function aP(a) {
+				a = a | 0;
+				var b = 0,
+					d = 0,
+					e = 0,
+					f = 0,
+					g = 0,
+					h = 0,
+					i = 0,
+					)raw_html",R"raw_html(j = 0,
+					k = 0,
+					l = 0,
+					m = 0,
+					n = 0,
+					o = 0,
+					p = 0,
+					q = 0,
+					r = 0,
+					s = 0,
+					t = 0,
+					u = 0,
+					v = 0,
+					w = 0,
+					x = 0,
+					y = 0,
+					z = 0,
+					A = 0,
+					B = 0,
+					C = 0,
+					D = 0,
+					E = )raw_html",R"raw_html(0,
+					F = 0,
+					G = 0,
+					H = 0,
+					I = 0,
+					J = 0,
+					K = 0,
+					L = 0,
+					M = 0,
+					N = 0,
+					O = 0,
+					P = 0,
+					Q = 0,
+					R = 0,
+					S = 0,
+					T = 0,
+					U = 0,
+					V = 0,
+					W = 0,
+					X = 0,
+					Y = 0,
+					Z = 0,
+	)raw_html",R"raw_html(				_ = 0,
+					$ = 0,
+					aa = 0,
+					ab = 0,
+					ac = 0,
+					ad = 0,
+					ae = 0,
+					af = 0,
+					ag = 0,
+					ah = 0,
+					ai = 0,
+					al = 0,
+					ap = 0,
+					aq = 0,
+					ar = 0,
+					as = 0,
+					at = 0,
+					au = 0,
+					av = 0,
+					aw = 0,)raw_html",R"raw_html(
+					ax = 0,
+					ay = 0,
+					az = 0,
+					aA = 0,
+					aB = 0,
+					aC = 0,
+					aD = 0,
+					aE = 0,
+					aF = 0,
+					aG = 0,
+					aH = 0,
+					aI = 0,
+					aJ = 0,
+					aK = 0,
+					aL = 0;
+				do {
+					if (a >>> 0 < 245 >>> 0) {
+						if (a >>> 0 <)raw_html",R"raw_html( 11 >>> 0) {
+							b = 16
+						} else {
+							b = a + 11 & -8
+						}
+						d = b >>> 3;
+						e = c[16] | 0;
+						f = e >>> (d >>> 0);
+						if ((f & 3 | 0) != 0) {
+							g = (f & 1 ^ 1) + d | 0;
+							h = g << 1;
+							i = 104 + (h << 2) | 0;
+				)raw_html",R"raw_html(			j = 104 + (h + 2 << 2) | 0;
+							h = c[j >> 2] | 0;
+							k = h + 8 | 0;
+							l = c[k >> 2] | 0;
+							do {
+								if ((i | 0) == (l | 0)) {
+									c[16] = e & ~(1 << g)
+								} else {
+									if (l >>> 0 < (c[20] | 0) >>> 0) {
+										an()raw_html",R"raw_html();
+										return 0
+									}
+									m = l + 12 | 0;
+									if ((c[m >> 2] | 0) == (h | 0)) {
+										c[m >> 2] = i;
+										c[j >> 2] = l;
+										break
+									} else {
+										an();
+										return 0
+									}
+								}
+							} while )raw_html",R"raw_html((0);
+							l = g << 3;
+							c[h + 4 >> 2] = l | 3;
+							j = h + (l | 4) | 0;
+							c[j >> 2] = c[j >> 2] | 1;
+							n = k;
+							return n | 0
+						}
+						if (b >>> 0 <= (c[18] | 0) >>> 0) {
+							o = b;
+							break
+						}
+						if ((f | 0) != )raw_html",R"raw_html(0) {
+							j = 2 << d;
+							l = f << d & (j | -j);
+							j = (l & -l) - 1 | 0;
+							l = j >>> 12 & 16;
+							i = j >>> (l >>> 0);
+							j = i >>> 5 & 8;
+							m = i >>> (j >>> 0);
+							i = m >>> 2 & 4;
+							p = m >>> (i >>> 0);
+							m = p >>)raw_html",R"raw_html(> 1 & 2;
+							q = p >>> (m >>> 0);
+							p = q >>> 1 & 1;
+							r = (j | l | i | m | p) + (q >>> (p >>> 0)) | 0;
+							p = r << 1;
+							q = 104 + (p << 2) | 0;
+							m = 104 + (p + 2 << 2) | 0;
+							p = c[m >> 2] | 0;
+							i = p + 8 | 0;
+						)raw_html",R"raw_html(	l = c[i >> 2] | 0;
+							do {
+								if ((q | 0) == (l | 0)) {
+									c[16] = e & ~(1 << r)
+								} else {
+									if (l >>> 0 < (c[20] | 0) >>> 0) {
+										an();
+										return 0
+									}
+									j = l + 12 | 0;
+									if ((c[j >> 2] | 0)raw_html",R"raw_html() == (p | 0)) {
+										c[j >> 2] = q;
+										c[m >> 2] = l;
+										break
+									} else {
+										an();
+										return 0
+									}
+								}
+							} while (0);
+							l = r << 3;
+							m = l - b | 0;
+							c[p + 4 >> 2] = b | 3;
+							q )raw_html",R"raw_html(= p;
+							e = q + b | 0;
+							c[q + (b | 4) >> 2] = m | 1;
+							c[q + l >> 2] = m;
+							l = c[18] | 0;
+							if ((l | 0) != 0) {
+								q = c[21] | 0;
+								d = l >>> 3;
+								l = d << 1;
+								f = 104 + (l << 2) | 0;
+								k = c[16] | 0;)raw_html",R"raw_html(
+								h = 1 << d;
+								do {
+									if ((k & h | 0) == 0) {
+										c[16] = k | h;
+										s = f;
+										t = 104 + (l + 2 << 2) | 0
+									} else {
+										d = 104 + (l + 2 << 2) | 0;
+										g = c[d >> 2] | 0;
+										if (g >>> 0 >= )raw_html",R"raw_html((c[20] | 0) >>> 0) {
+											s = g;
+											t = d;
+											break
+										}
+										an();
+										return 0
+									}
+								} while (0);
+								c[t >> 2] = q;
+								c[s + 12 >> 2] = q;
+								c[q + 8 >> 2] = s;
+								c[q + 12 >> 2] = )raw_html",R"raw_html(f
+							}
+							c[18] = m;
+							c[21] = e;
+							n = i;
+							return n | 0
+						}
+						l = c[17] | 0;
+						if ((l | 0) == 0) {
+							o = b;
+							break
+						}
+						h = (l & -l) - 1 | 0;
+						l = h >>> 12 & 16;
+						k = h >>> (l >>> 0);
+					)raw_html",R"raw_html(	h = k >>> 5 & 8;
+						p = k >>> (h >>> 0);
+						k = p >>> 2 & 4;
+						r = p >>> (k >>> 0);
+						p = r >>> 1 & 2;
+						d = r >>> (p >>> 0);
+						r = d >>> 1 & 1;
+						g = c[368 + ((h | l | k | p | r) + (d >>> (r >>> 0)) << 2) >> 2] | 0;
+						r = g;)raw_html",R"raw_html(
+						d = g;
+						p = (c[g + 4 >> 2] & -8) - b | 0;
+						while (1) {
+							g = c[r + 16 >> 2] | 0;
+							if ((g | 0) == 0) {
+								k = c[r + 20 >> 2] | 0;
+								if ((k | 0) == 0) {
+									break
+								} else {
+									u = k
+								}
+							} )raw_html",R"raw_html(else {
+								u = g
+							}
+							g = (c[u + 4 >> 2] & -8) - b | 0;
+							k = g >>> 0 < p >>> 0;
+							r = u;
+							d = k ? u : d;
+							p = k ? g : p
+						}
+						r = d;
+						i = c[20] | 0;
+						if (r >>> 0 < i >>> 0) {
+							an();
+							retur)raw_html",R"raw_html(n 0
+						}
+						e = r + b | 0;
+						m = e;
+						if (r >>> 0 >= e >>> 0) {
+							an();
+							return 0
+						}
+						e = c[d + 24 >> 2] | 0;
+						f = c[d + 12 >> 2] | 0;
+						do {
+							if ((f | 0) == (d | 0)) {
+								q = d + 20 | 0;
+								g = c)raw_html",R"raw_html([q >> 2] | 0;
+								if ((g | 0) == 0) {
+									k = d + 16 | 0;
+									l = c[k >> 2] | 0;
+									if ((l | 0) == 0) {
+										v = 0;
+										break
+									} else {
+										w = l;
+										x = k
+									}
+								} else {
+									w = g;
+				)raw_html",R"raw_html(					x = q
+								}
+								while (1) {
+									q = w + 20 | 0;
+									g = c[q >> 2] | 0;
+									if ((g | 0) != 0) {
+										w = g;
+										x = q;
+										continue
+									}
+									q = w + 16 | 0;
+									g = c[q >> 2] | 0;
+									if ((g )raw_html",R"raw_html(| 0) == 0) {
+										break
+									} else {
+										w = g;
+										x = q
+									}
+								}
+								if (x >>> 0 < i >>> 0) {
+									an();
+									return 0
+								} else {
+									c[x >> 2] = 0;
+									v = w;
+									break
+								}
+							)raw_html",R"raw_html(} else {
+								q = c[d + 8 >> 2] | 0;
+								if (q >>> 0 < i >>> 0) {
+									an();
+									return 0
+								}
+								g = q + 12 | 0;
+								if ((c[g >> 2] | 0) != (d | 0)) {
+									an();
+									return 0
+								}
+								k = f + 8 | 0;
+								)raw_html",R"raw_html(if ((c[k >> 2] | 0) == (d | 0)) {
+									c[g >> 2] = f;
+									c[k >> 2] = q;
+									v = f;
+									break
+								} else {
+									an();
+									return 0
+								}
+							}
+						} while (0);
+						L292: do {
+							if ((e | 0) != 0) {
+								f =)raw_html",R"raw_html( d + 28 | 0;
+								i = 368 + (c[f >> 2] << 2) | 0;
+								do {
+									if ((d | 0) == (c[i >> 2] | 0)) {
+										c[i >> 2] = v;
+										if ((v | 0) != 0) {
+											break
+										}
+										c[17] = c[17] & ~(1 << c[f >> 2]);
+										break L2)raw_html",R"raw_html(92
+									} else {
+										if (e >>> 0 < (c[20] | 0) >>> 0) {
+											an();
+											return 0
+										}
+										q = e + 16 | 0;
+										if ((c[q >> 2] | 0) == (d | 0)) {
+											c[q >> 2] = v
+										} else {
+											c[e + 20 >> 2] =)raw_html",R"raw_html( v
+										}
+										if ((v | 0) == 0) {
+											break L292
+										}
+									}
+								} while (0);
+								if (v >>> 0 < (c[20] | 0) >>> 0) {
+									an();
+									return 0
+								}
+								c[v + 24 >> 2] = e;
+								f = c[d + 16 >> 2] | 0;)raw_html",R"raw_html(
+								do {
+									if ((f | 0) != 0) {
+										if (f >>> 0 < (c[20] | 0) >>> 0) {
+											an();
+											return 0
+										} else {
+											c[v + 16 >> 2] = f;
+											c[f + 24 >> 2] = v;
+											break
+										}
+									}
+								} )raw_html",R"raw_html(while (0);
+								f = c[d + 20 >> 2] | 0;
+								if ((f | 0) == 0) {
+									break
+								}
+								if (f >>> 0 < (c[20] | 0) >>> 0) {
+									an();
+									return 0
+								} else {
+									c[v + 20 >> 2] = f;
+									c[f + 24 >> 2] = v;
+									)raw_html",R"raw_html(break
+								}
+							}
+						} while (0);
+						if (p >>> 0 < 16 >>> 0) {
+							e = p + b | 0;
+							c[d + 4 >> 2] = e | 3;
+							f = r + (e + 4) | 0;
+							c[f >> 2] = c[f >> 2] | 1
+						} else {
+							c[d + 4 >> 2] = b | 3;
+							c[r + (b | 4) >)raw_html",R"raw_html(> 2] = p | 1;
+							c[r + (p + b) >> 2] = p;
+							f = c[18] | 0;
+							if ((f | 0) != 0) {
+								e = c[21] | 0;
+								i = f >>> 3;
+								f = i << 1;
+								q = 104 + (f << 2) | 0;
+								k = c[16] | 0;
+								g = 1 << i;
+								do {
+									)raw_html",R"raw_html(if ((k & g | 0) == 0) {
+										c[16] = k | g;
+										y = q;
+										z = 104 + (f + 2 << 2) | 0
+									} else {
+										i = 104 + (f + 2 << 2) | 0;
+										l = c[i >> 2] | 0;
+										if (l >>> 0 >= (c[20] | 0) >>> 0) {
+											y = l;
+				)raw_html",R"raw_html(							z = i;
+											break
+										}
+										an();
+										return 0
+									}
+								} while (0);
+								c[z >> 2] = e;
+								c[y + 12 >> 2] = e;
+								c[e + 8 >> 2] = y;
+								c[e + 12 >> 2] = q
+							}
+							c[18] = p;
+							c[21] =)raw_html",R"raw_html( m
+						}
+						f = d + 8 | 0;
+						if ((f | 0) == 0) {
+							o = b;
+							break
+						} else {
+							n = f
+						}
+						return n | 0
+					} else {
+						if (a >>> 0 > 4294967231 >>> 0) {
+							o = -1;
+							break
+						}
+						f = a + 11 | 0;
+				)raw_html",R"raw_html(		g = f & -8;
+						k = c[17] | 0;
+						if ((k | 0) == 0) {
+							o = g;
+							break
+						}
+						r = -g | 0;
+						i = f >>> 8;
+						do {
+							if ((i | 0) == 0) {
+								A = 0
+							} else {
+								if (g >>> 0 > 16777215 >>> 0) {
+									A = 31)raw_html",R"raw_html(;
+									break
+								}
+								f = (i + 1048320 | 0) >>> 16 & 8;
+								l = i << f;
+								h = (l + 520192 | 0) >>> 16 & 4;
+								j = l << h;
+								l = (j + 245760 | 0) >>> 16 & 2;
+								B = 14 - (h | f | l) + (j << l >>> 15) | 0;
+								A = g)raw_html",R"raw_html( >>> ((B + 7 | 0) >>> 0) & 1 | B << 1
+							}
+						} while (0);
+						i = c[368 + (A << 2) >> 2] | 0;
+						L340: do {
+							if ((i | 0) == 0) {
+								C = 0;
+								D = r;
+								E = 0
+							} else {
+								if ((A | 0) == 31) {
+									F = 0
+				)raw_html",R"raw_html(				} else {
+									F = 25 - (A >>> 1) | 0
+								}
+								d = 0;
+								m = r;
+								p = i;
+								q = g << F;
+								e = 0;
+								while (1) {
+									B = c[p + 4 >> 2] & -8;
+									l = B - g | 0;
+									if (l >>> 0 < m >>> 0) {
+										)raw_html",R"raw_html(if ((B | 0) == (g | 0)) {
+											C = p;
+											D = l;
+											E = p;
+											break L340
+										} else {
+											G = p;
+											H = l
+										}
+									} else {
+										G = d;
+										H = m
+									}
+									l = c[p + 20 >> 2)raw_html",R"raw_html(] | 0;
+									B = c[p + 16 + (q >>> 31 << 2) >> 2] | 0;
+									j = (l | 0) == 0 | (l | 0) == (B | 0) ? e : l;
+									if ((B | 0) == 0) {
+										C = G;
+										D = H;
+										E = j;
+										break
+									} else {
+										d = G;
+										m)raw_html",R"raw_html( = H;
+										p = B;
+										q = q << 1;
+										e = j
+									}
+								}
+							}
+						} while (0);
+						if ((E | 0) == 0 & (C | 0) == 0) {
+							i = 2 << A;
+							r = k & (i | -i);
+							if ((r | 0) == 0) {
+								o = g;
+								break
+					)raw_html",R"raw_html(		}
+							i = (r & -r) - 1 | 0;
+							r = i >>> 12 & 16;
+							e = i >>> (r >>> 0);
+							i = e >>> 5 & 8;
+							q = e >>> (i >>> 0);
+							e = q >>> 2 & 4;
+							p = q >>> (e >>> 0);
+							q = p >>> 1 & 2;
+							m = p >>> (q >>> 0);
+							p = m )raw_html",R"raw_html(>>> 1 & 1;
+							I = c[368 + ((i | r | e | q | p) + (m >>> (p >>> 0)) << 2) >> 2] | 0
+						} else {
+							I = E
+						}
+						if ((I | 0) == 0) {
+							J = D;
+							K = C
+						} else {
+							p = I;
+							m = D;
+							q = C;
+							while (1) {
+				)raw_html",R"raw_html(				e = (c[p + 4 >> 2] & -8) - g | 0;
+								r = e >>> 0 < m >>> 0;
+								i = r ? e : m;
+								e = r ? p : q;
+								r = c[p + 16 >> 2] | 0;
+								if ((r | 0) != 0) {
+									p = r;
+									m = i;
+									q = e;
+									continue
+								}
+					)raw_html",R"raw_html(			r = c[p + 20 >> 2] | 0;
+								if ((r | 0) == 0) {
+									J = i;
+									K = e;
+									break
+								} else {
+									p = r;
+									m = i;
+									q = e
+								}
+							}
+						}
+						if ((K | 0) == 0) {
+							o = g;
+							break
+						}
+		)raw_html",R"raw_html(				if (J >>> 0 >= ((c[18] | 0) - g | 0) >>> 0) {
+							o = g;
+							break
+						}
+						q = K;
+						m = c[20] | 0;
+						if (q >>> 0 < m >>> 0) {
+							an();
+							return 0
+						}
+						p = q + g | 0;
+						k = p;
+						if (q >>> 0 >= p >>> 0) {
+			)raw_html",R"raw_html(				an();
+							return 0
+						}
+						e = c[K + 24 >> 2] | 0;
+						i = c[K + 12 >> 2] | 0;
+						do {
+							if ((i | 0) == (K | 0)) {
+								r = K + 20 | 0;
+								d = c[r >> 2] | 0;
+								if ((d | 0) == 0) {
+									j = K + 16 | 0;
+									B = c)raw_html",R"raw_html([j >> 2] | 0;
+									if ((B | 0) == 0) {
+										L = 0;
+										break
+									} else {
+										M = B;
+										N = j
+									}
+								} else {
+									M = d;
+									N = r
+								}
+								while (1) {
+									r = M + 20 | 0;
+									d = c[)raw_html",R"raw_html(r >> 2] | 0;
+									if ((d | 0) != 0) {
+										M = d;
+										N = r;
+										continue
+									}
+									r = M + 16 | 0;
+									d = c[r >> 2] | 0;
+									if ((d | 0) == 0) {
+										break
+									} else {
+										M = d;
+										N = r
+	)raw_html",R"raw_html(								}
+								}
+								if (N >>> 0 < m >>> 0) {
+									an();
+									return 0
+								} else {
+									c[N >> 2] = 0;
+									L = M;
+									break
+								}
+							} else {
+								r = c[K + 8 >> 2] | 0;
+								if (r >>> 0 < m >>> 0) {
+								)raw_html",R"raw_html(	an();
+									return 0
+								}
+								d = r + 12 | 0;
+								if ((c[d >> 2] | 0) != (K | 0)) {
+									an();
+									return 0
+								}
+								j = i + 8 | 0;
+								if ((c[j >> 2] | 0) == (K | 0)) {
+									c[d >> 2] = i;
+									c[j >> 2] = r;)raw_html",R"raw_html(
+									L = i;
+									break
+								} else {
+									an();
+									return 0
+								}
+							}
+						} while (0);
+						L390: do {
+							if ((e | 0) != 0) {
+								i = K + 28 | 0;
+								m = 368 + (c[i >> 2] << 2) | 0;
+								do {
+									if ((K)raw_html",R"raw_html( | 0) == (c[m >> 2] | 0)) {
+										c[m >> 2] = L;
+										if ((L | 0) != 0) {
+											break
+										}
+										c[17] = c[17] & ~(1 << c[i >> 2]);
+										break L390
+									} else {
+										if (e >>> 0 < (c[20] | 0) >>> 0) {
+											an())raw_html",R"raw_html(;
+											return 0
+										}
+										r = e + 16 | 0;
+										if ((c[r >> 2] | 0) == (K | 0)) {
+											c[r >> 2] = L
+										} else {
+											c[e + 20 >> 2] = L
+										}
+										if ((L | 0) == 0) {
+											break L390
+										}
+		)raw_html",R"raw_html(							}
+								} while (0);
+								if (L >>> 0 < (c[20] | 0) >>> 0) {
+									an();
+									return 0
+								}
+								c[L + 24 >> 2] = e;
+								i = c[K + 16 >> 2] | 0;
+								do {
+									if ((i | 0) != 0) {
+										if (i >>> 0 < (c[20] | 0) >>)raw_html",R"raw_html(> 0) {
+											an();
+											return 0
+										} else {
+											c[L + 16 >> 2] = i;
+											c[i + 24 >> 2] = L;
+											break
+										}
+									}
+								} while (0);
+								i = c[K + 20 >> 2] | 0;
+								if ((i | 0) == 0) {
+									b)raw_html",R"raw_html(reak
+								}
+								if (i >>> 0 < (c[20] | 0) >>> 0) {
+									an();
+									return 0
+								} else {
+									c[L + 20 >> 2] = i;
+									c[i + 24 >> 2] = L;
+									break
+								}
+							}
+						} while (0);
+						do {
+							if (J >>> 0 < 16 >>)raw_html",R"raw_html(> 0) {
+								e = J + g | 0;
+								c[K + 4 >> 2] = e | 3;
+								i = q + (e + 4) | 0;
+								c[i >> 2] = c[i >> 2] | 1
+							} else {
+								c[K + 4 >> 2] = g | 3;
+								c[q + (g | 4) >> 2] = J | 1;
+								c[q + (J + g) >> 2] = J;
+								i = J >)raw_html",R"raw_html(>> 3;
+								if (J >>> 0 < 256 >>> 0) {
+									e = i << 1;
+									m = 104 + (e << 2) | 0;
+									r = c[16] | 0;
+									j = 1 << i;
+									do {
+										if ((r & j | 0) == 0) {
+											c[16] = r | j;
+											O = m;
+											P = 104 + (e )raw_html",R"raw_html(+ 2 << 2) | 0
+										} else {
+											i = 104 + (e + 2 << 2) | 0;
+											d = c[i >> 2] | 0;
+											if (d >>> 0 >= (c[20] | 0) >>> 0) {
+												O = d;
+												P = i;
+												break
+											}
+											an();
+											return 0
+	)raw_html",R"raw_html(									}
+									} while (0);
+									c[P >> 2] = k;
+									c[O + 12 >> 2] = k;
+									c[q + (g + 8) >> 2] = O;
+									c[q + (g + 12) >> 2] = m;
+									break
+								}
+								e = p;
+								j = J >>> 8;
+								do {
+									if ((j | 0) == 0) )raw_html",R"raw_html({
+										Q = 0
+									} else {
+										if (J >>> 0 > 16777215 >>> 0) {
+											Q = 31;
+											break
+										}
+										r = (j + 1048320 | 0) >>> 16 & 8;
+										i = j << r;
+										d = (i + 520192 | 0) >>> 16 & 4;
+										B = i << d;)raw_html",R"raw_html(
+										i = (B + 245760 | 0) >>> 16 & 2;
+										l = 14 - (d | r | i) + (B << i >>> 15) | 0;
+										Q = J >>> ((l + 7 | 0) >>> 0) & 1 | l << 1
+									}
+								} while (0);
+								j = 368 + (Q << 2) | 0;
+								c[q + (g + 28) >> 2] = Q;
+							)raw_html",R"raw_html(	c[q + (g + 20) >> 2] = 0;
+								c[q + (g + 16) >> 2] = 0;
+								m = c[17] | 0;
+								l = 1 << Q;
+								if ((m & l | 0) == 0) {
+									c[17] = m | l;
+									c[j >> 2] = e;
+									c[q + (g + 24) >> 2] = j;
+									c[q + (g + 12) >> 2] = e;
+		)raw_html",R"raw_html(							c[q + (g + 8) >> 2] = e;
+									break
+								}
+								if ((Q | 0) == 31) {
+									R = 0
+								} else {
+									R = 25 - (Q >>> 1) | 0
+								}
+								l = J << R;
+								m = c[j >> 2] | 0;
+								while (1) {
+									if ((c[m + 4 >> 2] &)raw_html",R"raw_html( -8 | 0) == (J | 0)) {
+										break
+									}
+									S = m + 16 + (l >>> 31 << 2) | 0;
+									j = c[S >> 2] | 0;
+									if ((j | 0) == 0) {
+										T = 302;
+										break
+									} else {
+										l = l << 1;
+										m = j
+									}
+				)raw_html",R"raw_html(				}
+								if ((T | 0) == 302) {
+									if (S >>> 0 < (c[20] | 0) >>> 0) {
+										an();
+										return 0
+									} else {
+										c[S >> 2] = e;
+										c[q + (g + 24) >> 2] = m;
+										c[q + (g + 12) >> 2] = e;
+										c[q + (g + 8) >>)raw_html",R"raw_html( 2] = e;
+										break
+									}
+								}
+								l = m + 8 | 0;
+								j = c[l >> 2] | 0;
+								i = c[20] | 0;
+								if (m >>> 0 < i >>> 0) {
+									an();
+									return 0
+								}
+								if (j >>> 0 < i >>> 0) {
+									an();
+									retu)raw_html",R"raw_html(rn 0
+								} else {
+									c[j + 12 >> 2] = e;
+									c[l >> 2] = e;
+									c[q + (g + 8) >> 2] = j;
+									c[q + (g + 12) >> 2] = m;
+									c[q + (g + 24) >> 2] = 0;
+									break
+								}
+							}
+						} while (0);
+						q = K + 8 | 0;
+			)raw_html",R"raw_html(			if ((q | 0) == 0) {
+							o = g;
+							break
+						} else {
+							n = q
+						}
+						return n | 0
+					}
+				} while (0);
+				K = c[18] | 0;
+				if (o >>> 0 <= K >>> 0) {
+					S = K - o | 0;
+					J = c[21] | 0;
+					if (S >>> 0 > 15 >>> 0) {
+						R)raw_html",R"raw_html( = J;
+						c[21] = R + o;
+						c[18] = S;
+						c[R + (o + 4) >> 2] = S | 1;
+						c[R + K >> 2] = S;
+						c[J + 4 >> 2] = o | 3
+					} else {
+						c[18] = 0;
+						c[21] = 0;
+						c[J + 4 >> 2] = K | 3;
+						S = J + (K + 4) | 0;
+						c[S >> 2] = c[)raw_html",R"raw_html(S >> 2] | 1
+					}
+					n = J + 8 | 0;
+					return n | 0
+				}
+				J = c[19] | 0;
+				if (o >>> 0 < J >>> 0) {
+					S = J - o | 0;
+					c[19] = S;
+					J = c[22] | 0;
+					K = J;
+					c[22] = K + o;
+					c[K + (o + 4) >> 2] = S | 1;
+					c[J + 4 >> 2] = o )raw_html",R"raw_html(| 3;
+					n = J + 8 | 0;
+					return n | 0
+				}
+				do {
+					if ((c[10] | 0) == 0) {
+						J = aj(30) | 0;
+						if ((J - 1 & J | 0) == 0) {
+							c[12] = J;
+							c[11] = J;
+							c[13] = -1;
+							c[14] = -1;
+							c[15] = 0;
+							c[127] = 0;
+		)raw_html",R"raw_html(					c[10] = (ao(0) | 0) & -16 ^ 1431655768;
+							break
+						} else {
+							an();
+							return 0
+						}
+					}
+				} while (0);
+				J = o + 48 | 0;
+				S = c[12] | 0;
+				K = o + 47 | 0;
+				R = S + K | 0;
+				Q = -S | 0;
+				S = R & Q;
+				if (S >>>)raw_html",R"raw_html( 0 <= o >>> 0) {
+					n = 0;
+					return n | 0
+				}
+				O = c[126] | 0;
+				do {
+					if ((O | 0) != 0) {
+						P = c[124] | 0;
+						L = P + S | 0;
+						if (L >>> 0 <= P >>> 0 | L >>> 0 > O >>> 0) {
+							n = 0
+						} else {
+							break
+						}
+					)raw_html",R"raw_html(	return n | 0
+					}
+				} while (0);
+				L482: do {
+					if ((c[127] & 4 | 0) == 0) {
+						O = c[22] | 0;
+						L484: do {
+							if ((O | 0) == 0) {
+								T = 332
+							} else {
+								L = O;
+								P = 512;
+								while (1) {
+									U = P | 0;
+)raw_html",R"raw_html(									M = c[U >> 2] | 0;
+									if (M >>> 0 <= L >>> 0) {
+										V = P + 4 | 0;
+										if ((M + (c[V >> 2] | 0) | 0) >>> 0 > L >>> 0) {
+											break
+										}
+									}
+									M = c[P + 8 >> 2] | 0;
+									if ((M | 0) == 0) {
+								)raw_html",R"raw_html(		T = 332;
+										break L484
+									} else {
+										P = M
+									}
+								}
+								if ((P | 0) == 0) {
+									T = 332;
+									break
+								}
+								L = R - (c[19] | 0) & Q;
+								if (L >>> 0 >= 2147483647 >>> 0) {
+									W = 0;
+						)raw_html",R"raw_html(			break
+								}
+								m = ak(L | 0) | 0;
+								e = (m | 0) == ((c[U >> 2] | 0) + (c[V >> 2] | 0) | 0);
+								X = e ? m : -1;
+								Y = e ? L : 0;
+								Z = m;
+								_ = L;
+								T = 341
+							}
+						} while (0);
+						do {
+							if ((T )raw_html",R"raw_html(| 0) == 332) {
+								O = ak(0) | 0;
+								if ((O | 0) == -1) {
+									W = 0;
+									break
+								}
+								g = O;
+								L = c[11] | 0;
+								m = L - 1 | 0;
+								if ((m & g | 0) == 0) {
+									$ = S
+								} else {
+									$ = S - g + (m)raw_html",R"raw_html( + g & -L) | 0
+								}
+								L = c[124] | 0;
+								g = L + $ | 0;
+								if (!($ >>> 0 > o >>> 0 & $ >>> 0 < 2147483647 >>> 0)) {
+									W = 0;
+									break
+								}
+								m = c[126] | 0;
+								if ((m | 0) != 0) {
+									if (g >>> 0 <= L )raw_html",R"raw_html(>>> 0 | g >>> 0 > m >>> 0) {
+										W = 0;
+										break
+									}
+								}
+								m = ak($ | 0) | 0;
+								g = (m | 0) == (O | 0);
+								X = g ? O : -1;
+								Y = g ? $ : 0;
+								Z = m;
+								_ = $;
+								T = 341
+							}
+						} whil)raw_html",R"raw_html(e (0);
+						L504: do {
+							if ((T | 0) == 341) {
+								m = -_ | 0;
+								if ((X | 0) != -1) {
+									aa = Y;
+									ab = X;
+									T = 352;
+									break L482
+								}
+								do {
+									if ((Z | 0) != -1 & _ >>> 0 < 2147483647 >>> 0 & _)raw_html",R"raw_html( >>> 0 < J >>> 0) {
+										g = c[12] | 0;
+										O = K - _ + g & -g;
+										if (O >>> 0 >= 2147483647 >>> 0) {
+											ac = _;
+											break
+										}
+										if ((ak(O | 0) | 0) == -1) {
+											ak(m | 0) | 0;
+											W = Y;
+					)raw_html",R"raw_html(						break L504
+										} else {
+											ac = O + _ | 0;
+											break
+										}
+									} else {
+										ac = _
+									}
+								} while (0);
+								if ((Z | 0) == -1) {
+									W = Y
+								} else {
+									aa = ac;
+									ab = Z;
+	)raw_html",R"raw_html(								T = 352;
+									break L482
+								}
+							}
+						} while (0);
+						c[127] = c[127] | 4;
+						ad = W;
+						T = 349
+					} else {
+						ad = 0;
+						T = 349
+					}
+				} while (0);
+				do {
+					if ((T | 0) == 349) {
+						if (S >>> 0 >= 214)raw_html",R"raw_html(7483647 >>> 0) {
+							break
+						}
+						W = ak(S | 0) | 0;
+						Z = ak(0) | 0;
+						if (!((Z | 0) != -1 & (W | 0) != -1 & W >>> 0 < Z >>> 0)) {
+							break
+						}
+						ac = Z - W | 0;
+						Z = ac >>> 0 > (o + 40 | 0) >>> 0;
+						Y = Z ? W : -1;
+)raw_html",R"raw_html(						if ((Y | 0) != -1) {
+							aa = Z ? ac : ad;
+							ab = Y;
+							T = 352
+						}
+					}
+				} while (0);
+				do {
+					if ((T | 0) == 352) {
+						ad = (c[124] | 0) + aa | 0;
+						c[124] = ad;
+						if (ad >>> 0 > (c[125] | 0) >>> 0) {
+							c[1)raw_html",R"raw_html(25] = ad
+						}
+						ad = c[22] | 0;
+						L524: do {
+							if ((ad | 0) == 0) {
+								S = c[20] | 0;
+								if ((S | 0) == 0 | ab >>> 0 < S >>> 0) {
+									c[20] = ab
+								}
+								c[128] = ab;
+								c[129] = aa;
+								c[131] = 0;
+								)raw_html",R"raw_html(c[25] = c[10];
+								c[24] = -1;
+								S = 0;
+								do {
+									Y = S << 1;
+									ac = 104 + (Y << 2) | 0;
+									c[104 + (Y + 3 << 2) >> 2] = ac;
+									c[104 + (Y + 2 << 2) >> 2] = ac;
+									S = S + 1 | 0;
+								} while (S >>> 0 < 32 )raw_html",R"raw_html(>>> 0);
+								S = ab + 8 | 0;
+								if ((S & 7 | 0) == 0) {
+									ae = 0
+								} else {
+									ae = -S & 7
+								}
+								S = aa - 40 - ae | 0;
+								c[22] = ab + ae;
+								c[19] = S;
+								c[ab + (ae + 4) >> 2] = S | 1;
+								c[ab + )raw_html",R"raw_html((aa - 36) >> 2] = 40;
+								c[23] = c[14]
+							} else {
+								S = 512;
+								while (1) {
+									af = c[S >> 2] | 0;
+									ag = S + 4 | 0;
+									ah = c[ag >> 2] | 0;
+									if ((ab | 0) == (af + ah | 0)) {
+										T = 364;
+										brea)raw_html",R"raw_html(k
+									}
+									ac = c[S + 8 >> 2] | 0;
+									if ((ac | 0) == 0) {
+										break
+									} else {
+										S = ac
+									}
+								}
+								do {
+									if ((T | 0) == 364) {
+										if ((c[S + 12 >> 2] & 8 | 0) != 0) {
+											break
+)raw_html",R"raw_html(										}
+										ac = ad;
+										if (!(ac >>> 0 >= af >>> 0 & ac >>> 0 < ab >>> 0)) {
+											break
+										}
+										c[ag >> 2] = ah + aa;
+										ac = c[22] | 0;
+										Y = (c[19] | 0) + aa | 0;
+										Z = ac;
+										W = ac + 8 )raw_html",R"raw_html(| 0;
+										if ((W & 7 | 0) == 0) {
+											ai = 0
+										} else {
+											ai = -W & 7
+										}
+										W = Y - ai | 0;
+										c[22] = Z + ai;
+										c[19] = W;
+										c[Z + (ai + 4) >> 2] = W | 1;
+										c[Z + (Y + 4) >> 2] = )raw_html",R"raw_html(40;
+										c[23] = c[14];
+										break L524
+									}
+								} while (0);
+								if (ab >>> 0 < (c[20] | 0) >>> 0) {
+									c[20] = ab
+								}
+								S = ab + aa | 0;
+								Y = 512;
+								while (1) {
+									al = Y | 0;
+									if ((c[a)raw_html",R"raw_html(l >> 2] | 0) == (S | 0)) {
+										T = 374;
+										break
+									}
+									Z = c[Y + 8 >> 2] | 0;
+									if ((Z | 0) == 0) {
+										break
+									} else {
+										Y = Z
+									}
+								}
+								do {
+									if ((T | 0) == 374) {
+							)raw_html",R"raw_html(			if ((c[Y + 12 >> 2] & 8 | 0) != 0) {
+											break
+										}
+										c[al >> 2] = ab;
+										S = Y + 4 | 0;
+										c[S >> 2] = (c[S >> 2] | 0) + aa;
+										S = ab + 8 | 0;
+										if ((S & 7 | 0) == 0) {
+											ap = 0
+										} e)raw_html",R"raw_html(lse {
+											ap = -S & 7
+										}
+										S = ab + (aa + 8) | 0;
+										if ((S & 7 | 0) == 0) {
+											aq = 0
+										} else {
+											aq = -S & 7
+										}
+										S = ab + (aq + aa) | 0;
+										Z = S;
+										W = ap + o | 0;)raw_html",R"raw_html(
+										ac = ab + W | 0;
+										_ = ac;
+										K = S - (ab + ap) - o | 0;
+										c[ab + (ap + 4) >> 2] = o | 3;
+										do {
+											if ((Z | 0) == (c[22] | 0)) {
+												J = (c[19] | 0) + K | 0;
+												c[19] = J;
+												c[22)raw_html",R"raw_html(] = _;
+												c[ab + (W + 4) >> 2] = J | 1
+											} else {
+												if ((Z | 0) == (c[21] | 0)) {
+													J = (c[18] | 0) + K | 0;
+													c[18] = J;
+													c[21] = _;
+													c[ab + (W + 4) >> 2] = J | 1;
+													c[ab)raw_html",R"raw_html( + (J + W) >> 2] = J;
+													break
+												}
+												J = aa + 4 | 0;
+												X = c[ab + (J + aq) >> 2] | 0;
+												if ((X & 3 | 0) == 1) {
+													$ = X & -8;
+													V = X >>> 3;
+													L569: do {
+														if (X)raw_html",R"raw_html( >>> 0 < 256 >>> 0) {
+															U = c[ab + ((aq | 8) + aa) >> 2] | 0;
+															Q = c[ab + (aa + 12 + aq) >> 2] | 0;
+															R = 104 + (V << 1 << 2) | 0;
+															do {
+																if ((U | 0) != (R | 0)) {
+																	if (U )raw_html",R"raw_html(>>> 0 < (c[20] | 0) >>> 0) {
+																		an();
+																		return 0
+																	}
+																	if ((c[U + 12 >> 2] | 0) == (Z | 0)) {
+																		break
+																	}
+																	an();
+																	return 0
+									)raw_html",R"raw_html(							}
+															} while (0);
+															if ((Q | 0) == (U | 0)) {
+																c[16] = c[16] & ~(1 << V);
+																break
+															}
+															do {
+																if ((Q | 0) == (R | 0)) {
+																	ar = Q + 8 | 0
+		)raw_html",R"raw_html(														} else {
+																	if (Q >>> 0 < (c[20] | 0) >>> 0) {
+																		an();
+																		return 0
+																	}
+																	m = Q + 8 | 0;
+																	if ((c[m >> 2] | 0) == (Z | 0)) {
+																		ar = m;
+		)raw_html",R"raw_html(																break
+																	}
+																	an();
+																	return 0
+																}
+															} while (0);
+															c[U + 12 >> 2] = Q;
+															c[ar >> 2] = U
+														} else {
+															R = S;
+										)raw_html",R"raw_html(					m = c[ab + ((aq | 24) + aa) >> 2] | 0;
+															P = c[ab + (aa + 12 + aq) >> 2] | 0;
+															do {
+																if ((P | 0) == (R | 0)) {
+																	O = aq | 16;
+																	g = ab + (J + O) | 0;
+																	L = c[g >> 2)raw_html",R"raw_html(] | 0;
+																	if ((L | 0) == 0) {
+																		e = ab + (O + aa) | 0;
+																		O = c[e >> 2] | 0;
+																		if ((O | 0) == 0) {
+																			as = 0;
+																			break
+																		} else {
+																	)raw_html",R"raw_html(		at = O;
+																			au = e
+																		}
+																	} else {
+																		at = L;
+																		au = g
+																	}
+																	while (1) {
+																		g = at + 20 | 0;
+																		L = c[g >> 2] | 0;
+			)raw_html",R"raw_html(															if ((L | 0) != 0) {
+																			at = L;
+																			au = g;
+																			continue
+																		}
+																		g = at + 16 | 0;
+																		L = c[g >> 2] | 0;
+																		if ((L | 0) == 0) {
+									)raw_html",R"raw_html(										break
+																		} else {
+																			at = L;
+																			au = g
+																		}
+																	}
+																	if (au >>> 0 < (c[20] | 0) >>> 0) {
+																		an();
+																		return 0
+																	)raw_html",R"raw_html(} else {
+																		c[au >> 2] = 0;
+																		as = at;
+																		break
+																	}
+																} else {
+																	g = c[ab + ((aq | 8) + aa) >> 2] | 0;
+																	if (g >>> 0 < (c[20] | 0) >>> 0) {
+											)raw_html",R"raw_html(							an();
+																		return 0
+																	}
+																	L = g + 12 | 0;
+																	if ((c[L >> 2] | 0) != (R | 0)) {
+																		an();
+																		return 0
+																	}
+																	e = P + 8 | 0;
+											)raw_html",R"raw_html(						if ((c[e >> 2] | 0) == (R | 0)) {
+																		c[L >> 2] = P;
+																		c[e >> 2] = g;
+																		as = P;
+																		break
+																	} else {
+																		an();
+																		return 0
+																	}
+				)raw_html",R"raw_html(												}
+															} while (0);
+															if ((m | 0) == 0) {
+																break
+															}
+															P = ab + (aa + 28 + aq) | 0;
+															U = 368 + (c[P >> 2] << 2) | 0;
+															do {
+																if ((R | 0) =)raw_html",R"raw_html(= (c[U >> 2] | 0)) {
+																	c[U >> 2] = as;
+																	if ((as | 0) != 0) {
+																		break
+																	}
+																	c[17] = c[17] & ~(1 << c[P >> 2]);
+																	break L569
+																} else {
+																)raw_html",R"raw_html(	if (m >>> 0 < (c[20] | 0) >>> 0) {
+																		an();
+																		return 0
+																	}
+																	Q = m + 16 | 0;
+																	if ((c[Q >> 2] | 0) == (R | 0)) {
+																		c[Q >> 2] = as
+																	} else {
+							)raw_html",R"raw_html(											c[m + 20 >> 2] = as
+																	}
+																	if ((as | 0) == 0) {
+																		break L569
+																	}
+																}
+															} while (0);
+															if (as >>> 0 < (c[20] | 0) >>> 0) {
+																an();
+	)raw_html",R"raw_html(															return 0
+															}
+															c[as + 24 >> 2] = m;
+															R = aq | 16;
+															P = c[ab + (R + aa) >> 2] | 0;
+															do {
+																if ((P | 0) != 0) {
+																	if (P >>> 0 < (c[20] | 0) >>> 0))raw_html",R"raw_html( {
+																		an();
+																		return 0
+																	} else {
+																		c[as + 16 >> 2] = P;
+																		c[P + 24 >> 2] = as;
+																		break
+																	}
+																}
+															} while (0);
+									)raw_html",R"raw_html(						P = c[ab + (J + R) >> 2] | 0;
+															if ((P | 0) == 0) {
+																break
+															}
+															if (P >>> 0 < (c[20] | 0) >>> 0) {
+																an();
+																return 0
+															} else {
+																c[as + 20)raw_html",R"raw_html( >> 2] = P;
+																c[P + 24 >> 2] = as;
+																break
+															}
+														}
+													} while (0);
+													av = ab + (($ | aq) + aa) | 0;
+													aw = $ + K | 0
+												} else {
+													av = Z;
+												)raw_html",R"raw_html(	aw = K
+												}
+												J = av + 4 | 0;
+												c[J >> 2] = c[J >> 2] & -2;
+												c[ab + (W + 4) >> 2] = aw | 1;
+												c[ab + (aw + W) >> 2] = aw;
+												J = aw >>> 3;
+												if (aw >>> 0 < 256 >>> 0) {
+													V = )raw_html",R"raw_html(J << 1;
+													X = 104 + (V << 2) | 0;
+													P = c[16] | 0;
+													m = 1 << J;
+													do {
+														if ((P & m | 0) == 0) {
+															c[16] = P | m;
+															ax = X;
+															ay = 104 + (V + 2 << 2) | 0
+						)raw_html",R"raw_html(								} else {
+															J = 104 + (V + 2 << 2) | 0;
+															U = c[J >> 2] | 0;
+															if (U >>> 0 >= (c[20] | 0) >>> 0) {
+																ax = U;
+																ay = J;
+																break
+															}
+															an();
+			)raw_html",R"raw_html(												return 0
+														}
+													} while (0);
+													c[ay >> 2] = _;
+													c[ax + 12 >> 2] = _;
+													c[ab + (W + 8) >> 2] = ax;
+													c[ab + (W + 12) >> 2] = X;
+													break
+												}
+												V = a)raw_html",R"raw_html(c;
+												m = aw >>> 8;
+												do {
+													if ((m | 0) == 0) {
+														az = 0
+													} else {
+														if (aw >>> 0 > 16777215 >>> 0) {
+															az = 31;
+															break
+														}
+														P = (m + 104)raw_html",R"raw_html(8320 | 0) >>> 16 & 8;
+														$ = m << P;
+														J = ($ + 520192 | 0) >>> 16 & 4;
+														U = $ << J;
+														$ = (U + 245760 | 0) >>> 16 & 2;
+														Q = 14 - (J | P | $) + (U << $ >>> 15) | 0;
+														az = aw >>> ((Q )raw_html",R"raw_html(+ 7 | 0) >>> 0) & 1 | Q << 1
+													}
+												} while (0);
+												m = 368 + (az << 2) | 0;
+												c[ab + (W + 28) >> 2] = az;
+												c[ab + (W + 20) >> 2] = 0;
+												c[ab + (W + 16) >> 2] = 0;
+												X = c[17] | 0;
+					)raw_html",R"raw_html(							Q = 1 << az;
+												if ((X & Q | 0) == 0) {
+													c[17] = X | Q;
+													c[m >> 2] = V;
+													c[ab + (W + 24) >> 2] = m;
+													c[ab + (W + 12) >> 2] = V;
+													c[ab + (W + 8) >> 2] = V;
+													break
+						)raw_html",R"raw_html(						}
+												if ((az | 0) == 31) {
+													aA = 0
+												} else {
+													aA = 25 - (az >>> 1) | 0
+												}
+												Q = aw << aA;
+												X = c[m >> 2] | 0;
+												while (1) {
+													if ((c[X + 4 >> 2] & -8 | 0)raw_html",R"raw_html() == (aw | 0)) {
+														break
+													}
+													aB = X + 16 + (Q >>> 31 << 2) | 0;
+													m = c[aB >> 2] | 0;
+													if ((m | 0) == 0) {
+														T = 447;
+														break
+													} else {
+														Q = Q << 1;)raw_html",R"raw_html(
+														X = m
+													}
+												}
+												if ((T | 0) == 447) {
+													if (aB >>> 0 < (c[20] | 0) >>> 0) {
+														an();
+														return 0
+													} else {
+														c[aB >> 2] = V;
+														c[ab + (W + 24)raw_html",R"raw_html() >> 2] = X;
+														c[ab + (W + 12) >> 2] = V;
+														c[ab + (W + 8) >> 2] = V;
+														break
+													}
+												}
+												Q = X + 8 | 0;
+												m = c[Q >> 2] | 0;
+												$ = c[20] | 0;
+												if (X >>> 0 < $ )raw_html",R"raw_html(>>> 0) {
+													an();
+													return 0
+												}
+												if (m >>> 0 < $ >>> 0) {
+													an();
+													return 0
+												} else {
+													c[m + 12 >> 2] = V;
+													c[Q >> 2] = V;
+													c[ab + (W + 8) >> 2)raw_html",R"raw_html(] = m;
+													c[ab + (W + 12) >> 2] = X;
+													c[ab + (W + 24) >> 2] = 0;
+													break
+												}
+											}
+										} while (0);
+										n = ab + (ap | 8) | 0;
+										return n | 0
+									}
+								} while (0);
+								Y = )raw_html",R"raw_html(ad;
+								W = 512;
+								while (1) {
+									aC = c[W >> 2] | 0;
+									if (aC >>> 0 <= Y >>> 0) {
+										aD = c[W + 4 >> 2] | 0;
+										aE = aC + aD | 0;
+										if (aE >>> 0 > Y >>> 0) {
+											break
+										}
+									}
+									W =)raw_html",R"raw_html( c[W + 8 >> 2] | 0
+								}
+								W = aC + (aD - 39) | 0;
+								if ((W & 7 | 0) == 0) {
+									aF = 0
+								} else {
+									aF = -W & 7
+								}
+								W = aC + (aD - 47 + aF) | 0;
+								ac = W >>> 0 < (ad + 16 | 0) >>> 0 ? Y : W;
+								W )raw_html",R"raw_html(= ac + 8 | 0;
+								_ = ab + 8 | 0;
+								if ((_ & 7 | 0) == 0) {
+									aG = 0
+								} else {
+									aG = -_ & 7
+								}
+								_ = aa - 40 - aG | 0;
+								c[22] = ab + aG;
+								c[19] = _;
+								c[ab + (aG + 4) >> 2] = _ | 1;
+								c)raw_html",R"raw_html([ab + (aa - 36) >> 2] = 40;
+								c[23] = c[14];
+								c[ac + 4 >> 2] = 27;
+								c[W >> 2] = c[128];
+								c[W + 4 >> 2] = c[129];
+								c[W + 8 >> 2] = c[130];
+								c[W + 12 >> 2] = c[131];
+								c[128] = ab;
+								c[129] = aa;
+								c)raw_html",R"raw_html([131] = 0;
+								c[130] = W;
+								W = ac + 28 | 0;
+								c[W >> 2] = 7;
+								if ((ac + 32 | 0) >>> 0 < aE >>> 0) {
+									_ = W;
+									while (1) {
+										W = _ + 4 | 0;
+										c[W >> 2] = 7;
+										if ((_ + 8 | 0) >>> 0 < aE >>> 0) )raw_html",R"raw_html({
+											_ = W
+										} else {
+											break
+										}
+									}
+								}
+								if ((ac | 0) == (Y | 0)) {
+									break
+								}
+								_ = ac - ad | 0;
+								W = Y + (_ + 4) | 0;
+								c[W >> 2] = c[W >> 2] & -2;
+								c[ad + 4 >)raw_html",R"raw_html(> 2] = _ | 1;
+								c[Y + _ >> 2] = _;
+								W = _ >>> 3;
+								if (_ >>> 0 < 256 >>> 0) {
+									K = W << 1;
+									Z = 104 + (K << 2) | 0;
+									S = c[16] | 0;
+									m = 1 << W;
+									do {
+										if ((S & m | 0) == 0) {
+											c)raw_html",R"raw_html([16] = S | m;
+											aH = Z;
+											aI = 104 + (K + 2 << 2) | 0
+										} else {
+											W = 104 + (K + 2 << 2) | 0;
+											Q = c[W >> 2] | 0;
+											if (Q >>> 0 >= (c[20] | 0) >>> 0) {
+												aH = Q;
+												aI = W;
+									)raw_html",R"raw_html(			break
+											}
+											an();
+											return 0
+										}
+									} while (0);
+									c[aI >> 2] = ad;
+									c[aH + 12 >> 2] = ad;
+									c[ad + 8 >> 2] = aH;
+									c[ad + 12 >> 2] = Z;
+									break
+								}
+								K = ad;
+					)raw_html",R"raw_html(			m = _ >>> 8;
+								do {
+									if ((m | 0) == 0) {
+										aJ = 0
+									} else {
+										if (_ >>> 0 > 16777215 >>> 0) {
+											aJ = 31;
+											break
+										}
+										S = (m + 1048320 | 0) >>> 16 & 8;
+										Y = m << S;
+						)raw_html",R"raw_html(				ac = (Y + 520192 | 0) >>> 16 & 4;
+										W = Y << ac;
+										Y = (W + 245760 | 0) >>> 16 & 2;
+										Q = 14 - (ac | S | Y) + (W << Y >>> 15) | 0;
+										aJ = _ >>> ((Q + 7 | 0) >>> 0) & 1 | Q << 1
+									}
+								} while (0);
+								m =)raw_html",R"raw_html( 368 + (aJ << 2) | 0;
+								c[ad + 28 >> 2] = aJ;
+								c[ad + 20 >> 2] = 0;
+								c[ad + 16 >> 2] = 0;
+								Z = c[17] | 0;
+								Q = 1 << aJ;
+								if ((Z & Q | 0) == 0) {
+									c[17] = Z | Q;
+									c[m >> 2] = K;
+									c[ad + 24 >> )raw_html",R"raw_html(2] = m;
+									c[ad + 12 >> 2] = ad;
+									c[ad + 8 >> 2] = ad;
+									break
+								}
+								if ((aJ | 0) == 31) {
+									aK = 0
+								} else {
+									aK = 25 - (aJ >>> 1) | 0
+								}
+								Q = _ << aK;
+								Z = c[m >> 2] | 0;
+							)raw_html",R"raw_html(	while (1) {
+									if ((c[Z + 4 >> 2] & -8 | 0) == (_ | 0)) {
+										break
+									}
+									aL = Z + 16 + (Q >>> 31 << 2) | 0;
+									m = c[aL >> 2] | 0;
+									if ((m | 0) == 0) {
+										T = 482;
+										break
+									} else {
+									)raw_html",R"raw_html(	Q = Q << 1;
+										Z = m
+									}
+								}
+								if ((T | 0) == 482) {
+									if (aL >>> 0 < (c[20] | 0) >>> 0) {
+										an();
+										return 0
+									} else {
+										c[aL >> 2] = K;
+										c[ad + 24 >> 2] = Z;
+										c[ad + 12 >)raw_html",R"raw_html(> 2] = ad;
+										c[ad + 8 >> 2] = ad;
+										break
+									}
+								}
+								Q = Z + 8 | 0;
+								_ = c[Q >> 2] | 0;
+								m = c[20] | 0;
+								if (Z >>> 0 < m >>> 0) {
+									an();
+									return 0
+								}
+								if (_ >>> 0 < m >>> )raw_html",R"raw_html(0) {
+									an();
+									return 0
+								} else {
+									c[_ + 12 >> 2] = K;
+									c[Q >> 2] = K;
+									c[ad + 8 >> 2] = _;
+									c[ad + 12 >> 2] = Z;
+									c[ad + 24 >> 2] = 0;
+									break
+								}
+							}
+						} while (0);
+						)raw_html",R"raw_html(ad = c[19] | 0;
+						if (ad >>> 0 <= o >>> 0) {
+							break
+						}
+						_ = ad - o | 0;
+						c[19] = _;
+						ad = c[22] | 0;
+						Q = ad;
+						c[22] = Q + o;
+						c[Q + (o + 4) >> 2] = _ | 1;
+						c[ad + 4 >> 2] = o | 3;
+						n = ad + 8 | 0;
+			)raw_html",R"raw_html(			return n | 0
+					}
+				} while (0);
+				c[(am() | 0) >> 2] = 12;
+				n = 0;
+				return n | 0
+			}
+
+			function aQ(a) {
+				a = a | 0;
+				var b = 0,
+					d = 0,
+					e = 0,
+					f = 0,
+					g = 0,
+					h = 0,
+					i = 0,
+					j = 0,
+					k = 0,
+					l )raw_html",R"raw_html(= 0,
+					m = 0,
+					n = 0,
+					o = 0,
+					p = 0,
+					q = 0,
+					r = 0,
+					s = 0,
+					t = 0,
+					u = 0,
+					v = 0,
+					w = 0,
+					x = 0,
+					y = 0,
+					z = 0,
+					A = 0,
+					B = 0,
+					C = 0,
+					D = 0,
+					E = 0,
+					F = 0,
+					G = 0,)raw_html",R"raw_html(
+					H = 0,
+					I = 0,
+					J = 0,
+					K = 0,
+					L = 0,
+					M = 0,
+					N = 0,
+					O = 0;
+				if ((a | 0) == 0) {
+					return
+				}
+				b = a - 8 | 0;
+				d = b;
+				e = c[20] | 0;
+				if (b >>> 0 < e >>> 0) {
+					an()
+				}
+				f = c[a - 4 >> 2] |)raw_html",R"raw_html( 0;
+				g = f & 3;
+				if ((g | 0) == 1) {
+					an()
+				}
+				h = f & -8;
+				i = a + (h - 8) | 0;
+				j = i;
+				L741: do {
+					if ((f & 1 | 0) == 0) {
+						k = c[b >> 2] | 0;
+						if ((g | 0) == 0) {
+							return
+						}
+						l = -8 - k | 0;
+						)raw_html",R"raw_html(m = a + l | 0;
+						n = m;
+						o = k + h | 0;
+						if (m >>> 0 < e >>> 0) {
+							an()
+						}
+						if ((n | 0) == (c[21] | 0)) {
+							p = a + (h - 4) | 0;
+							if ((c[p >> 2] & 3 | 0) != 3) {
+								q = n;
+								r = o;
+								break
+							}
+)raw_html",R"raw_html(							c[18] = o;
+							c[p >> 2] = c[p >> 2] & -2;
+							c[a + (l + 4) >> 2] = o | 1;
+							c[i >> 2] = o;
+							return
+						}
+						p = k >>> 3;
+						if (k >>> 0 < 256 >>> 0) {
+							k = c[a + (l + 8) >> 2] | 0;
+							s = c[a + (l + 12) >> 2] | 0)raw_html",R"raw_html(;
+							t = 104 + (p << 1 << 2) | 0;
+							do {
+								if ((k | 0) != (t | 0)) {
+									if (k >>> 0 < e >>> 0) {
+										an()
+									}
+									if ((c[k + 12 >> 2] | 0) == (n | 0)) {
+										break
+									}
+									an()
+								}
+							} whil)raw_html",R"raw_html(e (0);
+							if ((s | 0) == (k | 0)) {
+								c[16] = c[16] & ~(1 << p);
+								q = n;
+								r = o;
+								break
+							}
+							do {
+								if ((s | 0) == (t | 0)) {
+									u = s + 8 | 0
+								} else {
+									if (s >>> 0 < e >>> 0) {
+								)raw_html",R"raw_html(		an()
+									}
+									v = s + 8 | 0;
+									if ((c[v >> 2] | 0) == (n | 0)) {
+										u = v;
+										break
+									}
+									an()
+								}
+							} while (0);
+							c[k + 12 >> 2] = s;
+							c[u >> 2] = k;
+							q = n;
+							r = o;
+						)raw_html",R"raw_html(	break
+						}
+						t = m;
+						p = c[a + (l + 24) >> 2] | 0;
+						v = c[a + (l + 12) >> 2] | 0;
+						do {
+							if ((v | 0) == (t | 0)) {
+								w = a + (l + 20) | 0;
+								x = c[w >> 2] | 0;
+								if ((x | 0) == 0) {
+									y = a + (l + 16) |)raw_html",R"raw_html( 0;
+									z = c[y >> 2] | 0;
+									if ((z | 0) == 0) {
+										A = 0;
+										break
+									} else {
+										B = z;
+										C = y
+									}
+								} else {
+									B = x;
+									C = w
+								}
+								while (1) {
+									w = B + 20 | )raw_html",R"raw_html(0;
+									x = c[w >> 2] | 0;
+									if ((x | 0) != 0) {
+										B = x;
+										C = w;
+										continue
+									}
+									w = B + 16 | 0;
+									x = c[w >> 2] | 0;
+									if ((x | 0) == 0) {
+										break
+									} else {
+										B = x;)raw_html",R"raw_html(
+										C = w
+									}
+								}
+								if (C >>> 0 < e >>> 0) {
+									an()
+								} else {
+									c[C >> 2] = 0;
+									A = B;
+									break
+								}
+							} else {
+								w = c[a + (l + 8) >> 2] | 0;
+								if (w >>> 0 < e >>> 0) {
+			)raw_html",R"raw_html(						an()
+								}
+								x = w + 12 | 0;
+								if ((c[x >> 2] | 0) != (t | 0)) {
+									an()
+								}
+								y = v + 8 | 0;
+								if ((c[y >> 2] | 0) == (t | 0)) {
+									c[x >> 2] = v;
+									c[y >> 2] = w;
+									A = v;
+									break
+	)raw_html",R"raw_html(							} else {
+									an()
+								}
+							}
+						} while (0);
+						if ((p | 0) == 0) {
+							q = n;
+							r = o;
+							break
+						}
+						v = a + (l + 28) | 0;
+						m = 368 + (c[v >> 2] << 2) | 0;
+						do {
+							if ((t | 0) == (c[m >> 2] | 0)raw_html",R"raw_html()) {
+								c[m >> 2] = A;
+								if ((A | 0) != 0) {
+									break
+								}
+								c[17] = c[17] & ~(1 << c[v >> 2]);
+								q = n;
+								r = o;
+								break L741
+							} else {
+								if (p >>> 0 < (c[20] | 0) >>> 0) {
+									an()
+								}
+)raw_html",R"raw_html(								k = p + 16 | 0;
+								if ((c[k >> 2] | 0) == (t | 0)) {
+									c[k >> 2] = A
+								} else {
+									c[p + 20 >> 2] = A
+								}
+								if ((A | 0) == 0) {
+									q = n;
+									r = o;
+									break L741
+								}
+							}
+						} while)raw_html",R"raw_html( (0);
+						if (A >>> 0 < (c[20] | 0) >>> 0) {
+							an()
+						}
+						c[A + 24 >> 2] = p;
+						t = c[a + (l + 16) >> 2] | 0;
+						do {
+							if ((t | 0) != 0) {
+								if (t >>> 0 < (c[20] | 0) >>> 0) {
+									an()
+								} else {
+									c[A + )raw_html",R"raw_html(16 >> 2] = t;
+									c[t + 24 >> 2] = A;
+									break
+								}
+							}
+						} while (0);
+						t = c[a + (l + 20) >> 2] | 0;
+						if ((t | 0) == 0) {
+							q = n;
+							r = o;
+							break
+						}
+						if (t >>> 0 < (c[20] | 0) >>> 0) {
+							a)raw_html",R"raw_html(n()
+						} else {
+							c[A + 20 >> 2] = t;
+							c[t + 24 >> 2] = A;
+							q = n;
+							r = o;
+							break
+						}
+					} else {
+						q = d;
+						r = h
+					}
+				} while (0);
+				d = q;
+				if (d >>> 0 >= i >>> 0) {
+					an()
+				}
+				A = a + (h)raw_html",R"raw_html( - 4) | 0;
+				e = c[A >> 2] | 0;
+				if ((e & 1 | 0) == 0) {
+					an()
+				}
+				do {
+					if ((e & 2 | 0) == 0) {
+						if ((j | 0) == (c[22] | 0)) {
+							B = (c[19] | 0) + r | 0;
+							c[19] = B;
+							c[22] = q;
+							c[q + 4 >> 2] = B | 1;
+						)raw_html",R"raw_html(	if ((q | 0) != (c[21] | 0)) {
+								return
+							}
+							c[21] = 0;
+							c[18] = 0;
+							return
+						}
+						if ((j | 0) == (c[21] | 0)) {
+							B = (c[18] | 0) + r | 0;
+							c[18] = B;
+							c[21] = q;
+							c[q + 4 >> 2] = B | 1;
+							c[)raw_html",R"raw_html(d + B >> 2] = B;
+							return
+						}
+						B = (e & -8) + r | 0;
+						C = e >>> 3;
+						L843: do {
+							if (e >>> 0 < 256 >>> 0) {
+								u = c[a + h >> 2] | 0;
+								g = c[a + (h | 4) >> 2] | 0;
+								b = 104 + (C << 1 << 2) | 0;
+								do {
+	)raw_html",R"raw_html(								if ((u | 0) != (b | 0)) {
+										if (u >>> 0 < (c[20] | 0) >>> 0) {
+											an()
+										}
+										if ((c[u + 12 >> 2] | 0) == (j | 0)) {
+											break
+										}
+										an()
+									}
+								} while (0);
+								if ((g | 0) == ()raw_html",R"raw_html(u | 0)) {
+									c[16] = c[16] & ~(1 << C);
+									break
+								}
+								do {
+									if ((g | 0) == (b | 0)) {
+										D = g + 8 | 0
+									} else {
+										if (g >>> 0 < (c[20] | 0) >>> 0) {
+											an()
+										}
+										f = g + 8 | )raw_html",R"raw_html(0;
+										if ((c[f >> 2] | 0) == (j | 0)) {
+											D = f;
+											break
+										}
+										an()
+									}
+								} while (0);
+								c[u + 12 >> 2] = g;
+								c[D >> 2] = u
+							} else {
+								b = i;
+								f = c[a + (h + 16) >> 2] |)raw_html",R"raw_html( 0;
+								t = c[a + (h | 4) >> 2] | 0;
+								do {
+									if ((t | 0) == (b | 0)) {
+										p = a + (h + 12) | 0;
+										v = c[p >> 2] | 0;
+										if ((v | 0) == 0) {
+											m = a + (h + 8) | 0;
+											k = c[m >> 2] | 0;
+											if )raw_html",R"raw_html(((k | 0) == 0) {
+												E = 0;
+												break
+											} else {
+												F = k;
+												G = m
+											}
+										} else {
+											F = v;
+											G = p
+										}
+										while (1) {
+											p = F + 20 | 0;
+											v = c[)raw_html",R"raw_html(p >> 2] | 0;
+											if ((v | 0) != 0) {
+												F = v;
+												G = p;
+												continue
+											}
+											p = F + 16 | 0;
+											v = c[p >> 2] | 0;
+											if ((v | 0) == 0) {
+												break
+											} else {
+												F )raw_html",R"raw_html(= v;
+												G = p
+											}
+										}
+										if (G >>> 0 < (c[20] | 0) >>> 0) {
+											an()
+										} else {
+											c[G >> 2] = 0;
+											E = F;
+											break
+										}
+									} else {
+										p = c[a + h >> 2] | 0;
+				)raw_html",R"raw_html(						if (p >>> 0 < (c[20] | 0) >>> 0) {
+											an()
+										}
+										v = p + 12 | 0;
+										if ((c[v >> 2] | 0) != (b | 0)) {
+											an()
+										}
+										m = t + 8 | 0;
+										if ((c[m >> 2] | 0) == (b | 0)) {
+											c[v >> 2])raw_html",R"raw_html( = t;
+											c[m >> 2] = p;
+											E = t;
+											break
+										} else {
+											an()
+										}
+									}
+								} while (0);
+								if ((f | 0) == 0) {
+									break
+								}
+								t = a + (h + 20) | 0;
+								u = 368 + (c[t >> 2)raw_html",R"raw_html(] << 2) | 0;
+								do {
+									if ((b | 0) == (c[u >> 2] | 0)) {
+										c[u >> 2] = E;
+										if ((E | 0) != 0) {
+											break
+										}
+										c[17] = c[17] & ~(1 << c[t >> 2]);
+										break L843
+									} else {
+										if (f >>>)raw_html",R"raw_html( 0 < (c[20] | 0) >>> 0) {
+											an()
+										}
+										g = f + 16 | 0;
+										if ((c[g >> 2] | 0) == (b | 0)) {
+											c[g >> 2] = E
+										} else {
+											c[f + 20 >> 2] = E
+										}
+										if ((E | 0) == 0) {
+											break)raw_html",R"raw_html( L843
+										}
+									}
+								} while (0);
+								if (E >>> 0 < (c[20] | 0) >>> 0) {
+									an()
+								}
+								c[E + 24 >> 2] = f;
+								b = c[a + (h + 8) >> 2] | 0;
+								do {
+									if ((b | 0) != 0) {
+										if (b >>> 0 < (c[20] |)raw_html",R"raw_html( 0) >>> 0) {
+											an()
+										} else {
+											c[E + 16 >> 2] = b;
+											c[b + 24 >> 2] = E;
+											break
+										}
+									}
+								} while (0);
+								b = c[a + (h + 12) >> 2] | 0;
+								if ((b | 0) == 0) {
+									break
+				)raw_html",R"raw_html(				}
+								if (b >>> 0 < (c[20] | 0) >>> 0) {
+									an()
+								} else {
+									c[E + 20 >> 2] = b;
+									c[b + 24 >> 2] = E;
+									break
+								}
+							}
+						} while (0);
+						c[q + 4 >> 2] = B | 1;
+						c[d + B >> 2] = B;
+						if (()raw_html",R"raw_html(q | 0) != (c[21] | 0)) {
+							H = B;
+							break
+						}
+						c[18] = B;
+						return
+					} else {
+						c[A >> 2] = e & -2;
+						c[q + 4 >> 2] = r | 1;
+						c[d + r >> 2] = r;
+						H = r
+					}
+				} while (0);
+				r = H >>> 3;
+				if (H >>> 0 < 2)raw_html",R"raw_html(56 >>> 0) {
+					d = r << 1;
+					e = 104 + (d << 2) | 0;
+					A = c[16] | 0;
+					E = 1 << r;
+					do {
+						if ((A & E | 0) == 0) {
+							c[16] = A | E;
+							I = e;
+							J = 104 + (d + 2 << 2) | 0
+						} else {
+							r = 104 + (d + 2 << 2) | 0;
+	)raw_html",R"raw_html(						h = c[r >> 2] | 0;
+							if (h >>> 0 >= (c[20] | 0) >>> 0) {
+								I = h;
+								J = r;
+								break
+							}
+							an()
+						}
+					} while (0);
+					c[J >> 2] = q;
+					c[I + 12 >> 2] = q;
+					c[q + 8 >> 2] = I;
+					c[q + 12 >> 2] = e;
+			)raw_html",R"raw_html(		return
+				}
+				e = q;
+				I = H >>> 8;
+				do {
+					if ((I | 0) == 0) {
+						K = 0
+					} else {
+						if (H >>> 0 > 16777215 >>> 0) {
+							K = 31;
+							break
+						}
+						J = (I + 1048320 | 0) >>> 16 & 8;
+						d = I << J;
+						E = (d + 520192)raw_html",R"raw_html( | 0) >>> 16 & 4;
+						A = d << E;
+						d = (A + 245760 | 0) >>> 16 & 2;
+						r = 14 - (E | J | d) + (A << d >>> 15) | 0;
+						K = H >>> ((r + 7 | 0) >>> 0) & 1 | r << 1
+					}
+				} while (0);
+				I = 368 + (K << 2) | 0;
+				c[q + 28 >> 2] = K;
+				c[)raw_html",R"raw_html(q + 20 >> 2] = 0;
+				c[q + 16 >> 2] = 0;
+				r = c[17] | 0;
+				d = 1 << K;
+				do {
+					if ((r & d | 0) == 0) {
+						c[17] = r | d;
+						c[I >> 2] = e;
+						c[q + 24 >> 2] = I;
+						c[q + 12 >> 2] = q;
+						c[q + 8 >> 2] = q
+					} else {
+						if )raw_html",R"raw_html(((K | 0) == 31) {
+							L = 0
+						} else {
+							L = 25 - (K >>> 1) | 0
+						}
+						A = H << L;
+						J = c[I >> 2] | 0;
+						while (1) {
+							if ((c[J + 4 >> 2] & -8 | 0) == (H | 0)) {
+								break
+							}
+							M = J + 16 + (A >>> 31 << 2) | )raw_html",R"raw_html(0;
+							E = c[M >> 2] | 0;
+							if ((E | 0) == 0) {
+								N = 659;
+								break
+							} else {
+								A = A << 1;
+								J = E
+							}
+						}
+						if ((N | 0) == 659) {
+							if (M >>> 0 < (c[20] | 0) >>> 0) {
+								an()
+							} else {
+			)raw_html",R"raw_html(					c[M >> 2] = e;
+								c[q + 24 >> 2] = J;
+								c[q + 12 >> 2] = q;
+								c[q + 8 >> 2] = q;
+								break
+							}
+						}
+						A = J + 8 | 0;
+						B = c[A >> 2] | 0;
+						E = c[20] | 0;
+						if (J >>> 0 < E >>> 0) {
+							an()
+						}
+				)raw_html",R"raw_html(		if (B >>> 0 < E >>> 0) {
+							an()
+						} else {
+							c[B + 12 >> 2] = e;
+							c[A >> 2] = e;
+							c[q + 8 >> 2] = B;
+							c[q + 12 >> 2] = J;
+							c[q + 24 >> 2] = 0;
+							break
+						}
+					}
+				} while (0);
+				q = (c[24] | 0) - 1 | 0;)raw_html",R"raw_html(
+				c[24] = q;
+				if ((q | 0) == 0) {
+					O = 520
+				} else {
+					return
+				}
+				while (1) {
+					q = c[O >> 2] | 0;
+					if ((q | 0) == 0) {
+						break
+					} else {
+						O = q + 8 | 0
+					}
+				}
+				c[24] = -1;
+				return
+			}
+
+			function aR()raw_html",R"raw_html(b, d, e) {
+				b = b | 0;
+				d = d | 0;
+				e = e | 0;
+				var f = 0,
+					g = 0,
+					h = 0,
+					i = 0;
+				f = b + e | 0;
+				if ((e | 0) >= 20) {
+					d = d & 255;
+					g = b & 3;
+					h = d | d << 8 | d << 16 | d << 24;
+					i = f & ~3;
+					if (g) {)raw_html",R"raw_html(
+						g = b + 4 - g | 0;
+						while ((b | 0) < (g | 0)) {
+							a[b] = d;
+							b = b + 1 | 0
+						}
+					}
+					while ((b | 0) < (i | 0)) {
+						c[b >> 2] = h;
+						b = b + 4 | 0
+					}
+				}
+				while ((b | 0) < (f | 0)) {
+					a[b] = d;
+					b = )raw_html",R"raw_html(b + 1 | 0
+				}
+				return b - e | 0
+			}
+
+			function aS(b, d, e) {
+				b = b | 0;
+				d = d | 0;
+				e = e | 0;
+				var f = 0;
+				f = b | 0;
+				if ((b & 3) == (d & 3)) {
+					while (b & 3) {
+						if ((e | 0) == 0) return f | 0;
+						a[b] = a[d] | 0;
+)raw_html",R"raw_html(						b = b + 1 | 0;
+						d = d + 1 | 0;
+						e = e - 1 | 0
+					}
+					while ((e | 0) >= 4) {
+						c[b >> 2] = c[d >> 2];
+						b = b + 4 | 0;
+						d = d + 4 | 0;
+						e = e - 4 | 0
+					}
+				}
+				while ((e | 0) > 0) {
+					a[b] = a[d] | 0;
+					b )raw_html",R"raw_html(= b + 1 | 0;
+					d = d + 1 | 0;
+					e = e - 1 | 0
+				}
+				return f | 0
+			}
+
+			function aT(b) {
+				b = b | 0;
+				var c = 0;
+				c = a[m + (b & 255) | 0] | 0;
+				if ((c | 0) < 8) return c | 0;
+				c = a[m + (b >> 8 & 255) | 0] | 0;
+				if ((c | 0) <)raw_html",R"raw_html( 8) return c + 8 | 0;
+				c = a[m + (b >> 16 & 255) | 0] | 0;
+				if ((c | 0) < 8) return c + 16 | 0;
+				return (a[m + (b >>> 24) | 0] | 0) + 24 | 0
+			}
+
+			function aU(b) {
+				b = b | 0;
+				var c = 0;
+				c = b;
+				while (a[c] | 0) {
+					c = c + 1 |)raw_html",R"raw_html( 0
+				}
+				return c - b | 0
+			}
+
+			function aV(a, b) {
+				a = a | 0;
+				b = b | 0;
+				return ar[a & 1](b | 0) | 0
+			}
+
+			function aW(a) {
+				a = a | 0;
+				as[a & 1]()
+			}
+
+			function aX(a, b, c) {
+				a = a | 0;
+				b = b | 0;
+				c = c | 0;
+	)raw_html",R"raw_html(			return at[a & 1](b | 0, c | 0) | 0
+			}
+
+			function aY(a, b) {
+				a = a | 0;
+				b = b | 0;
+				au[a & 1](b | 0)
+			}
+
+			function aZ(a) {
+				a = a | 0;
+				aa(0);
+				return 0
+			}
+
+			function a_() {
+				aa(1)
+			}
+
+			function a$(a, b) {
+				a = a)raw_html",R"raw_html( | 0;
+				b = b | 0;
+				aa(2);
+				return 0
+			}
+
+			function a0(a) {
+					a = a | 0;
+					aa(3)
+				}
+				// EMSCRIPTEN_END_FUNCS
+			var ar = [aZ, aZ];
+			var as = [a_, a_];
+			var at = [a$, a$];
+			var au = [a0, a0];
+			return {
+				_strlen: aU,
+				_fr)raw_html",R"raw_html(ee: aQ,
+				_XXH32: aO,
+				_memset: aR,
+				_llvm_cttz_i32: aT,
+				_malloc: aP,
+				_LZ4_decompress_safe: aN,
+				_memcpy: aS,
+				_LZ4_compress: aM,
+				runPostSets: aL,
+				stackAlloc: av,
+				stackSave: aw,
+				stackRestore: ax,
+				setThrew: ay,
+				)raw_html",R"raw_html(setTempRet0: aB,
+				setTempRet1: aC,
+				setTempRet2: aD,
+				setTempRet3: aE,
+				setTempRet4: aF,
+				setTempRet5: aG,
+				setTempRet6: aH,
+				setTempRet7: aI,
+				setTempRet8: aJ,
+				setTempRet9: aK,
+				dynCall_ii: aV,
+				dynCall_v: aW,
+				dynCall)raw_html",R"raw_html(_iii: aX,
+				dynCall_vi: aY
+			}
+			// EMSCRIPTEN_END_ASM
+		})({
+			Math: Math,
+			Int8Array: Int8Array,
+			Int16Array: Int16Array,
+			Int32Array: Int32Array,
+			Uint8Array: Uint8Array,
+			Uint16Array: Uint16Array,
+			Uint32Array: Uint32Array,
+			Float32A)raw_html",R"raw_html(rray: Float32Array,
+			Float64Array: Float64Array
+		}, {
+			abort: B,
+			assert: w,
+			asmPrintInt: function(a, b) {
+				r.print("int " + a + "," + b)
+			},
+			asmPrintFloat: function(a, b) {
+				r.print("float " + a + "," + b)
+			},
+			min: Fa,
+			invoke_)raw_html",R"raw_html(ii: function(a, b) {
+				try {
+					return r.dynCall_ii(a, b)
+				} catch (c) {
+					"number" !== typeof c && "longjmp" !== c && e(c), $.setThrew(1, 0)
+				}
+			},
+			invoke_v: function(a) {
+				try {
+					r.dynCall_v(a)
+				} catch (b) {
+					"number" !==)raw_html",R"raw_html(
+					typeof b && "longjmp" !== b && e(b), $.setThrew(1, 0)
+				}
+			},
+			invoke_iii: function(a, b, c) {
+				try {
+					return r.dynCall_iii(a, b, c)
+				} catch (d) {
+					"number" !== typeof d && "longjmp" !== d && e(d), $.setThrew(1, 0)
+				}
+			},
+		)raw_html",R"raw_html(	invoke_vi: function(a, b) {
+				try {
+					r.dynCall_vi(a, b)
+				} catch (c) {
+					"number" !== typeof c && "longjmp" !== c && e(c), $.setThrew(1, 0)
+				}
+			},
+			_sysconf: function(a) {
+				switch (a) {
+					case 30:
+						return 4096;
+					case 132:)raw_html",R"raw_html(
+					case 133:
+					case 12:
+					case 137:
+					case 138:
+					case 15:
+					case 235:
+					case 16:
+					case 17:
+					case 18:
+					case 19:
+					case 20:
+					case 149:
+					case 13:
+					case 10:
+					case 236:
+					case 153:
+					case 9:
+					case 2)raw_html",R"raw_html(1:
+					case 22:
+					case 159:
+					case 154:
+					case 14:
+					case 77:
+					case 78:
+					case 139:
+					case 80:
+					case 81:
+					case 79:
+					case 82:
+					case 68:
+					case 67:
+					case 164:
+					case 11:
+					case 29:
+					case 47:
+					case 4)raw_html",R"raw_html(8:
+					case 95:
+					case 52:
+					case 51:
+					case 46:
+						return 200809;
+					case 27:
+					case 246:
+					case 127:
+					case 128:
+					case 23:
+					case 24:
+					case 160:
+					case 161:
+					case 181:
+					case 182:
+					case 242:
+					case 183:)raw_html",R"raw_html(
+					case 184:
+					case 243:
+					case 244:
+					case 245:
+					case 165:
+					case 178:
+					case 179:
+					case 49:
+					case 50:
+					case 168:
+					case 169:
+					case 175:
+					case 170:
+					case 171:
+					case 172:
+					case 97:
+					case 76:
+				)raw_html",R"raw_html(	case 32:
+					case 173:
+					case 35:
+						return -1;
+					case 176:
+					case 177:
+					case 7:
+					case 155:
+					case 8:
+					case 157:
+					case 125:
+					case 126:
+					case 92:
+					case 93:
+					case 129:
+					case 130:
+					case 131:
+					case 9)raw_html",R"raw_html(4:
+					case 91:
+						return 1;
+					case 74:
+					case 60:
+					case 69:
+					case 70:
+					case 4:
+						return 1024;
+					case 31:
+					case 42:
+					case 72:
+						return 32;
+					case 87:
+					case 26:
+					case 33:
+						return 2147483647;
+					case)raw_html",R"raw_html( 34:
+					case 1:
+						return 47839;
+					case 38:
+					case 36:
+						return 99;
+					case 43:
+					case 37:
+						return 2048;
+					case 0:
+						return 2097152;
+					case 3:
+						return 65536;
+					case 28:
+						return 32768;
+					case 44:
+						retu)raw_html",R"raw_html(rn 32767;
+					case 75:
+						return 16384;
+					case 39:
+						return 1E3;
+					case 89:
+						return 700;
+					case 71:
+						return 256;
+					case 40:
+						return 255;
+					case 2:
+						return 100;
+					case 180:
+						return 64;
+					case 25:
+						r)raw_html",R"raw_html(eturn 20;
+					case 5:
+						return 16;
+					case 6:
+						return 6;
+					case 73:
+						return 4;
+					case 84:
+						return 1
+				}
+				kb(R.C);
+				return -1
+			},
+			_sbrk: lb,
+			___setErrNo: kb,
+			___errno_location: function() {
+				return jb
+			},
+)raw_html",R"raw_html(			_abort: function() {
+				r.abort()
+			},
+			_time: function(a) {
+				var b = Math.floor(Date.now() / 1E3);
+				a && (H[a >> 2] = b);
+				return b
+			},
+			_fflush: q(),
+			STACKTOP: u,
+			STACK_MAX: Ra,
+			tempDoublePtr: eb,
+			ABORT: xa,
+			cttz_i8: hb)raw_html",R"raw_html(,
+			ctlz_i8: 1,
+			NaN: NaN,
+			Infinity: Infinity
+		}, N),
+		mb = r._strlen = $._strlen,
+		tc = r._free = $._free,
+		uc = r._XXH32 = $._XXH32,
+		fb = r._memset = $._memset,
+		ib = r._llvm_cttz_i32 = $._llvm_cttz_i32,
+		L = r._malloc = $._malloc,
+		vc = r)raw_html",R"raw_html(._LZ4_decompress_safe = $._LZ4_decompress_safe,
+		gb = r._memcpy = $._memcpy,
+		wc = r._LZ4_compress = $._LZ4_compress,
+		db = r.runPostSets = $.runPostSets;
+	r.dynCall_ii = $.dynCall_ii;
+	r.dynCall_v = $.dynCall_v;
+	r.dynCall_iii = $.dynCall_iii;
+	r.dynCa)raw_html",R"raw_html(ll_vi = $.dynCall_vi;
+	qa = function(a) {
+		return $.stackAlloc(a)
+	};
+	ja = function() {
+		return $.stackSave()
+	};
+	ka = function(a) {
+		$.stackRestore(a)
+	};
+
+	function xc(a) {
+		this.name = "ExitStatus";
+		this.message = "Program terminated with exit(")raw_html",R"raw_html( + a + ")";
+		this.status = a
+	}
+	xc.prototype = Error();
+	var yc, zc = m,
+		ab = function Ac() {
+			!r.calledRun && Bc && Cc();
+			r.calledRun || (ab = Ac)
+		};
+	r.callMain = r.fd = function(a) {
+		function b() {
+			for (var a = 0; 3 > a; a++) d.push(0)
+	)raw_html",R"raw_html(	}
+		w(0 == Q, "cannot call main when async dependencies remain! (listen on __ATMAIN__)");
+		w(0 == Ta.length, "cannot call main when preRun functions remain to be called");
+		a = a || [];
+		ca && zc !== m && r.P("preload time: " + (Date.now() - zc) + " ms)raw_html",R"raw_html(");
+		Xa || (Xa = l, O(P));
+		var c = a.length + 1,
+			d = [K(D("/bin/this.program"), "i8", 0)];
+		b();
+		for (var f = 0; f < c - 1; f += 1) d.push(K(D(a[f]), "i8", 0)), b();
+		d.push(0);
+		d = K(d, "i32", 0);
+		yc = u;
+		try {
+			var g = r._main(c, d, 0);)raw_html",R"raw_html(
+			r.noExitRuntime || Dc(g)
+		} catch (h) {
+			h instanceof
+			xc || ("SimulateInfiniteLoop" == h ? r.noExitRuntime = l : (h && ("object" === typeof h && h.stack) && r.P("exception thrown: " + [h, h.stack]), e(h)))
+		} finally {}
+	};
+
+	function Cc(a) {
+		)raw_html",R"raw_html(function b() {
+			Xa || (Xa = l, O(P));
+			O(Ua);
+			r.calledRun = l;
+			r._main && Bc && r.callMain(a);
+			if (r.postRun)
+				for ("function" == typeof r.postRun && (r.postRun = [r.postRun]); r.postRun.length;) Za(r.postRun.shift());
+			O(Wa)
+		}
+		a = a )raw_html",R"raw_html(|| r.arguments;
+		zc === m && (zc = Date.now());
+		if (0 < Q) r.P("run() called, but dependencies remain, so not running");
+		else {
+			if (r.preRun)
+				for ("function" == typeof r.preRun && (r.preRun = [r.preRun]); r.preRun.length;) Ya(r.preRun.shift());)raw_html",R"raw_html(
+			O(Ta);
+			0 < Q || (r.setStatus ? (r.setStatus("Running..."), setTimeout(function() {
+				setTimeout(function() {
+						r.setStatus("")
+					},
+					1);
+				xa || b()
+			}, 1)) : b())
+		}
+	}
+	r.run = r.xd = Cc;
+
+	function Dc(a) {
+		xa = l;
+		u = yc;
+		)raw_html",R"raw_html(O(Va);
+		e(new xc(a))
+	}
+	r.exit = r.kd = Dc;
+
+	function B(a) {
+		a && (r.print(a), r.P(a));
+		xa = l;
+		e("abort() at " + Ma())
+	}
+	r.abort = r.abort = B;
+	if (r.preInit)
+		for ("function" == typeof r.preInit && (r.preInit = [r.preInit]); 0 < r.preInit.le)raw_html",R"raw_html(ngth;) r.preInit.pop()();
+	var Bc = l;
+	r.noInitialRun && (Bc = p);
+	Cc();
+
+	function Ec(a) {
+		return a + (a / 255 | 0) + 16
+	}
+	var Fc = [m, m, m, m, 65536, 262144, 1048576, 4194304],
+		Gc = this;
+	Gc.decompress = function(a) {
+		var g = new DataView(a.b)raw_html",R"raw_html(uffer, a.byteOffset, a.byteLength);
+		3131965165 !== g.getUint32(0, true) && e(Error("lz4: invalid magic number"));
+		var size = g.getUint32(4, true);
+		var csize = g.getUint32(8, true);
+		var inbuf = L(csize);
+		var outbuf = L(size);
+		M.set(a.subarray(12)raw_html",R"raw_html(), inbuf);
+		vc(inbuf, outbuf, csize, size) !== size && e(Error("lz4: error decompress"));
+		var buf = new Uint8Array(M.subarray(outbuf, outbuf + size));
+		tc(inbuf);
+		tc(outbuf);
+		return buf;
+	};
+	r._LZ4_compressBound = Ec;
+	"function" === typeof define)raw_html",R"raw_html( && define.amd ? define("lz4", function() {
+		return Gc
+	}) : ba && (module.exports = Gc);
 
 }).call(lz4);
 </script>
 
 <script type="text/javascript">
-var dat=dat||{};dat.gui=dat.gui||{};dat.utils=dat.utils||{};dat.controllers=dat.controllers||{};dat.dom=dat.dom||{};dat.color=dat.color||{};dat)raw_html",R"raw_html(.utils.css=function(){return{load:function(e,a){a=a||document;var b=a.createElement("link");b.type="text/css";b.rel="stylesheet";b.href=e;a.getElementsByTagName("head")[0].appendChild(b)},inject:function(e,a){a=a||document;var b=document.createElement("sty)raw_html",R"raw_html(le");b.type="text/css";b.innerHTML=e;a.getElementsByTagName("head")[0].appendChild(b)}}}();
-dat.utils.common=function(){var e=Array.prototype.forEach,a=Array.prototype.slice;return{BREAK:{},extend:function(b){this.each(a.call(arguments,1),function(a){for(v)raw_html",R"raw_html(ar f in a)this.isUndefined(a[f])||(b[f]=a[f])},this);return b},defaults:function(b){this.each(a.call(arguments,1),function(a){for(var f in a)this.isUndefined(b[f])&&(b[f]=a[f])},this);return b},compose:function(){var b=a.call(arguments);return function(){f)raw_html",R"raw_html(or(var d=a.call(arguments),f=b.length-1;0<=f;f--)d=[b[f].apply(this,d)];return d[0]}},
-each:function(a,d,f){if(e&&a.forEach===e)a.forEach(d,f);else if(a.length===a.length+0)for(var c=0,p=a.length;c<p&&!(c in a&&d.call(f,a[c],c)===this.BREAK);c++);else for()raw_html",R"raw_html(c in a)if(d.call(f,a[c],c)===this.BREAK)break},defer:function(a){setTimeout(a,0)},toArray:function(b){return b.toArray?b.toArray():a.call(b)},isUndefined:function(a){return void 0===a},isNull:function(a){return null===a},isNaN:function(a){return a!==a},isA)raw_html",R"raw_html(rray:Array.isArray||function(a){return a.constructor===Array},isObject:function(a){return a===
-Object(a)},isNumber:function(a){return a===a+0},isString:function(a){return a===a+""},isBoolean:function(a){return!1===a||!0===a},isFunction:function(a){return"[)raw_html",R"raw_html(object Function]"===Object.prototype.toString.call(a)}}}();
-dat.controllers.Controller=function(e){var a=function(a,d){this.initialValue=a[d];this.domElement=document.createElement("div");this.object=a;this.property=d;this.__onFinishChange=this.__onChange=)raw_html",R"raw_html(void 0};e.extend(a.prototype,{onChange:function(a){this.__onChange=a;return this},onFinishChange:function(a){this.__onFinishChange=a;return this},setValue:function(a){this.object[this.property]=a;this.__onChange&&this.__onChange.call(this,a);this.updateDis)raw_html",R"raw_html(play();return this},getValue:function(){return this.object[this.property]},
+var dat=dat||{};dat.gui=dat.gui||{};dat.utils=dat.utils||{};dat.controllers=dat.controllers||{};dat.dom=dat)raw_html",R"raw_html(.dom||{};dat.color=dat.color||{};dat.utils.css=function(){return{load:function(e,a){a=a||document;var b=a.createElement("link");b.type="text/css";b.rel="stylesheet";b.href=e;a.getElementsByTagName("head")[0].appendChild(b)},inject:function(e,a){a=a||docume)raw_html",R"raw_html(nt;var b=document.createElement("style");b.type="text/css";b.innerHTML=e;a.getElementsByTagName("head")[0].appendChild(b)}}}();
+dat.utils.common=function(){var e=Array.prototype.forEach,a=Array.prototype.slice;return{BREAK:{},extend:function(b){this.each(a)raw_html",R"raw_html(.call(arguments,1),function(a){for(var f in a)this.isUndefined(a[f])||(b[f]=a[f])},this);return b},defaults:function(b){this.each(a.call(arguments,1),function(a){for(var f in a)this.isUndefined(b[f])&&(b[f]=a[f])},this);return b},compose:function(){var b=a)raw_html",R"raw_html(.call(arguments);return function(){for(var d=a.call(arguments),f=b.length-1;0<=f;f--)d=[b[f].apply(this,d)];return d[0]}},
+each:function(a,d,f){if(e&&a.forEach===e)a.forEach(d,f);else if(a.length===a.length+0)for(var c=0,p=a.length;c<p&&!(c in a&&d.call(f,)raw_html",R"raw_html(a[c],c)===this.BREAK);c++);else for(c in a)if(d.call(f,a[c],c)===this.BREAK)break},defer:function(a){setTimeout(a,0)},toArray:function(b){return b.toArray?b.toArray():a.call(b)},isUndefined:function(a){return void 0===a},isNull:function(a){return null===a})raw_html",R"raw_html(,isNaN:function(a){return a!==a},isArray:Array.isArray||function(a){return a.constructor===Array},isObject:function(a){return a===
+Object(a)},isNumber:function(a){return a===a+0},isString:function(a){return a===a+""},isBoolean:function(a){return!1===a||!0=)raw_html",R"raw_html(==a},isFunction:function(a){return"[object Function]"===Object.prototype.toString.call(a)}}}();
+dat.controllers.Controller=function(e){var a=function(a,d){this.initialValue=a[d];this.domElement=document.createElement("div");this.object=a;this.property=d;th)raw_html",R"raw_html(is.__onFinishChange=this.__onChange=void 0};e.extend(a.prototype,{onChange:function(a){this.__onChange=a;return this},onFinishChange:function(a){this.__onFinishChange=a;return this},setValue:function(a){this.object[this.property]=a;this.__onChange&&this.__)raw_html",R"raw_html(onChange.call(this,a);this.updateDisplay();return this},getValue:function(){return this.object[this.property]},
 updateDisplay:function(){return this},isModified:function(){return this.initialValue!==this.getValue()}});return a}(dat.utils.common);
-dat.dom.dom=function(e){function a(c){if("0"=)raw_html",R"raw_html(==c||e.isUndefined(c))return 0;c=c.match(d);return e.isNull(c)?0:parseFloat(c[1])}var b={};e.each({HTMLEvents:["change"],MouseEvents:["click","mousemove","mousedown","mouseup","mouseover"],KeyboardEvents:["keydown"]},function(c,a){e.each(c,function(c){b[c])raw_html",R"raw_html(=a})});var d=/(\d+(\.\d+)?)px/,f={makeSelectable:function(c,a){void 0!==c&&void 0!==c.style&&(c.onselectstart=a?function(){return!1}:function(){},c.style.MozUserSelect=a?"auto":"none",c.style.KhtmlUserSelect=
-a?"auto":"none",c.unselectable=a?"on":"off")},m)raw_html",R"raw_html(akeFullscreen:function(c,a,d){e.isUndefined(a)&&(a=!0);e.isUndefined(d)&&(d=!0);c.style.position="absolute";a&&(c.style.left=0,c.style.right=0);d&&(c.style.top=0,c.style.bottom=0)},fakeEvent:function(c,a,d,f){d=d||{};var q=b[a];if(!q)throw Error("Event typ)raw_html",R"raw_html(e "+a+" not supported.");var n=document.createEvent(q);switch(q){case "MouseEvents":n.initMouseEvent(a,d.bubbles||!1,d.cancelable||!0,window,d.clickCount||1,0,0,d.x||d.clientX||0,d.y||d.clientY||0,!1,
-!1,!1,!1,0,null);break;case "KeyboardEvents":q=n.initKe)raw_html",R"raw_html(yboardEvent||n.initKeyEvent;e.defaults(d,{cancelable:!0,ctrlKey:!1,altKey:!1,shiftKey:!1,metaKey:!1,keyCode:void 0,charCode:void 0});q(a,d.bubbles||!1,d.cancelable,window,d.ctrlKey,d.altKey,d.shiftKey,d.metaKey,d.keyCode,d.charCode);break;default:n.initEve)raw_html",R"raw_html(nt(a,d.bubbles||!1,d.cancelable||!0)}e.defaults(n,f);c.dispatchEvent(n)},bind:function(c,a,d,b){c.addEventListener?c.addEventListener(a,d,b||!1):c.attachEvent&&c.attachEvent("on"+a,d);return f},
-unbind:function(c,a,d,b){c.removeEventListener?c.removeEventL)raw_html",R"raw_html(istener(a,d,b||!1):c.detachEvent&&c.detachEvent("on"+a,d);return f},addClass:function(a,d){if(void 0===a.className)a.className=d;else if(a.className!==d){var b=a.className.split(/ +/);-1==b.indexOf(d)&&(b.push(d),a.className=b.join(" ").replace(/^\s+/,"").)raw_html",R"raw_html(replace(/\s+$/,""))}return f},removeClass:function(a,d){if(d){if(void 0!==a.className)if(a.className===d)a.removeAttribute("class");else{var b=a.className.split(/ +/),e=b.indexOf(d);-1!=
-e&&(b.splice(e,1),a.className=b.join(" "))}}else a.className=void 0;r)raw_html",R"raw_html(eturn f},hasClass:function(a,d){return RegExp("(?:^|\\s+)"+d+"(?:\\s+|$)").test(a.className)||!1},getWidth:function(c){c=getComputedStyle(c);return a(c["border-left-width"])+a(c["border-right-width"])+a(c["padding-left"])+a(c["padding-right"])+a(c.width)},)raw_html",R"raw_html(getHeight:function(c){c=getComputedStyle(c);return a(c["border-top-width"])+a(c["border-bottom-width"])+a(c["padding-top"])+a(c["padding-bottom"])+a(c.height)},getOffset:function(a){var d=
-{left:0,top:0};if(a.offsetParent){do d.left+=a.offsetLeft,d.top+=a.)raw_html",R"raw_html(offsetTop;while(a=a.offsetParent)}return d},isActive:function(a){return a===document.activeElement&&(a.type||a.href)}};return f}(dat.utils.common);
-dat.controllers.OptionController=function(e,a,b){var d=function(f,c,e){d.superclass.call(this,f,c);var k=thi)raw_html",R"raw_html(s;this.__select=document.createElement("select");if(b.isArray(e)){var l={};b.each(e,function(a){l[a]=a});e=l}b.each(e,function(a,c){var d=document.createElement("option");d.innerHTML=c;d.setAttribute("value",a);k.__select.appendChild(d)});this.updateDispla)raw_html",R"raw_html(y();a.bind(this.__select,"change",function(){k.setValue(this.options[this.selectedIndex].value)});this.domElement.appendChild(this.__select)};
-d.superclass=e;b.extend(d.prototype,e.prototype,{setValue:function(a){a=d.superclass.prototype.setValue.call(this)raw_html",R"raw_html(,a);this.__onFinishChange&&this.__onFinishChange.call(this,this.getValue());return a},updateDisplay:function(){this.__select.value=this.getValue();return d.superclass.prototype.updateDisplay.call(this)}});return d}(dat.controllers.Controller,dat.dom.dom,da)raw_html",R"raw_html(t.utils.common);
-dat.controllers.NumberController=function(e,a){var b=function(d,f,c){b.superclass.call(this,d,f);c=c||{};this.__min=c.min;this.__max=c.max;this.__step=c.step;a.isUndefined(this.__step)?this.__impliedStep=0==this.initialValue?1:Math.pow(10,)raw_html",R"raw_html(Math.floor(Math.log(this.initialValue)/Math.LN10))/10:this.__impliedStep=this.__step;d=this.__impliedStep;d=d.toString();d=-1<d.indexOf(".")?d.length-d.indexOf(".")-1:0;this.__precision=d};b.superclass=e;a.extend(b.prototype,e.prototype,{setValue:function()raw_html",R"raw_html(a){void 0!==
-this.__min&&a<this.__min?a=this.__min:void 0!==this.__max&&a>this.__max&&(a=this.__max);void 0!==this.__step&&0!=a%this.__step&&(a=Math.round(a/this.__step)*this.__step);return b.superclass.prototype.setValue.call(this,a)},min:function(a){this)raw_html",R"raw_html(.__min=a;return this},max:function(a){this.__max=a;return this},step:function(a){this.__step=a;return this}});return b}(dat.controllers.Controller,dat.utils.common);
-dat.controllers.NumberControllerBox=function(e,a,b){var d=function(f,c,e){function k(){var)raw_html",R"raw_html( a=parseFloat(n.__input.value);b.isNaN(a)||n.setValue(a)}function l(a){var c=r-a.clientY;n.setValue(n.getValue()+c*n.__impliedStep);r=a.clientY}function q(){a.unbind(window,"mousemove",l);a.unbind(window,"mouseup",q)}this.__truncationSuspended=!1;d.supercl)raw_html",R"raw_html(ass.call(this,f,c,e);var n=this,r;this.__input=document.createElement("input");this.__input.setAttribute("type","text");a.bind(this.__input,"change",k);a.bind(this.__input,
-"blur",function(){k();n.__onFinishChange&&n.__onFinishChange.call(n,n.getValue())}))raw_html",R"raw_html(;a.bind(this.__input,"mousedown",function(c){a.bind(window,"mousemove",l);a.bind(window,"mouseup",q);r=c.clientY});a.bind(this.__input,"keydown",function(a){13===a.keyCode&&(n.__truncationSuspended=!0,this.blur(),n.__truncationSuspended=!1)});this.updateDi)raw_html",R"raw_html(splay();this.domElement.appendChild(this.__input)};d.superclass=e;b.extend(d.prototype,e.prototype,{updateDisplay:function(){var a=this.__input,c;if(this.__truncationSuspended)c=
-this.getValue();else{c=this.getValue();var b=Math.pow(10,this.__precision);c=)raw_html",R"raw_html(Math.round(c*b)/b}a.value=c;return d.superclass.prototype.updateDisplay.call(this)}});return d}(dat.controllers.NumberController,dat.dom.dom,dat.utils.common);
-dat.controllers.NumberControllerSlider=function(e,a,b,d,f){function c(a,c,d,b,f){return b+(a-c)/)raw_html",R"raw_html((d-c)*(f-b)}var p=function(d,b,f,e,r){function y(d){d.preventDefault();var b=a.getOffset(h.__background),f=a.getWidth(h.__background);h.setValue(c(d.clientX,b.left,b.left+f,h.__min,h.__max));return!1}function g(){a.unbind(window,"mousemove",y);a.unbind(win)raw_html",R"raw_html(dow,"mouseup",g);h.__onFinishChange&&h.__onFinishChange.call(h,h.getValue())}p.superclass.call(this,d,b,{min:f,max:e,step:r});var h=this;this.__background=
-document.createElement("div");this.__foreground=document.createElement("div");a.bind(this.__backgrou)raw_html",R"raw_html(nd,"mousedown",function(c){a.bind(window,"mousemove",y);a.bind(window,"mouseup",g);y(c)});a.addClass(this.__background,"slider");a.addClass(this.__foreground,"slider-fg");this.updateDisplay();this.__background.appendChild(this.__foreground);this.domElement)raw_html",R"raw_html(.appendChild(this.__background)};p.superclass=e;p.useDefaultStyles=function(){b.inject(f)};d.extend(p.prototype,e.prototype,{updateDisplay:function(){var a=
-(this.getValue()-this.__min)/(this.__max-this.__min);this.__foreground.style.width=100*a+"%";return)raw_html",R"raw_html( p.superclass.prototype.updateDisplay.call(this)}});return p}(dat.controllers.NumberController,dat.dom.dom,dat.utils.css,dat.utils.common,"/**\n * dat-gui JavaScript Controller Library\n * http://code.google.com/p/dat-gui\n *\n * Copyright 2011 Data Arts T)raw_html",R"raw_html(eam, Google Creative Lab\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n * http://www.apache.org/licenses/LICEN)raw_html",R"raw_html(SE-2.0\n */\n\n.slider {\n  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);\n  height: 1em;\n  border-radius: 1em;\n  background-color: #eee;\n  padding: 0 0.5em;\n  overflow: hidden;\n}\n\n.slider-fg {\n  padding: 1px 0 2px 0;\n  background-color: #aaa;\n  )raw_html",R"raw_html(height: 1em;\n  margin-left: -0.5em;\n  padding-right: 0.5em;\n  border-radius: 1em 0 0 1em;\n}\n\n.slider-fg:after {\n  display: inline-block;\n  border-radius: 1em;\n  background-color: #fff;\n  border:  1px solid #aaa;\n  content: '';\n  float: right;\n)raw_html",R"raw_html(  margin-right: -1em;\n  margin-top: -1px;\n  height: 0.9em;\n  width: 0.9em;\n}");
-dat.controllers.FunctionController=function(e,a,b){var d=function(b,c,e){d.superclass.call(this,b,c);var k=this;this.__button=document.createElement("div");this.__button.in)raw_html",R"raw_html(nerHTML=void 0===e?"Fire":e;a.bind(this.__button,"click",function(a){a.preventDefault();k.fire();return!1});a.addClass(this.__button,"button");this.domElement.appendChild(this.__button)};d.superclass=e;b.extend(d.prototype,e.prototype,{fire:function(){this)raw_html",R"raw_html(.__onChange&&this.__onChange.call(this);this.__onFinishChange&&this.__onFinishChange.call(this,
+dat.dom.d)raw_html",R"raw_html(om=function(e){function a(c){if("0"===c||e.isUndefined(c))return 0;c=c.match(d);return e.isNull(c)?0:parseFloat(c[1])}var b={};e.each({HTMLEvents:["change"],MouseEvents:["click","mousemove","mousedown","mouseup","mouseover"],KeyboardEvents:["keydown"]},fun)raw_html",R"raw_html(ction(c,a){e.each(c,function(c){b[c]=a})});var d=/(\d+(\.\d+)?)px/,f={makeSelectable:function(c,a){void 0!==c&&void 0!==c.style&&(c.onselectstart=a?function(){return!1}:function(){},c.style.MozUserSelect=a?"auto":"none",c.style.KhtmlUserSelect=
+a?"auto":"n)raw_html",R"raw_html(one",c.unselectable=a?"on":"off")},makeFullscreen:function(c,a,d){e.isUndefined(a)&&(a=!0);e.isUndefined(d)&&(d=!0);c.style.position="absolute";a&&(c.style.left=0,c.style.right=0);d&&(c.style.top=0,c.style.bottom=0)},fakeEvent:function(c,a,d,f){d=d||{};var)raw_html",R"raw_html( q=b[a];if(!q)throw Error("Event type "+a+" not supported.");var n=document.createEvent(q);switch(q){case "MouseEvents":n.initMouseEvent(a,d.bubbles||!1,d.cancelable||!0,window,d.clickCount||1,0,0,d.x||d.clientX||0,d.y||d.clientY||0,!1,
+!1,!1,!1,0,null);br)raw_html",R"raw_html(eak;case "KeyboardEvents":q=n.initKeyboardEvent||n.initKeyEvent;e.defaults(d,{cancelable:!0,ctrlKey:!1,altKey:!1,shiftKey:!1,metaKey:!1,keyCode:void 0,charCode:void 0});q(a,d.bubbles||!1,d.cancelable,window,d.ctrlKey,d.altKey,d.shiftKey,d.metaKey,d.keyCode)raw_html",R"raw_html(,d.charCode);break;default:n.initEvent(a,d.bubbles||!1,d.cancelable||!0)}e.defaults(n,f);c.dispatchEvent(n)},bind:function(c,a,d,b){c.addEventListener?c.addEventListener(a,d,b||!1):c.attachEvent&&c.attachEvent("on"+a,d);return f},
+unbind:function(c,a,d,b){)raw_html",R"raw_html(c.removeEventListener?c.removeEventListener(a,d,b||!1):c.detachEvent&&c.detachEvent("on"+a,d);return f},addClass:function(a,d){if(void 0===a.className)a.className=d;else if(a.className!==d){var b=a.className.split(/ +/);-1==b.indexOf(d)&&(b.push(d),a.class)raw_html",R"raw_html(Name=b.join(" ").replace(/^\s+/,"").replace(/\s+$/,""))}return f},removeClass:function(a,d){if(d){if(void 0!==a.className)if(a.className===d)a.removeAttribute("class");else{var b=a.className.split(/ +/),e=b.indexOf(d);-1!=
+e&&(b.splice(e,1),a.className=b.j)raw_html",R"raw_html(oin(" "))}}else a.className=void 0;return f},hasClass:function(a,d){return RegExp("(?:^|\\s+)"+d+"(?:\\s+|$)").test(a.className)||!1},getWidth:function(c){c=getComputedStyle(c);return a(c["border-left-width"])+a(c["border-right-width"])+a(c["padding-left"])raw_html",R"raw_html()+a(c["padding-right"])+a(c.width)},getHeight:function(c){c=getComputedStyle(c);return a(c["border-top-width"])+a(c["border-bottom-width"])+a(c["padding-top"])+a(c["padding-bottom"])+a(c.height)},getOffset:function(a){var d=
+{left:0,top:0};if(a.offsetParen)raw_html",R"raw_html(t){do d.left+=a.offsetLeft,d.top+=a.offsetTop;while(a=a.offsetParent)}return d},isActive:function(a){return a===document.activeElement&&(a.type||a.href)}};return f}(dat.utils.common);
+dat.controllers.OptionController=function(e,a,b){var d=function(f,c,e){d)raw_html",R"raw_html(.superclass.call(this,f,c);var k=this;this.__select=document.createElement("select");if(b.isArray(e)){var l={};b.each(e,function(a){l[a]=a});e=l}b.each(e,function(a,c){var d=document.createElement("option");d.innerHTML=c;d.setAttribute("value",a);k.__selec)raw_html",R"raw_html(t.appendChild(d)});this.updateDisplay();a.bind(this.__select,"change",function(){k.setValue(this.options[this.selectedIndex].value)});this.domElement.appendChild(this.__select)};
+d.superclass=e;b.extend(d.prototype,e.prototype,{setValue:function(a){a=d.sup)raw_html",R"raw_html(erclass.prototype.setValue.call(this,a);this.__onFinishChange&&this.__onFinishChange.call(this,this.getValue());return a},updateDisplay:function(){this.__select.value=this.getValue();return d.superclass.prototype.updateDisplay.call(this)}});return d}(dat.c)raw_html",R"raw_html(ontrollers.Controller,dat.dom.dom,dat.utils.common);
+dat.controllers.NumberController=function(e,a){var b=function(d,f,c){b.superclass.call(this,d,f);c=c||{};this.__min=c.min;this.__max=c.max;this.__step=c.step;a.isUndefined(this.__step)?this.__impliedStep)raw_html",R"raw_html(=0==this.initialValue?1:Math.pow(10,Math.floor(Math.log(this.initialValue)/Math.LN10))/10:this.__impliedStep=this.__step;d=this.__impliedStep;d=d.toString();d=-1<d.indexOf(".")?d.length-d.indexOf(".")-1:0;this.__precision=d};b.superclass=e;a.extend(b.proto)raw_html",R"raw_html(type,e.prototype,{setValue:function(a){void 0!==
+this.__min&&a<this.__min?a=this.__min:void 0!==this.__max&&a>this.__max&&(a=this.__max);void 0!==this.__step&&0!=a%this.__step&&(a=Math.round(a/this.__step)*this.__step);return b.superclass.prototype.setValu)raw_html",R"raw_html(e.call(this,a)},min:function(a){this.__min=a;return this},max:function(a){this.__max=a;return this},step:function(a){this.__step=a;return this}});return b}(dat.controllers.Controller,dat.utils.common);
+dat.controllers.NumberControllerBox=function(e,a,b){va)raw_html",R"raw_html(r d=function(f,c,e){function k(){var a=parseFloat(n.__input.value);b.isNaN(a)||n.setValue(a)}function l(a){var c=r-a.clientY;n.setValue(n.getValue()+c*n.__impliedStep);r=a.clientY}function q(){a.unbind(window,"mousemove",l);a.unbind(window,"mouseup",q)}thi)raw_html",R"raw_html(s.__truncationSuspended=!1;d.superclass.call(this,f,c,e);var n=this,r;this.__input=document.createElement("input");this.__input.setAttribute("type","text");a.bind(this.__input,"change",k);a.bind(this.__input,
+"blur",function(){k();n.__onFinishChange&&n.__o)raw_html",R"raw_html(nFinishChange.call(n,n.getValue())});a.bind(this.__input,"mousedown",function(c){a.bind(window,"mousemove",l);a.bind(window,"mouseup",q);r=c.clientY});a.bind(this.__input,"keydown",function(a){13===a.keyCode&&(n.__truncationSuspended=!0,this.blur(),n.__tru)raw_html",R"raw_html(ncationSuspended=!1)});this.updateDisplay();this.domElement.appendChild(this.__input)};d.superclass=e;b.extend(d.prototype,e.prototype,{updateDisplay:function(){var a=this.__input,c;if(this.__truncationSuspended)c=
+this.getValue();else{c=this.getValue();va)raw_html",R"raw_html(r b=Math.pow(10,this.__precision);c=Math.round(c*b)/b}a.value=c;return d.superclass.prototype.updateDisplay.call(this)}});return d}(dat.controllers.NumberController,dat.dom.dom,dat.utils.common);
+dat.controllers.NumberControllerSlider=function(e,a,b,d,f){f)raw_html",R"raw_html(unction c(a,c,d,b,f){return b+(a-c)/(d-c)*(f-b)}var p=function(d,b,f,e,r){function y(d){d.preventDefault();var b=a.getOffset(h.__background),f=a.getWidth(h.__background);h.setValue(c(d.clientX,b.left,b.left+f,h.__min,h.__max));return!1}function g(){a.unbin)raw_html",R"raw_html(d(window,"mousemove",y);a.unbind(window,"mouseup",g);h.__onFinishChange&&h.__onFinishChange.call(h,h.getValue())}p.superclass.call(this,d,b,{min:f,max:e,step:r});var h=this;this.__background=
+document.createElement("div");this.__foreground=document.createE)raw_html",R"raw_html(lement("div");a.bind(this.__background,"mousedown",function(c){a.bind(window,"mousemove",y);a.bind(window,"mouseup",g);y(c)});a.addClass(this.__background,"slider");a.addClass(this.__foreground,"slider-fg");this.updateDisplay();this.__background.appendChil)raw_html",R"raw_html(d(this.__foreground);this.domElement.appendChild(this.__background)};p.superclass=e;p.useDefaultStyles=function(){b.inject(f)};d.extend(p.prototype,e.prototype,{updateDisplay:function(){var a=
+(this.getValue()-this.__min)/(this.__max-this.__min);this.__for)raw_html",R"raw_html(eground.style.width=100*a+"%";return p.superclass.prototype.updateDisplay.call(this)}});return p}(dat.controllers.NumberController,dat.dom.dom,dat.utils.css,dat.utils.common,"/**\n * dat-gui JavaScript Controller Library\n * http://code.google.com/p/dat-gu)raw_html",R"raw_html(i\n *\n * Copyright 2011 Data Arts Team, Google Creative Lab\n *\n * Licensed under the Apache License, Version 2.0 (the \"License\");\n * you may not use this file except in compliance with the License.\n * You may obtain a copy of the License at\n *\n * )raw_html",R"raw_html(http://www.apache.org/licenses/LICENSE-2.0\n */\n\n.slider {\n  box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);\n  height: 1em;\n  border-radius: 1em;\n  background-color: #eee;\n  padding: 0 0.5em;\n  overflow: hidden;\n}\n\n.slider-fg {\n  padding: 1px 0 2)raw_html",R"raw_html(px 0;\n  background-color: #aaa;\n  height: 1em;\n  margin-left: -0.5em;\n  padding-right: 0.5em;\n  border-radius: 1em 0 0 1em;\n}\n\n.slider-fg:after {\n  display: inline-block;\n  border-radius: 1em;\n  background-color: #fff;\n  border:  1px solid #aaa)raw_html",R"raw_html(;\n  content: '';\n  float: right;\n  margin-right: -1em;\n  margin-top: -1px;\n  height: 0.9em;\n  width: 0.9em;\n}");
+dat.controllers.FunctionController=function(e,a,b){var d=function(b,c,e){d.superclass.call(this,b,c);var k=this;this.__button=document.c)raw_html",R"raw_html(reateElement("div");this.__button.innerHTML=void 0===e?"Fire":e;a.bind(this.__button,"click",function(a){a.preventDefault();k.fire();return!1});a.addClass(this.__button,"button");this.domElement.appendChild(this.__button)};d.superclass=e;b.extend(d.prototy)raw_html",R"raw_html(pe,e.prototype,{fire:function(){this.__onChange&&this.__onChange.call(this);this.__onFinishChange&&this.__onFinishChange.call(this,
 this.getValue());this.getValue().call(this.object)}});return d}(dat.controllers.Controller,dat.dom.dom,dat.utils.common);
-dat.controllers.BooleanController=func)raw_html",R"raw_html(tion(e,a,b){var d=function(b,c){d.superclass.call(this,b,c);var e=this;this.__prev=this.getValue();this.__checkbox=document.createElement("input");this.__checkbox.setAttribute("type","checkbox");a.bind(this.__checkbox,"change",function(){e.setValue(!e.__pr)raw_html",R"raw_html(ev)},!1);this.domElement.appendChild(this.__checkbox);this.updateDisplay()};d.superclass=e;b.extend(d.prototype,e.prototype,{setValue:function(a){a=d.superclass.prototype.setValue.call(this,a);this.__onFinishChange&&
-this.__onFinishChange.call(this,this.ge)raw_html",R"raw_html(tValue());this.__prev=this.getValue();return a},updateDisplay:function(){!0===this.getValue()?(this.__checkbox.setAttribute("checked","checked"),this.__checkbox.checked=!0):this.__checkbox.checked=!1;return d.superclass.prototype.updateDisplay.call(this)}})raw_html",R"raw_html();return d}(dat.controllers.Controller,dat.dom.dom,dat.utils.common);
-dat.color.toString=function(e){return function(a){if(1==a.a||e.isUndefined(a.a)){for(a=a.hex.toString(16);6>a.length;)a="0"+a;return"#"+a}return"rgba("+Math.round(a.r)+","+Math.round(a.g)raw_html",R"raw_html()+","+Math.round(a.b)+","+a.a+")"}}(dat.utils.common);
-dat.color.interpret=function(e,a){var b,d,f=[{litmus:a.isString,conversions:{THREE_CHAR_HEX:{read:function(a){a=a.match(/^#([A-F0-9])([A-F0-9])([A-F0-9])$/i);return null===a?!1:{space:"HEX",hex:parseIn)raw_html",R"raw_html(t("0x"+a[1].toString()+a[1].toString()+a[2].toString()+a[2].toString()+a[3].toString()+a[3].toString())}},write:e},SIX_CHAR_HEX:{read:function(a){a=a.match(/^#([A-F0-9]{6})$/i);return null===a?!1:{space:"HEX",hex:parseInt("0x"+a[1].toString())}},write:e},C)raw_html",R"raw_html(SS_RGB:{read:function(a){a=a.match(/^rgb\(\s*(.+)\s*,\s*(.+)\s*,\s*(.+)\s*\)/);
-return null===a?!1:{space:"RGB",r:parseFloat(a[1]),g:parseFloat(a[2]),b:parseFloat(a[3])}},write:e},CSS_RGBA:{read:function(a){a=a.match(/^rgba\(\s*(.+)\s*,\s*(.+)\s*,\s*(.+)\s)raw_html",R"raw_html(*\,\s*(.+)\s*\)/);return null===a?!1:{space:"RGB",r:parseFloat(a[1]),g:parseFloat(a[2]),b:parseFloat(a[3]),a:parseFloat(a[4])}},write:e}}},{litmus:a.isNumber,conversions:{HEX:{read:function(a){return{space:"HEX",hex:a,conversionName:"HEX"}},write:function()raw_html",R"raw_html(a){return a.hex}}}},{litmus:a.isArray,conversions:{RGB_ARRAY:{read:function(a){return 3!=
-a.length?!1:{space:"RGB",r:a[0],g:a[1],b:a[2]}},write:function(a){return[a.r,a.g,a.b]}},RGBA_ARRAY:{read:function(a){return 4!=a.length?!1:{space:"RGB",r:a[0],g:a[1],)raw_html",R"raw_html(b:a[2],a:a[3]}},write:function(a){return[a.r,a.g,a.b,a.a]}}}},{litmus:a.isObject,conversions:{RGBA_OBJ:{read:function(c){return a.isNumber(c.r)&&a.isNumber(c.g)&&a.isNumber(c.b)&&a.isNumber(c.a)?{space:"RGB",r:c.r,g:c.g,b:c.b,a:c.a}:!1},write:function(a){r)raw_html",R"raw_html(eturn{r:a.r,g:a.g,b:a.b,a:a.a}}},RGB_OBJ:{read:function(c){return a.isNumber(c.r)&&
-a.isNumber(c.g)&&a.isNumber(c.b)?{space:"RGB",r:c.r,g:c.g,b:c.b}:!1},write:function(a){return{r:a.r,g:a.g,b:a.b}}},HSVA_OBJ:{read:function(c){return a.isNumber(c.h)&&a.isNu)raw_html",R"raw_html(mber(c.s)&&a.isNumber(c.v)&&a.isNumber(c.a)?{space:"HSV",h:c.h,s:c.s,v:c.v,a:c.a}:!1},write:function(a){return{h:a.h,s:a.s,v:a.v,a:a.a}}},HSV_OBJ:{read:function(d){return a.isNumber(d.h)&&a.isNumber(d.s)&&a.isNumber(d.v)?{space:"HSV",h:d.h,s:d.s,v:d.v}:!1})raw_html",R"raw_html(,write:function(a){return{h:a.h,s:a.s,v:a.v}}}}}];return function(){d=!1;
-var c=1<arguments.length?a.toArray(arguments):arguments[0];a.each(f,function(e){if(e.litmus(c))return a.each(e.conversions,function(e,f){b=e.read(c);if(!1===d&&!1!==b)return d=b,b.co)raw_html",R"raw_html(nversionName=f,b.conversion=e,a.BREAK}),a.BREAK});return d}}(dat.color.toString,dat.utils.common);
-dat.GUI=dat.gui.GUI=function(e,a,b,d,f,c,p,k,l,q,n,r,y,g,h){function t(a,c,b,e){if(void 0===c[b])throw Error("Object "+c+' has no property "'+b+'"');e.color?)raw_html",R"raw_html(c=new n(c,b):(c=[c,b].concat(e.factoryArgs),c=d.apply(a,c));e.before instanceof f&&(e.before=e.before.__li);v(a,c);g.addClass(c.domElement,"c");b=document.createElement("span");g.addClass(b,"property-name");b.innerHTML=c.property;var q=document.createEleme)raw_html",R"raw_html(nt("div");q.appendChild(b);q.appendChild(c.domElement);e=u(a,q,e.before);g.addClass(e,m.CLASS_CONTROLLER_ROW);
-g.addClass(e,typeof c.getValue());s(a,e,c);a.__controllers.push(c);return c}function u(a,d,c){var b=document.createElement("li");d&&b.appendChild)raw_html",R"raw_html((d);c?a.__ul.insertBefore(b,params.before):a.__ul.appendChild(b);a.onResize();return b}function s(a,d,b){b.__li=d;b.__gui=a;h.extend(b,{options:function(d){if(1<arguments.length)return b.remove(),t(a,b.object,b.property,{before:b.__li.nextElementSibling,fa)raw_html",R"raw_html(ctoryArgs:[h.toArray(arguments)]});if(h.isArray(d)||h.isObject(d))return b.remove(),t(a,b.object,b.property,
-{before:b.__li.nextElementSibling,factoryArgs:[d]})},name:function(a){b.__li.firstElementChild.firstElementChild.innerHTML=a;return b},listen:funct)raw_html",R"raw_html(ion(){b.__gui.listen(b);return b},remove:function(){b.__gui.remove(b);return b}});if(b instanceof l){var e=new k(b.object,b.property,{min:b.__min,max:b.__max,step:b.__step});h.each(["updateDisplay","onChange","onFinishChange"],function(a){var d=b[a],J=e[a])raw_html",R"raw_html(;b[a]=e[a]=function(){var a=Array.prototype.slice.call(arguments);d.apply(b,a);return J.apply(e,a)}});
-g.addClass(d,"has-slider");b.domElement.insertBefore(e.domElement,b.domElement.firstElementChild)}else if(b instanceof k){var f=function(d){return h.isNu)raw_html",R"raw_html(mber(b.__min)&&h.isNumber(b.__max)?(b.remove(),t(a,b.object,b.property,{before:b.__li.nextElementSibling,factoryArgs:[b.__min,b.__max,b.__step]})):d};b.min=h.compose(f,b.min);b.max=h.compose(f,b.max)}else b instanceof c?(g.bind(d,"click",function(){g.fakeE)raw_html",R"raw_html(vent(b.__checkbox,"click")}),g.bind(b.__checkbox,"click",function(a){a.stopPropagation()})):
-b instanceof p?(g.bind(d,"click",function(){g.fakeEvent(b.__button,"click")}),g.bind(d,"mouseover",function(){g.addClass(b.__button,"hover")}),g.bind(d,"mouseout",)raw_html",R"raw_html(function(){g.removeClass(b.__button,"hover")})):b instanceof n&&(g.addClass(d,"color"),b.updateDisplay=h.compose(function(a){d.style.borderLeftColor=b.__color.toString();return a},b.updateDisplay),b.updateDisplay());b.setValue=h.compose(function(d){a.getRo)raw_html",R"raw_html(ot().__preset_select&&b.isModified()&&D(a.getRoot(),!0);return d},b.setValue)}function v(a,
-d){var b=a.getRoot(),c=b.__rememberedObjects.indexOf(d.object);if(-1!=c){var e=b.__rememberedObjectIndecesToControllers[c];void 0===e&&(e={},b.__rememberedObjectInd)raw_html",R"raw_html(ecesToControllers[c]=e);e[d.property]=d;if(b.load&&b.load.remembered){b=b.load.remembered;if(b[a.preset])b=b[a.preset];else if(b[z])b=b[z];else return;b[c]&&void 0!==b[c][d.property]&&(c=b[c][d.property],d.initialValue=c,d.setValue(c))}}}function K(a){var )raw_html",R"raw_html(b=a.__save_row=document.createElement("li");g.addClass(a.domElement,"has-save");a.__ul.insertBefore(b,
-a.__ul.firstChild);g.addClass(b,"save-row");var d=document.createElement("span");d.innerHTML="&nbsp;";g.addClass(d,"button gears");var c=document.createE)raw_html",R"raw_html(lement("span");c.innerHTML="Save";g.addClass(c,"button");g.addClass(c,"save");var e=document.createElement("span");e.innerHTML="New";g.addClass(e,"button");g.addClass(e,"save-as");var f=document.createElement("span");f.innerHTML="Revert";g.addClass(f,"butt)raw_html",R"raw_html(on");g.addClass(f,"revert");var q=a.__preset_select=document.createElement("select");a.load&&
-a.load.remembered?h.each(a.load.remembered,function(b,d){E(a,d,d==a.preset)}):E(a,z,!1);g.bind(q,"change",function(){for(var b=0;b<a.__preset_select.length;b++)a.)raw_html",R"raw_html(__preset_select[b].innerHTML=a.__preset_select[b].value;a.preset=this.value});b.appendChild(q);b.appendChild(d);b.appendChild(c);b.appendChild(e);b.appendChild(f);if(w){var b=document.getElementById("dg-save-locally"),n=document.getElementById("dg-local-ex)raw_html",R"raw_html(plain");b.style.display="block";b=document.getElementById("dg-local-storage");"true"===
-localStorage.getItem(document.location.href+".isLocal")&&b.setAttribute("checked","checked");var k=function(){n.style.display=a.useLocalStorage?"block":"none"};k();g.bi)raw_html",R"raw_html(nd(b,"change",function(){a.useLocalStorage=!a.useLocalStorage;k()})}var r=document.getElementById("dg-new-constructor");g.bind(r,"keydown",function(a){!a.metaKey||67!==a.which&&67!=a.keyCode||A.hide()});g.bind(d,"click",function(){r.innerHTML=JSON.stringif)raw_html",R"raw_html(y(a.getSaveObject(),void 0,2);A.show();r.focus();r.select()});g.bind(c,"click",
-function(){a.save()});g.bind(e,"click",function(){var b=prompt("Enter a new preset name.");b&&a.saveAs(b)});g.bind(f,"click",function(){a.revert()})}function L(a){function b(f))raw_html",R"raw_html({f.preventDefault();e=f.clientX;g.addClass(a.__closeButton,m.CLASS_DRAG);g.bind(window,"mousemove",d);g.bind(window,"mouseup",c);return!1}function d(b){b.preventDefault();a.width+=e-b.clientX;a.onResize();e=b.clientX;return!1}function c(){g.removeClass(a._)raw_html",R"raw_html(_closeButton,m.CLASS_DRAG);g.unbind(window,"mousemove",d);g.unbind(window,
-"mouseup",c)}a.__resize_handle=document.createElement("div");h.extend(a.__resize_handle.style,{width:"6px",marginLeft:"-3px",height:"200px",cursor:"ew-resize",position:"absolute"});)raw_html",R"raw_html(var e;g.bind(a.__resize_handle,"mousedown",b);g.bind(a.__closeButton,"mousedown",b);a.domElement.insertBefore(a.__resize_handle,a.domElement.firstElementChild)}function F(a,b){a.domElement.style.width=b+"px";a.__save_row&&a.autoPlace&&(a.__save_row.style.w)raw_html",R"raw_html(idth=b+"px");a.__closeButton&&(a.__closeButton.style.width=b+"px")}
-function B(a,b){var d={};h.each(a.__rememberedObjects,function(c,e){var f={};h.each(a.__rememberedObjectIndecesToControllers[e],function(a,d){f[d]=b?a.initialValue:a.getValue()});d[e]=f});)raw_html",R"raw_html(return d}function E(a,b,d){var c=document.createElement("option");c.innerHTML=b;c.value=b;a.__preset_select.appendChild(c);d&&(a.__preset_select.selectedIndex=a.__preset_select.length-1)}function D(a,b){var d=a.__preset_select[a.__preset_select.selectedInd)raw_html",R"raw_html(ex];d.innerHTML=b?d.value+"*":d.value}function G(a){0!=a.length&&
-r(function(){G(a)});h.each(a,function(a){a.updateDisplay()})}e.inject(b);var z="Default",w;try{w="localStorage"in window&&null!==window.localStorage}catch(M){w=!1}var A,H=!0,x,C=!1,I=[],m=fu)raw_html",R"raw_html(nction(a){function b(){localStorage.setItem(document.location.href+".gui",JSON.stringify(c.getSaveObject()))}function d(){var a=c.getRoot();a.width+=1;h.defer(function(){a.width-=1})}var c=this;this.domElement=document.createElement("div");this.__ul=docume)raw_html",R"raw_html(nt.createElement("ul");this.domElement.appendChild(this.__ul);
-g.addClass(this.domElement,"dg");this.__folders={};this.__controllers=[];this.__rememberedObjects=[];this.__rememberedObjectIndecesToControllers=[];this.__listening=[];a=a||{};a=h.defaults(a,{a)raw_html",R"raw_html(utoPlace:!0,width:m.DEFAULT_WIDTH});a=h.defaults(a,{resizable:a.autoPlace,hideable:a.autoPlace});h.isUndefined(a.load)?a.load={preset:z}:a.preset&&(a.load.preset=a.preset);h.isUndefined(a.parent)&&a.hideable&&I.push(this);a.resizable=h.isUndefined(a.parent)raw_html",R"raw_html()&&a.resizable;a.autoPlace&&h.isUndefined(a.scrollable)&&
-(a.scrollable=!0);var e=w&&"true"===localStorage.getItem(document.location.href+".isLocal");Object.defineProperties(this,{parent:{get:function(){return a.parent}},scrollable:{get:function(){return a)raw_html",R"raw_html(.scrollable}},autoPlace:{get:function(){return a.autoPlace}},preset:{get:function(){return c.parent?c.getRoot().preset:a.load.preset},set:function(b){c.parent?c.getRoot().preset=b:a.load.preset=b;for(b=0;b<this.__preset_select.length;b++)this.__preset_sele)raw_html",R"raw_html(ct[b].value==this.preset&&(this.__preset_select.selectedIndex=
-b);c.revert()}},width:{get:function(){return a.width},set:function(b){a.width=b;F(c,b)}},name:{get:function(){return a.name},set:function(b){a.name=b;q&&(q.innerHTML=a.name)}},closed:{get:funct)raw_html",R"raw_html(ion(){return a.closed},set:function(b){a.closed=b;a.closed?g.addClass(c.__ul,m.CLASS_CLOSED):g.removeClass(c.__ul,m.CLASS_CLOSED);this.onResize();c.__closeButton&&(c.__closeButton.innerHTML=b?m.TEXT_OPEN:m.TEXT_CLOSED)}},load:{get:function(){return a.load})raw_html",R"raw_html(},useLocalStorage:{get:function(){return e},set:function(a){w&&
-((e=a)?g.bind(window,"unload",b):g.unbind(window,"unload",b),localStorage.setItem(document.location.href+".isLocal",a))}}});if(h.isUndefined(a.parent)){a.closed=!1;g.addClass(this.domElement,m)raw_html",R"raw_html(.CLASS_MAIN);g.makeSelectable(this.domElement,!1);if(w&&e){c.useLocalStorage=!0;var f=localStorage.getItem(document.location.href+".gui");f&&(a.load=JSON.parse(f))}this.__closeButton=document.createElement("div");this.__closeButton.innerHTML=m.TEXT_CLOSED;)raw_html",R"raw_html(g.addClass(this.__closeButton,m.CLASS_CLOSE_BUTTON);this.domElement.appendChild(this.__closeButton);
-g.bind(this.__closeButton,"click",function(){c.closed=!c.closed})}else{void 0===a.closed&&(a.closed=!0);var q=document.createTextNode(a.name);g.addClass(q,)raw_html",R"raw_html("controller-name");f=u(c,q);g.addClass(this.__ul,m.CLASS_CLOSED);g.addClass(f,"title");g.bind(f,"click",function(a){a.preventDefault();c.closed=!c.closed;return!1});a.closed||(this.closed=!1)}a.autoPlace&&(h.isUndefined(a.parent)&&(H&&(x=document.createEle)raw_html",R"raw_html(ment("div"),g.addClass(x,"dg"),g.addClass(x,m.CLASS_AUTO_PLACE_CONTAINER),document.body.appendChild(x),
-H=!1),x.appendChild(this.domElement),g.addClass(this.domElement,m.CLASS_AUTO_PLACE)),this.parent||F(c,a.width));g.bind(window,"resize",function(){c.onRe)raw_html",R"raw_html(size()});g.bind(this.__ul,"webkitTransitionEnd",function(){c.onResize()});g.bind(this.__ul,"transitionend",function(){c.onResize()});g.bind(this.__ul,"oTransitionEnd",function(){c.onResize()});this.onResize();a.resizable&&L(this);c.getRoot();a.parent||d()})raw_html",R"raw_html(;m.toggleHide=function(){C=!C;h.each(I,function(a){a.domElement.style.zIndex=C?-999:999;a.domElement.style.opacity=
-C?0:1})};m.CLASS_AUTO_PLACE="a";m.CLASS_AUTO_PLACE_CONTAINER="ac";m.CLASS_MAIN="main";m.CLASS_CONTROLLER_ROW="cr";m.CLASS_TOO_TALL="taller-t)raw_html",R"raw_html(han-window";m.CLASS_CLOSED="closed";m.CLASS_CLOSE_BUTTON="close-button";m.CLASS_DRAG="drag";m.DEFAULT_WIDTH=245;m.TEXT_CLOSED="Close Controls";m.TEXT_OPEN="Open Controls";g.bind(window,"keydown",function(a){"text"===document.activeElement.type||72!==a.whic)raw_html",R"raw_html(h&&72!=a.keyCode||m.toggleHide()},!1);h.extend(m.prototype,{add:function(a,b){return t(this,a,b,{factoryArgs:Array.prototype.slice.call(arguments,
-2)})},addColor:function(a,b){return t(this,a,b,{color:!0})},remove:function(a){this.__ul.removeChild(a.__li);)raw_html",R"raw_html(this.__controllers.slice(this.__controllers.indexOf(a),1);var b=this;h.defer(function(){b.onResize()})},destroy:function(){this.autoPlace&&x.removeChild(this.domElement)},addFolder:function(a){if(void 0!==this.__folders[a])throw Error('You already have a f)raw_html",R"raw_html(older in this GUI by the name "'+a+'"');var b={name:a,parent:this};b.autoPlace=this.autoPlace;this.load&&this.load.folders&&this.load.folders[a]&&
-(b.closed=this.load.folders[a].closed,b.load=this.load.folders[a]);b=new m(b);this.__folders[a]=b;a=u(this,b.)raw_html",R"raw_html(domElement);g.addClass(a,"folder");return b},open:function(){this.closed=!1},close:function(){this.closed=!0},onResize:function(){var a=this.getRoot();if(a.scrollable){var b=g.getOffset(a.__ul).top,d=0;h.each(a.__ul.childNodes,function(b){a.autoPlace&&b===)raw_html",R"raw_html(a.__save_row||(d+=g.getHeight(b))});window.innerHeight-b-20<d?(g.addClass(a.domElement,m.CLASS_TOO_TALL),a.__ul.style.height=window.innerHeight-
-b-20+"px"):(g.removeClass(a.domElement,m.CLASS_TOO_TALL),a.__ul.style.height="auto")}a.__resize_handle&&h.defer)raw_html",R"raw_html((function(){a.__resize_handle.style.height=a.__ul.offsetHeight+"px"});a.__closeButton&&(a.__closeButton.style.width=a.width+"px")},remember:function(){h.isUndefined(A)&&(A=new y,A.domElement.innerHTML=a);if(this.parent)throw Error("You can only call rememb)raw_html",R"raw_html(er on a top level GUI.");var b=this;h.each(Array.prototype.slice.call(arguments),function(a){0==b.__rememberedObjects.length&&K(b);-1==
-b.__rememberedObjects.indexOf(a)&&b.__rememberedObjects.push(a)});this.autoPlace&&F(this,this.width)},getRoot:function())raw_html",R"raw_html({for(var a=this;a.parent;)a=a.parent;return a},getSaveObject:function(){var a=this.load;a.closed=this.closed;0<this.__rememberedObjects.length&&(a.preset=this.preset,a.remembered||(a.remembered={}),a.remembered[this.preset]=B(this));a.folders={};h.each(thi)raw_html",R"raw_html(s.__folders,function(b,d){a.folders[d]=b.getSaveObject()});return a},save:function(){this.load.remembered||(this.load.remembered=
-{});this.load.remembered[this.preset]=B(this);D(this,!1)},saveAs:function(a){this.load.remembered||(this.load.remembered={},th)raw_html",R"raw_html(is.load.remembered[z]=B(this,!0));this.load.remembered[a]=B(this);this.preset=a;E(this,a,!0)},revert:function(a){h.each(this.__controllers,function(b){this.getRoot().load.remembered?v(a||this.getRoot(),b):b.setValue(b.initialValue)},this);h.each(this.__fol)raw_html",R"raw_html(ders,function(a){a.revert(a)});a||D(this.getRoot(),!1)},listen:function(a){var b=0==this.__listening.length;this.__listening.push(a);
-b&&G(this.__listening)}});return m}(dat.utils.css,'<div id="dg-save" class="dg dialogue">\n\n  Here\'s the new load parame)raw_html",R"raw_html(ter for your <code>GUI</code>\'s constructor:\n\n  <textarea id="dg-new-constructor"></textarea>\n\n  <div id="dg-save-locally">\n\n    <input id="dg-local-storage" type="checkbox"/> Automatically save\n    values to <code>localStorage</code> on exit.\n\n )raw_html",R"raw_html(   <div id="dg-local-explain">The values saved to <code>localStorage</code> will\n      override those passed to <code>dat.GUI</code>\'s constructor. This makes it\n      easier to work incrementally, but <code>localStorage</code> is fragile,\n      and yo)raw_html",R"raw_html(ur friends may not see the same values you do.\n      \n    </div>\n    \n  </div>\n\n</div>',
-".dg {\n  /** Clear list styles */\n  /* Auto-place container */\n  /* Auto-placed GUI's */\n  /* Line items that don't contain folders. */\n  /** Folder names *)raw_html",R"raw_html(/\n  /** Hides closed items */\n  /** Controller row */\n  /** Name-half (left) */\n  /** Controller-half (right) */\n  /** Controller placement */\n  /** Shorter number boxes when slider is present. */\n  /** Ensure the entire boolean and function row sho)raw_html",R"raw_html(ws a hand */ }\n  .dg ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    width: 100%;\n    clear: both; }\n  .dg.ac {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    height: 0;\n    z-index: 0; }\n  .dg:not(.ac) .main {\)raw_html",R"raw_html(n    /** Exclude mains in ac so that we don't hide close button */\n    overflow: hidden; }\n  .dg.main {\n    -webkit-transition: opacity 0.1s linear;\n    -o-transition: opacity 0.1s linear;\n    -moz-transition: opacity 0.1s linear;\n    transition: opa)raw_html",R"raw_html(city 0.1s linear; }\n    .dg.main.taller-than-window {\n      overflow-y: auto; }\n      .dg.main.taller-than-window .close-button {\n        opacity: 1;\n        /* TODO, these are style notes */\n        margin-top: -1px;\n        border-top: 1px solid #)raw_html",R"raw_html(2c2c2c; }\n    .dg.main ul.closed .close-button {\n      opacity: 1 !important; }\n    .dg.main:hover .close-button,\n    .dg.main .close-button.drag {\n      opacity: 1; }\n    .dg.main .close-button {\n      /*opacity: 0;*/\n      -webkit-transition: opa)raw_html",R"raw_html(city 0.1s linear;\n      -o-transition: opacity 0.1s linear;\n      -moz-transition: opacity 0.1s linear;\n      transition: opacity 0.1s linear;\n      border: 0;\n      position: absolute;\n      line-height: 19px;\n      height: 20px;\n      /* TODO, th)raw_html",R"raw_html(ese are style notes */\n      cursor: pointer;\n      text-align: center;\n      background-color: #000; }\n      .dg.main .close-button:hover {\n        background-color: #111; }\n  .dg.a {\n    float: right;\n    margin-right: 15px;\n    overflow-x: hidd)raw_html",R"raw_html(en; }\n    .dg.a.has-save > ul {\n      margin-top: 27px; }\n      .dg.a.has-save > ul.closed {\n        margin-top: 0; }\n    .dg.a .save-row {\n      position: fixed;\n      top: 0;\n      z-index: 1002; }\n  .dg li {\n    -webkit-transition: height 0.1s)raw_html",R"raw_html( ease-out;\n    -o-transition: height 0.1s ease-out;\n    -moz-transition: height 0.1s ease-out;\n    transition: height 0.1s ease-out; }\n  .dg li:not(.folder) {\n    cursor: auto;\n    height: 27px;\n    line-height: 27px;\n    overflow: hidden;\n    pad)raw_html",R"raw_html(ding: 0 4px 0 5px; }\n  .dg li.folder {\n    padding: 0;\n    border-left: 4px solid rgba(0, 0, 0, 0); }\n  .dg li.title {\n    cursor: pointer;\n    margin-left: -4px; }\n  .dg .closed li:not(.title),\n  .dg .closed ul li,\n  .dg .closed ul li > * {\n    )raw_html",R"raw_html(height: 0;\n    overflow: hidden;\n    border: 0; }\n  .dg .cr {\n    clear: both;\n    padding-left: 3px;\n    height: 27px; }\n  .dg .property-name {\n    cursor: default;\n    float: left;\n    clear: left;\n    width: 40%;\n    overflow: hidden;\n    t)raw_html",R"raw_html(ext-overflow: ellipsis; }\n  .dg .c {\n    float: left;\n    width: 60%; }\n  .dg .c input[type=text] {\n    border: 0;\n    margin-top: 4px;\n    padding: 3px;\n    width: 100%;\n    float: right; }\n  .dg .has-slider input[type=text] {\n    width: 30%;\n)raw_html",R"raw_html(    /*display: none;*/\n    margin-left: 0; }\n  .dg .slider {\n    float: left;\n    width: 66%;\n    margin-left: -5px;\n    margin-right: 0;\n    height: 19px;\n    margin-top: 4px; }\n  .dg .slider-fg {\n    height: 100%; }\n  .dg .c input[type=checkbo)raw_html",R"raw_html(x] {\n    margin-top: 9px; }\n  .dg .c select {\n    margin-top: 5px; }\n  .dg .cr.function,\n  .dg .cr.function .property-name,\n  .dg .cr.function *,\n  .dg .cr.boolean,\n  .dg .cr.boolean * {\n    cursor: pointer; }\n  .dg .selector {\n    display: none)raw_html",R"raw_html(;\n    position: absolute;\n    margin-left: -9px;\n    margin-top: 23px;\n    z-index: 10; }\n  .dg .c:hover .selector,\n  .dg .selector.drag {\n    display: block; }\n  .dg li.save-row {\n    padding: 0; }\n    .dg li.save-row .button {\n      display: i)raw_html",R"raw_html(nline-block;\n      padding: 0px 6px; }\n  .dg.dialogue {\n    background-color: #222;\n    width: 460px;\n    padding: 15px;\n    font-size: 13px;\n    line-height: 15px; }\n\n/* TODO Separate style and structure */\n#dg-new-constructor {\n  padding: 10px)raw_html",R"raw_html(;\n  color: #222;\n  font-family: Monaco, monospace;\n  font-size: 10px;\n  border: 0;\n  resize: none;\n  box-shadow: inset 1px 1px 1px #888;\n  word-wrap: break-word;\n  margin: 12px 0;\n  display: block;\n  width: 440px;\n  overflow-y: scroll;\n  height)raw_html",R"raw_html(: 100px;\n  position: relative; }\n\n#dg-local-explain {\n  display: none;\n  font-size: 11px;\n  line-height: 17px;\n  border-radius: 3px;\n  background-color: #333;\n  padding: 8px;\n  margin-top: 10px; }\n  #dg-local-explain code {\n    font-size: 10px;)raw_html",R"raw_html( }\n\n#dat-gui-save-locally {\n  display: none; }\n\n/** Main type */\n.dg {\n  color: #eee;\n  font: 11px 'Lucida Grande', sans-serif;\n  text-shadow: 0 -1px 0 #111;\n  /** Auto place */\n  /* Controller row, <li> */\n  /** Controllers */ }\n  .dg.main {\)raw_html",R"raw_html(n    /** Scrollbar */ }\n    .dg.main::-webkit-scrollbar {\n      width: 5px;\n      background: #1a1a1a; }\n    .dg.main::-webkit-scrollbar-corner {\n      height: 0;\n      display: none; }\n    .dg.main::-webkit-scrollbar-thumb {\n      border-radius: 5)raw_html",R"raw_html(px;\n      background: #676767; }\n  .dg li:not(.folder) {\n    background: #1a1a1a;\n    border-bottom: 1px solid #2c2c2c; }\n  .dg li.save-row {\n    line-height: 25px;\n    background: #dad5cb;\n    border: 0; }\n    .dg li.save-row select {\n      marg)raw_html",R"raw_html(in-left: 5px;\n      width: 108px; }\n    .dg li.save-row .button {\n      margin-left: 5px;\n      margin-top: 1px;\n      border-radius: 2px;\n      font-size: 9px;\n      line-height: 7px;\n      padding: 4px 4px 5px 4px;\n      background: #c5bdad;\n  )raw_html",R"raw_html(    color: #fff;\n      text-shadow: 0 1px 0 #b0a58f;\n      box-shadow: 0 -1px 0 #b0a58f;\n      cursor: pointer; }\n      .dg li.save-row .button.gears {\n        background: #c5bdad url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7A)raw_html",R"raw_html(AAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7ty/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG)raw_html",R"raw_html(5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;\n        height: 7px;\n        width: 8px; }\n      .dg li.save-)raw_html",R"raw_html(row .button:hover {\n        background-color: #bab19e;\n        box-shadow: 0 -1px 0 #b0a58f; }\n  .dg li.folder {\n    border-bottom: 0; }\n  .dg li.title {\n    padding-left: 16px;\n    background: black url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////P)raw_html",R"raw_html(z8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;\n    cursor: pointer;\n    border-bottom: 1px solid rgba(255, 255, 255, 0.2); }\n  .dg .closed li.title {\n    background-image: url(data:image/gif;base64,R0lGODlhBQAFAJEAAP////Pz8/)raw_html",R"raw_html(///////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==); }\n  .dg .cr.boolean {\n    border-left: 3px solid #806787; }\n  .dg .cr.function {\n    border-left: 3px solid #e61d5f; }\n  .dg .cr.number {\n    border-left: 3px solid #2fa1d6; }\n    .dg .cr.number i)raw_html",R"raw_html(nput[type=text] {\n      color: #2fa1d6; }\n  .dg .cr.string {\n    border-left: 3px solid #1ed36f; }\n    .dg .cr.string input[type=text] {\n      color: #1ed36f; }\n  .dg .cr.function:hover, .dg .cr.boolean:hover {\n    background: #111; }\n  .dg .c inpu)raw_html",R"raw_html(t[type=text] {\n    background: #303030;\n    outline: none; }\n    .dg .c input[type=text]:hover {\n      background: #3c3c3c; }\n    .dg .c input[type=text]:focus {\n      background: #494949;\n      color: #fff; }\n  .dg .c .slider {\n    background: #3)raw_html",R"raw_html(03030;\n    cursor: ew-resize; }\n  .dg .c .slider-fg {\n    background: #2fa1d6; }\n  .dg .c .slider:hover {\n    background: #3c3c3c; }\n    .dg .c .slider:hover .slider-fg {\n      background: #44abda; }\n",
-dat.controllers.factory=function(e,a,b,d,f,c,)raw_html",R"raw_html(p){return function(k,l,q,n){var r=k[l];if(p.isArray(q)||p.isObject(q))return new e(k,l,q);if(p.isNumber(r))return p.isNumber(q)&&p.isNumber(n)?new b(k,l,q,n):new a(k,l,{min:q,max:n});if(p.isString(r))return new d(k,l);if(p.isFunction(r))return new f(k,l,"")raw_html",R"raw_html();if(p.isBoolean(r))return new c(k,l)}}(dat.controllers.OptionController,dat.controllers.NumberControllerBox,dat.controllers.NumberControllerSlider,dat.controllers.StringController=function(e,a,b){var d=
-function(b,c){function e(){k.setValue(k.__input.valu)raw_html",R"raw_html(e)}d.superclass.call(this,b,c);var k=this;this.__input=document.createElement("input");this.__input.setAttribute("type","text");a.bind(this.__input,"keyup",e);a.bind(this.__input,"change",e);a.bind(this.__input,"blur",function(){k.__onFinishChange&&k.__onF)raw_html",R"raw_html(inishChange.call(k,k.getValue())});a.bind(this.__input,"keydown",function(a){13===a.keyCode&&this.blur()});this.updateDisplay();this.domElement.appendChild(this.__input)};d.superclass=e;b.extend(d.prototype,
-e.prototype,{updateDisplay:function(){a.isActive)raw_html",R"raw_html((this.__input)||(this.__input.value=this.getValue());return d.superclass.prototype.updateDisplay.call(this)}});return d}(dat.controllers.Controller,dat.dom.dom,dat.utils.common),dat.controllers.FunctionController,dat.controllers.BooleanController,dat.utils)raw_html",R"raw_html(.common),dat.controllers.Controller,dat.controllers.BooleanController,dat.controllers.FunctionController,dat.controllers.NumberControllerBox,dat.controllers.NumberControllerSlider,dat.controllers.OptionController,
-dat.controllers.ColorController=function(e)raw_html",R"raw_html(,a,b,d,f){function c(a,b,d,c){a.style.background="";f.each(l,function(e){a.style.cssText+="background: "+e+"linear-gradient("+b+", "+d+" 0%, "+c+" 100%); "})}function p(a){a.style.background="";a.style.cssText+="background: -moz-linear-gradient(top,  #ff00)raw_html",R"raw_html(00 0%, #ff00ff 17%, #0000ff 34%, #00ffff 50%, #00ff00 67%, #ffff00 84%, #ff0000 100%);";a.style.cssText+="background: -webkit-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);";
-a.style.cssText+="ba)raw_html",R"raw_html(ckground: -o-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);";a.style.cssText+="background: -ms-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000)raw_html",R"raw_html( 100%);";a.style.cssText+="background: linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);"}var k=function(e,n){function r(b){t(b);a.bind(window,"mousemove",t);a.bind(window,
-"mouseup",l)}function l())raw_html",R"raw_html({a.unbind(window,"mousemove",t);a.unbind(window,"mouseup",l)}function g(){var a=d(this.value);!1!==a?(s.__color.__state=a,s.setValue(s.__color.toOriginal())):this.value=s.__color.toString()}function h(){a.unbind(window,"mousemove",u);a.unbind(window,"mouse)raw_html",R"raw_html(up",h)}function t(b){b.preventDefault();var d=a.getWidth(s.__saturation_field),c=a.getOffset(s.__saturation_field),e=(b.clientX-c.left+document.body.scrollLeft)/d;b=1-(b.clientY-c.top+document.body.scrollTop)/d;1<b?b=1:0>
-b&&(b=0);1<e?e=1:0>e&&(e=0);s.__co)raw_html",R"raw_html(lor.v=b;s.__color.s=e;s.setValue(s.__color.toOriginal());return!1}function u(b){b.preventDefault();var d=a.getHeight(s.__hue_field),c=a.getOffset(s.__hue_field);b=1-(b.clientY-c.top+document.body.scrollTop)/d;1<b?b=1:0>b&&(b=0);s.__color.h=360*b;s.setValue)raw_html",R"raw_html((s.__color.toOriginal());return!1}k.superclass.call(this,e,n);this.__color=new b(this.getValue());this.__temp=new b(0);var s=this;this.domElement=document.createElement("div");a.makeSelectable(this.domElement,!1);
-this.__selector=document.createElement("di)raw_html",R"raw_html(v");this.__selector.className="selector";this.__saturation_field=document.createElement("div");this.__saturation_field.className="saturation-field";this.__field_knob=document.createElement("div");this.__field_knob.className="field-knob";this.__field_knob_b)raw_html",R"raw_html(order="2px solid ";this.__hue_knob=document.createElement("div");this.__hue_knob.className="hue-knob";this.__hue_field=document.createElement("div");this.__hue_field.className="hue-field";this.__input=document.createElement("input");
-this.__input.type="tex)raw_html",R"raw_html(t";this.__input_textShadow="0 1px 1px ";a.bind(this.__input,"keydown",function(a){13===a.keyCode&&g.call(this)});a.bind(this.__input,"blur",g);a.bind(this.__selector,"mousedown",function(b){a.addClass(this,"drag").bind(window,"mouseup",function(b){a.remove)raw_html",R"raw_html(Class(s.__selector,"drag")})});var v=document.createElement("div");f.extend(this.__selector.style,{width:"122px",height:"102px",padding:"3px",backgroundColor:"#222",boxShadow:"0px 1px 3px rgba(0,0,0,0.3)"});f.extend(this.__field_knob.style,
-{position:"abso)raw_html",R"raw_html(lute",width:"12px",height:"12px",border:this.__field_knob_border+(0.5>this.__color.v?"#fff":"#000"),boxShadow:"0px 1px 3px rgba(0,0,0,0.5)",borderRadius:"12px",zIndex:1});f.extend(this.__hue_knob.style,{position:"absolute",width:"15px",height:"2px",borderR)raw_html",R"raw_html(ight:"4px solid #fff",zIndex:1});f.extend(this.__saturation_field.style,{width:"100px",height:"100px",border:"1px solid #555",marginRight:"3px",display:"inline-block",cursor:"pointer"});f.extend(v.style,{width:"100%",height:"100%",
-background:"none"});c(v,)raw_html",R"raw_html("top","rgba(0,0,0,0)","#000");f.extend(this.__hue_field.style,{width:"15px",height:"100px",display:"inline-block",border:"1px solid #555",cursor:"ns-resize"});p(this.__hue_field);f.extend(this.__input.style,{outline:"none",textAlign:"center",color:"#fff",b)raw_html",R"raw_html(order:0,fontWeight:"bold",textShadow:this.__input_textShadow+"rgba(0,0,0,0.7)"});a.bind(this.__saturation_field,"mousedown",r);a.bind(this.__field_knob,"mousedown",r);a.bind(this.__hue_field,"mousedown",function(b){u(b);a.bind(window,
-"mousemove",u);a.bind)raw_html",R"raw_html((window,"mouseup",h)});this.__saturation_field.appendChild(v);this.__selector.appendChild(this.__field_knob);this.__selector.appendChild(this.__saturation_field);this.__selector.appendChild(this.__hue_field);this.__hue_field.appendChild(this.__hue_knob);th)raw_html",R"raw_html(is.domElement.appendChild(this.__input);this.domElement.appendChild(this.__selector);this.updateDisplay()};k.superclass=e;f.extend(k.prototype,e.prototype,{updateDisplay:function(){var a=d(this.getValue());if(!1!==a){var e=!1;
-f.each(b.COMPONENTS,function()raw_html",R"raw_html(b){if(!f.isUndefined(a[b])&&!f.isUndefined(this.__color.__state[b])&&a[b]!==this.__color.__state[b])return e=!0,{}},this);e&&f.extend(this.__color.__state,a)}f.extend(this.__temp.__state,this.__color.__state);this.__temp.a=1;var k=0.5>this.__color.v||0.5<t)raw_html",R"raw_html(his.__color.s?255:0,l=255-k;f.extend(this.__field_knob.style,{marginLeft:100*this.__color.s-7+"px",marginTop:100*(1-this.__color.v)-7+"px",backgroundColor:this.__temp.toString(),border:this.__field_knob_border+"rgb("+
-k+","+k+","+k+")"});this.__hue_knob.st)raw_html",R"raw_html(yle.marginTop=100*(1-this.__color.h/360)+"px";this.__temp.s=1;this.__temp.v=1;c(this.__saturation_field,"left","#fff",this.__temp.toString());f.extend(this.__input.style,{backgroundColor:this.__input.value=this.__color.toString(),color:"rgb("+k+","+k+","+k)raw_html",R"raw_html(+")",textShadow:this.__input_textShadow+"rgba("+l+","+l+","+l+",.7)"})}});var l=["-moz-","-o-","-webkit-","-ms-",""];return k}(dat.controllers.Controller,dat.dom.dom,dat.color.Color=function(e,a,b,d){function f(a,
-b,d){Object.defineProperty(a,b,{get:functi)raw_html",R"raw_html(on(){if("RGB"===this.__state.space)return this.__state[b];p(this,b,d);return this.__state[b]},set:function(a){"RGB"!==this.__state.space&&(p(this,b,d),this.__state.space="RGB");this.__state[b]=a}})}function c(a,b){Object.defineProperty(a,b,{get:function(){)raw_html",R"raw_html(if("HSV"===this.__state.space)return this.__state[b];k(this);return this.__state[b]},set:function(a){"HSV"!==this.__state.space&&(k(this),this.__state.space="HSV");this.__state[b]=a}})}function p(b,c,e){if("HEX"===
-b.__state.space)b.__state[c]=a.component_)raw_html",R"raw_html(from_hex(b.__state.hex,e);else if("HSV"===b.__state.space)d.extend(b.__state,a.hsv_to_rgb(b.__state.h,b.__state.s,b.__state.v));else throw"Corrupted color state";}function k(b){var c=a.rgb_to_hsv(b.r,b.g,b.b);d.extend(b.__state,{s:c.s,v:c.v});d.isNaN(c.h)?)raw_html",R"raw_html(d.isUndefined(b.__state.h)&&(b.__state.h=0):b.__state.h=c.h}var l=function(){this.__state=e.apply(this,arguments);if(!1===this.__state)throw"Failed to interpret color arguments";this.__state.a=this.__state.a||
-1};l.COMPONENTS="r g b h s v hex a".split(" "))raw_html",R"raw_html(;d.extend(l.prototype,{toString:function(){return b(this)},toOriginal:function(){return this.__state.conversion.write(this)}});f(l.prototype,"r",2);f(l.prototype,"g",1);f(l.prototype,"b",0);c(l.prototype,"h");c(l.prototype,"s");c(l.prototype,"v");Object.de)raw_html",R"raw_html(fineProperty(l.prototype,"a",{get:function(){return this.__state.a},set:function(a){this.__state.a=a}});Object.defineProperty(l.prototype,"hex",{get:function(){"HEX"!==!this.__state.space&&(this.__state.hex=
-a.rgb_to_hex(this.r,this.g,this.b));return this.)raw_html",R"raw_html(__state.hex},set:function(a){this.__state.space="HEX";this.__state.hex=a}});return l}(dat.color.interpret,dat.color.math=function(){var e;return{hsv_to_rgb:function(a,b,d){var e=a/60-Math.floor(a/60),c=d*(1-b),p=d*(1-e*b);b=d*(1-(1-e)*b);a=[[d,b,c],[p,d,c])raw_html",R"raw_html(,[c,d,b],[c,p,d],[b,c,d],[d,c,p]][Math.floor(a/60)%6];return{r:255*a[0],g:255*a[1],b:255*a[2]}},rgb_to_hsv:function(a,b,d){var e=Math.min(a,b,d),c=Math.max(a,b,d),e=c-e;if(0==c)return{h:NaN,s:0,v:0};
-a=(a==c?(b-d)/e:b==c?2+(d-a)/e:4+(a-b)/e)/6;0>a&&(a+=1);)raw_html",R"raw_html(return{h:360*a,s:e/c,v:c/255}},rgb_to_hex:function(a,b,d){a=this.hex_with_component(0,2,a);a=this.hex_with_component(a,1,b);return a=this.hex_with_component(a,0,d)},component_from_hex:function(a,b){return a>>8*b&255},hex_with_component:function(a,b,d){retu)raw_html",R"raw_html(rn d<<(e=8*b)|a&~(255<<e)}}}(),dat.color.toString,dat.utils.common),dat.color.interpret,dat.utils.common),dat.utils.requestAnimationFrame=function(){return window.webkitRequestAnimationFrame||
-window.mozRequestAnimationFrame||window.oRequestAnimationFrame|)raw_html",R"raw_html(|window.msRequestAnimationFrame||function(e,a){window.setTimeout(e,1E3/60)}}(),dat.dom.CenteredDiv=function(e,a){var b=function(){this.backgroundElement=document.createElement("div");a.extend(this.backgroundElement.style,{backgroundColor:"rgba(0,0,0,0.8)",)raw_html",R"raw_html(top:0,left:0,display:"none",zIndex:"1000",opacity:0,WebkitTransition:"opacity 0.2s linear"});e.makeFullscreen(this.backgroundElement);this.backgroundElement.style.position="fixed";this.domElement=
-document.createElement("div");a.extend(this.domElement.styl)raw_html",R"raw_html(e,{position:"fixed",display:"none",zIndex:"1001",opacity:0,WebkitTransition:"-webkit-transform 0.2s ease-out, opacity 0.2s linear"});document.body.appendChild(this.backgroundElement);document.body.appendChild(this.domElement);var b=this;e.bind(this.backgro)raw_html",R"raw_html(undElement,"click",function(){b.hide()})};b.prototype.show=function(){var b=this;this.backgroundElement.style.display="block";this.domElement.style.display="block";this.domElement.style.opacity=
-0;this.domElement.style.webkitTransform="scale(1.1)";this.lay)raw_html",R"raw_html(out();a.defer(function(){b.backgroundElement.style.opacity=1;b.domElement.style.opacity=1;b.domElement.style.webkitTransform="scale(1)"})};b.prototype.hide=function(){var a=this,b=function(){a.domElement.style.display="none";a.backgroundElement.style.displ)raw_html",R"raw_html(ay="none";e.unbind(a.domElement,"webkitTransitionEnd",b);e.unbind(a.domElement,"transitionend",b);e.unbind(a.domElement,"oTransitionEnd",b)};e.bind(this.domElement,"webkitTransitionEnd",
-b);e.bind(this.domElement,"transitionend",b);e.bind(this.domElement,")raw_html",R"raw_html(oTransitionEnd",b);this.backgroundElement.style.opacity=0;this.domElement.style.opacity=0;this.domElement.style.webkitTransform="scale(1.1)"};b.prototype.layout=function(){this.domElement.style.left=window.innerWidth/2-e.getWidth(this.domElement)/2+"px";th)raw_html",R"raw_html(is.domElement.style.top=window.innerHeight/2-e.getHeight(this.domElement)/2+"px"};return b}(dat.dom.dom,dat.utils.common),dat.dom.dom,dat.utils.common);
+da)raw_html",R"raw_html(t.controllers.BooleanController=function(e,a,b){var d=function(b,c){d.superclass.call(this,b,c);var e=this;this.__prev=this.getValue();this.__checkbox=document.createElement("input");this.__checkbox.setAttribute("type","checkbox");a.bind(this.__checkbox,"c)raw_html",R"raw_html(hange",function(){e.setValue(!e.__prev)},!1);this.domElement.appendChild(this.__checkbox);this.updateDisplay()};d.superclass=e;b.extend(d.prototype,e.prototype,{setValue:function(a){a=d.superclass.prototype.setValue.call(this,a);this.__onFinishChange&&
+thi)raw_html",R"raw_html(s.__onFinishChange.call(this,this.getValue());this.__prev=this.getValue();return a},updateDisplay:function(){!0===this.getValue()?(this.__checkbox.setAttribute("checked","checked"),this.__checkbox.checked=!0):this.__checkbox.checked=!1;return d.superclass.)raw_html",R"raw_html(prototype.updateDisplay.call(this)}});return d}(dat.controllers.Controller,dat.dom.dom,dat.utils.common);
+dat.color.toString=function(e){return function(a){if(1==a.a||e.isUndefined(a.a)){for(a=a.hex.toString(16);6>a.length;)a="0"+a;return"#"+a}return"rgba()raw_html",R"raw_html("+Math.round(a.r)+","+Math.round(a.g)+","+Math.round(a.b)+","+a.a+")"}}(dat.utils.common);
+dat.color.interpret=function(e,a){var b,d,f=[{litmus:a.isString,conversions:{THREE_CHAR_HEX:{read:function(a){a=a.match(/^#([A-F0-9])([A-F0-9])([A-F0-9])$/i);return )raw_html",R"raw_html(null===a?!1:{space:"HEX",hex:parseInt("0x"+a[1].toString()+a[1].toString()+a[2].toString()+a[2].toString()+a[3].toString()+a[3].toString())}},write:e},SIX_CHAR_HEX:{read:function(a){a=a.match(/^#([A-F0-9]{6})$/i);return null===a?!1:{space:"HEX",hex:parseIn)raw_html",R"raw_html(t("0x"+a[1].toString())}},write:e},CSS_RGB:{read:function(a){a=a.match(/^rgb\(\s*(.+)\s*,\s*(.+)\s*,\s*(.+)\s*\)/);
+return null===a?!1:{space:"RGB",r:parseFloat(a[1]),g:parseFloat(a[2]),b:parseFloat(a[3])}},write:e},CSS_RGBA:{read:function(a){a=a.match(/^r)raw_html",R"raw_html(gba\(\s*(.+)\s*,\s*(.+)\s*,\s*(.+)\s*\,\s*(.+)\s*\)/);return null===a?!1:{space:"RGB",r:parseFloat(a[1]),g:parseFloat(a[2]),b:parseFloat(a[3]),a:parseFloat(a[4])}},write:e}}},{litmus:a.isNumber,conversions:{HEX:{read:function(a){return{space:"HEX",hex:a,co)raw_html",R"raw_html(nversionName:"HEX"}},write:function(a){return a.hex}}}},{litmus:a.isArray,conversions:{RGB_ARRAY:{read:function(a){return 3!=
+a.length?!1:{space:"RGB",r:a[0],g:a[1],b:a[2]}},write:function(a){return[a.r,a.g,a.b]}},RGBA_ARRAY:{read:function(a){return 4!=a.l)raw_html",R"raw_html(ength?!1:{space:"RGB",r:a[0],g:a[1],b:a[2],a:a[3]}},write:function(a){return[a.r,a.g,a.b,a.a]}}}},{litmus:a.isObject,conversions:{RGBA_OBJ:{read:function(c){return a.isNumber(c.r)&&a.isNumber(c.g)&&a.isNumber(c.b)&&a.isNumber(c.a)?{space:"RGB",r:c.r,g:c.g,)raw_html",R"raw_html(b:c.b,a:c.a}:!1},write:function(a){return{r:a.r,g:a.g,b:a.b,a:a.a}}},RGB_OBJ:{read:function(c){return a.isNumber(c.r)&&
+a.isNumber(c.g)&&a.isNumber(c.b)?{space:"RGB",r:c.r,g:c.g,b:c.b}:!1},write:function(a){return{r:a.r,g:a.g,b:a.b}}},HSVA_OBJ:{read:functi)raw_html",R"raw_html(on(c){return a.isNumber(c.h)&&a.isNumber(c.s)&&a.isNumber(c.v)&&a.isNumber(c.a)?{space:"HSV",h:c.h,s:c.s,v:c.v,a:c.a}:!1},write:function(a){return{h:a.h,s:a.s,v:a.v,a:a.a}}},HSV_OBJ:{read:function(d){return a.isNumber(d.h)&&a.isNumber(d.s)&&a.isNumber(d.v))raw_html",R"raw_html(?{space:"HSV",h:d.h,s:d.s,v:d.v}:!1},write:function(a){return{h:a.h,s:a.s,v:a.v}}}}}];return function(){d=!1;
+var c=1<arguments.length?a.toArray(arguments):arguments[0];a.each(f,function(e){if(e.litmus(c))return a.each(e.conversions,function(e,f){b=e.read()raw_html",R"raw_html(c);if(!1===d&&!1!==b)return d=b,b.conversionName=f,b.conversion=e,a.BREAK}),a.BREAK});return d}}(dat.color.toString,dat.utils.common);
+dat.GUI=dat.gui.GUI=function(e,a,b,d,f,c,p,k,l,q,n,r,y,g,h){function t(a,c,b,e){if(void 0===c[b])throw Error("Object "+c+)raw_html",R"raw_html(' has no property "'+b+'"');e.color?c=new n(c,b):(c=[c,b].concat(e.factoryArgs),c=d.apply(a,c));e.before instanceof f&&(e.before=e.before.__li);v(a,c);g.addClass(c.domElement,"c");b=document.createElement("span");g.addClass(b,"property-name");b.innerHTML=c)raw_html",R"raw_html(.property;var q=document.createElement("div");q.appendChild(b);q.appendChild(c.domElement);e=u(a,q,e.before);g.addClass(e,m.CLASS_CONTROLLER_ROW);
+g.addClass(e,typeof c.getValue());s(a,e,c);a.__controllers.push(c);return c}function u(a,d,c){var b=document.)raw_html",R"raw_html(createElement("li");d&&b.appendChild(d);c?a.__ul.insertBefore(b,params.before):a.__ul.appendChild(b);a.onResize();return b}function s(a,d,b){b.__li=d;b.__gui=a;h.extend(b,{options:function(d){if(1<arguments.length)return b.remove(),t(a,b.object,b.property,)raw_html",R"raw_html({before:b.__li.nextElementSibling,factoryArgs:[h.toArray(arguments)]});if(h.isArray(d)||h.isObject(d))return b.remove(),t(a,b.object,b.property,
+{before:b.__li.nextElementSibling,factoryArgs:[d]})},name:function(a){b.__li.firstElementChild.firstElementChil)raw_html",R"raw_html(d.innerHTML=a;return b},listen:function(){b.__gui.listen(b);return b},remove:function(){b.__gui.remove(b);return b}});if(b instanceof l){var e=new k(b.object,b.property,{min:b.__min,max:b.__max,step:b.__step});h.each(["updateDisplay","onChange","onFinishCh)raw_html",R"raw_html(ange"],function(a){var d=b[a],J=e[a];b[a]=e[a]=function(){var a=Array.prototype.slice.call(arguments);d.apply(b,a);return J.apply(e,a)}});
+g.addClass(d,"has-slider");b.domElement.insertBefore(e.domElement,b.domElement.firstElementChild)}else if(b instanceo)raw_html",R"raw_html(f k){var f=function(d){return h.isNumber(b.__min)&&h.isNumber(b.__max)?(b.remove(),t(a,b.object,b.property,{before:b.__li.nextElementSibling,factoryArgs:[b.__min,b.__max,b.__step]})):d};b.min=h.compose(f,b.min);b.max=h.compose(f,b.max)}else b instanceof c?)raw_html",R"raw_html((g.bind(d,"click",function(){g.fakeEvent(b.__checkbox,"click")}),g.bind(b.__checkbox,"click",function(a){a.stopPropagation()})):
+b instanceof p?(g.bind(d,"click",function(){g.fakeEvent(b.__button,"click")}),g.bind(d,"mouseover",function(){g.addClass(b.__bu)raw_html",R"raw_html(tton,"hover")}),g.bind(d,"mouseout",function(){g.removeClass(b.__button,"hover")})):b instanceof n&&(g.addClass(d,"color"),b.updateDisplay=h.compose(function(a){d.style.borderLeftColor=b.__color.toString();return a},b.updateDisplay),b.updateDisplay());b.se)raw_html",R"raw_html(tValue=h.compose(function(d){a.getRoot().__preset_select&&b.isModified()&&D(a.getRoot(),!0);return d},b.setValue)}function v(a,
+d){var b=a.getRoot(),c=b.__rememberedObjects.indexOf(d.object);if(-1!=c){var e=b.__rememberedObjectIndecesToControllers[c];void )raw_html",R"raw_html(0===e&&(e={},b.__rememberedObjectIndecesToControllers[c]=e);e[d.property]=d;if(b.load&&b.load.remembered){b=b.load.remembered;if(b[a.preset])b=b[a.preset];else if(b[z])b=b[z];else return;b[c]&&void 0!==b[c][d.property]&&(c=b[c][d.property],d.initialValue=c)raw_html",R"raw_html(,d.setValue(c))}}}function K(a){var b=a.__save_row=document.createElement("li");g.addClass(a.domElement,"has-save");a.__ul.insertBefore(b,
+a.__ul.firstChild);g.addClass(b,"save-row");var d=document.createElement("span");d.innerHTML="&nbsp;";g.addClass(d,"b)raw_html",R"raw_html(utton gears");var c=document.createElement("span");c.innerHTML="Save";g.addClass(c,"button");g.addClass(c,"save");var e=document.createElement("span");e.innerHTML="New";g.addClass(e,"button");g.addClass(e,"save-as");var f=document.createElement("span");f.i)raw_html",R"raw_html(nnerHTML="Revert";g.addClass(f,"button");g.addClass(f,"revert");var q=a.__preset_select=document.createElement("select");a.load&&
+a.load.remembered?h.each(a.load.remembered,function(b,d){E(a,d,d==a.preset)}):E(a,z,!1);g.bind(q,"change",function(){for(var b)raw_html",R"raw_html(=0;b<a.__preset_select.length;b++)a.__preset_select[b].innerHTML=a.__preset_select[b].value;a.preset=this.value});b.appendChild(q);b.appendChild(d);b.appendChild(c);b.appendChild(e);b.appendChild(f);if(w){var b=document.getElementById("dg-save-locally"),n=)raw_html",R"raw_html(document.getElementById("dg-local-explain");b.style.display="block";b=document.getElementById("dg-local-storage");"true"===
+localStorage.getItem(document.location.href+".isLocal")&&b.setAttribute("checked","checked");var k=function(){n.style.display=a.useL)raw_html",R"raw_html(ocalStorage?"block":"none"};k();g.bind(b,"change",function(){a.useLocalStorage=!a.useLocalStorage;k()})}var r=document.getElementById("dg-new-constructor");g.bind(r,"keydown",function(a){!a.metaKey||67!==a.which&&67!=a.keyCode||A.hide()});g.bind(d,"click",)raw_html",R"raw_html(function(){r.innerHTML=JSON.stringify(a.getSaveObject(),void 0,2);A.show();r.focus();r.select()});g.bind(c,"click",
+function(){a.save()});g.bind(e,"click",function(){var b=prompt("Enter a new preset name.");b&&a.saveAs(b)});g.bind(f,"click",function(){a.re)raw_html",R"raw_html(vert()})}function L(a){function b(f){f.preventDefault();e=f.clientX;g.addClass(a.__closeButton,m.CLASS_DRAG);g.bind(window,"mousemove",d);g.bind(window,"mouseup",c);return!1}function d(b){b.preventDefault();a.width+=e-b.clientX;a.onResize();e=b.clientX;ret)raw_html",R"raw_html(urn!1}function c(){g.removeClass(a.__closeButton,m.CLASS_DRAG);g.unbind(window,"mousemove",d);g.unbind(window,
+"mouseup",c)}a.__resize_handle=document.createElement("div");h.extend(a.__resize_handle.style,{width:"6px",marginLeft:"-3px",height:"200px",curso)raw_html",R"raw_html(r:"ew-resize",position:"absolute"});var e;g.bind(a.__resize_handle,"mousedown",b);g.bind(a.__closeButton,"mousedown",b);a.domElement.insertBefore(a.__resize_handle,a.domElement.firstElementChild)}function F(a,b){a.domElement.style.width=b+"px";a.__save_row)raw_html",R"raw_html(&&a.autoPlace&&(a.__save_row.style.width=b+"px");a.__closeButton&&(a.__closeButton.style.width=b+"px")}
+function B(a,b){var d={};h.each(a.__rememberedObjects,function(c,e){var f={};h.each(a.__rememberedObjectIndecesToControllers[e],function(a,d){f[d]=b?a.i)raw_html",R"raw_html(nitialValue:a.getValue()});d[e]=f});return d}function E(a,b,d){var c=document.createElement("option");c.innerHTML=b;c.value=b;a.__preset_select.appendChild(c);d&&(a.__preset_select.selectedIndex=a.__preset_select.length-1)}function D(a,b){var d=a.__preset_)raw_html",R"raw_html(select[a.__preset_select.selectedIndex];d.innerHTML=b?d.value+"*":d.value}function G(a){0!=a.length&&
+r(function(){G(a)});h.each(a,function(a){a.updateDisplay()})}e.inject(b);var z="Default",w;try{w="localStorage"in window&&null!==window.localStorage}catch)raw_html",R"raw_html((M){w=!1}var A,H=!0,x,C=!1,I=[],m=function(a){function b(){localStorage.setItem(document.location.href+".gui",JSON.stringify(c.getSaveObject()))}function d(){var a=c.getRoot();a.width+=1;h.defer(function(){a.width-=1})}var c=this;this.domElement=document.c)raw_html",R"raw_html(reateElement("div");this.__ul=document.createElement("ul");this.domElement.appendChild(this.__ul);
+g.addClass(this.domElement,"dg");this.__folders={};this.__controllers=[];this.__rememberedObjects=[];this.__rememberedObjectIndecesToControllers=[];this.__li)raw_html",R"raw_html(stening=[];a=a||{};a=h.defaults(a,{autoPlace:!0,width:m.DEFAULT_WIDTH});a=h.defaults(a,{resizable:a.autoPlace,hideable:a.autoPlace});h.isUndefined(a.load)?a.load={preset:z}:a.preset&&(a.load.preset=a.preset);h.isUndefined(a.parent)&&a.hideable&&I.push(this)raw_html",R"raw_html();a.resizable=h.isUndefined(a.parent)&&a.resizable;a.autoPlace&&h.isUndefined(a.scrollable)&&
+(a.scrollable=!0);var e=w&&"true"===localStorage.getItem(document.location.href+".isLocal");Object.defineProperties(this,{parent:{get:function(){return a.parent}})raw_html",R"raw_html(,scrollable:{get:function(){return a.scrollable}},autoPlace:{get:function(){return a.autoPlace}},preset:{get:function(){return c.parent?c.getRoot().preset:a.load.preset},set:function(b){c.parent?c.getRoot().preset=b:a.load.preset=b;for(b=0;b<this.__preset_)raw_html",R"raw_html(select.length;b++)this.__preset_select[b].value==this.preset&&(this.__preset_select.selectedIndex=
+b);c.revert()}},width:{get:function(){return a.width},set:function(b){a.width=b;F(c,b)}},name:{get:function(){return a.name},set:function(b){a.name=b;q&&(q.i)raw_html",R"raw_html(nnerHTML=a.name)}},closed:{get:function(){return a.closed},set:function(b){a.closed=b;a.closed?g.addClass(c.__ul,m.CLASS_CLOSED):g.removeClass(c.__ul,m.CLASS_CLOSED);this.onResize();c.__closeButton&&(c.__closeButton.innerHTML=b?m.TEXT_OPEN:m.TEXT_CLOSED)}})raw_html",R"raw_html(,load:{get:function(){return a.load}},useLocalStorage:{get:function(){return e},set:function(a){w&&
+((e=a)?g.bind(window,"unload",b):g.unbind(window,"unload",b),localStorage.setItem(document.location.href+".isLocal",a))}}});if(h.isUndefined(a.parent)){a.cl)raw_html",R"raw_html(osed=!1;g.addClass(this.domElement,m.CLASS_MAIN);g.makeSelectable(this.domElement,!1);if(w&&e){c.useLocalStorage=!0;var f=localStorage.getItem(document.location.href+".gui");f&&(a.load=JSON.parse(f))}this.__closeButton=document.createElement("div");this.__)raw_html",R"raw_html(closeButton.innerHTML=m.TEXT_CLOSED;g.addClass(this.__closeButton,m.CLASS_CLOSE_BUTTON);this.domElement.appendChild(this.__closeButton);
+g.bind(this.__closeButton,"click",function(){c.closed=!c.closed})}else{void 0===a.closed&&(a.closed=!0);var q=document.)raw_html",R"raw_html(createTextNode(a.name);g.addClass(q,"controller-name");f=u(c,q);g.addClass(this.__ul,m.CLASS_CLOSED);g.addClass(f,"title");g.bind(f,"click",function(a){a.preventDefault();c.closed=!c.closed;return!1});a.closed||(this.closed=!1)}a.autoPlace&&(h.isUndefined()raw_html",R"raw_html(a.parent)&&(H&&(x=document.createElement("div"),g.addClass(x,"dg"),g.addClass(x,m.CLASS_AUTO_PLACE_CONTAINER),document.body.appendChild(x),
+H=!1),x.appendChild(this.domElement),g.addClass(this.domElement,m.CLASS_AUTO_PLACE)),this.parent||F(c,a.width));g.bi)raw_html",R"raw_html(nd(window,"resize",function(){c.onResize()});g.bind(this.__ul,"webkitTransitionEnd",function(){c.onResize()});g.bind(this.__ul,"transitionend",function(){c.onResize()});g.bind(this.__ul,"oTransitionEnd",function(){c.onResize()});this.onResize();a.resizable)raw_html",R"raw_html(&&L(this);c.getRoot();a.parent||d()};m.toggleHide=function(){C=!C;h.each(I,function(a){a.domElement.style.zIndex=C?-999:999;a.domElement.style.opacity=
+C?0:1})};m.CLASS_AUTO_PLACE="a";m.CLASS_AUTO_PLACE_CONTAINER="ac";m.CLASS_MAIN="main";m.CLASS_CONTROLLER)raw_html",R"raw_html(_ROW="cr";m.CLASS_TOO_TALL="taller-than-window";m.CLASS_CLOSED="closed";m.CLASS_CLOSE_BUTTON="close-button";m.CLASS_DRAG="drag";m.DEFAULT_WIDTH=245;m.TEXT_CLOSED="Close Controls";m.TEXT_OPEN="Open Controls";g.bind(window,"keydown",function(a){"text"===docu)raw_html",R"raw_html(ment.activeElement.type||72!==a.which&&72!=a.keyCode||m.toggleHide()},!1);h.extend(m.prototype,{add:function(a,b){return t(this,a,b,{factoryArgs:Array.prototype.slice.call(arguments,
+2)})},addColor:function(a,b){return t(this,a,b,{color:!0})},remove:functi)raw_html",R"raw_html(on(a){this.__ul.removeChild(a.__li);this.__controllers.slice(this.__controllers.indexOf(a),1);var b=this;h.defer(function(){b.onResize()})},destroy:function(){this.autoPlace&&x.removeChild(this.domElement)},addFolder:function(a){if(void 0!==this.__folders[)raw_html",R"raw_html(a])throw Error('You already have a folder in this GUI by the name "'+a+'"');var b={name:a,parent:this};b.autoPlace=this.autoPlace;this.load&&this.load.folders&&this.load.folders[a]&&
+(b.closed=this.load.folders[a].closed,b.load=this.load.folders[a]);b=new )raw_html",R"raw_html(m(b);this.__folders[a]=b;a=u(this,b.domElement);g.addClass(a,"folder");return b},open:function(){this.closed=!1},close:function(){this.closed=!0},onResize:function(){var a=this.getRoot();if(a.scrollable){var b=g.getOffset(a.__ul).top,d=0;h.each(a.__ul.chil)raw_html",R"raw_html(dNodes,function(b){a.autoPlace&&b===a.__save_row||(d+=g.getHeight(b))});window.innerHeight-b-20<d?(g.addClass(a.domElement,m.CLASS_TOO_TALL),a.__ul.style.height=window.innerHeight-
+b-20+"px"):(g.removeClass(a.domElement,m.CLASS_TOO_TALL),a.__ul.style.heigh)raw_html",R"raw_html(t="auto")}a.__resize_handle&&h.defer(function(){a.__resize_handle.style.height=a.__ul.offsetHeight+"px"});a.__closeButton&&(a.__closeButton.style.width=a.width+"px")},remember:function(){h.isUndefined(A)&&(A=new y,A.domElement.innerHTML=a);if(this.parent)t)raw_html",R"raw_html(hrow Error("You can only call remember on a top level GUI.");var b=this;h.each(Array.prototype.slice.call(arguments),function(a){0==b.__rememberedObjects.length&&K(b);-1==
+b.__rememberedObjects.indexOf(a)&&b.__rememberedObjects.push(a)});this.autoPlace&&F()raw_html",R"raw_html(this,this.width)},getRoot:function(){for(var a=this;a.parent;)a=a.parent;return a},getSaveObject:function(){var a=this.load;a.closed=this.closed;0<this.__rememberedObjects.length&&(a.preset=this.preset,a.remembered||(a.remembered={}),a.remembered[this.pres)raw_html",R"raw_html(et]=B(this));a.folders={};h.each(this.__folders,function(b,d){a.folders[d]=b.getSaveObject()});return a},save:function(){this.load.remembered||(this.load.remembered=
+{});this.load.remembered[this.preset]=B(this);D(this,!1)},saveAs:function(a){this.load.rem)raw_html",R"raw_html(embered||(this.load.remembered={},this.load.remembered[z]=B(this,!0));this.load.remembered[a]=B(this);this.preset=a;E(this,a,!0)},revert:function(a){h.each(this.__controllers,function(b){this.getRoot().load.remembered?v(a||this.getRoot(),b):b.setValue(b.in)raw_html",R"raw_html(itialValue)},this);h.each(this.__folders,function(a){a.revert(a)});a||D(this.getRoot(),!1)},listen:function(a){var b=0==this.__listening.length;this.__listening.push(a);
+b&&G(this.__listening)}});return m}(dat.utils.css,'<div id="dg-save" class="dg dialogu)raw_html",R"raw_html(e">\n\n  Here\'s the new load parameter for your <code>GUI</code>\'s constructor:\n\n  <textarea id="dg-new-constructor"></textarea>\n\n  <div id="dg-save-locally">\n\n    <input id="dg-local-storage" type="checkbox"/> Automatically save\n    values to <co)raw_html",R"raw_html(de>localStorage</code> on exit.\n\n    <div id="dg-local-explain">The values saved to <code>localStorage</code> will\n      override those passed to <code>dat.GUI</code>\'s constructor. This makes it\n      easier to work incrementally, but <code>localStor)raw_html",R"raw_html(age</code> is fragile,\n      and your friends may not see the same values you do.\n      \n    </div>\n    \n  </div>\n\n</div>',
+".dg {\n  /** Clear list styles */\n  /* Auto-place container */\n  /* Auto-placed GUI's */\n  /* Line items that don't conta)raw_html",R"raw_html(in folders. */\n  /** Folder names */\n  /** Hides closed items */\n  /** Controller row */\n  /** Name-half (left) */\n  /** Controller-half (right) */\n  /** Controller placement */\n  /** Shorter number boxes when slider is present. */\n  /** Ensure the)raw_html",R"raw_html( entire boolean and function row shows a hand */ }\n  .dg ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    width: 100%;\n    clear: both; }\n  .dg.ac {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    height: 0;\n    z-)raw_html",R"raw_html(index: 0; }\n  .dg:not(.ac) .main {\n    /** Exclude mains in ac so that we don't hide close button */\n    overflow: hidden; }\n  .dg.main {\n    -webkit-transition: opacity 0.1s linear;\n    -o-transition: opacity 0.1s linear;\n    -moz-transition: opaci)raw_html",R"raw_html(ty 0.1s linear;\n    transition: opacity 0.1s linear; }\n    .dg.main.taller-than-window {\n      overflow-y: auto; }\n      .dg.main.taller-than-window .close-button {\n        opacity: 1;\n        /* TODO, these are style notes */\n        margin-top: -1)raw_html",R"raw_html(px;\n        border-top: 1px solid #2c2c2c; }\n    .dg.main ul.closed .close-button {\n      opacity: 1 !important; }\n    .dg.main:hover .close-button,\n    .dg.main .close-button.drag {\n      opacity: 1; }\n    .dg.main .close-button {\n      /*opacity:)raw_html",R"raw_html( 0;*/\n      -webkit-transition: opacity 0.1s linear;\n      -o-transition: opacity 0.1s linear;\n      -moz-transition: opacity 0.1s linear;\n      transition: opacity 0.1s linear;\n      border: 0;\n      position: absolute;\n      line-height: 19px;\n  )raw_html",R"raw_html(    height: 20px;\n      /* TODO, these are style notes */\n      cursor: pointer;\n      text-align: center;\n      background-color: #000; }\n      .dg.main .close-button:hover {\n        background-color: #111; }\n  .dg.a {\n    float: right;\n    margi)raw_html",R"raw_html(n-right: 15px;\n    overflow-x: hidden; }\n    .dg.a.has-save > ul {\n      margin-top: 27px; }\n      .dg.a.has-save > ul.closed {\n        margin-top: 0; }\n    .dg.a .save-row {\n      position: fixed;\n      top: 0;\n      z-index: 1002; }\n  .dg li {\)raw_html",R"raw_html(n    -webkit-transition: height 0.1s ease-out;\n    -o-transition: height 0.1s ease-out;\n    -moz-transition: height 0.1s ease-out;\n    transition: height 0.1s ease-out; }\n  .dg li:not(.folder) {\n    cursor: auto;\n    height: 27px;\n    line-height: 2)raw_html",R"raw_html(7px;\n    overflow: hidden;\n    padding: 0 4px 0 5px; }\n  .dg li.folder {\n    padding: 0;\n    border-left: 4px solid rgba(0, 0, 0, 0); }\n  .dg li.title {\n    cursor: pointer;\n    margin-left: -4px; }\n  .dg .closed li:not(.title),\n  .dg .closed ul )raw_html",R"raw_html(li,\n  .dg .closed ul li > * {\n    height: 0;\n    overflow: hidden;\n    border: 0; }\n  .dg .cr {\n    clear: both;\n    padding-left: 3px;\n    height: 27px; }\n  .dg .property-name {\n    cursor: default;\n    float: left;\n    clear: left;\n    width)raw_html",R"raw_html(: 40%;\n    overflow: hidden;\n    text-overflow: ellipsis; }\n  .dg .c {\n    float: left;\n    width: 60%; }\n  .dg .c input[type=text] {\n    border: 0;\n    margin-top: 4px;\n    padding: 3px;\n    width: 100%;\n    float: right; }\n  .dg .has-slider i)raw_html",R"raw_html(nput[type=text] {\n    width: 30%;\n    /*display: none;*/\n    margin-left: 0; }\n  .dg .slider {\n    float: left;\n    width: 66%;\n    margin-left: -5px;\n    margin-right: 0;\n    height: 19px;\n    margin-top: 4px; }\n  .dg .slider-fg {\n    height: )raw_html",R"raw_html(100%; }\n  .dg .c input[type=checkbox] {\n    margin-top: 9px; }\n  .dg .c select {\n    margin-top: 5px; }\n  .dg .cr.function,\n  .dg .cr.function .property-name,\n  .dg .cr.function *,\n  .dg .cr.boolean,\n  .dg .cr.boolean * {\n    cursor: pointer; }\n)raw_html",R"raw_html(  .dg .selector {\n    display: none;\n    position: absolute;\n    margin-left: -9px;\n    margin-top: 23px;\n    z-index: 10; }\n  .dg .c:hover .selector,\n  .dg .selector.drag {\n    display: block; }\n  .dg li.save-row {\n    padding: 0; }\n    .dg li.)raw_html",R"raw_html(save-row .button {\n      display: inline-block;\n      padding: 0px 6px; }\n  .dg.dialogue {\n    background-color: #222;\n    width: 460px;\n    padding: 15px;\n    font-size: 13px;\n    line-height: 15px; }\n\n/* TODO Separate style and structure */\n#d)raw_html",R"raw_html(g-new-constructor {\n  padding: 10px;\n  color: #222;\n  font-family: Monaco, monospace;\n  font-size: 10px;\n  border: 0;\n  resize: none;\n  box-shadow: inset 1px 1px 1px #888;\n  word-wrap: break-word;\n  margin: 12px 0;\n  display: block;\n  width: 440)raw_html",R"raw_html(px;\n  overflow-y: scroll;\n  height: 100px;\n  position: relative; }\n\n#dg-local-explain {\n  display: none;\n  font-size: 11px;\n  line-height: 17px;\n  border-radius: 3px;\n  background-color: #333;\n  padding: 8px;\n  margin-top: 10px; }\n  #dg-local-)raw_html",R"raw_html(explain code {\n    font-size: 10px; }\n\n#dat-gui-save-locally {\n  display: none; }\n\n/** Main type */\n.dg {\n  color: #eee;\n  font: 11px 'Lucida Grande', sans-serif;\n  text-shadow: 0 -1px 0 #111;\n  /** Auto place */\n  /* Controller row, <li> */\n )raw_html",R"raw_html( /** Controllers */ }\n  .dg.main {\n    /** Scrollbar */ }\n    .dg.main::-webkit-scrollbar {\n      width: 5px;\n      background: #1a1a1a; }\n    .dg.main::-webkit-scrollbar-corner {\n      height: 0;\n      display: none; }\n    .dg.main::-webkit-scrol)raw_html",R"raw_html(lbar-thumb {\n      border-radius: 5px;\n      background: #676767; }\n  .dg li:not(.folder) {\n    background: #1a1a1a;\n    border-bottom: 1px solid #2c2c2c; }\n  .dg li.save-row {\n    line-height: 25px;\n    background: #dad5cb;\n    border: 0; }\n    )raw_html",R"raw_html(.dg li.save-row select {\n      margin-left: 5px;\n      width: 108px; }\n    .dg li.save-row .button {\n      margin-left: 5px;\n      margin-top: 1px;\n      border-radius: 2px;\n      font-size: 9px;\n      line-height: 7px;\n      padding: 4px 4px 5px )raw_html",R"raw_html(4px;\n      background: #c5bdad;\n      color: #fff;\n      text-shadow: 0 1px 0 #b0a58f;\n      box-shadow: 0 -1px 0 #b0a58f;\n      cursor: pointer; }\n      .dg li.save-row .button.gears {\n        background: #c5bdad url(data:image/png;base64,iVBORw0KG)raw_html",R"raw_html(goAAAANSUhEUgAAAAsAAAANCAYAAAB/9ZQ7AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAQJJREFUeNpiYKAU/P//PwGIC/ApCABiBSAW+I8AClAcgKxQ4T9hoMAEUrxx2QSGN6+egDX+/vWT4e7N82AMYoPAx/evwWoYoSYbACX2s7KxCxzcsezDh3evFoDEBYTEEqycggWAzA9AuUSQQgeYPa9fPv6/YWm/Acx5IPb7t)raw_html",R"raw_html(y/fw+QZblw67vDs8R0YHyQhgObx+yAJkBqmG5dPPDh1aPOGR/eugW0G4vlIoTIfyFcA+QekhhHJhPdQxbiAIguMBTQZrPD7108M6roWYDFQiIAAv6Aow/1bFwXgis+f2LUAynwoIaNcz8XNx3Dl7MEJUDGQpx9gtQ8YCueB+D26OECAAQDadt7e46D42QAAAABJRU5ErkJggg==) 2px 1px no-repeat;\n        height: 7px;\n     )raw_html",R"raw_html(   width: 8px; }\n      .dg li.save-row .button:hover {\n        background-color: #bab19e;\n        box-shadow: 0 -1px 0 #b0a58f; }\n  .dg li.folder {\n    border-bottom: 0; }\n  .dg li.title {\n    padding-left: 16px;\n    background: black url(data:imag)raw_html",R"raw_html(e/gif;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlI+hKgFxoCgAOw==) 6px 10px no-repeat;\n    cursor: pointer;\n    border-bottom: 1px solid rgba(255, 255, 255, 0.2); }\n  .dg .closed li.title {\n    background-image: url(data:image/g)raw_html",R"raw_html(if;base64,R0lGODlhBQAFAJEAAP////Pz8////////yH5BAEAAAIALAAAAAAFAAUAAAIIlGIWqMCbWAEAOw==); }\n  .dg .cr.boolean {\n    border-left: 3px solid #806787; }\n  .dg .cr.function {\n    border-left: 3px solid #e61d5f; }\n  .dg .cr.number {\n    border-left: 3px so)raw_html",R"raw_html(lid #2fa1d6; }\n    .dg .cr.number input[type=text] {\n      color: #2fa1d6; }\n  .dg .cr.string {\n    border-left: 3px solid #1ed36f; }\n    .dg .cr.string input[type=text] {\n      color: #1ed36f; }\n  .dg .cr.function:hover, .dg .cr.boolean:hover {\n  )raw_html",R"raw_html(  background: #111; }\n  .dg .c input[type=text] {\n    background: #303030;\n    outline: none; }\n    .dg .c input[type=text]:hover {\n      background: #3c3c3c; }\n    .dg .c input[type=text]:focus {\n      background: #494949;\n      color: #fff; }\n  )raw_html",R"raw_html(.dg .c .slider {\n    background: #303030;\n    cursor: ew-resize; }\n  .dg .c .slider-fg {\n    background: #2fa1d6; }\n  .dg .c .slider:hover {\n    background: #3c3c3c; }\n    .dg .c .slider:hover .slider-fg {\n      background: #44abda; }\n",
+dat.contr)raw_html",R"raw_html(ollers.factory=function(e,a,b,d,f,c,p){return function(k,l,q,n){var r=k[l];if(p.isArray(q)||p.isObject(q))return new e(k,l,q);if(p.isNumber(r))return p.isNumber(q)&&p.isNumber(n)?new b(k,l,q,n):new a(k,l,{min:q,max:n});if(p.isString(r))return new d(k,l);if)raw_html",R"raw_html((p.isFunction(r))return new f(k,l,"");if(p.isBoolean(r))return new c(k,l)}}(dat.controllers.OptionController,dat.controllers.NumberControllerBox,dat.controllers.NumberControllerSlider,dat.controllers.StringController=function(e,a,b){var d=
+function(b,c){fu)raw_html",R"raw_html(nction e(){k.setValue(k.__input.value)}d.superclass.call(this,b,c);var k=this;this.__input=document.createElement("input");this.__input.setAttribute("type","text");a.bind(this.__input,"keyup",e);a.bind(this.__input,"change",e);a.bind(this.__input,"blur",fu)raw_html",R"raw_html(nction(){k.__onFinishChange&&k.__onFinishChange.call(k,k.getValue())});a.bind(this.__input,"keydown",function(a){13===a.keyCode&&this.blur()});this.updateDisplay();this.domElement.appendChild(this.__input)};d.superclass=e;b.extend(d.prototype,
+e.prototype,)raw_html",R"raw_html({updateDisplay:function(){a.isActive(this.__input)||(this.__input.value=this.getValue());return d.superclass.prototype.updateDisplay.call(this)}});return d}(dat.controllers.Controller,dat.dom.dom,dat.utils.common),dat.controllers.FunctionController,dat.con)raw_html",R"raw_html(trollers.BooleanController,dat.utils.common),dat.controllers.Controller,dat.controllers.BooleanController,dat.controllers.FunctionController,dat.controllers.NumberControllerBox,dat.controllers.NumberControllerSlider,dat.controllers.OptionController,
+dat.co)raw_html",R"raw_html(ntrollers.ColorController=function(e,a,b,d,f){function c(a,b,d,c){a.style.background="";f.each(l,function(e){a.style.cssText+="background: "+e+"linear-gradient("+b+", "+d+" 0%, "+c+" 100%); "})}function p(a){a.style.background="";a.style.cssText+="backgrou)raw_html",R"raw_html(nd: -moz-linear-gradient(top,  #ff0000 0%, #ff00ff 17%, #0000ff 34%, #00ffff 50%, #00ff00 67%, #ffff00 84%, #ff0000 100%);";a.style.cssText+="background: -webkit-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#)raw_html",R"raw_html(ff0000 100%);";
+a.style.cssText+="background: -o-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);";a.style.cssText+="background: -ms-linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff)raw_html",R"raw_html( 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);";a.style.cssText+="background: linear-gradient(top,  #ff0000 0%,#ff00ff 17%,#0000ff 34%,#00ffff 50%,#00ff00 67%,#ffff00 84%,#ff0000 100%);"}var k=function(e,n){function r(b){t(b);a.bind(window,"mousemove",t);a.bi)raw_html",R"raw_html(nd(window,
+"mouseup",l)}function l(){a.unbind(window,"mousemove",t);a.unbind(window,"mouseup",l)}function g(){var a=d(this.value);!1!==a?(s.__color.__state=a,s.setValue(s.__color.toOriginal())):this.value=s.__color.toString()}function h(){a.unbind(window,")raw_html",R"raw_html(mousemove",u);a.unbind(window,"mouseup",h)}function t(b){b.preventDefault();var d=a.getWidth(s.__saturation_field),c=a.getOffset(s.__saturation_field),e=(b.clientX-c.left+document.body.scrollLeft)/d;b=1-(b.clientY-c.top+document.body.scrollTop)/d;1<b?b=1:0)raw_html",R"raw_html(>
+b&&(b=0);1<e?e=1:0>e&&(e=0);s.__color.v=b;s.__color.s=e;s.setValue(s.__color.toOriginal());return!1}function u(b){b.preventDefault();var d=a.getHeight(s.__hue_field),c=a.getOffset(s.__hue_field);b=1-(b.clientY-c.top+document.body.scrollTop)/d;1<b?b=1:0>b)raw_html",R"raw_html(&&(b=0);s.__color.h=360*b;s.setValue(s.__color.toOriginal());return!1}k.superclass.call(this,e,n);this.__color=new b(this.getValue());this.__temp=new b(0);var s=this;this.domElement=document.createElement("div");a.makeSelectable(this.domElement,!1);
+this._)raw_html",R"raw_html(_selector=document.createElement("div");this.__selector.className="selector";this.__saturation_field=document.createElement("div");this.__saturation_field.className="saturation-field";this.__field_knob=document.createElement("div");this.__field_knob.classN)raw_html",R"raw_html(ame="field-knob";this.__field_knob_border="2px solid ";this.__hue_knob=document.createElement("div");this.__hue_knob.className="hue-knob";this.__hue_field=document.createElement("div");this.__hue_field.className="hue-field";this.__input=document.createElem)raw_html",R"raw_html(ent("input");
+this.__input.type="text";this.__input_textShadow="0 1px 1px ";a.bind(this.__input,"keydown",function(a){13===a.keyCode&&g.call(this)});a.bind(this.__input,"blur",g);a.bind(this.__selector,"mousedown",function(b){a.addClass(this,"drag").bind(w)raw_html",R"raw_html(indow,"mouseup",function(b){a.removeClass(s.__selector,"drag")})});var v=document.createElement("div");f.extend(this.__selector.style,{width:"122px",height:"102px",padding:"3px",backgroundColor:"#222",boxShadow:"0px 1px 3px rgba(0,0,0,0.3)"});f.extend(this)raw_html",R"raw_html(.__field_knob.style,
+{position:"absolute",width:"12px",height:"12px",border:this.__field_knob_border+(0.5>this.__color.v?"#fff":"#000"),boxShadow:"0px 1px 3px rgba(0,0,0,0.5)",borderRadius:"12px",zIndex:1});f.extend(this.__hue_knob.style,{position:"absolut)raw_html",R"raw_html(e",width:"15px",height:"2px",borderRight:"4px solid #fff",zIndex:1});f.extend(this.__saturation_field.style,{width:"100px",height:"100px",border:"1px solid #555",marginRight:"3px",display:"inline-block",cursor:"pointer"});f.extend(v.style,{width:"100%",hei)raw_html",R"raw_html(ght:"100%",
+background:"none"});c(v,"top","rgba(0,0,0,0)","#000");f.extend(this.__hue_field.style,{width:"15px",height:"100px",display:"inline-block",border:"1px solid #555",cursor:"ns-resize"});p(this.__hue_field);f.extend(this.__input.style,{outline:"non)raw_html",R"raw_html(e",textAlign:"center",color:"#fff",border:0,fontWeight:"bold",textShadow:this.__input_textShadow+"rgba(0,0,0,0.7)"});a.bind(this.__saturation_field,"mousedown",r);a.bind(this.__field_knob,"mousedown",r);a.bind(this.__hue_field,"mousedown",function(b){u(b);)raw_html",R"raw_html(a.bind(window,
+"mousemove",u);a.bind(window,"mouseup",h)});this.__saturation_field.appendChild(v);this.__selector.appendChild(this.__field_knob);this.__selector.appendChild(this.__saturation_field);this.__selector.appendChild(this.__hue_field);this.__hue_f)raw_html",R"raw_html(ield.appendChild(this.__hue_knob);this.domElement.appendChild(this.__input);this.domElement.appendChild(this.__selector);this.updateDisplay()};k.superclass=e;f.extend(k.prototype,e.prototype,{updateDisplay:function(){var a=d(this.getValue());if(!1!==a){var)raw_html",R"raw_html( e=!1;
+f.each(b.COMPONENTS,function(b){if(!f.isUndefined(a[b])&&!f.isUndefined(this.__color.__state[b])&&a[b]!==this.__color.__state[b])return e=!0,{}},this);e&&f.extend(this.__color.__state,a)}f.extend(this.__temp.__state,this.__color.__state);this.__temp)raw_html",R"raw_html(.a=1;var k=0.5>this.__color.v||0.5<this.__color.s?255:0,l=255-k;f.extend(this.__field_knob.style,{marginLeft:100*this.__color.s-7+"px",marginTop:100*(1-this.__color.v)-7+"px",backgroundColor:this.__temp.toString(),border:this.__field_knob_border+"rgb("+
+k+)raw_html",R"raw_html(","+k+","+k+")"});this.__hue_knob.style.marginTop=100*(1-this.__color.h/360)+"px";this.__temp.s=1;this.__temp.v=1;c(this.__saturation_field,"left","#fff",this.__temp.toString());f.extend(this.__input.style,{backgroundColor:this.__input.value=this.__color.t)raw_html",R"raw_html(oString(),color:"rgb("+k+","+k+","+k+")",textShadow:this.__input_textShadow+"rgba("+l+","+l+","+l+",.7)"})}});var l=["-moz-","-o-","-webkit-","-ms-",""];return k}(dat.controllers.Controller,dat.dom.dom,dat.color.Color=function(e,a,b,d){function f(a,
+b,d){O)raw_html",R"raw_html(bject.defineProperty(a,b,{get:function(){if("RGB"===this.__state.space)return this.__state[b];p(this,b,d);return this.__state[b]},set:function(a){"RGB"!==this.__state.space&&(p(this,b,d),this.__state.space="RGB");this.__state[b]=a}})}function c(a,b){Object)raw_html",R"raw_html(.defineProperty(a,b,{get:function(){if("HSV"===this.__state.space)return this.__state[b];k(this);return this.__state[b]},set:function(a){"HSV"!==this.__state.space&&(k(this),this.__state.space="HSV");this.__state[b]=a}})}function p(b,c,e){if("HEX"===
+b.__s)raw_html",R"raw_html(tate.space)b.__state[c]=a.component_from_hex(b.__state.hex,e);else if("HSV"===b.__state.space)d.extend(b.__state,a.hsv_to_rgb(b.__state.h,b.__state.s,b.__state.v));else throw"Corrupted color state";}function k(b){var c=a.rgb_to_hsv(b.r,b.g,b.b);d.extend(b.)raw_html",R"raw_html(__state,{s:c.s,v:c.v});d.isNaN(c.h)?d.isUndefined(b.__state.h)&&(b.__state.h=0):b.__state.h=c.h}var l=function(){this.__state=e.apply(this,arguments);if(!1===this.__state)throw"Failed to interpret color arguments";this.__state.a=this.__state.a||
+1};l.COMPO)raw_html",R"raw_html(NENTS="r g b h s v hex a".split(" ");d.extend(l.prototype,{toString:function(){return b(this)},toOriginal:function(){return this.__state.conversion.write(this)}});f(l.prototype,"r",2);f(l.prototype,"g",1);f(l.prototype,"b",0);c(l.prototype,"h");c(l.prototy)raw_html",R"raw_html(pe,"s");c(l.prototype,"v");Object.defineProperty(l.prototype,"a",{get:function(){return this.__state.a},set:function(a){this.__state.a=a}});Object.defineProperty(l.prototype,"hex",{get:function(){"HEX"!==!this.__state.space&&(this.__state.hex=
+a.rgb_to_hex)raw_html",R"raw_html((this.r,this.g,this.b));return this.__state.hex},set:function(a){this.__state.space="HEX";this.__state.hex=a}});return l}(dat.color.interpret,dat.color.math=function(){var e;return{hsv_to_rgb:function(a,b,d){var e=a/60-Math.floor(a/60),c=d*(1-b),p=d*(1-e*b)raw_html",R"raw_html();b=d*(1-(1-e)*b);a=[[d,b,c],[p,d,c],[c,d,b],[c,p,d],[b,c,d],[d,c,p]][Math.floor(a/60)%6];return{r:255*a[0],g:255*a[1],b:255*a[2]}},rgb_to_hsv:function(a,b,d){var e=Math.min(a,b,d),c=Math.max(a,b,d),e=c-e;if(0==c)return{h:NaN,s:0,v:0};
+a=(a==c?(b-d)/e:b==c)raw_html",R"raw_html(?2+(d-a)/e:4+(a-b)/e)/6;0>a&&(a+=1);return{h:360*a,s:e/c,v:c/255}},rgb_to_hex:function(a,b,d){a=this.hex_with_component(0,2,a);a=this.hex_with_component(a,1,b);return a=this.hex_with_component(a,0,d)},component_from_hex:function(a,b){return a>>8*b&255},hex)raw_html",R"raw_html(_with_component:function(a,b,d){return d<<(e=8*b)|a&~(255<<e)}}}(),dat.color.toString,dat.utils.common),dat.color.interpret,dat.utils.common),dat.utils.requestAnimationFrame=function(){return window.webkitRequestAnimationFrame||
+window.mozRequestAnimationF)raw_html",R"raw_html(rame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(e,a){window.setTimeout(e,1E3/60)}}(),dat.dom.CenteredDiv=function(e,a){var b=function(){this.backgroundElement=document.createElement("div");a.extend(this.backgroundElement.style)raw_html",R"raw_html(,{backgroundColor:"rgba(0,0,0,0.8)",top:0,left:0,display:"none",zIndex:"1000",opacity:0,WebkitTransition:"opacity 0.2s linear"});e.makeFullscreen(this.backgroundElement);this.backgroundElement.style.position="fixed";this.domElement=
+document.createElement()raw_html",R"raw_html("div");a.extend(this.domElement.style,{position:"fixed",display:"none",zIndex:"1001",opacity:0,WebkitTransition:"-webkit-transform 0.2s ease-out, opacity 0.2s linear"});document.body.appendChild(this.backgroundElement);document.body.appendChild(this.domEle)raw_html",R"raw_html(ment);var b=this;e.bind(this.backgroundElement,"click",function(){b.hide()})};b.prototype.show=function(){var b=this;this.backgroundElement.style.display="block";this.domElement.style.display="block";this.domElement.style.opacity=
+0;this.domElement.style.w)raw_html",R"raw_html(ebkitTransform="scale(1.1)";this.layout();a.defer(function(){b.backgroundElement.style.opacity=1;b.domElement.style.opacity=1;b.domElement.style.webkitTransform="scale(1)"})};b.prototype.hide=function(){var a=this,b=function(){a.domElement.style.display="n)raw_html",R"raw_html(one";a.backgroundElement.style.display="none";e.unbind(a.domElement,"webkitTransitionEnd",b);e.unbind(a.domElement,"transitionend",b);e.unbind(a.domElement,"oTransitionEnd",b)};e.bind(this.domElement,"webkitTransitionEnd",
+b);e.bind(this.domElement,"transi)raw_html",R"raw_html(tionend",b);e.bind(this.domElement,"oTransitionEnd",b);this.backgroundElement.style.opacity=0;this.domElement.style.opacity=0;this.domElement.style.webkitTransform="scale(1.1)"};b.prototype.layout=function(){this.domElement.style.left=window.innerWidth/2-e)raw_html",R"raw_html(.getWidth(this.domElement)/2+"px";this.domElement.style.top=window.innerHeight/2-e.getHeight(this.domElement)/2+"px"};return b}(dat.dom.dom,dat.utils.common),dat.dom.dom,dat.utils.common);
 </script>
 
 
 <script type="text/javascript">
-//---------------------------------------------------------)raw_html",R"raw_html(--------------------
+//---------------------)raw_html",R"raw_html(--------------------------------------------------------
 // Remote Imgui for https://github.com/ocornut/imgui
 // https://github.com/JordiRos/remoteimgui
 // Jordi Ros
 //-----------------------------------------------------------------------------
 
-// utility function to parse an arraybuffer l)raw_html",R"raw_html(ike a stream
+// utilit)raw_html",R"raw_html(y function to parse an arraybuffer like a stream
 function DataStream( data ) {
-    var stream = {};
-    stream.buffer = new DataView( data );
-    stream.idx = 0;
-    stream.endian = true;
-    stream.readInt8    = function() { var r = this.buffer.getInt8   ( this.idx, this.endian ); this.idx+)raw_html",R"raw_html(=1; return r; }
-    stream.readUint8   = function() { var r = this.buffer.getUint8  ( this.idx, this.endian ); this.idx+=1; return r; }
-    stream.readInt16   = function() { var r = this.buffer.getInt16  ( this.idx, this.endian ); this.idx+=2; return r; }
-)raw_html",R"raw_html(    stream.readUint16  = function() { var r = this.buffer.getUint16 ( this.idx, this.endian ); this.idx+=2; return r; }
-    stream.readInt32   = function() { var r = this.buffer.getInt32  ( this.idx, this.endian ); this.idx+=4; return r; }
-    stream.readU)raw_html",R"raw_html(int32  = function() { var r = this.buffer.getUint32 ( this.idx, this.endian ); this.idx+=4; return r; }
-    stream.readFloat32 = function() { var r = this.buffer.getFloat32( this.idx, this.endian ); this.idx+=4; return r; }
-    stream.readInt16AsFloat32  =)raw_html",R"raw_html( function() { var r = this.readInt16(); return r * ( 1.0 ); }
-    stream.readInt16pAsFloat32 = function() { var r = this.readInt16(); return r * ( 1.0 / 32767.0 ); }
-    stream.readUint8AsFloat32  = function() { var r = this.readUint8(); return r * ( 1.0 /)raw_html",R"raw_html( 255.0 ); }
-    return stream;
+	var stream = {};
+	stream.buffer = new DataView( data );
+	stream.idx = 0;
+	stream.endian = true;
+	stream.readInt8    = function() { var r = this.buffer.getInt8   ( this.idx, thi)raw_html",R"raw_html(s.endian ); this.idx+=1; return r; }
+	stream.readUint8   = function() { var r = this.buffer.getUint8  ( this.idx, this.endian ); this.idx+=1; return r; }
+	stream.readInt16   = function() { var r = this.buffer.getInt16  ( this.idx, this.endian ); this.idx+=)raw_html",R"raw_html(2; return r; }
+	stream.readUint16  = function() { var r = this.buffer.getUint16 ( this.idx, this.endian ); this.idx+=2; return r; }
+	stream.readInt32   = function() { var r = this.buffer.getInt32  ( this.idx, this.endian ); this.idx+=4; return r; }
+	stream)raw_html",R"raw_html(.readUint32  = function() { var r = this.buffer.getUint32 ( this.idx, this.endian ); this.idx+=4; return r; }
+	stream.readFloat32 = function() { var r = this.buffer.getFloat32( this.idx, this.endian ); this.idx+=4; return r; }
+	stream.readInt16AsFloat32  =)raw_html",R"raw_html( function() { var r = this.readInt16(); return r * ( 1.0 ); }
+	stream.readInt16pAsFloat32 = function() { var r = this.readInt16(); return r * ( 1.0 / 32767.0 ); }
+	stream.readUint8AsFloat32  = function() { var r = this.readUint8(); return r * ( 1.0 / 255.0)raw_html",R"raw_html( ); }
+	return stream;
 }
 
 // threejs shader to render with clipping region
 var ImVS = [
-    "attribute float alpha;",
+	"attribute float alpha;",
 
-    "varying vec3 vColor;",
-    "varying vec2 vUv;",
-    "varying float vAlpha;",
+	"varying vec3 vColor;",
+	"varying vec2 vUv;",
+	"varying float vAlpha;",
 
-    "void main() {",
+	"void main() {",
 
-        "vColor = color;)raw_html",R"raw_html(",
-        "vUv = uv;",
-        "vAlpha = alpha;",
-        "gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
+		"vColor = color;",
+		"vUv = uv;",
+		"vAlpha = )raw_html",R"raw_html(alpha;",
+		"gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );",
 
-    "}" ].join("\n");
+	"}" ].join("\n");
 
 var ImFS = [
-    "varying vec3 vColor;",
-    "varying vec2 vUv;",
-    "varying float vAlpha;",
- )raw_html",R"raw_html(   
-    "uniform sampler2D tTex;",
+	"varying vec3 vColor;",
+	"varying vec2 vUv;",
+	"varying float vAlpha;",
+	
+	"uniform sampler2D tTex;",
 
-    "void main() {",
-            "gl_FragColor = vec4( vColor, texture2D( tTex, vUv ).a * vAlpha );",
-    "}" ].join("\n");
+	"void main() {",
+			"gl_FragC)raw_html",R"raw_html(olor = vec4( vColor, texture2D( tTex, vUv ).a * vAlpha );",
+	"}" ].join("\n");
 
 var ImguiGui = function() {
-  this.window = 'Origin';
-  this.windows = [ 'Origin' ];
+	this.window = 'Origin';
+	this.windows = [ 'Origin' ];
 };
 
-// Mes)raw_html",R"raw_html(sage types used by the relay server and ImGUI client - these need to be kept in-sync with the host
-var messageTypes = { RoomJoined: 0, RoomUpdate: 1, ImInit: 10, ImMouseMove: 11, ImMousePress: 12, ImMouseWheelDelta: 13, ImKeyDown: 14, ImKeyUp: 15, ImKeyPre)raw_html",R"raw_html(ss: 16, ImClipboard: 17 };
+// Message types used by the relay server and ImGUI client - these need to be kept in-syn)raw_html",R"raw_html(c with the host
+var messageTypes = { RoomJoined: 0, RoomUpdate: 1, ImInit: 10, ImMouseMove: 11, ImMousePress: 12, ImMouseWheelDelta: 13, ImKeyDown: 14, ImKeyUp: 15, ImKeyPress: 16, ImClipboard: 17 };
 var roomInfo = { roomId: -1, connectionCount: 0};
 
-export function StartImgui( element, serveruri, targetwidth, targetheight, compressed ) {
+funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targetheight, compressed ) {
 
-    if( !Detector.webgl ) Detector.addGetWebGLMessage();
+	if( !Detector.webgl ) {
+		Detector.addGetWebGLMessage();
+	}
 
-    var gui = new dat.GUI();
-)raw_html",R"raw_html(    var datgui = new ImguiGui();
-    var datgui_window = gui.add( datgui, 'window', datgui.windows );
-    datgui_window.onChange( onFocusWindow );
-    var websocket, connecting, connected;
-    var server;
+	var websocket, connecting, connected;
+	var server;
 
-    var width = window.innerWidth;
-    var height )raw_html",R"raw_html(= window.innerHeight;
-    var targetwidth = targetwidth;
-    var targetheight = targetheight;
-    var clientactive = false;
-    var frame = 0;
-    var mouse = { x: 0, y: 0, l: 0, r: 0, w: 0, update: false };
-    var curElem;
-    var prev_data;
-    var read)raw_html",R"raw_html(yToRender = false
+	var width = window.innerWidth;
+	var height = window.innerHeig)raw_html",R"raw_html(ht;
+	var targetwidth = targetwidth;
+	var targetheight = targetheight;
+	var clientactive = false;
+	var frame = 0;
+	var mouse = { x: 0, y: 0, l: 0, r: 0, w: 0, update: false };
+	var curElem;
+	var prev_data;
+	var readyToRender = false;
 
-    var camera_offset = { x: 0, y: 0 };
-    var camera_drag = false;
-    var camera_drag_pos = { x: 0, y: 0 };
-    var mouse_left = 0;
-    var mouse_right = 0;
-    var mouse_wheel = 0;
+	var camera_offset = {)raw_html",R"raw_html( x: 0, y: 0 };
+	var camera_drag = false;
+	var camera_drag_pos = { x: 0, y: 0 };
 
-    // renderer
-    var renderer = new THREE.WebGLR)raw_html",R"raw_html(enderer();
-    renderer.autoClear = false;
-    renderer.setSize( width, height );
+	// renderer
+	var renderer = new THREE.WebGLRenderer();
+	renderer.autoClear = false;
+	renderer.setSize( width, height );
 
+	// camera
+	var camera = new THREE.OrthographicCamera)raw_html",R"raw_html(( 0, width, 0, height, -1, 1 );
+	camera.position.z = 1;
 
-    // camera
-    var camera = new THREE.OrthographicCamera( 0, width, 0, height, -1, 1 );
-    camera.position.z = 1;
+	// plane
+	var scene_background = new THREE.Scene();
+	var plane = new THREE.Mesh( new THREE.PlaneBufferGeometry( targetwidth, targetheight ), new THREE.MeshBasicMaterial( { color: 0x72909A, side: THR)raw_html",R"raw_html(EE.DoubleSide }));
+	plane.position.x = targetwidth/2;
+	plane.position.y = targetheight/2;
+	scene_background.add( plane );
 
-    // plane
-    var scene_background = new THREE.Sce)raw_html",R"raw_html(ne();
-    var plane = new THREE.Mesh( new THREE.PlaneBufferGeometry( targetwidth, targetheight ), new THREE.MeshBasicMaterial( { color: 0x72909A, side: THREE.DoubleSide }));
-    plane.position.x = targetwidth/2;
-    plane.position.y = targetheight/2;
-    s)raw_html",R"raw_html(cene_background.add( plane );
+	// imgui dynamic geometry / meshes
+	// FIXME: Support for any number of triangles.
+	// material
+	var guniforms = {
+		tTex: { type: ')raw_html",R"raw_html(t', value: null },
+		uClip: { type: 'v4', value: new THREE.Vector4() },
+	};
+	var gattributes = {
+		alpha: { type: 'f', value: null },
+	};
+	var material = new THREE.ShaderMaterial( {
+		uniforms: guniforms,        
+		attributes: gattributes,
+		vertexShader: )raw_html",R"raw_html(ImVS,
+		fragmentShader: ImFS,
+		vertexColors: THREE.VertexColors,
+		transparent: true,
+		side: THREE.DoubleSide
+	} );
 
-    // imgui dynamic geometry / meshes
-    // FIXME: Support for any number of triangles.
-    // material
-    var guniforms = {
-        tTex: { type: 't', value: null },
-        uClip: { type: 'v4', value: new THREE.Vector4())raw_html",R"raw_html( },
-    };
-    var gattributes = {
-        alpha: { type: 'f', value: null },
-    };
-    var material = new THREE.ShaderMaterial( {
-        uniforms: guniforms,        
-        attributes: gattributes,
-        vertexShader: ImVS,
-        fragmentShader: Im)raw_html",R"raw_html(FS,
-        vertexColors: THREE.VertexColors,
-        transparent: true,
-        side: THREE.DoubleSide } );
+	var MAX_DRAW_LISTS= 20;
+	var geometries = [];
+	var scenes = [];
+	var scene;
+	var geometry;
+	for(var i = 0; i < MAX_DRAW_LISTS; i++) {
+		)raw_html",R"raw_html(// scene
+		scene = new THREE.Scene();
+		scenes.push(scene);
+		geometry = new THREE.BufferGeometry();
+		var MAX_TRIANGLES = 21844; // *3 ~= 65536
+		geometry.addAttribute( 'index',    new THREE.BufferAttribute( new Uint16Array ( MAX_TRIANGLES * 3 ), 1 ) );
+	)raw_html",R"raw_html(	geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
+		geometry.addAttribute( 'uv',       new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 2 * 3 ), 2 ) );
+		geometry.addAttribute( 'col)raw_html",R"raw_html(or',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
+		geometry.addAttribute( 'alpha',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 1     ), 1 ) );
+		geometry.dynamic = true;
+		geometry.offsets = [ { start)raw_html",R"raw_html(: 0, index: 0, count: 0 } ];
+		geometries.push(geometry);
 
-    var MAX_DRAW_LISTS= 20;
-    var geometries = [];
-    var scenes = [];
-    var scene;
-    var geometry;
-    for(var i = 0; i < MAX_DRAW_LISTS; )raw_html",R"raw_html(i++)
-    {
-        // scene
-        scene = new THREE.Scene();
-        scenes.push(scene);
-        geometry = new THREE.BufferGeometry();
-        var MAX_TRIANGLES = 21844; // *3 ~= 65536
-        geometry.addAttribute( 'index',    new THREE.BufferAttribute)raw_html",R"raw_html(( new Uint16Array ( MAX_TRIANGLES * 3 ), 1 ) );
-        geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
-        geometry.addAttribute( 'uv',       new THREE.BufferAttribute( new Float32Array( )raw_html",R"raw_html(MAX_TRIANGLES * 2 * 3 ), 2 ) );
-        geometry.addAttribute( 'color',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
-        geometry.addAttribute( 'alpha',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * )raw_html",R"raw_html(1     ), 1 ) );
-        geometry.dynamic = true;
-        geometry.offsets = [ { start: 0, index: 0, count: 0 } ];
-        geometries.push(geometry);
+		var mesh = new THREE.Mesh( geometry, material );
+		mesh.frustumCulled = false;
+		scene.add( mesh );
+	}
+	geometry = null;
+	scene = null;
 
-        var mesh = new THREE.Mesh( geometry, material );
-        mesh.frustumCulled = false;
-        scene)raw_html",R"raw_html(.add( mesh );
-    }
-    geometry = null;
-    scene = null;
+	let currentDrawList = [];
 
-    let currentDrawList = []
+	// geometry shortcuts
+	var gi)raw_html",R"raw_html(ndices;
+	var gpositions;
+	var guvs;
+	var gcolors;
+	var galphas;
+	var gcmdcount = 0;
+	var gvtxcount = 0;
+	var gidxcount = 0;
+	var glistcount= 0;
+	var gclips = [];
 
-    // geometry shortcuts
-    var gindices;
-    var gpositions;
-    var guvs;
-    var gcolors;
-    var galphas;
-    var gcmdcount = 0;
-    var gvtxcount = 0;
-    var )raw_html",R"raw_html(gidxcount = 0;
-    var glistcount= 0;
-    var gclips = [];
+	// add to element
+	element.appendChild( renderer.domElement );
 
-    // add to element
-    element.appendChild( renderer.domElement )
+	// canvas events (will send)raw_html",R"raw_html( to imgui)
+	var elem = renderer.domElement;
+	 //FF doesn't recognize mousewheel as of FF3.x 
+	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel";
+	elem.addEventListener(mousewheelevt, onMouseWheel, false);
 
-    // canvas events (will send to imgui)
-    var elem = renderer.domElement;
-     //FF doesn't recognize mousewheel as of FF3)raw_html",R"raw_html(.x 
-    var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel"
-    elem.addEventListener(mousewheelevt, onMouseWheel, false)
+	elem.addE)raw_html",R"raw_html(ventListener( 'mousemove', onMouseMove, false );
+	elem.addEventListener( 'mousedown', onMouseDown, false );
+	elem.addEventListener( 'mouseup', onMouseUp, false );
 
-    elem.addEventListener( 'mousemove', onMouseMove, false );
-    elem.addEventListener( 'mouse)raw_html",R"raw_html(down', onMouseDown, false );
-    elem.addEventListener( 'mouseup', onMouseUp, false );
+	elem.addEventListener( 'touchmove', onTouchMove, false );
+	elem.addEventListener( 'touchsta)raw_html",R"raw_html(rt', onTouchStart, false );
+	elem.addEventListener( 'touchend', onTouchEnd, false );
 
-    elem.addEventListener( 'touchmove', onTouchMove, false );
-    elem.addEventListener( 'touchstart', onTouchStart, false );
-    elem.addEventListener( 'touchend', onT)raw_html",R"raw_html(ouchEnd, false );
+	window.addEventListener( 'keydown', onKeyDown, false );
+	window.addEventListener( 'keyup', onKeyUp, false );
+	window.addEventListener( 'keypress', onKeyPress, false );
 
-    window.addEventListener( 'keydown', onKeyDown, false );
-    window.addEventListener( 'keyup', onKeyUp, false );
-    window.addEventListener( 'keypress', onKeyPress, false );
-    
-    window.addEventListener( 'paste', onPaste, false ))raw_html",R"raw_html(;
-    window.addEventListener( 'resize', onWindowResize, false );
-    document.oncontextmenu = document.body.oncontextmenu = function() { return false; }
+)raw_html",R"raw_html(	window.addEventListener( 'paste', onPaste, false );
+	window.addEventListener( 'resize', onWindowResize, false );
+	document.oncontextmenu = document.body.oncontextmenu = function() { return false; };
 
-    // connect websocket to server
-    websocketConnect( serveruri );
+	// connect websocket to server
+	websocketConnect( serv)raw_html",R"raw_html(eruri );
 
-    // initial render
-    onRe)raw_html",R"raw_html(nder();    
+	// initial render
+	onRender();
 
-    // keep connected
-    setInterval(function() { if ( !connecting && !connected ) websocketConnect( serveruri ); }, 5000);
+	// keep connected
+	setInterval(function() {
+		if ( !connecting && !connected ) {
+			websocketConnect( serveruri );
+		}
+	}, 5000);
 
-    // init websockets
-    function websocketConnect( serveruri ) {
-        console.log( "Remote ImGui: Connecting to)raw_html",R"raw_html( " + serveruri + "..." );
-        connecting = true;
-        connected = false;
-        websocket = new WebSocket( serveruri );
-        websocket.binaryType = "arraybuffer";
-        websocket.onopen = function( evt ) {
-            console.log( "Remote ImGu)raw_html",R"raw_html(i: Connected" );
-            clientactive = false;
-            connecting = false;
-            connected = true;
-            websocket.send(String.fromCharCode(messageTypes.ImInit));
-            gclips.length = 0;
-            onRender();
-        };
-       )raw_html",R"raw_html( websocket.onclose = function( evt ) {
-            console.log( "Remote ImGui: Disconnected" );
-            clientactive = false;
-            connecting = false;
-            connected = false;
-            gclips.length = 0;
-            onRender();
-        )raw_html",R"raw_html(};
-        websocket.onmessage = function( evt ) {
-            if( typeof evt.data == "string" ) {
-                let messageType = evt.data.charCodeAt(0);
-                let messagePayload = evt.data.substring(1);
-                if (messageType === mes)raw_html",R"raw_html(sageTypes.RoomJoined) {
-                    roomInfo = JSON.parse(messagePayload);
-                    console.log("Room joined", roomInfo);
-                }
-                else if (messageType === messageTypes.RoomUpdate) {
-                    let roomU)raw_html",R"raw_html(pdateMessage = JSON.parse(messagePayload);
-                    roomInfo.connectionCount = roomUpdateMessage.connectionCount;
-                    clientactive = roomInfo.connectionCount > 1;
-                    console.log("Room updated", roomInfo);
-       )raw_html",R"raw_html(         }
-                else if(messageType === messageTypes.ImInit)
-                {
-                    console.log( "ImInit OK" );
-                    clientactive = true;
-                }
-                else
-                    console.log( "Unkn)raw_html",R"raw_html(own message: " + evt.data ); 
-            }
-            else {
-                var data;
-                if( compressed ) {
-                    // log decompress time
-                    //var t = performance.now();
-                    data = lz4.decompres)raw_html",R"raw_html(s( new Uint8Array( evt.data ) ).buffer;
-                    //console.log("Decompress: " + (performance.now() - t));
-                }
-                else
-                    data = evt.data;
+	// init websockets
+	function websocketConnect( serveruri ) {
+		console.log( "Rem)raw_html",R"raw_html(ote ImGui: Connecting to " + serveruri + "..." );
+		connecting = true;
+		connected = false;
+		websocket = new WebSocket( serveruri );
+		websocket.binaryType = "arraybuffer";
+		websocket.onopen = function( evt ) {
+			console.log( "Remote ImGui: Connected" ))raw_html",R"raw_html(;
+			clientactive = false;
+			connecting = false;
+			connected = true;
+			websocket.send(String.fromCharCode(messageTypes.ImInit));
+			gclips.length = 0;
+		};
+		websocket.onclose = function( evt ) {
+			console.log( "Remote ImGui: Disconnected" );
+			client)raw_html",R"raw_html(active = false;
+			connecting = false;
+			connected = false;
+			gclips.length = 0;
+		};
+		websocket.onmessage = function( evt ) {
+			if( typeof evt.data == "string" ) {
+				let messageType = evt.data.charCodeAt(0);
+				let messagePayload = evt.data.substri)raw_html",R"raw_html(ng(1);
+				if (messageType === messageTypes.RoomJoined) {
+					roomInfo = JSON.parse(messagePayload);
+					console.log("Room joined", roomInfo);
+				}
+				else if (messageType === messageTypes.RoomUpdate) {
+					let roomUpdateMessage = JSON.parse(messagePa)raw_html",R"raw_html(yload);
+					roomInfo.connectionCount = roomUpdateMessage.connectionCount;
+					clientactive = roomInfo.connectionCount > 1;
+					console.log("Room updated", roomInfo);
+				}
+				else if(messageType === messageTypes.ImInit) {
+					console.log( "ImInit OK" )raw_html",R"raw_html();
+					clientactive = true;
+				}
+				else {
+					console.log( "Unknown message: " + evt.data );
+				}
+			}
+			else {
+				var data;
+				if( compressed ) {
+					// log decompress time
+					//var t = performance.now();
+					data = lz4.decompress( new Uint8A)raw_html",R"raw_html(rray( evt.data ) ).buffer;
+					//console.log("Decompress: " + (performance.now() - t));
+				}
+				else {
+					data = evt.data;
+				}
 
-                // message type
-                var type = { T)raw_html",R"raw_html(EX_FONT : 255, FRAME_KEY : 254, FRAME_DIFF : 253 };
-                var stream = new DataStream( data );
-                var message_type = stream.readUint8();
-                switch( message_type ) {
-                    // load font texture
-              )raw_html",R"raw_html(      case type.TEX_FONT:
-                        var w = stream.readUint32();
-                        var h = stream.readUint32();
-                        var src = new Uint8Array( data, 9 );
-                        // canvas
-                        var c)raw_html",R"raw_html(anvas = document.createElement( 'canvas' );
-                        canvas.id     = "CursorLayer";
-                        canvas.width  = w;
-                        canvas.height = h;
-                        var ctx = canvas.getContext( '2d' );
-          )raw_html",R"raw_html(              var imageData = ctx.getImageData( 0, 0, w,h );
-                        var buf = new ArrayBuffer( imageData.data.length );
-                        var buf8 = new Uint8ClampedArray( buf );
-                        var data = new Uint32Array( bu)raw_html",R"raw_html(f );
-                        for( var i = 0; i < w*h; i++ )
-                            data[ i ] = ( src[ i ] << 24 ) | 0xFFFFFF;
-                        imageData.data.set( buf8 );
-                        ctx.putImageData( imageData, 0, 0 );
-            )raw_html",R"raw_html(            // texture
-                        var map = new THREE.Texture( canvas );
-                        map.needsUpdate = true;
-                        map.minFilter = map.magFilter = THREE.NearestFilter;
-                        guniforms.tTex.value )raw_html",R"raw_html(= map;
-                        break;
-                    // full frame data
-                    case type.FRAME_KEY:
-                        //var t = performance.now();
-                        onMessage( stream );
-                        //console.log("F)raw_html",R"raw_html(ramekey: " + (performance.now() - t));
-                        prev_data = data;
-                        break;                    
-                    // use previous frame to compose current frame
-                    case type.FRAME_DIFF:
-               )raw_html",R"raw_html(         //var t = performance.now();
-                        var buffer = new Uint8Array( data );
-                        var prev_buffer = new Uint8Array( prev_data );
-                        for( var i = 1; i < buffer.length; i++ ) {
-                   )raw_html",R"raw_html(         if( i < prev_buffer.length ) {
-                                buffer[ i ] = buffer[ i ] + prev_buffer[ i ];
-                            }
-                        }
-                        onMessage( stream );
-                        //console.log)raw_html",R"raw_html(("FrameDiff: " + (performance.now() - t));
-                        prev_data = data;
-                        break;
-                }
+				var stream = new DataStream( data );
+				// message type is the very start of the message
+				var type = { TEX_FONT :)raw_html",R"raw_html( 255, FRAME_KEY : 254, FRAME_DIFF : 253 };
+				var message_type = stream.readUint8();
+				switch( message_type ) {
+					// load font texture
+					case type.TEX_FONT:
+						var w = stream.readUint32();
+						var h = stream.readUint32();
+						var src = new )raw_html",R"raw_html(Uint8Array( data, 9 );
+						// canvas
+						var canvas = document.createElement( 'canvas' );
+						canvas.id     = "CursorLayer";
+						canvas.width  = w;
+						canvas.height = h;
+						var ctx = canvas.getContext( '2d' );
+						var imageData = ctx.getIma)raw_html",R"raw_html(geData( 0, 0, w,h );
+						var buf = new ArrayBuffer( imageData.data.length );
+						var buf8 = new Uint8ClampedArray( buf );
+						var data = new Uint32Array( buf );
+						for( var i = 0; i < w*h; i++ )
+							data[ i ] = ( src[ i ] << 24 ) | 0xFFFFFF;
+		)raw_html",R"raw_html(				imageData.data.set( buf8 );
+						ctx.putImageData( imageData, 0, 0 );
+						// texture
+						var map = new THREE.Texture( canvas );
+						map.needsUpdate = true;
+						map.minFilter = map.magFilter = THREE.NearestFilter;
+						guniforms.tTex.value = m)raw_html",R"raw_html(ap;
+						break;
+					// full frame data
+					case type.FRAME_KEY:
+						onFrameMessage( stream );
+						prev_data = data;
+						break;
+					// use previous frame to compose current frame
+					case type.FRAME_DIFF:
+						var buffer = new Uint8Array( data ))raw_html",R"raw_html(;
+						var prev_buffer = new Uint8Array( prev_data );
+						for( var i = 1; i < buffer.length; i++ ) {
+							if( i < prev_buffer.length ) {
+								buffer[ i ] = buffer[ i ] + prev_buffer[ i ];
+							}
+						}
+						onFrameMessage( stream );
+						prev_)raw_html",R"raw_html(data = data;
+						break;
+				}
 
-            }
-        };
-        websocket.onerror = function( evt ) {
-            console.log( "ERROR: " + evt.data );
- )raw_html",R"raw_html(           clientactive = false;
-            connecting = false;
-            connected = false;
-            gclips.length = 0;
-            onRender();
-        };
-    }
+			}
+		};
+		websocket.onerror = function( evt ) {
+			console.log( "ERROR: " + evt.data );
+			clientactive = false;
+			connecting = false;
+			connected = false;
+			gclips.length = 0;
+		};
+	}
 
-    function onWindowResize() {
-        width = window.innerWidth;
-        height = win)raw_html",R"raw_html(dow.innerHeight; 
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        camera = new THREE.OrthographicCamera( 0, width, 0, height, -1, 1 );
-        camera.position.z = 1;
-    }
+	function onWindowResize() {
+		w)raw_html",R"raw_html(idth = window.innerWidth;
+		height = window.innerHeight; 
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		camera = new THREE.OrthographicCamera( 0, width, 0, height, -1, 1 );
+		camera.position.z = 1;
+	}
 
-    function onMouseMove( event ) {
-        if( !event ))raw_html",R"raw_html( event = window.event;
-        
-        if( camera_drag ) {
-            camera_offset.x += camera_drag_pos.x - event.clientX;
-            camera_offset.y += camera_drag_pos.y - event.clientY;
-            camera_drag_pos.x = event.clientX;
-            camer)raw_html",R"raw_html(a_drag_pos.y = event.clientY;
-        }
-        else {
-            var x = event.clientX + camera.position.x;
-            var y = event.clientY + camera.position.y;
-            if( clientactive )
-                websocket.send(String.fromCharCode(messageTy)raw_html",R"raw_html(pes.ImMouseMove) + x + "," + y + "," + mouse_left + "," + mouse_right);
-        }
-    }
+	function onMouseMove( event ) {
+		if)raw_html",R"raw_html(( !event ) event = window.event;
+		
+		if( camera_drag ) {
+			camera_offset.x += camera_drag_pos.x - event.clientX;
+			camera_offset.y += camera_drag_pos.y - event.clientY;
+			camera_drag_pos.x = event.clientX;
+			camera_drag_pos.y = event.clientY;
+		}
+		el)raw_html",R"raw_html(se {
+			var x = event.clientX + camera.position.x;
+			var y = event.clientY + camera.position.y;
+			if( clientactive )
+				websocket.send(String.fromCharCode(messageTypes.ImMouseMove) + x + "," + y + "," + mouse.l + "," + mouse.r);
+		}
+	}
 
-    function onMouseDown( event ) {
-        if( !event ) event = window.event;
-        event.preventDefault();
-        if( event.button == 0 ) mouse_left = 1;
-        )raw_html",R"raw_html(if( event.button == 2 ) mouse_right = 1;
-        camera_drag = event.ctrlKey;
-        if( camera_drag ) {
-            camera_drag_pos.x = event.clientX;
-            camera_drag_pos.y = event.clientY;
-        }
-        else {
-            if( clientactive )
-)raw_html",R"raw_html(            {
-                websocket.send(String.fromCharCode(messageTypes.ImMousePress) + mouse_left + "," + mouse_right);
-            }
-        }
-    }    
+	function onMous)raw_html",R"raw_html(eDown( event ) {
+		if( !event ) event = window.event;
+		event.preventDefault();
+		if( event.button == 0 ) mouse.l = 1;
+		if( event.button == 2 ) mouse.r = 1;
+		camera_drag = event.ctrlKey;
+		if( camera_drag ) {
+			camera_drag_pos.x = event.clientX;
+			came)raw_html",R"raw_html(ra_drag_pos.y = event.clientY;
+		}
+		else if( clientactive ) {
+			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + mouse.l + "," + mouse.r);
+		}
+	}
 
-    function onMouseUp( event ) {
-        if( !event ) event = window.event;
-        event.pre)raw_html",R"raw_html(ventDefault();
-        if( event.button == 0 ) mouse_left = 0;
-        if( event.button == 2 ) mouse_right = 0;
-        if( camera_drag ) {
-            camera_drag = false;
-        }
-        else
-        {
-            if (clientactive)
-            {
-      )raw_html",R"raw_html(          websocket.send(String.fromCharCode(messageTypes.ImMousePress) + mouse_left + "," + mouse_right);
-            }
-        }
-    }
+	function onMouseUp( event ) {
+		if( !event ) event = window.event;
+		event.preventDefault())raw_html",R"raw_html(;
+		if( event.button == 0 ) mouse.l = 0;
+		if( event.button == 2 ) mouse.r = 0;
+		if( camera_drag ) {
+			camera_drag = false;
+		}
+		else if (clientactive) {
+			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + mouse.l + "," + mouse.r);
+		}
+	})raw_html",R"raw_html(
 
 var getPointerEvent = function(event) {
-    return event.originalEvent.targetTouches ? event.originalEvent.targetTouch)raw_html",R"raw_html(es[0] : event;
+	return event.originalEvent.targetTouches ? event.originalEvent.targetTouches[0] : event;
 };
-var touchStarted = false, // detect if a touch event is sarted
-    currX = 0,
-    currY = 0,
-    cachedX = 0,
-    cachedY = 0,
-    touchDragging = false,
-    touchInertial = false,
-    touchPressTimeout;
+var touchStarted = false, // detect if a touch event is started
+	currX = 0,
+	currY = 0,
+	cachedX = 0,
+	cachedY = 0,
+	touc)raw_html",R"raw_html(hDragging = false,
+	touchInertial = false,
+	touchPressTimeout;
 
-    function onTouchStart( event )raw_html",R"raw_html() 
-    {
-        if( !event ) event = window.event;
-        event.preventDefault(); 
-        var pointer =  event; //getPointerEvent(event);
-        if(touchInertial)
-        {
-            clearInterval(ticker);
-            touchInertial = false;
-        })raw_html",R"raw_html(
-        // caching the current x
-        cachedX = currX = pointer.pageX;
-        // caching the current y
-        cachedY = currY = pointer.pageY;
-        // a touch event is detected      
-        websocket.send(String.fromCharCode(messageTypes.ImMouseM)raw_html",R"raw_html(ove) + currX + "," + currY + ",0,0");
+	function onTouchStart( event ) {
+		if( !event ) event = window.event;
+		event.preventDefault(); 
+		var pointer =  event; //getPointerEvent(event);
+		if(touchInertial) {
+			clearInterval(ticke)raw_html",R"raw_html(r);
+			touchInertial = false;
+		}
+		// caching the current x
+		cachedX = currX = pointer.pageX;
+		// caching the current y
+		cachedY = currY = pointer.pageY;
+		// a touch event is detected      
+		websocket.send(String.fromCharCode(messageTypes.ImMouseMove)raw_html",R"raw_html() + currX + "," + currY + ",0,0");
 
-        setTimeout(function (){
-            touchStarted = true;
-            //if ((cachedX === currX) && !touchStarted && (cachedY === currY)) 
-            //console.log("50ms ImMousePress=1,0");
-            websocke)raw_html",R"raw_html(t.send(String.fromCharCode(messageTypes.ImMousePress) +"1,0");
-            // detecting if after 200ms the finger is still in the same position
-            clearTimeout(touchPressTimeout);
-            touchPressTimeout = setTimeout(function ()
-            )raw_html",R"raw_html({
-                if ((cachedX === currX) && (cachedY === currY)) 
-                {
-                    //console.log("200ms ImMousePress=0,0");
-                    websocket.send(String.fromCharCode(messageTypes.ImMousePress) + "0,0");
-                  )raw_html",R"raw_html(  touchStarted = false;
-                }
-            },150);
-        },50);
-      
-    
-    }    
-    var amplitude,initialVelocity, step,ticker,position,timeConstant = 325,scaleFactor = 2, updateInterval = 20;
-    function onTouchEnd( event ) 
-    {
-    )raw_html",R"raw_html(    if( !event ) event = window.event;
-        event.preventDefault();
-        // here we can consider finished the touch event
-        if(touchDragging)
-        {
-            amplitude = initialVelocity * scaleFactor;
-            targetPosition = position)raw_html",R"raw_html( + amplitude;
-            timestamp = Date.now();
-            touchInertial = true;
-            ticker = setInterval(function()
-            {
-                var elapsed = Date.now() - timestamp;
-                var delta = amplitude * Math.exp(-elapsed / )raw_html",R"raw_html(timeConstant);
-                websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + delta);
-                position = targetPosition - delta;
-                if (elapsed > 6 * timeConstant) 
-                {
-                    touchInert)raw_html",R"raw_html(ial = false;
-                    clearInterval(ticker);
-                }
-            }, updateInterval);
+		setTimeout(function (){
+			touchStarted = true;
+			//if ((cachedX === currX) && !touchStarted && (cachedY === currY)) 
+			//console.log("50ms ImMousePress=1,0");
+			websocket.send(String.fromCharCode(messageTypes.ImMou)raw_html",R"raw_html(sePress) +"1,0");
+			// detecting if after 200ms the finger is still in the same position
+			clearTimeout(touchPressTimeout);
+			touchPressTimeout = setTimeout(function () {
+				if ((cachedX === currX) && (cachedY === currY)) {
+					//console.log("200ms Im)raw_html",R"raw_html(MousePress=0,0");
+					websocket.send(String.fromCharCode(messageTypes.ImMousePress) + "0,0");
+					touchStarted = false;
+				}
+			},150);
+		},50);
+	}
+	var amplitude, initialVelocity, step, ticker, position, timeConstant = 325, scaleFactor = 2, updateInter)raw_html",R"raw_html(val = 20;
+	function onTouchEnd( event ) {
+		if( !event ) event = window.event;
+		event.preventDefault();
+		// here we can consider finished the touch event
+		if(touchDragging) {
+			amplitude = initialVelocity * scaleFactor;
+			targetPosition = position + a)raw_html",R"raw_html(mplitude;
+			timestamp = Date.now();
+			touchInertial = true;
+			ticker = setInterval(function() {
+				var elapsed = Date.now() - timestamp;
+				mouse.w = amplitude * Math.exp(-elapsed / timeConstant);
+				websocket.send(String.fromCharCode(messageTypes.Im)raw_html",R"raw_html(MouseWheelDelta) + mouse.w);
+				position = targetPosition - mouse.w;
+				if (elapsed > 6 * timeConstant) {
+					touchInertial = false;
+					clearInterval(ticker);
+				}
+			}, updateInterval);
+		}
+		else if(touchStarted) {
+			clearTimeout(touchPressTimeout)raw_html",R"raw_html();
+			//console.log("ontouchend ImMousePress=0,0");
+			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + "0,0");
+		}
+		touchStarted = false;
+		touchDragging = false;
+	}
 
-        }
-        else if(touchStarted)
-        {
-            clearTimeout(touchPressTimeout);
-            //console.log("ontouchend ImMousePress=0,0)raw_html",R"raw_html(");
-            websocket.send(String.fromCharCode(messageTypes.ImMousePress) + "0,0");
-        }
-        touchStarted = false;
-        touchDragging = false;
-    }
+	function onTouchMove( event ) 
+	{
+		if( !event ) event = window.event;
+)raw_html",R"raw_html(		event.preventDefault();
+		var pointer = event; //getPointerEvent(e);
+		currX = pointer.pageX;
+		currY = pointer.pageY;
+		if(touchStarted) {
+			// here you are swiping
+			if( clientactive ) {
+				touchDragging = true;
+				var diffY = (currY - cachedY) * 5)raw_html",R"raw_html(;
+				cachedY = currY;
+				initialVelocity = diffY;
+				websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + diffY);
+			}
+		}
+	}
 
-    function onTouchMove( event ) 
-    {
-        if( !event ) event = window.event;
-      )raw_html",R"raw_html(  event.preventDefault();
-        var pointer = event; //getPointerEvent(e);
-        currX = pointer.pageX;
-        currY = pointer.pageY;
-        if(touchStarted) 
-        {
-             // here you are swiping
-             if( clientactive )
-            )raw_html",R"raw_html( {
-                touchDragging = true;
-                var diffY = (currY - cachedY) * 5;
-                cachedY = currY;
-                initialVelocity = diffY;
-                //websocket.send("ImMouseMove=" + currX + "," + currY + ",1,0");
-         )raw_html",R"raw_html(       //console.log("ImMouseWheelDelta=" + diffY);
-                websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + diffY);
-             }
-        }   
-    }
+	function onMouseWheel( event ) {
+		if( !event ) event = window.event;
+		event.preventDefault();
+		if( clienta)raw_html",R"raw_html(ctive ) {
+			mouse.w=event.detail? event.detail*(-120)/4 : event.wheelDelta;
+			websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + mouse.w);
+		}
+	}
 
-    function onMouseWheel( event ) {
-        if( !event ) event = window.eve)raw_html",R"raw_html(nt;
-        event.preventDefault();
-        //if( event.which == 1 ) mouse_wheel += event.wheelDelta;
-        if( event.which == 1 && clientactive )
-        {
-            var delta=event.detail? event.detail*(-120)/4 : event.wheelDelta
-            websocke)raw_html",R"raw_html(t.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + delta);
-        }
-    }
+	var osxCommandKey = false;
+	function isSpecialKey(event) {
+		var key = event.which;
+		if)raw_html",R"raw_html(( (key < 32)
+		 || (key >= 33 && key <= 40) // PageUp, PageDown, End, Home, and Arrows
+		 || (key >= 45 && key <= 46) // Insert, Delete, and Mac Backspace
+		 || (key == 91 && event.metaKey) // Mac Command (Left)
+		 || (key == 93 && event.metaKey) // Mac Co)raw_html",R"raw_html(mmand (Right)
+		 || (key >= 112 && key <= 123)
+			) {
+			return true;
+		}
+		if( (osxCommandKey || event.ctrlKey )
+		 && (key == 'a' || key == 'A' // Select all
+		 ||  key == 'c' || key == 'C' // Copy
+		 ||  key == 'v' || key == 'V' // Paste
+		 ||  key == ')raw_html",R"raw_html(x' || key == 'X' // Cut
+		 ||  key == 'y' || key == 'Y' // Redo
+		 ||  key == 'z' || key == 'Z')// Undo
+			) {
+			return true;
+		}
+		return false;
+	}
 
-    var osxCommandKey = false;
-    function isSpecialKey(event)
-    {
-        var key = event.which;
-        if( (key == 91 && event.metaKey) || // Mac Command (Left)
-   )raw_html",R"raw_html(         (key == 93 && event.metaKey))   // Mac Command (Right)
-        {
-            osxCommandKey = true;
-            event.ctrlKey = true;
-            return true;
-        }
-        if( (key < 32)              ||
-            (key >= 37 && key<= 40) ||  )raw_html",R"raw_html(// Arrows
-            (key == 46)             ||  // Mac Backspace
-            (key >= 112 && key <= 123 )
-            )
-        {
-            return true;
-        }
-        if(key == 65 || key == 67 || key == 88 || key == 86) // 'A', 'C', 'X', 'V'
-       )raw_html",R"raw_html( {
-            if(osxCommandKey || event.ctrlKey)
-                return true;
-        }
-    }
+	function onKey( event, messageType ) {
+		if( !event ) event = window.event;
 
-    function translateKey(keyCode) {
-        //Tab
-        if(keyCode == 9) {
-            return 0; //ImGuiKey_Tab
-        }
+		// If end (ImKeyUp) of Ma)raw_html",R"raw_html(c Command
+		var key = event.which;
+		if (messageType === messageTypes.ImKeyUp) {
+			if( (key == 91 && event.metaKey) // Mac Command (Left)
+			 || (key == 93 && event.metaKey) // Mac Command (Right)
+				) {
+				osxCommandKey = false;
+				event.ctrlKey = fal)raw_html",R"raw_html(se;
+			}
+		}
+		// If start (ImKeyDown) or hold (ImKeyPress) of Mac Command
+		else {
+			if( (key == 91 && event.metaKey) // Mac Command (Left)
+			 || (key == 93 && event.metaKey) // Mac Command (Right)
+				) {
+				osxCommandKey = true;
+				event.ctrlKey = t)raw_html",R"raw_html(rue;
+			}
+		}
 
-        //Left
-        else if(key)raw_html",R"raw_html(Code == 37) {
-            return 1; //ImGuiKey_LeftArrow
-        }
+		// If someone is listening, tell them what happened
+		if ( clientactive ) {
+			var isShift = event.shiftKey ? 1 : 0;
+			var isCtrl = (event.ctrlKey || osxCommandKey) ? 1 : 0;
+			// Special keys will need to be translated into ImGuiKey_ enu)raw_html",R"raw_html(m values to handled correctly
+			websocket.send( String.fromCharCode(messageType) + event.which + "," + isShift + "," + isCtrl );
+		}
+	}
 
-        //Right
-        else if(keyCode == 39) {
-            return 2; //ImGuiKey_RightArrow
-        }
+	function onKeyDown( event ) {
+		// Only process special keystrokes manually
+		// (don't let them spill to other handl)raw_html",R"raw_html(ers)
+		if (isSpecialKey(event)) {
+			event.preventDefault();
+		}
 
-        //Up
-        else if(keyCode == 38) {
-            return 3; //ImGuiKey_UpArr)raw_html",R"raw_html(ow
-        }
+		onKey( event, messageTypes.ImKeyDown );
+	}
 
-        //Down
-        else if(keyCode == 40) {
-            return 4; //ImGuiKey_DownArrow
-        }
+	function onKeyPress( event ) {
+		onKey( event, messageTypes.ImKeyPress );
+	}
 
-        //PageUp
-        else if(keyCode == 33) {
-            return 5; //ImGuiKey_PageUp
-        }
+	function onKeyUp( event ) {
+		onKey( event, messageTypes.ImKeyUp)raw_html",R"raw_html( );
+		event.preventDefault();
+	}
 
-        //PageDown
-        else if(keyC)raw_html",R"raw_html(ode == 34) {
-            return 6; //ImGuiKey_PageDown
-        }
+	function onPaste( event ) {
+		if (!event) event = window.event;
+		event.preventDefault();
 
-        //Home
-        else if(keyCode == 36) {
-            return 7; //ImGuiKey_Home
-        }
+		if (event.which != 0) {
+			if( clientactive ) {
+				// Place the text on the clipboard
+				websocket.send(String.fromCharCode(me)raw_html",R"raw_html(ssageTypes.ImClipboard) + event.clipboardData.getData('Text') );
+				// Simulate the paste keystroke
+				setTimeout( function(){ websocket.send( String.fromCharCode(messageTypes.ImKeyDown) + "86,0,1" ) }, 100 );
+			}
+		}
+	}
 
-        //End
-        else if(keyCode == 35) {
-            return 8; //ImGuiKey_End
-        })raw_html",R"raw_html(
+	function onFrameMessage( strea)raw_html",R"raw_html(m ) {
+		// If the client is not active, don't process the frame
+		if(!clientactive) {
+			return;
+		}
 
-        //Insert
-        else if(keyCode == 45) {
-            return 9; //ImGuiKey_Insert
-        }
+		glistcount = stream.readUint32();
 
-        //Delete
-        else if(keyCode == 46) {
-            return 10; //ImGuiKey_Delete
-        }
+		let newDrawList = [];
 
-        //Backspace
-        else if(keyCode == 8) {)raw_html",R"raw_html(
-            return 11; //ImGuiKey_Backspace
-        }
+		for(var l = 0 ; l < glistcount; l++)
+		{
+			let drawCommand = {};
+			geometry = geometries)raw_html",R"raw_html([l];
+			drawCommand.gcmdcount = stream.readUint32();
+			drawCommand.gvtxcount = stream.readUint32();
+			drawCommand.gidxcount = stream.readUint32();
+			drawCommand.gindices = geometry.attributes.index.array;
+			drawCommand.gpositions = geometry.attributes.)raw_html",R"raw_html(position.array;
+			drawCommand.guvs = geometry.attributes.uv.array;
+			drawCommand.gcolors = geometry.attributes.color.array;
+			drawCommand.galphas = geometry.attributes.alpha.array;
+			drawCommand.gclips = [];
+			drawCommand.gclips.length = 0;
+			drawCom)raw_html",R"raw_html(mand.curElem = 0;
+			// command lists
+			for( var i = 0; i < drawCommand.gcmdcount; i++ ) {
+				var num = stream.readUint32();
+				var x = stream.readFloat32();
+				var y = stream.readFloat32();
+				var w = stream.readFloat32();
+				var h = stream.readFloa)raw_html",R"raw_html(t32();
+				drawCommand.gclips.push( { start: drawCommand.curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
+				drawCommand.curElem += num;
+			}
+			// all vertices
+			for( var i = 0; i < drawCommand.gvtxcount; i++ ) {
+				addVtx(draw)raw_html",R"raw_html(Command, stream, i );
+			}
+			for( var i = 0; i < drawCommand.gidxcount; i++ ) {
+				addIdx(drawCommand, stream, i );
+			}
+			geometry.attributes.position.needsUpdate = true;
+			geometry.attributes.uv.needsUpdate = true;
+			geometry.attributes.color.needsU)raw_html",R"raw_html(pdate = true;
+			geometry.attributes.alpha.needsUpdate = true;
+			geometry.attributes.index.needsUpdate = true;
 
-        //Space
-        else if(keyCode == 32) {
-            return 12; //ImGuiKey_Space
-        }
+			newDrawList.push(drawCommand);
+		}
+		currentDrawList = newDrawList.slice();
+	}
 
-        //Enter
-        else if(keyCode == 13) {
-            return 13; //ImGuiKey_Enter
-        }
+	function addVtx(drawCommand, stream, idx ) {
+		var vidx = i)raw_html",R"raw_html(dx*3;
+		var uidx = idx*2;
+		var cidx = idx*3;
+		var aidx = idx;
+		drawCommand.gpositions[ vidx+0 ] = stream.readInt16AsFloat32();
+		drawCommand.gpositions[ vidx+1 ] = stream.readInt16AsFloat32();
+		drawCommand.gpositions[ vidx+2 ] = 0;
+		drawCommand.guvs  )raw_html",R"raw_html(    [ uidx+0 ] = stream.readInt16pAsFloat32();
+		drawCommand.guvs      [ uidx+1 ] = 1 - stream.readInt16pAsFloat32();
+		drawCommand.gcolors   [ cidx+0 ] = stream.readUint8AsFloat32();
+		drawCommand.gcolors   [ cidx+1 ] = stream.readUint8AsFloat32();
+		draw)raw_html",R"raw_html(Command.gcolors   [ cidx+2 ] = stream.readUint8AsFloat32();
+		drawCommand.galphas   [ aidx   ] = stream.readUint8AsFloat32();
+	}
 
-)raw_html",R"raw_html(        //Escape
-        else if(keyCode == 27) {
-            return 14; //ImGuiKey_Escape
-        }
+	function addIdx(drawCommand, stream, idx) {
+		drawCommand.gindices [ idx ] = stream.readUint16();
+	}
 
-        //A
-        else if(keyCode == 65) {
-            return 15; //ImGuiKey_A
-        }
+	function onRender() {
+)raw_html",R"raw_html(		if(onRenderBackground()) {
+			for(var l in currentDrawList) {
+				var drawCommand = currentDrawList[l];
+				gcmdcount = drawCommand.gcmdcount;
+				gvtxcount = drawCommand.gvtxcount;
+				gidxcount = drawCommand.gidxcount;
+				gindices = drawCommand.gindic)raw_html",R"raw_html(es;
+				gpositions = drawCommand.gpositions;
+				guvs = drawCommand.guvs;
+				gcolors = drawCommand.gcolors;
+				galphas = drawCommand.galphas;
+				gclips = drawCommand.gclips;
+				curElem = drawCommand.curElem;
+				geometry = geometries[l];
+				
+				onRen)raw_html",R"raw_html(derTriangles(scenes[l]);
+			}
+		}
+		requestAnimationFrame(onRender);
+	}
 
-        //C
-        else if(keyCode == 67) {
-            retur)raw_html",R"raw_html(n 16; //ImGuiKey_C
-        }
+	function onRenderBackground() {
+		renderer.enableScissorTest(false);
+		// darken background when inactive
+		renderer.setClearColor( clientactive ? 0x72909A : 0x444444 );
+		renderer.c)raw_html",R"raw_html(lear( true, true, false );
 
-        //V
-        else if(keyCode == 86) {
-            return 17; //ImGuiKey_V
-        }
+		if (clientactive) {
+			// render background (visual reference of device canvas)
+			renderer.render( scene_background, camera );
+		}
 
-        //X
-        else if(keyCode == 88) {
-            return 18; //ImGuiKey_X
-        }
+		return clientactive;
+	}
 
-        //Y
-        else if(keyCode == 89))raw_html",R"raw_html( {
-            return 19; //ImGuiKey_Y
-        }
+	function onRenderTriangles(scene)
+	{
+		camera.position.x = camera)raw_html",R"raw_html(_offset.x;
+		camera.position.y = camera_offset.y;
+		renderer.enableScissorTest(true);
+		// render command lists (or selected one)
+		for( var i = 0; i < gclips.length; i++ )
+		{
+			geometry.offsets[ 0 ].start = gclips[ i ].start;
+			geometry.offsets[ 0 ].in)raw_html",R"raw_html(dex = gclips[ i ].index;
+			geometry.offsets[ 0 ].count = gclips[ i ].count;
 
-        //Z
-        else if(keyCode == 90) {
-            return 20; //ImGuiKey_Z
-        }
+			renderer.setScissor(
+				gclips[ i ].clip.x,
+				(height - gclips[ i ].clip.w),
+				(gclips[ i ].clip.z - gclips[ i ].clip.x),
+				(gclips[ i ].clip.w - gclips[ i ].clip.y)
+		)raw_html",R"raw_html(		);
 
-        //Shift
-        else if(keyCode == 17) {
-            return 21;
-        }
+			renderer.render( scene, camera );
+		}
+	}
 
-        //Ctrl
-        else if()raw_html",R"raw_html(keyCode == 16) {
-            return 22;
-        }
-
-        else {
-            if(keyCode <= 22) {
-                return 23; //Invalid Key
-            }
-
-            return keyCode;
-        }
-    }
-    
-    function onKeyDown( event ) {
-        if( !event )raw_html",R"raw_html() event = window.event;
-
-        // do not prevent paste
-        if( event.which == 86 && (event.ctrlKey || osxCommandKey )) { // CTRL+V
-            return;
-        }
-        //Prevent special keys
-        if(event.which == 9) {
-            event.preventDe)raw_html",R"raw_html(fault();
-        }
-        // prevent special keys
-        if(isSpecialKey(event))
-        {
-            event.preventDefault();
-            if( clientactive )
-            {
-                var isCtrl =  (osxCommandKey || event.ctrlKey)?1:0;
-              )raw_html",R"raw_html(  websocket.send( String.fromCharCode(messageTypes.ImKeyDown) + event.which + "," + ( event.shiftKey?1:0 ) + "," + isCtrl );
-            }
-        }
-    }
-
-    function onKeyUp( event ) {
-        if( !event ) event = window.event;
-        event.preventDefa)raw_html",R"raw_html(ult();
-        if( event.which != 0 )
-        {
-            if(osxCommandKey || isSpecialKey(event))
-            {
-                osxCommandKey = false;
-                if( clientactive )
-                {
-                    websocket.send( String.fromCh)raw_html",R"raw_html(arCode(messageTypes.ImKeyUp) + event.which );
-                }
-            }
-        }
-    }
-
-    function onKeyPress( event ) {
-        if( !event ) event = window.event;
-        if( clientactive )
-        {
-            websocket.send( String.fromCharCod)raw_html",R"raw_html(e(messageTypes.ImKeyPress) + event.charCode);
-        }
-    }
-
-    function onPaste( event ) {
-        if (!event) event = window.event;
-        event.preventDefault();
-        if (event.which != 0) {
-            if( clientactive ) {
-                websoc)raw_html",R"raw_html(ket.send(String.fromCharCode(messageTypes.ImClipboard) + event.clipboardData.getData('Text') );
-                setTimeout(function(){
-                websocket.send( String.fromCharCode(messageTypes.ImKeyDown) + "86,0,1" )}, 100);
-            }
-        }
-)raw_html",R"raw_html(    }
-
-    function onMessage( data ) {
-        if(!onRenderBackground() || !clientactive) {
-            return
-        }
-        
-        glistcount = data.readUint32();
-
-        let newDrawList = []
-
-        for(var l = 0 ; l < glistcount; l++)
-        {)raw_html",R"raw_html(
-            let drawCommand = {}
-            geometry = geometries[l]
-            drawCommand.gcmdcount = data.readUint32();
-            drawCommand.gvtxcount = data.readUint32();
-            drawCommand.gidxcount = data.readUint32();
-            drawComm)raw_html",R"raw_html(and.gindices = geometry.attributes.index.array;
-            drawCommand.gpositions = geometry.attributes.position.array;
-            drawCommand.guvs = geometry.attributes.uv.array;
-            drawCommand.gcolors = geometry.attributes.color.array;
-       )raw_html",R"raw_html(     drawCommand.galphas = geometry.attributes.alpha.array;
-            drawCommand.gclips = []
-            drawCommand.gclips.length = 0;
-            drawCommand.curElem = 0;
-            // command lists
-            for( var i = 0; i < drawCommand.gcmdcou)raw_html",R"raw_html(nt; i++ ) {
-                var num = data.readUint32();
-                var x = data.readFloat32();
-                var y = data.readFloat32();
-                var w = data.readFloat32();
-                var h = data.readFloat32();
-                drawCom)raw_html",R"raw_html(mand.gclips.push( { start: drawCommand.curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
-                drawCommand.curElem+= num;
-            }
-            // all vertices
-            for( var i = 0; i < drawCommand.gvtxcount; i++)raw_html",R"raw_html( ) {
-                addVtx( drawCommand, data, i )
-            }
-            for( var i = 0; i < drawCommand.gidxcount; i++ ) {
-                addIdx( drawCommand, data, i )
-            }
-            geometry.attributes.position.needsUpdate = true;
-     )raw_html",R"raw_html(       geometry.attributes.uv.needsUpdate = true;
-            geometry.attributes.color.needsUpdate = true;
-            geometry.attributes.alpha.needsUpdate = true;
-            geometry.attributes.index.needsUpdate = true;
-
-            newDrawList.push(dr)raw_html",R"raw_html(awCommand)
-            // update render and dat.gui
-            onRenderTriangles(scenes[l]);
-        }
-
-        currentDrawList = newDrawList.slice()
-        readyToRender = true
-        onUpdateGui();
-    }
-
-    function addVtx( drawCommand, data, idx ) )raw_html",R"raw_html({
-        var vidx = idx*3;
-        var uidx = idx*2;
-        var cidx = idx*3;
-        var aidx = idx;
-        drawCommand.gpositions[ vidx+0 ] = data.readInt16AsFloat32();
-        drawCommand.gpositions[ vidx+1 ] = data.readInt16AsFloat32();
-        draw)raw_html",R"raw_html(Command.gpositions[ vidx+2 ] = 0;
-        drawCommand.guvs      [ uidx+0 ] = data.readInt16pAsFloat32();
-        drawCommand.guvs      [ uidx+1 ] = 1 - data.readInt16pAsFloat32();
-        drawCommand.gcolors   [ cidx+0 ] = data.readUint8AsFloat32();
-      )raw_html",R"raw_html(  drawCommand.gcolors   [ cidx+1 ] = data.readUint8AsFloat32();
-        drawCommand.gcolors   [ cidx+2 ] = data.readUint8AsFloat32();
-        drawCommand.galphas   [ aidx   ] = data.readUint8AsFloat32();
-    }    
-
-    function addIdx(drawCommand, data, id)raw_html",R"raw_html(x)
-    {
-        drawCommand.gindices [ idx ] = data.readUint16();         
-    }
-
-    function onRender() {
-
-        // Use this to only render selected window
-        //var idx = ( datgui.window == 'All' ) ? -1 : parseInt( datgui.window ) - 1;
-        if)raw_html",R"raw_html((onRenderBackground())
-        {
-            for(var l in currentDrawList)
-            {
-                var drawCommand = currentDrawList[l]
-                gcmdcount =  drawCommand.gcmdcount
-                gvtxcount =  drawCommand.gvtxcount
-            )raw_html",R"raw_html(    gidxcount =  drawCommand.gidxcount
-                gindices =  drawCommand.gindices
-                gpositions =  drawCommand.gpositions
-                guvs =  drawCommand.guvs
-                gcolors =  drawCommand.gcolors
-                galphas =  )raw_html",R"raw_html(drawCommand.galphas
-                gclips =  drawCommand.gclips
-                curElem = drawCommand.curElem
-                geometry = geometries[l]
-                onRenderTriangles(scenes[l]);
-            }
-            //onRenderTriangles();
-        })raw_html",R"raw_html(
-
-        requestAnimationFrame(onRender);
-    }
-
-    function onRenderBackground()
-    {
-        if (clientactive) {
-            renderer.enableScissorTest(false);
-            renderer.setClearColor( 0x72909A );
-            renderer.clear( true, true, fal)raw_html",R"raw_html(se );
-            // render background (visual reference of device canvas)
-            renderer.render( scene_background, camera );
-            return true;
-          
-        }
-        else {
-            // darken background
-            renderer.enableSci)raw_html",R"raw_html(ssorTest(false);
-            renderer.setClearColor( 0x444444 );
-            renderer.clear( true, true, false );
-            return false;
-        }
-    }
-
-    function onRenderTriangles(scene)
-    {
-        camera.position.x = camera_offset.x;
-        ca)raw_html",R"raw_html(mera.position.y = camera_offset.y;
-        renderer.enableScissorTest(true);
-        // render command lists (or selected one)
-        for( var i = 0; i < gclips.length; i++ )
-        {
-            geometry.offsets[ 0 ].start = gclips[ i ].start;
-         )raw_html",R"raw_html(   geometry.offsets[ 0 ].index = gclips[ i ].index;
-            geometry.offsets[ 0 ].count = gclips[ i ].count;
-
-            renderer.setScissor(gclips[ i ].clip.x,
-                                (height - gclips[ i ].clip.w) ,
-                          )raw_html",R"raw_html(      (gclips[ i ].clip.z - gclips[ i ].clip.x),
-                                (gclips[ i ].clip.w - gclips[ i ].clip.y)
-                           );
-            
-                                
-            renderer.render( scene, camera );
-        }
- )raw_html",R"raw_html(   }
-
-    function onUpdateGui() {
-        if( datgui.windows.length != ( gcmdcount+1 ) ) {
-            datgui.windows = [ 'Origin' ];
-            for ( var i = 0; i < gcmdcount; i++ )
-                datgui.windows[ i+1 ] = i+1;
-            gui.remove( da)raw_html",R"raw_html(tgui_window );
-            datgui_window = gui.add( datgui, 'window', datgui.windows );
-            datgui_window.onChange( onFocusWindow );
-        }
-    }
-
-    function onFocusWindow( value ) {
-        if( value == 'Origin' ) {
-            camera_offset.)raw_html",R"raw_html(x = 0;
-            camera_offset.y = 0;
-        }
-        else {
-            var idx = parseInt( value ) - 1;
-            camera_offset.x = Math.round( - 50 + ( gclips[ idx ].clip.x + 1 ) * width / 2.0 );
-            camera_offset.y = Math.round( - 50 + ( )raw_html",R"raw_html(gclips[ idx ].clip.y + 1 ) * height / 2.0 );
-        }
-    }    
+	function onFocusWindow( value ) {
+		if( value == 'Origin' ) {
+			camera_offset.x = 0;
+			camera_offset.y = 0;
+		}
+		else {
+			var idx = parseInt( value ) - 1;
+			camera_offset.x = Math.round( - 50 + ( gcl)raw_html",R"raw_html(ips[ idx ].clip.x + 1 ) * width / 2.0 );
+			camera_offset.y = Math.round( - 50 + ( gclips[ idx ].clip.y + 1 ) * height / 2.0 );
+		}
+	}
 }
 </script>
 
 
 <style>
 body {
-    overflow	: hidden;
-    padding		: 0;
-    margin		: 0;
+	overflow	: hidden;
+	padding		: 0;
+	margin		: 0;
 
-    color		: #222;
-    background-color: #333;
-}
+	color		: #222;
+	background-color: #333;
+})raw_html",R"raw_html(
 .form-style-6{
-    font: 100% Arial, Helvetica, sans-s)raw_html",R"raw_html(erif;
-    max-width: 300px;
-    margin: 10px auto;
-    padding: 16px;
-    background: #F7F7F7;
+	font: 100% Arial, Helvetica, sans-serif;
+	max-width: 300px;
+	margin: 10px auto;
+	padding: 16px;
+	background: #F7F7F7;
 }
 .form-style-6 h1{
-    background: #409FC1;
-    padding: 15px 0;
-    font-size: 100%;
-    font-weight: 100;
-    text-align: center;
-    color: #fff;
-    margin:)raw_html",R"raw_html( -16px -16px 16px -16px;
+	background: #409FC1;
+	padding: 15px 0;
+	font-size: 100%;
+	font-weight: 100;
+	text-align: center;
+	co)raw_html",R"raw_html(lor: #fff;
+	margin: -16px -16px 16px -16px;
 }
 .form-style-6 input[type="text"],
 .form-style-6 input[type="date"],
 .form-style-6 input[type="datetime"],
 .form-style-6 input[type="email"],
 .form-style-6 input[type="number"],
-.form-style-6 input[type="search"],
-.form-style-6 in)raw_html",R"raw_html(put[type="time"],
+.form-style-6 input[type="search")raw_html",R"raw_html(],
+.form-style-6 input[type="time"],
 .form-style-6 input[type="url"],
 .form-style-6 textarea,
 .form-style-6 select 
 {
-    -webkit-transition: all 0.30s ease-in-out;
-    -moz-transition: all 0.30s ease-in-out;
-    -ms-transition: all 0.30s ease-in-out;
-    -o-transition: all )raw_html",R"raw_html(0.30s ease-in-out;
-    outline: none;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    width: 100%;
-    background: #fff;
-    margin-bottom: 4%;
-    border: 1px solid #ccc;
-    padding: 2%;
-    color: #55)raw_html",R"raw_html(5;
-    text-align: center;
-    font: 100% Arial, Helvetica, sans-serif;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transitio)raw_html",R"raw_html(n: all 0.30s ease-in-out;
+	outline: none;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	background: #fff;
+	margin-bottom: 4%;
+	border: 1px solid #ccc;
+	padding: 2%;
+	color: #555;
+	text-align: center;)raw_html",R"raw_html(
+	font: 100% Arial, Helvetica, sans-serif;
 }
 .form-style-6 input[type="text"]:focus,
 .form-style-6 input[type="date"]:focus,
 .form-style-6 input[type="datetime"]:focus,
 .form-style-6 input[type="email"]:focus,
-.form-style-6 inp)raw_html",R"raw_html(ut[type="number"]:focus,
-.form-style-6 input[type="search"]:focus,
+.form-style-6 input[type="number"]:focus,
+.for)raw_html",R"raw_html(m-style-6 input[type="search"]:focus,
 .form-style-6 input[type="time"]:focus,
 .form-style-6 input[type="url"]:focus,
 .form-style-6 textarea:focus,
 .form-style-6 select:focus
 {
-    box-shadow: 0 0 5px #409FC1;
-    padding: 3%;
- )raw_html",R"raw_html(   border: 1px solid #409FC1;
+	box-shadow: 0 0 5px #409FC1;
+	padding: 3%;
+	border: 1px solid #409FC1;
 }
-.button{
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    width: 100%;
-    padding: 3%;
-    background: #409FC1;
-    border-bottom: 2px solid #3080AF;
-    border-top-style:)raw_html",R"raw_html( none;
-    border-right-style: none;
-    border-left-style: none;    
-    color: #fff;
+.butto)raw_html",R"raw_html(n{
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	width: 100%;
+	padding: 3%;
+	background: #409FC1;
+	border-bottom: 2px solid #3080AF;
+	border-top-style: none;
+	border-right-style: none;
+	border-left-style: none;   )raw_html",R"raw_html( 
+	color: #fff;
 }
 .form-style-6 input[type="submit"]:hover,
 .form-style-6 input[type="button"]:hover{
-    background: #2EBC99;
+	background: #2EBC99;
 }
 #imgui {
-    margin-top: 10px;
-    color: #444;
-    font)raw_html",R"raw_html(: 75% Arial, Helvetica, sans-serif;
+	margin-top: 10px;
+	color: #444;
+	font: 75% Arial, Helvetica, sans-serif;
 }
 </style>
 
 <style>
-    #imgui_container
-    {
-        touch-action: none; /* Disable touch behaviors, like pan and zoom */
-    }
-    body 
-    {
-        position: fixed; 
-        overflow-y: scroll;
-        width: 100%;)raw_html",R"raw_html(
-    }
+	#imgui_container
+	{
+		touc)raw_html",R"raw_html(h-action: none; /* Disable touch behaviors, like pan and zoom */
+	}
+	body 
+	{
+		position: fixed; 
+		overflow-y: scroll;
+		width: 100%;
+	}
 </style>
 
 </head>
 <body>
-    <div id="imgui_container"></div>
+	<div id="imgui_container"></div>
+	<script>
+		document.addEventListener('DOMContentLoaded', f)raw_html",R"raw_html(unction () {
+			StartImgui( document.getElementById( 'imgui_container' ), "ws://" + window.location.hostname + ":" + window.location.port, 1920, 1080, true );
+		});
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            StartImgui( document.getElementById( 'imgui_container' ), "ws://" + window.location.hostname )raw_html",R"raw_html(+ ":" + window.location.port, 1920, 1080, true );
-        });
-
-        document.ontouchmove = function(event)
-        {
-            event.preventDefault();
-        }
-    </script>
-
-</body>
+		document.ontouchmove = function(event)
+		{
+			event.preventDefault();
+		}
+	</script>
+</b)raw_html",R"raw_html(ody>
 </html>
 )raw_html",
 };

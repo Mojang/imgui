@@ -27,8 +27,10 @@ namespace imgui {
 		virtual void OnMessage(OpCode opcode, const void *data, int size) override;
 
 	protected:
-		virtual void _sendFrame(const Frame& frame) override;
 		virtual bool _getIsActive() const override;
+		virtual void _sendFrame(const Frame& frame) override;
+
+		void _handleMessage(RemoteMessageType messageType, const void *data, int size);
 
 	private:
 		bool mIsClientActive = false;

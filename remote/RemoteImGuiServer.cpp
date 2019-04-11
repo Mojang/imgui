@@ -9,6 +9,7 @@
 
 #include "RemoteImGuiFrameBuilder.h"
 #include <cstdio>
+#include <sstream>
 
 #ifdef IMGUI_ENABLED
 
@@ -31,6 +32,7 @@ namespace imgui {
 	}
 
 	void RemoteImGuiServer::update() {
+		RemoteImGui::update();
 		IWebSocketServer::Update();
 	}
 
@@ -41,40 +43,10 @@ namespace imgui {
 	void RemoteImGuiServer::OnMessage(IWebSocketServer::OpCode opcode, const void *data, int size) {
 		switch (opcode) {
 			case IWebSocketServer::Text: {
-				// If not active, don't process input
-				if (!_getIsActive()) {
-					// Wait for init instead
-					if (!memcmp(data, "ImInit", sizeof("ImInit") - 1)) {
-						mIsClientActive = true;
-
-						// Send confirmation
-						SendText("ImInit", 6);
-
-						// Send font texture
-						_sendFontFrame();
-					}
-				}
-				// Handling other messages is not specific to local servers
-				else if (strstr((char *)data, "ImMouseMove")) {
-					_handleMessage(RemoteMessageType::ImMouseMove, (char*)data + sizeof("ImMouseMove"), size - sizeof("ImMouseMove"));
-				}
-				else if (strstr((char *)data, "ImMousePress")) {
-					_handleMessage(RemoteMessageType::ImMousePress, (char*)data + sizeof("ImMousePress"), size - sizeof("ImMousePress"));
-				}
-				else if (strstr((char *)data, "ImMouseWheelDelta")) {
-					_handleMessage(RemoteMessageType::ImMouseWheelDelta, (char*)data + sizeof("ImMouseWheelDelta"), size - sizeof("ImMouseWheelDelta"));
-				}
-				else if (strstr((char *)data, "ImKeyDown")) {
-					_handleMessage(RemoteMessageType::ImKeyDown, (char*)data + sizeof("ImKeyDown"), size - sizeof("ImKeyDown"));
-				}
-				else if (strstr((char *)data, "ImKeyUp")) {
-					_handleMessage(RemoteMessageType::ImKeyUp, (char*)data + sizeof("ImKeyUp"), size - sizeof("ImKeyUp"));
-				}
-				else if (strstr((char *)data, "ImKeyPress")) {
-					_handleMessage(RemoteMessageType::ImKeyPress, (char*)data + sizeof("ImKeyPress"), size - sizeof("ImKeyPress"));
-				}
-				else if (strstr((char *)data, "ImClipboard")) {
-					_handleMessage(RemoteMessageType::ImClipboard, (char*)data + sizeof("ImClipboard"), size - sizeof("ImClipboard"));
+				if (size > 0) {
+					const unsigned char * text = static_cast<const unsigned char *>(data);
+					RemoteMessageType messageType = static_cast<RemoteMessageType>(text[0]);
+					_handleMessage(messageType, &text[1], size - 1);
 				}
 				break;
 			}
@@ -103,6 +75,45 @@ namespace imgui {
 
 	void RemoteImGuiServer::_sendFrame(const Frame& frame) {
 		SendBinary(frame.data, frame.size);
+	}
+
+	void RemoteImGuiServer::_handleMessage(RemoteMessageType messageType, const void * data, int size) {
+		switch (messageType) {
+			case RemoteMessageType::RelayRoomJoined:
+			case RemoteMessageType::RelayRoomUpdate: {
+				// Valid, but unhandled
+				break;
+			}
+			case RemoteMessageType::ImInit: {
+				// If not active, don't process input
+				if (!_getIsActive()) {
+					mIsClientActive = true;
+
+					// ImGUI initialization request received - send init data
+					SendText(&messageType, 1);
+
+					// Send font texture
+					_sendFontFrame();
+				}
+				break;
+			}
+			case RemoteMessageType::ImMouseMove:
+			case RemoteMessageType::ImMousePress:
+			case RemoteMessageType::ImMouseWheelDelta:
+			case RemoteMessageType::ImKeyDown:
+			case RemoteMessageType::ImKeyUp:
+			case RemoteMessageType::ImKeyPress:
+			case RemoteMessageType::ImClipboard: {
+				// Handling other messages is not specific to relay servers
+				RemoteImGui::_handleMessage(messageType, data, size);
+				break;
+			}
+			default: {
+				mDebug("Unsupported message type: " + std::to_string((unsigned char)messageType));
+				assert(0);
+				return;
+			}
+		}
 	}
 }
 
