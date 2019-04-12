@@ -7270,7 +7270,7 @@ var ImFS = [
 	"varying vec3 vColor;",
 	"varying vec2 vUv;",
 	"varying float vAlpha;",
-	
+
 	"uniform sampler2D tTex;",
 
 	"void main() {",
@@ -7285,6 +7285,7 @@ var ImguiGui = function() {
 // Message types used by the relay server and ImGUI client - these need to be kept in-sync with the host
 var messageTypes = { RoomJoined: 0, RoomUpdate: 1, ImInit: 10, ImMouseMove: 11, ImMousePress: 12, ImMouseWheelDelta: 13, ImKeyDown: 14, ImKeyUp: 15, ImKeyPress: 16, ImClipboard: 17 };
 var roomInfo = { roomId: -1, connectionCount: 0};
+var connectionState = { Inactive: -1, Connecting: 0, Connected: 1, Active: 2  }
 
 function StartImgui( element, serveruri, targetwidth, targetheight, compressed ) {
 
@@ -7292,14 +7293,21 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		Detector.addGetWebGLMessage();
 	}
 
-	var websocket, connecting, connected;
+	var websocket;
+	function SendText(messageType, text) {
+		websocket.send(String.fromCharCode(messageType) + text);
+	}
+	function SendMessage(messageType) {
+		websocket.send(String.fromCharCode(messageType));
+	}
+
+	var serverState = connectionState.Inactive;
 	var server;
 
 	var width = window.innerWidth;
 	var height = window.innerHeight;
 	var targetwidth = targetwidth;
 	var targetheight = targetheight;
-	var clientactive = false;
 	var frame = 0;
 	var mouse = { x: 0, y: 0, l: 0, r: 0, w: 0, update: false };
 	var curElem;
@@ -7337,7 +7345,7 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		alpha: { type: 'f', value: null },
 	};
 	var material = new THREE.ShaderMaterial( {
-		uniforms: guniforms,        
+		uniforms: guniforms,
 		attributes: gattributes,
 		vertexShader: ImVS,
 		fragmentShader: ImFS,
@@ -7392,7 +7400,7 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 
 	// canvas events (will send to imgui)
 	var elem = renderer.domElement;
-	 //FF doesn't recognize mousewheel as of FF3.x 
+	 //FF doesn't recognize mousewheel as of FF3.x
 	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel";
 	elem.addEventListener(mousewheelevt, onMouseWheel, false);
 
@@ -7420,7 +7428,7 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 
 	// keep connected
 	setInterval(function() {
-		if ( !connecting && !connected ) {
+		if ( serverState == connectionState.Inactive ) {
 			websocketConnect( serveruri );
 		}
 	}, 5000);
@@ -7428,23 +7436,18 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 	// init websockets
 	function websocketConnect( serveruri ) {
 		console.log( "Remote ImGui: Connecting to " + serveruri + "..." );
-		connecting = true;
-		connected = false;
+		serverState = connectionState.Connecting;
 		websocket = new WebSocket( serveruri );
 		websocket.binaryType = "arraybuffer";
 		websocket.onopen = function( evt ) {
 			console.log( "Remote ImGui: Connected" );
-			clientactive = false;
-			connecting = false;
-			connected = true;
-			websocket.send(String.fromCharCode(messageTypes.ImInit));
+			serverState = connectionState.Connected;
+			SendMessage(messageTypes.ImInit);
 			gclips.length = 0;
 		};
 		websocket.onclose = function( evt ) {
 			console.log( "Remote ImGui: Disconnected" );
-			clientactive = false;
-			connecting = false;
-			connected = false;
+			serverState = connectionState.Inactive;
 			gclips.length = 0;
 		};
 		websocket.onmessage = function( evt ) {
@@ -7458,12 +7461,17 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 				else if (messageType === messageTypes.RoomUpdate) {
 					let roomUpdateMessage = JSON.parse(messagePayload);
 					roomInfo.connectionCount = roomUpdateMessage.connectionCount;
-					clientactive = roomInfo.connectionCount > 1;
+					if (roomInfo.connectionCount > 1) {
+						serverState = connectionState.Active;
+					}
+					else {
+						serverState = connectionState.Connected;
+					}
 					console.log("Room updated", roomInfo);
 				}
 				else if(messageType === messageTypes.ImInit) {
 					console.log( "ImInit OK" );
-					clientactive = true;
+					serverState = connectionState.Active;
 				}
 				else {
 					console.log( "Unknown message: " + evt.data );
@@ -7534,16 +7542,14 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		};
 		websocket.onerror = function( evt ) {
 			console.log( "ERROR: " + evt.data );
-			clientactive = false;
-			connecting = false;
-			connected = false;
+			serverState = connectionState.Inactive;
 			gclips.length = 0;
 		};
 	}
 
 	function onWindowResize() {
 		width = window.innerWidth;
-		height = window.innerHeight; 
+		height = window.innerHeight;
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		camera = new THREE.OrthographicCamera( 0, width, 0, height, -1, 1 );
 		camera.position.z = 1;
@@ -7551,7 +7557,7 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 
 	function onMouseMove( event ) {
 		if( !event ) event = window.event;
-		
+
 		if( camera_drag ) {
 			camera_offset.x += camera_drag_pos.x - event.clientX;
 			camera_offset.y += camera_drag_pos.y - event.clientY;
@@ -7561,8 +7567,9 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		else {
 			var x = event.clientX + camera.position.x;
 			var y = event.clientY + camera.position.y;
-			if( clientactive )
-				websocket.send(String.fromCharCode(messageTypes.ImMouseMove) + x + "," + y + "," + mouse.l + "," + mouse.r);
+			if( serverState == connectionState.Active ) {
+				SendText(messageTypes.ImMouseMove, x + "," + y + "," + mouse.l + "," + mouse.r);
+			}
 		}
 	}
 
@@ -7571,13 +7578,13 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		event.preventDefault();
 		if( event.button == 0 ) mouse.l = 1;
 		if( event.button == 2 ) mouse.r = 1;
-		camera_drag = event.ctrlKey;
+		camera_drag = event.ctrlKey && !mouse.l && mouse.r;
 		if( camera_drag ) {
 			camera_drag_pos.x = event.clientX;
 			camera_drag_pos.y = event.clientY;
 		}
-		else if( clientactive ) {
-			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + mouse.l + "," + mouse.r);
+		else if( serverState == connectionState.Active ) {
+			SendText(messageTypes.ImMousePress, mouse.l + "," + mouse.r);
 		}
 	}
 
@@ -7589,8 +7596,8 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		if( camera_drag ) {
 			camera_drag = false;
 		}
-		else if (clientactive) {
-			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + mouse.l + "," + mouse.r);
+		else if ( serverState == connectionState.Active ) {
+			SendText(messageTypes.ImMousePress, mouse.l + "," + mouse.r);
 		}
 	}
 
@@ -7608,7 +7615,7 @@ var touchStarted = false, // detect if a touch event is started
 
 	function onTouchStart( event ) {
 		if( !event ) event = window.event;
-		event.preventDefault(); 
+		event.preventDefault();
 		var pointer =  event; //getPointerEvent(event);
 		if(touchInertial) {
 			clearInterval(ticker);
@@ -7618,20 +7625,17 @@ var touchStarted = false, // detect if a touch event is started
 		cachedX = currX = pointer.pageX;
 		// caching the current y
 		cachedY = currY = pointer.pageY;
-		// a touch event is detected      
-		websocket.send(String.fromCharCode(messageTypes.ImMouseMove) + currX + "," + currY + ",0,0");
+		// a touch event is detected
+		SendText(messageTypes.ImMouseMove, currX + "," + currY + ",0,0");
 
 		setTimeout(function (){
 			touchStarted = true;
-			//if ((cachedX === currX) && !touchStarted && (cachedY === currY)) 
-			//console.log("50ms ImMousePress=1,0");
-			websocket.send(String.fromCharCode(messageTypes.ImMousePress) +"1,0");
+			SendText(messageTypes.ImMousePress, "1,0");
 			// detecting if after 200ms the finger is still in the same position
 			clearTimeout(touchPressTimeout);
 			touchPressTimeout = setTimeout(function () {
 				if ((cachedX === currX) && (cachedY === currY)) {
-					//console.log("200ms ImMousePress=0,0");
-					websocket.send(String.fromCharCode(messageTypes.ImMousePress) + "0,0");
+					SendText(messageTypes.ImMousePress, "0,0");
 					touchStarted = false;
 				}
 			},150);
@@ -7650,7 +7654,7 @@ var touchStarted = false, // detect if a touch event is started
 			ticker = setInterval(function() {
 				var elapsed = Date.now() - timestamp;
 				mouse.w = amplitude * Math.exp(-elapsed / timeConstant);
-				websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + mouse.w);
+				SendText(messageTypes.ImMouseWheelDelta, mouse.w);
 				position = targetPosition - mouse.w;
 				if (elapsed > 6 * timeConstant) {
 					touchInertial = false;
@@ -7660,14 +7664,13 @@ var touchStarted = false, // detect if a touch event is started
 		}
 		else if(touchStarted) {
 			clearTimeout(touchPressTimeout);
-			//console.log("ontouchend ImMousePress=0,0");
-			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + "0,0");
+			SendText(messageTypes.ImMousePress, "0,0");
 		}
 		touchStarted = false;
 		touchDragging = false;
 	}
 
-	function onTouchMove( event ) 
+	function onTouchMove( event )
 	{
 		if( !event ) event = window.event;
 		event.preventDefault();
@@ -7676,12 +7679,12 @@ var touchStarted = false, // detect if a touch event is started
 		currY = pointer.pageY;
 		if(touchStarted) {
 			// here you are swiping
-			if( clientactive ) {
+			if( serverState == connectionState.Active ) {
 				touchDragging = true;
 				var diffY = (currY - cachedY) * 5;
 				cachedY = currY;
 				initialVelocity = diffY;
-				websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + diffY);
+				SendText(messageTypes.ImMouseWheelDelta, diffY);
 			}
 		}
 	}
@@ -7689,9 +7692,9 @@ var touchStarted = false, // detect if a touch event is started
 	function onMouseWheel( event ) {
 		if( !event ) event = window.event;
 		event.preventDefault();
-		if( clientactive ) {
+		if( serverState == connectionState.Active ) {
 			mouse.w=event.detail? event.detail*(-120)/4 : event.wheelDelta;
-			websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + mouse.w);
+			SendText(messageTypes.ImMouseWheelDelta, mouse.w);
 		}
 	}
 
@@ -7744,11 +7747,11 @@ var touchStarted = false, // detect if a touch event is started
 		}
 
 		// If someone is listening, tell them what happened
-		if ( clientactive ) {
+		if ( serverState == connectionState.Active ) {
 			var isShift = event.shiftKey ? 1 : 0;
 			var isCtrl = (event.ctrlKey || osxCommandKey) ? 1 : 0;
 			// Special keys will need to be translated into ImGuiKey_ enum values to handled correctly
-			websocket.send( String.fromCharCode(messageType) + event.which + "," + isShift + "," + isCtrl );
+			SendText(messageType, event.which + "," + isShift + "," + isCtrl);
 		}
 	}
 
@@ -7776,18 +7779,18 @@ var touchStarted = false, // detect if a touch event is started
 		event.preventDefault();
 
 		if (event.which != 0) {
-			if( clientactive ) {
+			if( serverState == connectionState.Active ) {
 				// Place the text on the clipboard
-				websocket.send(String.fromCharCode(messageTypes.ImClipboard) + event.clipboardData.getData('Text') );
+				SendText(messageTypes.ImClipboard, event.clipboardData.getData('Text'));
 				// Simulate the paste keystroke
-				setTimeout( function(){ websocket.send( String.fromCharCode(messageTypes.ImKeyDown) + "86,0,1" ) }, 100 );
+				setTimeout( function(){ SendText(messageTypes.ImKeyDown, "86,0,1"); }, 100 );
 			}
 		}
 	}
 
 	function onFrameMessage( stream ) {
 		// If the client is not active, don't process the frame
-		if(!clientactive) {
+		if( serverState != connectionState.Active ) {
 			return;
 		}
 
@@ -7873,7 +7876,7 @@ var touchStarted = false, // detect if a touch event is started
 				gclips = drawCommand.gclips;
 				curElem = drawCommand.curElem;
 				geometry = geometries[l];
-				
+
 				onRenderTriangles(scenes[l]);
 			}
 		}
@@ -7883,15 +7886,15 @@ var touchStarted = false, // detect if a touch event is started
 	function onRenderBackground() {
 		renderer.enableScissorTest(false);
 		// darken background when inactive
-		renderer.setClearColor( clientactive ? 0x72909A : 0x444444 );
+		renderer.setClearColor( serverState == connectionState.Active ? 0x72909A : 0x444444 );
 		renderer.clear( true, true, false );
 
-		if (clientactive) {
+		if ( serverState == connectionState.Active ) {
 			// render background (visual reference of device canvas)
 			renderer.render( scene_background, camera );
 		}
 
-		return clientactive;
+		return serverState == connectionState.Active;
 	}
 
 	function onRenderTriangles(scene)
@@ -7966,7 +7969,7 @@ body {
 .form-style-6 input[type="time"],
 .form-style-6 input[type="url"],
 .form-style-6 textarea,
-.form-style-6 select 
+.form-style-6 select
 {
 	-webkit-transition: all 0.30s ease-in-out;
 	-moz-transition: all 0.30s ease-in-out;
@@ -8010,7 +8013,7 @@ body {
 	border-bottom: 2px solid #3080AF;
 	border-top-style: none;
 	border-right-style: none;
-	border-left-style: none;    
+	border-left-style: none;
 	color: #fff;
 }
 .form-style-6 input[type="submit"]:hover,
@@ -8029,9 +8032,9 @@ body {
 	{
 		touch-action: none; /* Disable touch behaviors, like pan and zoom */
 	}
-	body 
+	body
 	{
-		position: fixed; 
+		position: fixed;
 		overflow-y: scroll;
 		width: 100%;
 	}

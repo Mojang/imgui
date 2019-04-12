@@ -5,6 +5,8 @@
 #include "RemoteImGui.h"
 
 #include "RemoteImGuiFrameBuilder.h"
+#include "IRemoteImGuiLogHandler.h"
+#include <sstream>
 
 #ifdef IMGUI_ENABLED
 
@@ -55,12 +57,6 @@ namespace imgui {
 
 	void RemoteImGui::_handleMessage(RemoteMessageType messageType, const void * data, int) {
 		switch (messageType) {
-			case RemoteMessageType::RelayRoomJoined:
-			case RemoteMessageType::RelayRoomUpdate:
-			case RemoteMessageType::ImInit: {
-				// Valid, but unhandled
-				break;
-			}
 			case RemoteMessageType::ImMouseMove: {
 				int x, y, mouse_left, mouse_right;
 				if (sscanf((char *)data, "%d,%d,%d,%d", &x, &y, &mouse_left, &mouse_right) == 4) {
@@ -107,10 +103,22 @@ namespace imgui {
 				_onImClipboard(nullptr, reinterpret_cast<const char *>(data));
 				break;
 			}
+			case RemoteMessageType::RelayRoomJoined:
+			case RemoteMessageType::RelayRoomUpdate:
+			case RemoteMessageType::ImInit: {
+				// Valid, but unhandled
+				break;
+			}
+			case RemoteMessageType::BadMessageType:
 			default: {
-				mDebug("Unsupported message type: " + std::to_string((unsigned char)messageType));
-				assert(0);
-				return;
+				// All message types should have been caught by now
+				std::shared_ptr<IRemoteImGuiLogHandler> logger{ mLogger.lock() };
+				if (logger) {
+					std::ostringstream stream;
+					stream << "Unsupported message type: " << (unsigned char)messageType;
+					logger->onError(stream.str());
+				}
+				break;
 			}
 		}
 	}

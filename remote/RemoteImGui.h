@@ -13,14 +13,14 @@
 namespace imgui {
 	struct Frame;
 	class RemoteImGuiFrameBuilder;
+	class IRemoteImGuiLogHandler;
 
 	//------------------
 	// ImGuiRemoteInput
 	// - a structure to store input received from remote imgui, so you can use it on your whole app (keys, mouse) or just in imgui engine
 	// - use GetImGuiRemoteInput to read input data safely (valid for IMGUI_REMOTE_INPUT_FRAMES)
 	//------------------
-	struct RemoteInput
-	{
+	struct RemoteInput {
 		ImVec2	MousePos;
 		int		MouseButtons;
 		float	MouseWheelDelta;
@@ -35,6 +35,8 @@ namespace imgui {
 		Shift = 22
 	};
 
+	// These values cannot be modified without updating the Javascript for both
+	// relay and standalone servers
 	enum class RemoteMessageType : unsigned char {
 		// System events fired by the relay server
 		RelayRoomJoined = 0,
@@ -48,7 +50,10 @@ namespace imgui {
 		ImKeyDown,
 		ImKeyUp,
 		ImKeyPress,
-		ImClipboard
+		ImClipboard,
+
+		// Bad message received
+		BadMessageType
 	};
 
 	class RemoteImGui {
@@ -66,7 +71,7 @@ namespace imgui {
 		void draw(ImDrawList** const cmd_lists, int cmd_lists_count);
 
 		// Used to log to console (cannot use normal system because of submodules)
-		void (*mDebug)(const std::string & output);
+		std::weak_ptr<IRemoteImGuiLogHandler> mLogger;
 
 	protected:
 		virtual bool _getIsActive() const = 0;

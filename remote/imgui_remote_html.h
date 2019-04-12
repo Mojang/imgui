@@ -7441,11 +7441,11 @@ var ImFS = [
 	"varying vec3 vColor;",
 	"varying vec2 vUv;",
 	"varying float vAlpha;",
-	
+
 	"uniform sampler2D tTex;",
 
 	"void main() {",
-			"gl_FragC)raw_html",R"raw_html(olor = vec4( vColor, texture2D( tTex, vUv ).a * vAlpha );",
+			"gl_FragCo)raw_html",R"raw_html(lor = vec4( vColor, texture2D( tTex, vUv ).a * vAlpha );",
 	"}" ].join("\n");
 
 var ImguiGui = function() {
@@ -7453,31 +7453,39 @@ var ImguiGui = function() {
 	this.windows = [ 'Origin' ];
 };
 
-// Message types used by the relay server and ImGUI client - these need to be kept in-syn)raw_html",R"raw_html(c with the host
+// Message types used by the relay server and ImGUI client - these need to be kept in-sync)raw_html",R"raw_html( with the host
 var messageTypes = { RoomJoined: 0, RoomUpdate: 1, ImInit: 10, ImMouseMove: 11, ImMousePress: 12, ImMouseWheelDelta: 13, ImKeyDown: 14, ImKeyUp: 15, ImKeyPress: 16, ImClipboard: 17 };
 var roomInfo = { roomId: -1, connectionCount: 0};
+var con)raw_html",R"raw_html(nectionState = { Inactive: -1, Connecting: 0, Connected: 1, Active: 2  }
 
-funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targetheight, compressed ) {
+function StartImgui( element, serveruri, targetwidth, targetheight, compressed ) {
 
 	if( !Detector.webgl ) {
 		Detector.addGetWebGLMessage();
 	}
 
-	var websocket, connecting, connected;
+	var websocket;
+	function SendText(m)raw_html",R"raw_html(essageType, text) {
+		websocket.send(String.fromCharCode(messageType) + text);
+	}
+	function SendMessage(messageType) {
+		websocket.send(String.fromCharCode(messageType));
+	}
+
+	var serverState = connectionState.Inactive;
 	var server;
 
-	var width = window.innerWidth;
-	var height = window.innerHeig)raw_html",R"raw_html(ht;
+	var width = window.in)raw_html",R"raw_html(nerWidth;
+	var height = window.innerHeight;
 	var targetwidth = targetwidth;
 	var targetheight = targetheight;
-	var clientactive = false;
 	var frame = 0;
 	var mouse = { x: 0, y: 0, l: 0, r: 0, w: 0, update: false };
 	var curElem;
 	var prev_data;
 	var readyToRender = false;
 
-	var camera_offset = {)raw_html",R"raw_html( x: 0, y: 0 };
+	var came)raw_html",R"raw_html(ra_offset = { x: 0, y: 0 };
 	var camera_drag = false;
 	var camera_drag_pos = { x: 0, y: 0 };
 
@@ -7487,12 +7495,12 @@ funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targ
 	renderer.setSize( width, height );
 
 	// camera
-	var camera = new THREE.OrthographicCamera)raw_html",R"raw_html(( 0, width, 0, height, -1, 1 );
+	var camera = new THREE.Ortho)raw_html",R"raw_html(graphicCamera( 0, width, 0, height, -1, 1 );
 	camera.position.z = 1;
 
 	// plane
 	var scene_background = new THREE.Scene();
-	var plane = new THREE.Mesh( new THREE.PlaneBufferGeometry( targetwidth, targetheight ), new THREE.MeshBasicMaterial( { color: 0x72909A, side: THR)raw_html",R"raw_html(EE.DoubleSide }));
+	var plane = new THREE.Mesh( new THREE.PlaneBufferGeometry( targetwidth, targetheight ), new THREE.MeshBasicMaterial( { color: 0x7290)raw_html",R"raw_html(9A, side: THREE.DoubleSide }));
 	plane.position.x = targetwidth/2;
 	plane.position.y = targetheight/2;
 	scene_background.add( plane );
@@ -7501,16 +7509,16 @@ funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targ
 	// FIXME: Support for any number of triangles.
 	// material
 	var guniforms = {
-		tTex: { type: ')raw_html",R"raw_html(t', value: null },
+		tT)raw_html",R"raw_html(ex: { type: 't', value: null },
 		uClip: { type: 'v4', value: new THREE.Vector4() },
 	};
 	var gattributes = {
 		alpha: { type: 'f', value: null },
 	};
 	var material = new THREE.ShaderMaterial( {
-		uniforms: guniforms,        
+		uniforms: guniforms,
 		attributes: gattributes,
-		vertexShader: )raw_html",R"raw_html(ImVS,
+		vertexSha)raw_html",R"raw_html(der: ImVS,
 		fragmentShader: ImFS,
 		vertexColors: THREE.VertexColors,
 		transparent: true,
@@ -7522,19 +7530,19 @@ funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targ
 	var scenes = [];
 	var scene;
 	var geometry;
-	for(var i = 0; i < MAX_DRAW_LISTS; i++) {
-		)raw_html",R"raw_html(// scene
+	for(var i = 0; i < MAX_DRAW_LISTS; i++))raw_html",R"raw_html( {
+		// scene
 		scene = new THREE.Scene();
 		scenes.push(scene);
 		geometry = new THREE.BufferGeometry();
 		var MAX_TRIANGLES = 21844; // *3 ~= 65536
-		geometry.addAttribute( 'index',    new THREE.BufferAttribute( new Uint16Array ( MAX_TRIANGLES * 3 ), 1 ) );
-	)raw_html",R"raw_html(	geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
+		geometry.addAttribute( 'index',    new THREE.BufferAttribute( new Uint16Array ( MAX_TRIANGLES * 3 ), 1 ))raw_html",R"raw_html( );
+		geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
 		geometry.addAttribute( 'uv',       new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 2 * 3 ), 2 ) );
-		geometry.addAttribute( 'col)raw_html",R"raw_html(or',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
+		geometry.addAttribute()raw_html",R"raw_html( 'color',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
 		geometry.addAttribute( 'alpha',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 1     ), 1 ) );
 		geometry.dynamic = true;
-		geometry.offsets = [ { start)raw_html",R"raw_html(: 0, index: 0, count: 0 } ];
+		geometry.offsets = [ { )raw_html",R"raw_html(start: 0, index: 0, count: 0 } ];
 		geometries.push(geometry);
 
 		var mesh = new THREE.Mesh( geometry, material );
@@ -7547,7 +7555,7 @@ funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targ
 	let currentDrawList = [];
 
 	// geometry shortcuts
-	var gi)raw_html",R"raw_html(ndices;
+	v)raw_html",R"raw_html(ar gindices;
 	var gpositions;
 	var guvs;
 	var gcolors;
@@ -7561,80 +7569,80 @@ funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targ
 	// add to element
 	element.appendChild( renderer.domElement );
 
-	// canvas events (will send)raw_html",R"raw_html( to imgui)
+	// canvas events (will)raw_html",R"raw_html( send to imgui)
 	var elem = renderer.domElement;
-	 //FF doesn't recognize mousewheel as of FF3.x 
+	 //FF doesn't recognize mousewheel as of FF3.x
 	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel";
 	elem.addEventListener(mousewheelevt, onMouseWheel, false);
 
-	elem.addE)raw_html",R"raw_html(ventListener( 'mousemove', onMouseMove, false );
+	elem.)raw_html",R"raw_html(addEventListener( 'mousemove', onMouseMove, false );
 	elem.addEventListener( 'mousedown', onMouseDown, false );
 	elem.addEventListener( 'mouseup', onMouseUp, false );
 
 	elem.addEventListener( 'touchmove', onTouchMove, false );
-	elem.addEventListener( 'touchsta)raw_html",R"raw_html(rt', onTouchStart, false );
+	elem.addEventListener( 'touc)raw_html",R"raw_html(hstart', onTouchStart, false );
 	elem.addEventListener( 'touchend', onTouchEnd, false );
 
 	window.addEventListener( 'keydown', onKeyDown, false );
 	window.addEventListener( 'keyup', onKeyUp, false );
-	window.addEventListener( 'keypress', onKeyPress, false );
+	window.addEventListener( 'keypress', onKeyPress, false )raw_html",R"raw_html();
 
-)raw_html",R"raw_html(	window.addEventListener( 'paste', onPaste, false );
+	window.addEventListener( 'paste', onPaste, false );
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.oncontextmenu = document.body.oncontextmenu = function() { return false; };
 
 	// connect websocket to server
-	websocketConnect( serv)raw_html",R"raw_html(eruri );
+	websocketConnect( )raw_html",R"raw_html(serveruri );
 
 	// initial render
 	onRender();
 
 	// keep connected
 	setInterval(function() {
-		if ( !connecting && !connected ) {
+		if ( serverState == connectionState.Inactive ) {
 			websocketConnect( serveruri );
 		}
 	}, 5000);
 
 	// init websockets
 	function websocketConnect( serveruri ) {
-		console.log( "Rem)raw_html",R"raw_html(ote ImGui: Connecting to " + serveruri + "..." );
-		connecting = true;
-		connected = false;
+	)raw_html",R"raw_html(	console.log( "Remote ImGui: Connecting to " + serveruri + "..." );
+		serverState = connectionState.Connecting;
 		websocket = new WebSocket( serveruri );
 		websocket.binaryType = "arraybuffer";
 		websocket.onopen = function( evt ) {
-			console.log( "Remote ImGui: Connected" ))raw_html",R"raw_html(;
-			clientactive = false;
-			connecting = false;
-			connected = true;
-			websocket.send(String.fromCharCode(messageTypes.ImInit));
+			console.log( "Remote)raw_html",R"raw_html( ImGui: Connected" );
+			serverState = connectionState.Connected;
+			SendMessage(messageTypes.ImInit);
 			gclips.length = 0;
 		};
 		websocket.onclose = function( evt ) {
 			console.log( "Remote ImGui: Disconnected" );
-			client)raw_html",R"raw_html(active = false;
-			connecting = false;
-			connected = false;
+			serverState = connectionState.Inact)raw_html",R"raw_html(ive;
 			gclips.length = 0;
 		};
 		websocket.onmessage = function( evt ) {
 			if( typeof evt.data == "string" ) {
 				let messageType = evt.data.charCodeAt(0);
-				let messagePayload = evt.data.substri)raw_html",R"raw_html(ng(1);
-				if (messageType === messageTypes.RoomJoined) {
+				let messagePayload = evt.data.substring(1);
+				if (messageType === messageTypes.RoomJoined) )raw_html",R"raw_html({
 					roomInfo = JSON.parse(messagePayload);
 					console.log("Room joined", roomInfo);
 				}
 				else if (messageType === messageTypes.RoomUpdate) {
-					let roomUpdateMessage = JSON.parse(messagePa)raw_html",R"raw_html(yload);
-					roomInfo.connectionCount = roomUpdateMessage.connectionCount;
-					clientactive = roomInfo.connectionCount > 1;
+					let roomUpdateMessage = JSON.parse(messagePayload);
+					roomInfo.connectionCount = roomUpdateMessag)raw_html",R"raw_html(e.connectionCount;
+					if (roomInfo.connectionCount > 1) {
+						serverState = connectionState.Active;
+					}
+					else {
+						serverState = connectionState.Connected;
+					}
 					console.log("Room updated", roomInfo);
 				}
-				else if(messageType === messageTypes.ImInit) {
-					console.log( "ImInit OK" )raw_html",R"raw_html();
-					clientactive = true;
+				else if(messageType === m)raw_html",R"raw_html(essageTypes.ImInit) {
+					console.log( "ImInit OK" );
+					serverState = connectionState.Active;
 				}
 				else {
 					console.log( "Unknown message: " + evt.data );
@@ -7644,8 +7652,8 @@ funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targ
 				var data;
 				if( compressed ) {
 					// log decompress time
-					//var t = performance.now();
-					data = lz4.decompress( new Uint8A)raw_html",R"raw_html(rray( evt.data ) ).buffer;
+			)raw_html",R"raw_html(		//var t = performance.now();
+					data = lz4.decompress( new Uint8Array( evt.data ) ).buffer;
 					//console.log("Decompress: " + (performance.now() - t));
 				}
 				else {
@@ -7653,51 +7661,51 @@ funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targ
 				}
 
 				var stream = new DataStream( data );
-				// message type is the very start of the message
-				var type = { TEX_FONT :)raw_html",R"raw_html( 255, FRAME_KEY : 254, FRAME_DIFF : 253 };
+				// mess)raw_html",R"raw_html(age type is the very start of the message
+				var type = { TEX_FONT : 255, FRAME_KEY : 254, FRAME_DIFF : 253 };
 				var message_type = stream.readUint8();
 				switch( message_type ) {
 					// load font texture
 					case type.TEX_FONT:
-						var w = stream.readUint32();
+						var w = stream.)raw_html",R"raw_html(readUint32();
 						var h = stream.readUint32();
-						var src = new )raw_html",R"raw_html(Uint8Array( data, 9 );
+						var src = new Uint8Array( data, 9 );
 						// canvas
 						var canvas = document.createElement( 'canvas' );
 						canvas.id     = "CursorLayer";
 						canvas.width  = w;
 						canvas.height = h;
-						var ctx = canvas.getContext( '2d' );
-						var imageData = ctx.getIma)raw_html",R"raw_html(geData( 0, 0, w,h );
+						)raw_html",R"raw_html(var ctx = canvas.getContext( '2d' );
+						var imageData = ctx.getImageData( 0, 0, w,h );
 						var buf = new ArrayBuffer( imageData.data.length );
 						var buf8 = new Uint8ClampedArray( buf );
 						var data = new Uint32Array( buf );
-						for( var i = 0; i < w*h; i++ )
+						for( var i = 0)raw_html",R"raw_html(; i < w*h; i++ )
 							data[ i ] = ( src[ i ] << 24 ) | 0xFFFFFF;
-		)raw_html",R"raw_html(				imageData.data.set( buf8 );
+						imageData.data.set( buf8 );
 						ctx.putImageData( imageData, 0, 0 );
 						// texture
 						var map = new THREE.Texture( canvas );
 						map.needsUpdate = true;
-						map.minFilter = map.magFilter = THREE.NearestFilter;
-						guniforms.tTex.value = m)raw_html",R"raw_html(ap;
+						map.minFilter )raw_html",R"raw_html(= map.magFilter = THREE.NearestFilter;
+						guniforms.tTex.value = map;
 						break;
 					// full frame data
 					case type.FRAME_KEY:
 						onFrameMessage( stream );
 						prev_data = data;
 						break;
-					// use previous frame to compose current frame
+					// use previous frame to compose current frame)raw_html",R"raw_html(
 					case type.FRAME_DIFF:
-						var buffer = new Uint8Array( data ))raw_html",R"raw_html(;
+						var buffer = new Uint8Array( data );
 						var prev_buffer = new Uint8Array( prev_data );
 						for( var i = 1; i < buffer.length; i++ ) {
 							if( i < prev_buffer.length ) {
-								buffer[ i ] = buffer[ i ] + prev_buffer[ i ];
+								buffer[ i ] = buffer[ i ] + prev_buff)raw_html",R"raw_html(er[ i ];
 							}
 						}
 						onFrameMessage( stream );
-						prev_)raw_html",R"raw_html(data = data;
+						prev_data = data;
 						break;
 				}
 
@@ -7705,123 +7713,119 @@ funct)raw_html",R"raw_html(ion StartImgui( element, serveruri, targetwidth, targ
 		};
 		websocket.onerror = function( evt ) {
 			console.log( "ERROR: " + evt.data );
-			clientactive = false;
-			connecting = false;
-			connected = false;
-			gclips.length = 0;
+			serverState = connectionState.Inactive;
+			gclips.length = 0;)raw_html",R"raw_html(
 		};
 	}
 
 	function onWindowResize() {
-		w)raw_html",R"raw_html(idth = window.innerWidth;
-		height = window.innerHeight; 
+		width = window.innerWidth;
+		height = window.innerHeight;
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		camera = new THREE.OrthographicCamera( 0, width, 0, height, -1, 1 );
 		camera.position.z = 1;
-	}
+)raw_html",R"raw_html(	}
 
 	function onMouseMove( event ) {
-		if)raw_html",R"raw_html(( !event ) event = window.event;
-		
+		if( !event ) event = window.event;
+
 		if( camera_drag ) {
 			camera_offset.x += camera_drag_pos.x - event.clientX;
 			camera_offset.y += camera_drag_pos.y - event.clientY;
 			camera_drag_pos.x = event.clientX;
-			camera_drag_pos.y = event.clientY;
+			came)raw_html",R"raw_html(ra_drag_pos.y = event.clientY;
 		}
-		el)raw_html",R"raw_html(se {
+		else {
 			var x = event.clientX + camera.position.x;
 			var y = event.clientY + camera.position.y;
-			if( clientactive )
-				websocket.send(String.fromCharCode(messageTypes.ImMouseMove) + x + "," + y + "," + mouse.l + "," + mouse.r);
+			if( serverState == connectionState.Active ) {
+				SendText(messageTypes.ImMouseMove, x + "," + y + "," + mouse.l + ",)raw_html",R"raw_html(" + mouse.r);
+			}
 		}
 	}
 
-	function onMous)raw_html",R"raw_html(eDown( event ) {
+	function onMouseDown( event ) {
 		if( !event ) event = window.event;
 		event.preventDefault();
 		if( event.button == 0 ) mouse.l = 1;
 		if( event.button == 2 ) mouse.r = 1;
-		camera_drag = event.ctrlKey;
-		if( camera_drag ) {
+		camera_drag = event.ctrlKey && !mouse.l && mouse.r;
+	)raw_html",R"raw_html(	if( camera_drag ) {
 			camera_drag_pos.x = event.clientX;
-			came)raw_html",R"raw_html(ra_drag_pos.y = event.clientY;
+			camera_drag_pos.y = event.clientY;
 		}
-		else if( clientactive ) {
-			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + mouse.l + "," + mouse.r);
+		else if( serverState == connectionState.Active ) {
+			SendText(messageTypes.ImMousePress, mouse.l + "," + mouse.r);
 		}
 	}
 
-	function onMouseUp( event ) {
+	function onMouseUp( event ) )raw_html",R"raw_html({
 		if( !event ) event = window.event;
-		event.preventDefault())raw_html",R"raw_html(;
+		event.preventDefault();
 		if( event.button == 0 ) mouse.l = 0;
 		if( event.button == 2 ) mouse.r = 0;
 		if( camera_drag ) {
 			camera_drag = false;
 		}
-		else if (clientactive) {
-			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + mouse.l + "," + mouse.r);
+		else if ( serverState == connectionState.Active ) {
+			SendTe)raw_html",R"raw_html(xt(messageTypes.ImMousePress, mouse.l + "," + mouse.r);
 		}
-	})raw_html",R"raw_html(
+	}
 
 var getPointerEvent = function(event) {
 	return event.originalEvent.targetTouches ? event.originalEvent.targetTouches[0] : event;
 };
-var touchStarted = false, // detect if a touch event is started
+var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html(rted
 	currX = 0,
 	currY = 0,
 	cachedX = 0,
 	cachedY = 0,
-	touc)raw_html",R"raw_html(hDragging = false,
+	touchDragging = false,
 	touchInertial = false,
 	touchPressTimeout;
 
 	function onTouchStart( event ) {
 		if( !event ) event = window.event;
-		event.preventDefault(); 
-		var pointer =  event; //getPointerEvent(event);
+		event.preventDefault();
+		var pointer =  event; //getPoin)raw_html",R"raw_html(terEvent(event);
 		if(touchInertial) {
-			clearInterval(ticke)raw_html",R"raw_html(r);
+			clearInterval(ticker);
 			touchInertial = false;
 		}
 		// caching the current x
 		cachedX = currX = pointer.pageX;
 		// caching the current y
 		cachedY = currY = pointer.pageY;
-		// a touch event is detected      
-		websocket.send(String.fromCharCode(messageTypes.ImMouseMove)raw_html",R"raw_html() + currX + "," + currY + ",0,0");
+		// a touch event is detected
+		Send)raw_html",R"raw_html(Text(messageTypes.ImMouseMove, currX + "," + currY + ",0,0");
 
 		setTimeout(function (){
 			touchStarted = true;
-			//if ((cachedX === currX) && !touchStarted && (cachedY === currY)) 
-			//console.log("50ms ImMousePress=1,0");
-			websocket.send(String.fromCharCode(messageTypes.ImMou)raw_html",R"raw_html(sePress) +"1,0");
+			SendText(messageTypes.ImMousePress, "1,0");
 			// detecting if after 200ms the finger is still in the same position
-			clearTimeout(touchPressTimeout);
+			clearTimeout(touchPre)raw_html",R"raw_html(ssTimeout);
 			touchPressTimeout = setTimeout(function () {
 				if ((cachedX === currX) && (cachedY === currY)) {
-					//console.log("200ms Im)raw_html",R"raw_html(MousePress=0,0");
-					websocket.send(String.fromCharCode(messageTypes.ImMousePress) + "0,0");
+					SendText(messageTypes.ImMousePress, "0,0");
 					touchStarted = false;
 				}
 			},150);
 		},50);
 	}
-	var amplitude, initialVelocity, step, ticker, position, timeConstant = 325, scaleFactor = 2, updateInter)raw_html",R"raw_html(val = 20;
+	var amplitude, initialVelocity, step)raw_html",R"raw_html(, ticker, position, timeConstant = 325, scaleFactor = 2, updateInterval = 20;
 	function onTouchEnd( event ) {
 		if( !event ) event = window.event;
 		event.preventDefault();
 		// here we can consider finished the touch event
 		if(touchDragging) {
-			amplitude = initialVelocity * scaleFactor;
-			targetPosition = position + a)raw_html",R"raw_html(mplitude;
+			amplitu)raw_html",R"raw_html(de = initialVelocity * scaleFactor;
+			targetPosition = position + amplitude;
 			timestamp = Date.now();
 			touchInertial = true;
 			ticker = setInterval(function() {
 				var elapsed = Date.now() - timestamp;
-				mouse.w = amplitude * Math.exp(-elapsed / timeConstant);
-				websocket.send(String.fromCharCode(messageTypes.Im)raw_html",R"raw_html(MouseWheelDelta) + mouse.w);
+				mouse.w = amplitude * Math.exp(-elapsed / t)raw_html",R"raw_html(imeConstant);
+				SendText(messageTypes.ImMouseWheelDelta, mouse.w);
 				position = targetPosition - mouse.w;
 				if (elapsed > 6 * timeConstant) {
 					touchInertial = false;
@@ -7829,30 +7833,29 @@ var touchStarted = false, // detect if a touch event is started
 				}
 			}, updateInterval);
 		}
-		else if(touchStarted) {
-			clearTimeout(touchPressTimeout)raw_html",R"raw_html();
-			//console.log("ontouchend ImMousePress=0,0");
-			websocket.send(String.fromCharCode(messageTypes.ImMousePress) + "0,0");
+		else if(touchStar)raw_html",R"raw_html(ted) {
+			clearTimeout(touchPressTimeout);
+			SendText(messageTypes.ImMousePress, "0,0");
 		}
 		touchStarted = false;
 		touchDragging = false;
 	}
 
-	function onTouchMove( event ) 
+	function onTouchMove( event )
 	{
 		if( !event ) event = window.event;
-)raw_html",R"raw_html(		event.preventDefault();
-		var pointer = event; //getPointerEvent(e);
+		event.preventDefault();
+		var pointe)raw_html",R"raw_html(r = event; //getPointerEvent(e);
 		currX = pointer.pageX;
 		currY = pointer.pageY;
 		if(touchStarted) {
 			// here you are swiping
-			if( clientactive ) {
+			if( serverState == connectionState.Active ) {
 				touchDragging = true;
-				var diffY = (currY - cachedY) * 5)raw_html",R"raw_html(;
-				cachedY = currY;
+				var diffY = (currY - cachedY) * 5;
+				cachedY)raw_html",R"raw_html( = currY;
 				initialVelocity = diffY;
-				websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + diffY);
+				SendText(messageTypes.ImMouseWheelDelta, diffY);
 			}
 		}
 	}
@@ -7860,21 +7863,21 @@ var touchStarted = false, // detect if a touch event is started
 	function onMouseWheel( event ) {
 		if( !event ) event = window.event;
 		event.preventDefault();
-		if( clienta)raw_html",R"raw_html(ctive ) {
-			mouse.w=event.detail? event.detail*(-120)/4 : event.wheelDelta;
-			websocket.send(String.fromCharCode(messageTypes.ImMouseWheelDelta) + mouse.w);
+		if( serverState == connectionState.Active ) {
+			mou)raw_html",R"raw_html(se.w=event.detail? event.detail*(-120)/4 : event.wheelDelta;
+			SendText(messageTypes.ImMouseWheelDelta, mouse.w);
 		}
 	}
 
 	var osxCommandKey = false;
 	function isSpecialKey(event) {
 		var key = event.which;
-		if)raw_html",R"raw_html(( (key < 32)
-		 || (key >= 33 && key <= 40) // PageUp, PageDown, End, Home, and Arrows
+		if( (key < 32)
+		 || (key >= 33 && key <= 40) )raw_html",R"raw_html(// PageUp, PageDown, End, Home, and Arrows
 		 || (key >= 45 && key <= 46) // Insert, Delete, and Mac Backspace
 		 || (key == 91 && event.metaKey) // Mac Command (Left)
-		 || (key == 93 && event.metaKey) // Mac Co)raw_html",R"raw_html(mmand (Right)
-		 || (key >= 112 && key <= 123)
+		 || (key == 93 && event.metaKey) // Mac Command (Right)
+		 || (key >= 112 && key <= 12)raw_html",R"raw_html(3)
 			) {
 			return true;
 		}
@@ -7882,8 +7885,8 @@ var touchStarted = false, // detect if a touch event is started
 		 && (key == 'a' || key == 'A' // Select all
 		 ||  key == 'c' || key == 'C' // Copy
 		 ||  key == 'v' || key == 'V' // Paste
-		 ||  key == ')raw_html",R"raw_html(x' || key == 'X' // Cut
-		 ||  key == 'y' || key == 'Y' // Redo
+		 ||  key == 'x' || key == 'X' // Cut
+		 ||  key == 'y' ||)raw_html",R"raw_html( key == 'Y' // Redo
 		 ||  key == 'z' || key == 'Z')// Undo
 			) {
 			return true;
@@ -7894,40 +7897,40 @@ var touchStarted = false, // detect if a touch event is started
 	function onKey( event, messageType ) {
 		if( !event ) event = window.event;
 
-		// If end (ImKeyUp) of Ma)raw_html",R"raw_html(c Command
+		// If end (ImKeyUp) of Mac Command
 		var key = event.which;
-		if (messageType === messageTypes.ImKeyUp) {
+		if (mes)raw_html",R"raw_html(sageType === messageTypes.ImKeyUp) {
 			if( (key == 91 && event.metaKey) // Mac Command (Left)
 			 || (key == 93 && event.metaKey) // Mac Command (Right)
 				) {
 				osxCommandKey = false;
-				event.ctrlKey = fal)raw_html",R"raw_html(se;
+				event.ctrlKey = false;
 			}
 		}
-		// If start (ImKeyDown) or hold (ImKeyPress) of Mac Command
+		// If start (ImKeyDown) or ho)raw_html",R"raw_html(ld (ImKeyPress) of Mac Command
 		else {
 			if( (key == 91 && event.metaKey) // Mac Command (Left)
 			 || (key == 93 && event.metaKey) // Mac Command (Right)
 				) {
 				osxCommandKey = true;
-				event.ctrlKey = t)raw_html",R"raw_html(rue;
+				event.ctrlKey = true;
 			}
 		}
 
-		// If someone is listening, tell them what happened
-		if ( clientactive ) {
+		// If someone is listening,)raw_html",R"raw_html( tell them what happened
+		if ( serverState == connectionState.Active ) {
 			var isShift = event.shiftKey ? 1 : 0;
 			var isCtrl = (event.ctrlKey || osxCommandKey) ? 1 : 0;
-			// Special keys will need to be translated into ImGuiKey_ enu)raw_html",R"raw_html(m values to handled correctly
-			websocket.send( String.fromCharCode(messageType) + event.which + "," + isShift + "," + isCtrl );
+			// Special keys will need to be translated into ImGuiKey_ enum values to handled)raw_html",R"raw_html( correctly
+			SendText(messageType, event.which + "," + isShift + "," + isCtrl);
 		}
 	}
 
 	function onKeyDown( event ) {
 		// Only process special keystrokes manually
-		// (don't let them spill to other handl)raw_html",R"raw_html(ers)
+		// (don't let them spill to other handlers)
 		if (isSpecialKey(event)) {
-			event.preventDefault();
+			event.preven)raw_html",R"raw_html(tDefault();
 		}
 
 		onKey( event, messageTypes.ImKeyDown );
@@ -7938,27 +7941,27 @@ var touchStarted = false, // detect if a touch event is started
 	}
 
 	function onKeyUp( event ) {
-		onKey( event, messageTypes.ImKeyUp)raw_html",R"raw_html( );
+		onKey( event, messageTypes.ImKeyUp );
 		event.preventDefault();
 	}
 
-	function onPaste( event ) {
+	function onPas)raw_html",R"raw_html(te( event ) {
 		if (!event) event = window.event;
 		event.preventDefault();
 
 		if (event.which != 0) {
-			if( clientactive ) {
+			if( serverState == connectionState.Active ) {
 				// Place the text on the clipboard
-				websocket.send(String.fromCharCode(me)raw_html",R"raw_html(ssageTypes.ImClipboard) + event.clipboardData.getData('Text') );
+				SendText(messageTypes.ImClipboard, event.clipboardData.getDat)raw_html",R"raw_html(a('Text'));
 				// Simulate the paste keystroke
-				setTimeout( function(){ websocket.send( String.fromCharCode(messageTypes.ImKeyDown) + "86,0,1" ) }, 100 );
+				setTimeout( function(){ SendText(messageTypes.ImKeyDown, "86,0,1"); }, 100 );
 			}
 		}
 	}
 
-	function onFrameMessage( strea)raw_html",R"raw_html(m ) {
+	function onFrameMessage( stream ) {
 		// If the client is not active, don't process the frame
-		if(!clientactive) {
+		if( serverState )raw_html",R"raw_html(!= connectionState.Active ) {
 			return;
 		}
 
@@ -7969,39 +7972,39 @@ var touchStarted = false, // detect if a touch event is started
 		for(var l = 0 ; l < glistcount; l++)
 		{
 			let drawCommand = {};
-			geometry = geometries)raw_html",R"raw_html([l];
+			geometry = geometries[l];
 			drawCommand.gcmdcount = stream.readUint32();
-			drawCommand.gvtxcount = stream.readUint32();
+			)raw_html",R"raw_html(drawCommand.gvtxcount = stream.readUint32();
 			drawCommand.gidxcount = stream.readUint32();
 			drawCommand.gindices = geometry.attributes.index.array;
-			drawCommand.gpositions = geometry.attributes.)raw_html",R"raw_html(position.array;
-			drawCommand.guvs = geometry.attributes.uv.array;
+			drawCommand.gpositions = geometry.attributes.position.array;
+			drawCommand.guvs = geometry.attribute)raw_html",R"raw_html(s.uv.array;
 			drawCommand.gcolors = geometry.attributes.color.array;
 			drawCommand.galphas = geometry.attributes.alpha.array;
 			drawCommand.gclips = [];
 			drawCommand.gclips.length = 0;
-			drawCom)raw_html",R"raw_html(mand.curElem = 0;
+			drawCommand.curElem = 0;
 			// command lists
-			for( var i = 0; i < drawCommand.gcmdcount; i++ ) {
+			for( var i = 0;)raw_html",R"raw_html( i < drawCommand.gcmdcount; i++ ) {
 				var num = stream.readUint32();
 				var x = stream.readFloat32();
 				var y = stream.readFloat32();
 				var w = stream.readFloat32();
-				var h = stream.readFloa)raw_html",R"raw_html(t32();
-				drawCommand.gclips.push( { start: drawCommand.curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
+				var h = stream.readFloat32();
+				drawCommand.gclips.push( { start: drawCommand)raw_html",R"raw_html(.curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
 				drawCommand.curElem += num;
 			}
 			// all vertices
 			for( var i = 0; i < drawCommand.gvtxcount; i++ ) {
-				addVtx(draw)raw_html",R"raw_html(Command, stream, i );
+				addVtx(drawCommand, stream, i );
 			}
-			for( var i = 0; i < drawCommand.gidxcount; i++ ) {
+			for( var i = 0; i < drawCo)raw_html",R"raw_html(mmand.gidxcount; i++ ) {
 				addIdx(drawCommand, stream, i );
 			}
 			geometry.attributes.position.needsUpdate = true;
 			geometry.attributes.uv.needsUpdate = true;
-			geometry.attributes.color.needsU)raw_html",R"raw_html(pdate = true;
-			geometry.attributes.alpha.needsUpdate = true;
+			geometry.attributes.color.needsUpdate = true;
+			geometry.attributes.alpha.needsUpdate =)raw_html",R"raw_html( true;
 			geometry.attributes.index.needsUpdate = true;
 
 			newDrawList.push(drawCommand);
@@ -8010,18 +8013,18 @@ var touchStarted = false, // detect if a touch event is started
 	}
 
 	function addVtx(drawCommand, stream, idx ) {
-		var vidx = i)raw_html",R"raw_html(dx*3;
+		var vidx = idx*3;
 		var uidx = idx*2;
 		var cidx = idx*3;
-		var aidx = idx;
+		var aidx)raw_html",R"raw_html( = idx;
 		drawCommand.gpositions[ vidx+0 ] = stream.readInt16AsFloat32();
 		drawCommand.gpositions[ vidx+1 ] = stream.readInt16AsFloat32();
 		drawCommand.gpositions[ vidx+2 ] = 0;
-		drawCommand.guvs  )raw_html",R"raw_html(    [ uidx+0 ] = stream.readInt16pAsFloat32();
-		drawCommand.guvs      [ uidx+1 ] = 1 - stream.readInt16pAsFloat32();
+		drawCommand.guvs      [ uidx+0 ] = stream.readInt16pAsFloat32();
+		drawCom)raw_html",R"raw_html(mand.guvs      [ uidx+1 ] = 1 - stream.readInt16pAsFloat32();
 		drawCommand.gcolors   [ cidx+0 ] = stream.readUint8AsFloat32();
 		drawCommand.gcolors   [ cidx+1 ] = stream.readUint8AsFloat32();
-		draw)raw_html",R"raw_html(Command.gcolors   [ cidx+2 ] = stream.readUint8AsFloat32();
+		drawCommand.gcolors   [ cidx+2 ] = stream.readUint8AsFloat32)raw_html",R"raw_html(();
 		drawCommand.galphas   [ aidx   ] = stream.readUint8AsFloat32();
 	}
 
@@ -8030,59 +8033,59 @@ var touchStarted = false, // detect if a touch event is started
 	}
 
 	function onRender() {
-)raw_html",R"raw_html(		if(onRenderBackground()) {
-			for(var l in currentDrawList) {
+		if(onRenderBackground()) {
+			for(var l in currentDraw)raw_html",R"raw_html(List) {
 				var drawCommand = currentDrawList[l];
 				gcmdcount = drawCommand.gcmdcount;
 				gvtxcount = drawCommand.gvtxcount;
 				gidxcount = drawCommand.gidxcount;
-				gindices = drawCommand.gindic)raw_html",R"raw_html(es;
+				gindices = drawCommand.gindices;
 				gpositions = drawCommand.gpositions;
-				guvs = drawCommand.guvs;
+				guvs = )raw_html",R"raw_html(drawCommand.guvs;
 				gcolors = drawCommand.gcolors;
 				galphas = drawCommand.galphas;
 				gclips = drawCommand.gclips;
 				curElem = drawCommand.curElem;
 				geometry = geometries[l];
-				
-				onRen)raw_html",R"raw_html(derTriangles(scenes[l]);
+
+				onRenderTriangles(scenes[l]);
 			}
 		}
-		requestAnimationFrame(onRender);
+		requestAnimationFrame(on)raw_html",R"raw_html(Render);
 	}
 
 	function onRenderBackground() {
 		renderer.enableScissorTest(false);
 		// darken background when inactive
-		renderer.setClearColor( clientactive ? 0x72909A : 0x444444 );
-		renderer.c)raw_html",R"raw_html(lear( true, true, false );
+		renderer.setClearColor( serverState == connectionState.Active ? 0x72909A : 0x444444 );
+		renderer.clear( true, true, false );
 
-		if (clientactive) {
+		if ( )raw_html",R"raw_html(serverState == connectionState.Active ) {
 			// render background (visual reference of device canvas)
 			renderer.render( scene_background, camera );
 		}
 
-		return clientactive;
+		return serverState == connectionState.Active;
 	}
 
 	function onRenderTriangles(scene)
 	{
-		camera.position.x = camera)raw_html",R"raw_html(_offset.x;
+		camera.po)raw_html",R"raw_html(sition.x = camera_offset.x;
 		camera.position.y = camera_offset.y;
 		renderer.enableScissorTest(true);
 		// render command lists (or selected one)
 		for( var i = 0; i < gclips.length; i++ )
 		{
 			geometry.offsets[ 0 ].start = gclips[ i ].start;
-			geometry.offsets[ 0 ].in)raw_html",R"raw_html(dex = gclips[ i ].index;
+			geometr)raw_html",R"raw_html(y.offsets[ 0 ].index = gclips[ i ].index;
 			geometry.offsets[ 0 ].count = gclips[ i ].count;
 
 			renderer.setScissor(
 				gclips[ i ].clip.x,
 				(height - gclips[ i ].clip.w),
 				(gclips[ i ].clip.z - gclips[ i ].clip.x),
-				(gclips[ i ].clip.w - gclips[ i ].clip.y)
-		)raw_html",R"raw_html(		);
+				(gclips[ i ].clip.w - gclip)raw_html",R"raw_html(s[ i ].clip.y)
+				);
 
 			renderer.render( scene, camera );
 		}
@@ -8095,7 +8098,7 @@ var touchStarted = false, // detect if a touch event is started
 		}
 		else {
 			var idx = parseInt( value ) - 1;
-			camera_offset.x = Math.round( - 50 + ( gcl)raw_html",R"raw_html(ips[ idx ].clip.x + 1 ) * width / 2.0 );
+			camera_offset.x = Math.ro)raw_html",R"raw_html(und( - 50 + ( gclips[ idx ].clip.x + 1 ) * width / 2.0 );
 			camera_offset.y = Math.round( - 50 + ( gclips[ idx ].clip.y + 1 ) * height / 2.0 );
 		}
 	}
@@ -8110,8 +8113,8 @@ body {
 	margin		: 0;
 
 	color		: #222;
-	background-color: #333;
-})raw_html",R"raw_html(
+	backgrou)raw_html",R"raw_html(nd-color: #333;
+}
 .form-style-6{
 	font: 100% Arial, Helvetica, sans-serif;
 	max-width: 300px;
@@ -8124,8 +8127,8 @@ body {
 	padding: 15px 0;
 	font-size: 100%;
 	font-weight: 100;
-	text-align: center;
-	co)raw_html",R"raw_html(lor: #fff;
+	text-a)raw_html",R"raw_html(lign: center;
+	color: #fff;
 	margin: -16px -16px 16px -16px;
 }
 .form-style-6 input[type="text"],
@@ -8133,16 +8136,16 @@ body {
 .form-style-6 input[type="datetime"],
 .form-style-6 input[type="email"],
 .form-style-6 input[type="number"],
-.form-style-6 input[type="search")raw_html",R"raw_html(],
+.form-style-6 in)raw_html",R"raw_html(put[type="search"],
 .form-style-6 input[type="time"],
 .form-style-6 input[type="url"],
 .form-style-6 textarea,
-.form-style-6 select 
+.form-style-6 select
 {
 	-webkit-transition: all 0.30s ease-in-out;
 	-moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-out;
-	-o-transitio)raw_html",R"raw_html(n: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-ou)raw_html",R"raw_html(t;
+	-o-transition: all 0.30s ease-in-out;
 	outline: none;
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -8153,15 +8156,15 @@ body {
 	border: 1px solid #ccc;
 	padding: 2%;
 	color: #555;
-	text-align: center;)raw_html",R"raw_html(
+	tex)raw_html",R"raw_html(t-align: center;
 	font: 100% Arial, Helvetica, sans-serif;
 }
 .form-style-6 input[type="text"]:focus,
 .form-style-6 input[type="date"]:focus,
 .form-style-6 input[type="datetime"]:focus,
 .form-style-6 input[type="email"]:focus,
-.form-style-6 input[type="number"]:focus,
-.for)raw_html",R"raw_html(m-style-6 input[type="search"]:focus,
+.form-style-6 input[type="numb)raw_html",R"raw_html(er"]:focus,
+.form-style-6 input[type="search"]:focus,
 .form-style-6 input[type="time"]:focus,
 .form-style-6 input[type="url"]:focus,
 .form-style-6 textarea:focus,
@@ -8169,9 +8172,9 @@ body {
 {
 	box-shadow: 0 0 5px #409FC1;
 	padding: 3%;
-	border: 1px solid #409FC1;
+	border: 1px solid #)raw_html",R"raw_html(409FC1;
 }
-.butto)raw_html",R"raw_html(n{
+.button{
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -8181,7 +8184,7 @@ body {
 	border-bottom: 2px solid #3080AF;
 	border-top-style: none;
 	border-right-style: none;
-	border-left-style: none;   )raw_html",R"raw_html( 
+	border-left)raw_html",R"raw_html(-style: none;
 	color: #fff;
 }
 .form-style-6 input[type="submit"]:hover,
@@ -8196,13 +8199,13 @@ body {
 </style>
 
 <style>
-	#imgui_container
+	#imgui_contain)raw_html",R"raw_html(er
 	{
-		touc)raw_html",R"raw_html(h-action: none; /* Disable touch behaviors, like pan and zoom */
+		touch-action: none; /* Disable touch behaviors, like pan and zoom */
 	}
-	body 
+	body
 	{
-		position: fixed; 
+		position: fixed;
 		overflow-y: scroll;
 		width: 100%;
 	}
@@ -8212,7 +8215,7 @@ body {
 <body>
 	<div id="imgui_container"></div>
 	<script>
-		document.addEventListener('DOMContentLoaded', f)raw_html",R"raw_html(unction () {
+		document.addEventListener('DOMContent)raw_html",R"raw_html(Loaded', function () {
 			StartImgui( document.getElementById( 'imgui_container' ), "ws://" + window.location.hostname + ":" + window.location.port, 1920, 1080, true );
 		});
 
@@ -8220,8 +8223,8 @@ body {
 		{
 			event.preventDefault();
 		}
-	</script>
-</b)raw_html",R"raw_html(ody>
+	</s)raw_html",R"raw_html(cript>
+</body>
 </html>
 )raw_html",
 };

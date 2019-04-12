@@ -79,11 +79,6 @@ namespace imgui {
 
 	void RemoteImGuiServer::_handleMessage(RemoteMessageType messageType, const void * data, int size) {
 		switch (messageType) {
-			case RemoteMessageType::RelayRoomJoined:
-			case RemoteMessageType::RelayRoomUpdate: {
-				// Valid, but unhandled
-				break;
-			}
 			case RemoteMessageType::ImInit: {
 				// If not active, don't process input
 				if (!_getIsActive()) {
@@ -97,21 +92,20 @@ namespace imgui {
 				}
 				break;
 			}
+			case RemoteMessageType::RelayRoomJoined:
+			case RemoteMessageType::RelayRoomUpdate:
 			case RemoteMessageType::ImMouseMove:
 			case RemoteMessageType::ImMousePress:
 			case RemoteMessageType::ImMouseWheelDelta:
 			case RemoteMessageType::ImKeyDown:
 			case RemoteMessageType::ImKeyUp:
 			case RemoteMessageType::ImKeyPress:
-			case RemoteMessageType::ImClipboard: {
-				// Handling other messages is not specific to relay servers
+			case RemoteMessageType::ImClipboard:
+			default: {
+				// Handling other messages is not specific to local servers
+				// Unhandled messages will be logged in upward implementation
 				RemoteImGui::_handleMessage(messageType, data, size);
 				break;
-			}
-			default: {
-				mDebug("Unsupported message type: " + std::to_string((unsigned char)messageType));
-				assert(0);
-				return;
 			}
 		}
 	}

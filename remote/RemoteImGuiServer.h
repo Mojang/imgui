@@ -13,6 +13,7 @@
 #ifdef IMGUI_ENABLED
 
 namespace imgui {
+	// Hosts a remote ImGUI interface through http://localhost:7002/
 	class RemoteImGuiServer : public RemoteImGui, public IWebSocketServer {
 	public:
 		RemoteImGuiServer() = default;
