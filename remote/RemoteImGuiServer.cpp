@@ -77,18 +77,17 @@ namespace imgui {
 		SendBinary(frame.data, frame.size);
 	}
 
+	void RemoteImGuiServer::_sendText(const std::string& str) {
+		SendText(str.c_str(), static_cast<int>(str.size()));
+	}
+
 	void RemoteImGuiServer::_handleMessage(RemoteMessageType messageType, const void * data, int size) {
 		switch (messageType) {
 			case RemoteMessageType::ImInit: {
 				// If not active, don't process input
 				if (!_getIsActive()) {
 					mIsClientActive = true;
-
-					// ImGUI initialization request received - send init data
-					SendText(&messageType, 1);
-
-					// Send font texture
-					_sendFontFrame();
+					RemoteImGui::_handleMessage(messageType, data, size);
 				}
 				break;
 			}
@@ -101,6 +100,7 @@ namespace imgui {
 			case RemoteMessageType::ImKeyUp:
 			case RemoteMessageType::ImKeyPress:
 			case RemoteMessageType::ImClipboard:
+			case RemoteMessageType::ImCanvasUpdate:
 			default: {
 				// Handling other messages is not specific to local servers
 				// Unhandled messages will be logged in upward implementation

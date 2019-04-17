@@ -30,6 +30,7 @@ namespace imgui {
 	protected:
 		virtual bool _getIsActive() const override;
 		virtual void _sendFrame(const Frame& frame) override;
+		virtual void _sendText(const std::string& str) override;
 
 		void _handleMessage(RemoteMessageType messageType, const void *data, int size);
 

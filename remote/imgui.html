@@ -7283,11 +7283,16 @@ var ImguiGui = function() {
 };
 
 // Message types used by the relay server and ImGUI client - these need to be kept in-sync with the host
-var messageTypes = { RoomJoined: 0, RoomUpdate: 1, ImInit: 10, ImMouseMove: 11, ImMousePress: 12, ImMouseWheelDelta: 13, ImKeyDown: 14, ImKeyUp: 15, ImKeyPress: 16, ImClipboard: 17 };
+var messageTypes = { RoomJoined: 0, RoomUpdate: 1, ImInit: 10, ImMouseMove: 11, ImMousePress: 12, ImMouseWheelDelta: 13, ImKeyDown: 14, ImKeyUp: 15, ImKeyPress: 16, ImClipboard: 17, ImCanvasUpdate: 18 };
 var roomInfo = { roomId: -1, connectionCount: 0};
-var connectionState = { Inactive: -1, Connecting: 0, Connected: 1, Active: 2  }
+var connectionState = { Inactive: -1, Connecting: 0, Connected: 1, Active: 2 }
 
-function StartImgui( element, serveruri, targetwidth, targetheight, compressed ) {
+// Only used in the relay repository
+//export function StartImguiRelay( element, serveruri, targetwidth, targetheight, compressed ) {
+//	StartImguiInternal( element, serveruri, targetwidth, targetheight, compressed );
+//}
+
+function StartImguiInternal( element, serveruri, targetwidth, targetheight, compressed ) {
 
 	if( !Detector.webgl ) {
 		Detector.addGetWebGLMessage();
@@ -7308,6 +7313,7 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 	var height = window.innerHeight;
 	var targetwidth = targetwidth;
 	var targetheight = targetheight;
+	displaySize = { x: 0, y: 1 };
 	var frame = 0;
 	var mouse = { x: 0, y: 0, l: 0, r: 0, w: 0, update: false };
 	var curElem;
@@ -7354,7 +7360,7 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		side: THREE.DoubleSide
 	} );
 
-	var MAX_DRAW_LISTS= 20;
+	var MAX_DRAW_LISTS = 20;
 	var geometries = [];
 	var scenes = [];
 	var scene;
@@ -7400,7 +7406,7 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 
 	// canvas events (will send to imgui)
 	var elem = renderer.domElement;
-	 //FF doesn't recognize mousewheel as of FF3.x
+	//FF doesn't recognize mousewheel as of FF3.x
 	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel";
 	elem.addEventListener(mousewheelevt, onMouseWheel, false);
 
@@ -7472,6 +7478,12 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 				else if(messageType === messageTypes.ImInit) {
 					console.log( "ImInit OK" );
 					serverState = connectionState.Active;
+				}
+				else if(messageType === messageTypes.ImCanvasUpdate) {
+					var displayXY = messagePayload.split(",");
+					displaySize.x = parseFloat(displayXY[0]);
+					displaySize.y = parseFloat(displayXY[0]);
+					console.log( "DisplaySize set to: [" + displaySize.x + "," + displaySize.y + "]" );
 				}
 				else {
 					console.log( "Unknown message: " + evt.data );
@@ -7884,7 +7896,14 @@ var touchStarted = false, // detect if a touch event is started
 	}
 
 	function onRenderBackground() {
-		renderer.enableScissorTest(false);
+		// Render a square to represent the canvas
+		renderer.enableScissorTest(true);
+		renderer.setScissor(
+			-camera.position.x,
+			camera.position.y + height - displaySize.y,
+			displaySize.x,
+			displaySize.y
+			);
 		// darken background when inactive
 		renderer.setClearColor( serverState == connectionState.Active ? 0x72909A : 0x444444 );
 		renderer.clear( true, true, false );
@@ -7910,25 +7929,13 @@ var touchStarted = false, // detect if a touch event is started
 			geometry.offsets[ 0 ].count = gclips[ i ].count;
 
 			renderer.setScissor(
-				gclips[ i ].clip.x,
-				(height - gclips[ i ].clip.w),
+				gclips[ i ].clip.x - camera.position.x,
+				(height - gclips[ i ].clip.w) + camera.position.y,
 				(gclips[ i ].clip.z - gclips[ i ].clip.x),
 				(gclips[ i ].clip.w - gclips[ i ].clip.y)
 				);
 
 			renderer.render( scene, camera );
-		}
-	}
-
-	function onFocusWindow( value ) {
-		if( value == 'Origin' ) {
-			camera_offset.x = 0;
-			camera_offset.y = 0;
-		}
-		else {
-			var idx = parseInt( value ) - 1;
-			camera_offset.x = Math.round( - 50 + ( gclips[ idx ].clip.x + 1 ) * width / 2.0 );
-			camera_offset.y = Math.round( - 50 + ( gclips[ idx ].clip.y + 1 ) * height / 2.0 );
 		}
 	}
 }
@@ -8045,7 +8052,7 @@ body {
 	<div id="imgui_container"></div>
 	<script>
 		document.addEventListener('DOMContentLoaded', function () {
-			StartImgui( document.getElementById( 'imgui_container' ), "ws://" + window.location.hostname + ":" + window.location.port, 1920, 1080, true );
+			StartImguiInternal( document.getElementById( 'imgui_container' ), "ws://" + window.location.hostname + ":" + window.location.port, 1920, 1080, true );
 		});
 
 		document.ontouchmove = function(event)

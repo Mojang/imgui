@@ -57,6 +57,27 @@ namespace imgui {
 
 	void RemoteImGui::_handleMessage(RemoteMessageType messageType, const void * data, int) {
 		switch (messageType) {
+			case RemoteMessageType::ImInit: {
+				// ImGUI initialization request received - send init data
+				std::stringstream s;
+				s << (unsigned char)RemoteMessageType::ImInit;
+				_sendText(s.str());
+
+				// Send the canvas information
+				ImGuiIO& io = ImGui::GetIO();
+				s.clear();
+				s.str(std::string());
+				s << (unsigned char)RemoteMessageType::ImCanvasUpdate;
+				s << io.DisplaySize.x;
+				s << ',';
+				s << io.DisplaySize.y;
+				_sendText(s.str());
+
+				// Send the font textures
+				_sendFontFrame();
+
+				break;
+			}
 			case RemoteMessageType::ImMouseMove: {
 				int x, y, mouse_left, mouse_right;
 				if (sscanf((char *)data, "%d,%d,%d,%d", &x, &y, &mouse_left, &mouse_right) == 4) {
@@ -105,7 +126,7 @@ namespace imgui {
 			}
 			case RemoteMessageType::RelayRoomJoined:
 			case RemoteMessageType::RelayRoomUpdate:
-			case RemoteMessageType::ImInit: {
+			case RemoteMessageType::ImCanvasUpdate: {
 				// Valid, but unhandled
 				break;
 			}
