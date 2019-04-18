@@ -148,6 +148,9 @@ namespace ImGui
     }
     static void ImGui::EndLayout(ImGuiLayoutType type)
     {
+        //unused parameter
+        type;
+
         ImGuiWindow* window = GetCurrentWindow();
         if (window == nullptr) {
             return;
@@ -282,8 +285,9 @@ namespace ImGui
     }
     static void ImGui::PopLayout(ImGuiLayout* layout)
     {
+
         ImGuiWindow* window = GetCurrentWindow();
-        if (window == nullptr) {
+        if (window == nullptr || layout == nullptr) {
             return;
         }
         IM_ASSERT(!window->DC.LayoutStack.empty());
@@ -621,6 +625,7 @@ namespace ImGui
     void ImGui::ResumeLayout()
     {
         ImGuiWindow* window = GetCurrentWindow();
+        window;
         IM_ASSERT(!window->DC.CurrentLayout);
         IM_ASSERT(!window->DC.LayoutStack.empty());
         PopLayout(NULL);
