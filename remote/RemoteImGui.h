@@ -51,6 +51,7 @@ namespace imgui {
 		ImKeyUp,
 		ImKeyPress,
 		ImClipboard,
+		ImCanvasUpdate,
 
 		// Bad message received
 		BadMessageType
@@ -76,6 +77,7 @@ namespace imgui {
 	protected:
 		virtual bool _getIsActive() const = 0;
 		virtual void _sendFrame(const Frame& frame) = 0;
+		virtual void _sendText(const std::string& str) = 0;
 
 		void _sendFontFrame();
 		void _sendDrawFrame(ImDrawList** const cmd_lists, int cmd_lists_count);

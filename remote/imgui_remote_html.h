@@ -7454,18 +7454,23 @@ var ImguiGui = function() {
 };
 
 // Message types used by the relay server and ImGUI client - these need to be kept in-sync)raw_html",R"raw_html( with the host
-var messageTypes = { RoomJoined: 0, RoomUpdate: 1, ImInit: 10, ImMouseMove: 11, ImMousePress: 12, ImMouseWheelDelta: 13, ImKeyDown: 14, ImKeyUp: 15, ImKeyPress: 16, ImClipboard: 17 };
-var roomInfo = { roomId: -1, connectionCount: 0};
-var con)raw_html",R"raw_html(nectionState = { Inactive: -1, Connecting: 0, Connected: 1, Active: 2  }
+var messageTypes = { RoomJoined: 0, RoomUpdate: 1, ImInit: 10, ImMouseMove: 11, ImMousePress: 12, ImMouseWheelDelta: 13, ImKeyDown: 14, ImKeyUp: 15, ImKeyPress: 16, ImClipboard: 17, ImCanvasUpdate: 18 };
+var roomInfo = { roomId: -1, connecti)raw_html",R"raw_html(onCount: 0};
+var connectionState = { Inactive: -1, Connecting: 0, Connected: 1, Active: 2 }
 
-function StartImgui( element, serveruri, targetwidth, targetheight, compressed ) {
+// Only used in the relay repository
+//export function StartImguiRelay( element, serveruri, targetwidth, targetheight, compressed ) {
+//	StartImguiInternal( elemen)raw_html",R"raw_html(t, serveruri, targetwidth, targetheight, compressed );
+//}
+
+function StartImguiInternal( element, serveruri, targetwidth, targetheight, compressed ) {
 
 	if( !Detector.webgl ) {
 		Detector.addGetWebGLMessage();
 	}
 
 	var websocket;
-	function SendText(m)raw_html",R"raw_html(essageType, text) {
+	function SendText(message)raw_html",R"raw_html(Type, text) {
 		websocket.send(String.fromCharCode(messageType) + text);
 	}
 	function SendMessage(messageType) {
@@ -7475,17 +7480,18 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 	var serverState = connectionState.Inactive;
 	var server;
 
-	var width = window.in)raw_html",R"raw_html(nerWidth;
+	var width = window.innerWid)raw_html",R"raw_html(th;
 	var height = window.innerHeight;
 	var targetwidth = targetwidth;
 	var targetheight = targetheight;
+	displaySize = { x: 0, y: 1 };
 	var frame = 0;
 	var mouse = { x: 0, y: 0, l: 0, r: 0, w: 0, update: false };
 	var curElem;
 	var prev_data;
-	var readyToRender = false;
+	var readyToR)raw_html",R"raw_html(ender = false;
 
-	var came)raw_html",R"raw_html(ra_offset = { x: 0, y: 0 };
+	var camera_offset = { x: 0, y: 0 };
 	var camera_drag = false;
 	var camera_drag_pos = { x: 0, y: 0 };
 
@@ -7495,21 +7501,21 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 	renderer.setSize( width, height );
 
 	// camera
-	var camera = new THREE.Ortho)raw_html",R"raw_html(graphicCamera( 0, width, 0, height, -1, 1 );
+	var)raw_html",R"raw_html( camera = new THREE.OrthographicCamera( 0, width, 0, height, -1, 1 );
 	camera.position.z = 1;
 
 	// plane
 	var scene_background = new THREE.Scene();
-	var plane = new THREE.Mesh( new THREE.PlaneBufferGeometry( targetwidth, targetheight ), new THREE.MeshBasicMaterial( { color: 0x7290)raw_html",R"raw_html(9A, side: THREE.DoubleSide }));
+	var plane = new THREE.Mesh( new THREE.PlaneBufferGeometry( targetwidth, targetheight ), new THREE.MeshBasic)raw_html",R"raw_html(Material( { color: 0x72909A, side: THREE.DoubleSide }));
 	plane.position.x = targetwidth/2;
 	plane.position.y = targetheight/2;
 	scene_background.add( plane );
 
 	// imgui dynamic geometry / meshes
 	// FIXME: Support for any number of triangles.
-	// material
+	// materia)raw_html",R"raw_html(l
 	var guniforms = {
-		tT)raw_html",R"raw_html(ex: { type: 't', value: null },
+		tTex: { type: 't', value: null },
 		uClip: { type: 'v4', value: new THREE.Vector4() },
 	};
 	var gattributes = {
@@ -7517,32 +7523,32 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 	};
 	var material = new THREE.ShaderMaterial( {
 		uniforms: guniforms,
-		attributes: gattributes,
-		vertexSha)raw_html",R"raw_html(der: ImVS,
+		attributes:)raw_html",R"raw_html( gattributes,
+		vertexShader: ImVS,
 		fragmentShader: ImFS,
 		vertexColors: THREE.VertexColors,
 		transparent: true,
 		side: THREE.DoubleSide
 	} );
 
-	var MAX_DRAW_LISTS= 20;
+	var MAX_DRAW_LISTS = 20;
 	var geometries = [];
 	var scenes = [];
 	var scene;
 	var geometry;
-	for(var i = 0; i < MAX_DRAW_LISTS; i++))raw_html",R"raw_html( {
+	for(var i = 0)raw_html",R"raw_html(; i < MAX_DRAW_LISTS; i++) {
 		// scene
 		scene = new THREE.Scene();
 		scenes.push(scene);
 		geometry = new THREE.BufferGeometry();
 		var MAX_TRIANGLES = 21844; // *3 ~= 65536
-		geometry.addAttribute( 'index',    new THREE.BufferAttribute( new Uint16Array ( MAX_TRIANGLES * 3 ), 1 ))raw_html",R"raw_html( );
+		geometry.addAttribute( 'index',    new THREE.BufferAttribute( new Uint16Array )raw_html",R"raw_html(( MAX_TRIANGLES * 3 ), 1 ) );
 		geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
-		geometry.addAttribute( 'uv',       new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 2 * 3 ), 2 ) );
-		geometry.addAttribute()raw_html",R"raw_html( 'color',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
+		geometry.addAttribute( 'uv',       new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 2 * 3 ), 2 ) ))raw_html",R"raw_html(;
+		geometry.addAttribute( 'color',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
 		geometry.addAttribute( 'alpha',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 1     ), 1 ) );
-		geometry.dynamic = true;
-		geometry.offsets = [ { )raw_html",R"raw_html(start: 0, index: 0, count: 0 } ];
+		geometry.dynamic = true;)raw_html",R"raw_html(
+		geometry.offsets = [ { start: 0, index: 0, count: 0 } ];
 		geometries.push(geometry);
 
 		var mesh = new THREE.Mesh( geometry, material );
@@ -7553,9 +7559,9 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 	scene = null;
 
 	let currentDrawList = [];
-
+)raw_html",R"raw_html(
 	// geometry shortcuts
-	v)raw_html",R"raw_html(ar gindices;
+	var gindices;
 	var gpositions;
 	var guvs;
 	var gcolors;
@@ -7567,32 +7573,32 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 	var gclips = [];
 
 	// add to element
-	element.appendChild( renderer.domElement );
+	element.appendChild( renderer.domElement ))raw_html",R"raw_html(;
 
-	// canvas events (will)raw_html",R"raw_html( send to imgui)
+	// canvas events (will send to imgui)
 	var elem = renderer.domElement;
-	 //FF doesn't recognize mousewheel as of FF3.x
+	//FF doesn't recognize mousewheel as of FF3.x
 	var mousewheelevt=(/Firefox/i.test(navigator.userAgent))? "DOMMouseScroll" : "mousewheel";
-	elem.addEventListener(mousewheelevt, onMouseWheel, false);
+	elem.addEventListener(mousewheelevt, onMo)raw_html",R"raw_html(useWheel, false);
 
-	elem.)raw_html",R"raw_html(addEventListener( 'mousemove', onMouseMove, false );
+	elem.addEventListener( 'mousemove', onMouseMove, false );
 	elem.addEventListener( 'mousedown', onMouseDown, false );
 	elem.addEventListener( 'mouseup', onMouseUp, false );
 
 	elem.addEventListener( 'touchmove', onTouchMove, false );
-	elem.addEventListener( 'touc)raw_html",R"raw_html(hstart', onTouchStart, false );
+	ele)raw_html",R"raw_html(m.addEventListener( 'touchstart', onTouchStart, false );
 	elem.addEventListener( 'touchend', onTouchEnd, false );
 
 	window.addEventListener( 'keydown', onKeyDown, false );
 	window.addEventListener( 'keyup', onKeyUp, false );
-	window.addEventListener( 'keypress', onKeyPress, false )raw_html",R"raw_html();
+	window.addEventListener( 'keyp)raw_html",R"raw_html(ress', onKeyPress, false );
 
 	window.addEventListener( 'paste', onPaste, false );
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.oncontextmenu = document.body.oncontextmenu = function() { return false; };
 
-	// connect websocket to server
-	websocketConnect( )raw_html",R"raw_html(serveruri );
+	// connect websocket to s)raw_html",R"raw_html(erver
+	websocketConnect( serveruri );
 
 	// initial render
 	onRender();
@@ -7605,33 +7611,33 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 	}, 5000);
 
 	// init websockets
-	function websocketConnect( serveruri ) {
-	)raw_html",R"raw_html(	console.log( "Remote ImGui: Connecting to " + serveruri + "..." );
+	function websocke)raw_html",R"raw_html(tConnect( serveruri ) {
+		console.log( "Remote ImGui: Connecting to " + serveruri + "..." );
 		serverState = connectionState.Connecting;
 		websocket = new WebSocket( serveruri );
 		websocket.binaryType = "arraybuffer";
-		websocket.onopen = function( evt ) {
-			console.log( "Remote)raw_html",R"raw_html( ImGui: Connected" );
+		websocket.onopen = function( evt ) )raw_html",R"raw_html({
+			console.log( "Remote ImGui: Connected" );
 			serverState = connectionState.Connected;
 			SendMessage(messageTypes.ImInit);
 			gclips.length = 0;
 		};
 		websocket.onclose = function( evt ) {
 			console.log( "Remote ImGui: Disconnected" );
-			serverState = connectionState.Inact)raw_html",R"raw_html(ive;
+			serverStat)raw_html",R"raw_html(e = connectionState.Inactive;
 			gclips.length = 0;
 		};
 		websocket.onmessage = function( evt ) {
 			if( typeof evt.data == "string" ) {
 				let messageType = evt.data.charCodeAt(0);
 				let messagePayload = evt.data.substring(1);
-				if (messageType === messageTypes.RoomJoined) )raw_html",R"raw_html({
+				if (messageType === )raw_html",R"raw_html(messageTypes.RoomJoined) {
 					roomInfo = JSON.parse(messagePayload);
 					console.log("Room joined", roomInfo);
 				}
 				else if (messageType === messageTypes.RoomUpdate) {
 					let roomUpdateMessage = JSON.parse(messagePayload);
-					roomInfo.connectionCount = roomUpdateMessag)raw_html",R"raw_html(e.connectionCount;
+					roomInfo.connectio)raw_html",R"raw_html(nCount = roomUpdateMessage.connectionCount;
 					if (roomInfo.connectionCount > 1) {
 						serverState = connectionState.Active;
 					}
@@ -7640,68 +7646,74 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 					}
 					console.log("Room updated", roomInfo);
 				}
-				else if(messageType === m)raw_html",R"raw_html(essageTypes.ImInit) {
+				)raw_html",R"raw_html(else if(messageType === messageTypes.ImInit) {
 					console.log( "ImInit OK" );
 					serverState = connectionState.Active;
+				}
+				else if(messageType === messageTypes.ImCanvasUpdate) {
+					var displayXY = messagePayload.split(",");
+					displaySize.x =)raw_html",R"raw_html( parseFloat(displayXY[0]);
+					displaySize.y = parseFloat(displayXY[0]);
+					console.log( "DisplaySize set to: [" + displaySize.x + "," + displaySize.y + "]" );
 				}
 				else {
 					console.log( "Unknown message: " + evt.data );
 				}
 			}
 			else {
-				var data;
+			)raw_html",R"raw_html(	var data;
 				if( compressed ) {
 					// log decompress time
-			)raw_html",R"raw_html(		//var t = performance.now();
+					//var t = performance.now();
 					data = lz4.decompress( new Uint8Array( evt.data ) ).buffer;
 					//console.log("Decompress: " + (performance.now() - t));
 				}
 				else {
-					data = evt.data;
+					data = evt.)raw_html",R"raw_html(data;
 				}
 
 				var stream = new DataStream( data );
-				// mess)raw_html",R"raw_html(age type is the very start of the message
+				// message type is the very start of the message
 				var type = { TEX_FONT : 255, FRAME_KEY : 254, FRAME_DIFF : 253 };
 				var message_type = stream.readUint8();
 				switch( message_type ) {
-					// load font texture
+					//)raw_html",R"raw_html( load font texture
 					case type.TEX_FONT:
-						var w = stream.)raw_html",R"raw_html(readUint32();
+						var w = stream.readUint32();
 						var h = stream.readUint32();
 						var src = new Uint8Array( data, 9 );
 						// canvas
 						var canvas = document.createElement( 'canvas' );
-						canvas.id     = "CursorLayer";
+						canvas.id     = "Curso)raw_html",R"raw_html(rLayer";
 						canvas.width  = w;
 						canvas.height = h;
-						)raw_html",R"raw_html(var ctx = canvas.getContext( '2d' );
+						var ctx = canvas.getContext( '2d' );
 						var imageData = ctx.getImageData( 0, 0, w,h );
 						var buf = new ArrayBuffer( imageData.data.length );
-						var buf8 = new Uint8ClampedArray( buf );
+						var buf8 = new Uint8ClampedArray( buf)raw_html",R"raw_html( );
 						var data = new Uint32Array( buf );
-						for( var i = 0)raw_html",R"raw_html(; i < w*h; i++ )
+						for( var i = 0; i < w*h; i++ )
 							data[ i ] = ( src[ i ] << 24 ) | 0xFFFFFF;
 						imageData.data.set( buf8 );
 						ctx.putImageData( imageData, 0, 0 );
 						// texture
-						var map = new THREE.Texture( canvas );
+						var map = new THREE.Text)raw_html",R"raw_html(ure( canvas );
 						map.needsUpdate = true;
-						map.minFilter )raw_html",R"raw_html(= map.magFilter = THREE.NearestFilter;
+						map.minFilter = map.magFilter = THREE.NearestFilter;
 						guniforms.tTex.value = map;
 						break;
 					// full frame data
 					case type.FRAME_KEY:
 						onFrameMessage( stream );
-						prev_data = data;
+						prev_data = data;)raw_html",R"raw_html(
 						break;
-					// use previous frame to compose current frame)raw_html",R"raw_html(
+					// use previous frame to compose current frame
 					case type.FRAME_DIFF:
 						var buffer = new Uint8Array( data );
 						var prev_buffer = new Uint8Array( prev_data );
 						for( var i = 1; i < buffer.length; i++ ) {
-							if( i < prev_buffer.length ) {
-								buffer[ i ] = buffer[ i ] + prev_buff)raw_html",R"raw_html(er[ i ];
+							if( i < pre)raw_html",R"raw_html(v_buffer.length ) {
+								buffer[ i ] = buffer[ i ] + prev_buffer[ i ];
 							}
 						}
 						onFrameMessage( stream );
@@ -7712,9 +7724,9 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 			}
 		};
 		websocket.onerror = function( evt ) {
-			console.log( "ERROR: " + evt.data );
+			console.log( "ERROR: " + evt.data );)raw_html",R"raw_html(
 			serverState = connectionState.Inactive;
-			gclips.length = 0;)raw_html",R"raw_html(
+			gclips.length = 0;
 		};
 	}
 
@@ -7722,24 +7734,24 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		width = window.innerWidth;
 		height = window.innerHeight;
 		renderer.setSize( window.innerWidth, window.innerHeight );
-		camera = new THREE.OrthographicCamera( 0, width, 0, height, -1, 1 );
+		camera = new THREE.Orthograph)raw_html",R"raw_html(icCamera( 0, width, 0, height, -1, 1 );
 		camera.position.z = 1;
-)raw_html",R"raw_html(	}
+	}
 
 	function onMouseMove( event ) {
 		if( !event ) event = window.event;
 
 		if( camera_drag ) {
 			camera_offset.x += camera_drag_pos.x - event.clientX;
-			camera_offset.y += camera_drag_pos.y - event.clientY;
+			camera_offset.y += camera_drag_pos)raw_html",R"raw_html(.y - event.clientY;
 			camera_drag_pos.x = event.clientX;
-			came)raw_html",R"raw_html(ra_drag_pos.y = event.clientY;
+			camera_drag_pos.y = event.clientY;
 		}
 		else {
 			var x = event.clientX + camera.position.x;
 			var y = event.clientY + camera.position.y;
 			if( serverState == connectionState.Active ) {
-				SendText(messageTypes.ImMouseMove, x + "," + y + "," + mouse.l + ",)raw_html",R"raw_html(" + mouse.r);
+				Se)raw_html",R"raw_html(ndText(messageTypes.ImMouseMove, x + "," + y + "," + mouse.l + "," + mouse.r);
 			}
 		}
 	}
@@ -7748,34 +7760,34 @@ function StartImgui( element, serveruri, targetwidth, targetheight, compressed )
 		if( !event ) event = window.event;
 		event.preventDefault();
 		if( event.button == 0 ) mouse.l = 1;
-		if( event.button == 2 ) mouse.r = 1;
+		if( event.button == 2 ) mou)raw_html",R"raw_html(se.r = 1;
 		camera_drag = event.ctrlKey && !mouse.l && mouse.r;
-	)raw_html",R"raw_html(	if( camera_drag ) {
+		if( camera_drag ) {
 			camera_drag_pos.x = event.clientX;
 			camera_drag_pos.y = event.clientY;
 		}
 		else if( serverState == connectionState.Active ) {
-			SendText(messageTypes.ImMousePress, mouse.l + "," + mouse.r);
+			SendText(messageTypes.ImMousePress)raw_html",R"raw_html(, mouse.l + "," + mouse.r);
 		}
 	}
 
-	function onMouseUp( event ) )raw_html",R"raw_html({
+	function onMouseUp( event ) {
 		if( !event ) event = window.event;
 		event.preventDefault();
 		if( event.button == 0 ) mouse.l = 0;
 		if( event.button == 2 ) mouse.r = 0;
 		if( camera_drag ) {
 			camera_drag = false;
-		}
+		)raw_html",R"raw_html(}
 		else if ( serverState == connectionState.Active ) {
-			SendTe)raw_html",R"raw_html(xt(messageTypes.ImMousePress, mouse.l + "," + mouse.r);
+			SendText(messageTypes.ImMousePress, mouse.l + "," + mouse.r);
 		}
 	}
 
 var getPointerEvent = function(event) {
-	return event.originalEvent.targetTouches ? event.originalEvent.targetTouches[0] : event;
+	return event.originalEvent.targetTouches ? event.originalEvent.targetTouches[0] : even)raw_html",R"raw_html(t;
 };
-var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html(rted
+var touchStarted = false, // detect if a touch event is started
 	currX = 0,
 	currY = 0,
 	cachedX = 0,
@@ -7785,9 +7797,9 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 	touchPressTimeout;
 
 	function onTouchStart( event ) {
-		if( !event ) event = window.event;
+		if( !event ) event = window.e)raw_html",R"raw_html(vent;
 		event.preventDefault();
-		var pointer =  event; //getPoin)raw_html",R"raw_html(terEvent(event);
+		var pointer =  event; //getPointerEvent(event);
 		if(touchInertial) {
 			clearInterval(ticker);
 			touchInertial = false;
@@ -7795,45 +7807,45 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 		// caching the current x
 		cachedX = currX = pointer.pageX;
 		// caching the current y
-		cachedY = currY = pointer.pageY;
+		cache)raw_html",R"raw_html(dY = currY = pointer.pageY;
 		// a touch event is detected
-		Send)raw_html",R"raw_html(Text(messageTypes.ImMouseMove, currX + "," + currY + ",0,0");
+		SendText(messageTypes.ImMouseMove, currX + "," + currY + ",0,0");
 
 		setTimeout(function (){
 			touchStarted = true;
 			SendText(messageTypes.ImMousePress, "1,0");
-			// detecting if after 200ms the finger is still in the same position
-			clearTimeout(touchPre)raw_html",R"raw_html(ssTimeout);
+			// detecting if after 200ms )raw_html",R"raw_html(the finger is still in the same position
+			clearTimeout(touchPressTimeout);
 			touchPressTimeout = setTimeout(function () {
 				if ((cachedX === currX) && (cachedY === currY)) {
 					SendText(messageTypes.ImMousePress, "0,0");
 					touchStarted = false;
-				}
+	)raw_html",R"raw_html(			}
 			},150);
 		},50);
 	}
-	var amplitude, initialVelocity, step)raw_html",R"raw_html(, ticker, position, timeConstant = 325, scaleFactor = 2, updateInterval = 20;
+	var amplitude, initialVelocity, step, ticker, position, timeConstant = 325, scaleFactor = 2, updateInterval = 20;
 	function onTouchEnd( event ) {
 		if( !event ) event = window.event;
 		event.preventDefault();
-		// here we can consider finished the touch event
+		// here we can c)raw_html",R"raw_html(onsider finished the touch event
 		if(touchDragging) {
-			amplitu)raw_html",R"raw_html(de = initialVelocity * scaleFactor;
+			amplitude = initialVelocity * scaleFactor;
 			targetPosition = position + amplitude;
 			timestamp = Date.now();
 			touchInertial = true;
 			ticker = setInterval(function() {
-				var elapsed = Date.now() - timestamp;
-				mouse.w = amplitude * Math.exp(-elapsed / t)raw_html",R"raw_html(imeConstant);
+				var elapsed = Date.n)raw_html",R"raw_html(ow() - timestamp;
+				mouse.w = amplitude * Math.exp(-elapsed / timeConstant);
 				SendText(messageTypes.ImMouseWheelDelta, mouse.w);
 				position = targetPosition - mouse.w;
 				if (elapsed > 6 * timeConstant) {
 					touchInertial = false;
-					clearInterval(ticker);
+					clearInter)raw_html",R"raw_html(val(ticker);
 				}
 			}, updateInterval);
 		}
-		else if(touchStar)raw_html",R"raw_html(ted) {
+		else if(touchStarted) {
 			clearTimeout(touchPressTimeout);
 			SendText(messageTypes.ImMousePress, "0,0");
 		}
@@ -7843,17 +7855,17 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 
 	function onTouchMove( event )
 	{
-		if( !event ) event = window.event;
+		if( !eve)raw_html",R"raw_html(nt ) event = window.event;
 		event.preventDefault();
-		var pointe)raw_html",R"raw_html(r = event; //getPointerEvent(e);
+		var pointer = event; //getPointerEvent(e);
 		currX = pointer.pageX;
 		currY = pointer.pageY;
 		if(touchStarted) {
 			// here you are swiping
 			if( serverState == connectionState.Active ) {
-				touchDragging = true;
+				touchDr)raw_html",R"raw_html(agging = true;
 				var diffY = (currY - cachedY) * 5;
-				cachedY)raw_html",R"raw_html( = currY;
+				cachedY = currY;
 				initialVelocity = diffY;
 				SendText(messageTypes.ImMouseWheelDelta, diffY);
 			}
@@ -7862,31 +7874,31 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 
 	function onMouseWheel( event ) {
 		if( !event ) event = window.event;
-		event.preventDefault();
+		event.prevent)raw_html",R"raw_html(Default();
 		if( serverState == connectionState.Active ) {
-			mou)raw_html",R"raw_html(se.w=event.detail? event.detail*(-120)/4 : event.wheelDelta;
+			mouse.w=event.detail? event.detail*(-120)/4 : event.wheelDelta;
 			SendText(messageTypes.ImMouseWheelDelta, mouse.w);
 		}
 	}
 
 	var osxCommandKey = false;
 	function isSpecialKey(event) {
-		var key = event.which;
+		var ke)raw_html",R"raw_html(y = event.which;
 		if( (key < 32)
-		 || (key >= 33 && key <= 40) )raw_html",R"raw_html(// PageUp, PageDown, End, Home, and Arrows
+		 || (key >= 33 && key <= 40) // PageUp, PageDown, End, Home, and Arrows
 		 || (key >= 45 && key <= 46) // Insert, Delete, and Mac Backspace
 		 || (key == 91 && event.metaKey) // Mac Command (Left)
-		 || (key == 93 && event.metaKey) // Mac Command (Right)
-		 || (key >= 112 && key <= 12)raw_html",R"raw_html(3)
+		 || (key == 93 && eve)raw_html",R"raw_html(nt.metaKey) // Mac Command (Right)
+		 || (key >= 112 && key <= 123)
 			) {
 			return true;
 		}
 		if( (osxCommandKey || event.ctrlKey )
 		 && (key == 'a' || key == 'A' // Select all
 		 ||  key == 'c' || key == 'C' // Copy
-		 ||  key == 'v' || key == 'V' // Paste
+		 ||  key == 'v' || key == 'V' // )raw_html",R"raw_html(Paste
 		 ||  key == 'x' || key == 'X' // Cut
-		 ||  key == 'y' ||)raw_html",R"raw_html( key == 'Y' // Redo
+		 ||  key == 'y' || key == 'Y' // Redo
 		 ||  key == 'z' || key == 'Z')// Undo
 			) {
 			return true;
@@ -7897,40 +7909,40 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 	function onKey( event, messageType ) {
 		if( !event ) event = window.event;
 
-		// If end (ImKeyUp) of Mac Command
+		// I)raw_html",R"raw_html(f end (ImKeyUp) of Mac Command
 		var key = event.which;
-		if (mes)raw_html",R"raw_html(sageType === messageTypes.ImKeyUp) {
+		if (messageType === messageTypes.ImKeyUp) {
 			if( (key == 91 && event.metaKey) // Mac Command (Left)
 			 || (key == 93 && event.metaKey) // Mac Command (Right)
 				) {
 				osxCommandKey = false;
-				event.ctrlKey = false;
+		)raw_html",R"raw_html(		event.ctrlKey = false;
 			}
 		}
-		// If start (ImKeyDown) or ho)raw_html",R"raw_html(ld (ImKeyPress) of Mac Command
+		// If start (ImKeyDown) or hold (ImKeyPress) of Mac Command
 		else {
 			if( (key == 91 && event.metaKey) // Mac Command (Left)
 			 || (key == 93 && event.metaKey) // Mac Command (Right)
 				) {
 				osxCommandKey = true;
-				event.ctrlKey = true;
+)raw_html",R"raw_html(				event.ctrlKey = true;
 			}
 		}
 
-		// If someone is listening,)raw_html",R"raw_html( tell them what happened
+		// If someone is listening, tell them what happened
 		if ( serverState == connectionState.Active ) {
 			var isShift = event.shiftKey ? 1 : 0;
 			var isCtrl = (event.ctrlKey || osxCommandKey) ? 1 : 0;
-			// Special keys will need to be translated into ImGuiKey_ enum values to handled)raw_html",R"raw_html( correctly
+			// Special keys)raw_html",R"raw_html( will need to be translated into ImGuiKey_ enum values to handled correctly
 			SendText(messageType, event.which + "," + isShift + "," + isCtrl);
 		}
 	}
 
 	function onKeyDown( event ) {
 		// Only process special keystrokes manually
-		// (don't let them spill to other handlers)
+		// (don't let them spil)raw_html",R"raw_html(l to other handlers)
 		if (isSpecialKey(event)) {
-			event.preven)raw_html",R"raw_html(tDefault();
+			event.preventDefault();
 		}
 
 		onKey( event, messageTypes.ImKeyDown );
@@ -7941,18 +7953,18 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 	}
 
 	function onKeyUp( event ) {
-		onKey( event, messageTypes.ImKeyUp );
+		onKey( event, mess)raw_html",R"raw_html(ageTypes.ImKeyUp );
 		event.preventDefault();
 	}
 
-	function onPas)raw_html",R"raw_html(te( event ) {
+	function onPaste( event ) {
 		if (!event) event = window.event;
 		event.preventDefault();
 
 		if (event.which != 0) {
 			if( serverState == connectionState.Active ) {
 				// Place the text on the clipboard
-				SendText(messageTypes.ImClipboard, event.clipboardData.getDat)raw_html",R"raw_html(a('Text'));
+)raw_html",R"raw_html(				SendText(messageTypes.ImClipboard, event.clipboardData.getData('Text'));
 				// Simulate the paste keystroke
 				setTimeout( function(){ SendText(messageTypes.ImKeyDown, "86,0,1"); }, 100 );
 			}
@@ -7960,8 +7972,8 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 	}
 
 	function onFrameMessage( stream ) {
-		// If the client is not active, don't process the frame
-		if( serverState )raw_html",R"raw_html(!= connectionState.Active ) {
+		// If the)raw_html",R"raw_html( client is not active, don't process the frame
+		if( serverState != connectionState.Active ) {
 			return;
 		}
 
@@ -7972,39 +7984,39 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 		for(var l = 0 ; l < glistcount; l++)
 		{
 			let drawCommand = {};
-			geometry = geometries[l];
+			geometry = g)raw_html",R"raw_html(eometries[l];
 			drawCommand.gcmdcount = stream.readUint32();
-			)raw_html",R"raw_html(drawCommand.gvtxcount = stream.readUint32();
+			drawCommand.gvtxcount = stream.readUint32();
 			drawCommand.gidxcount = stream.readUint32();
 			drawCommand.gindices = geometry.attributes.index.array;
-			drawCommand.gpositions = geometry.attributes.position.array;
-			drawCommand.guvs = geometry.attribute)raw_html",R"raw_html(s.uv.array;
+			drawCommand.gpositions = geometry.at)raw_html",R"raw_html(tributes.position.array;
+			drawCommand.guvs = geometry.attributes.uv.array;
 			drawCommand.gcolors = geometry.attributes.color.array;
 			drawCommand.galphas = geometry.attributes.alpha.array;
 			drawCommand.gclips = [];
 			drawCommand.gclips.length = 0;
-			drawCommand.curElem = 0;
+	)raw_html",R"raw_html(		drawCommand.curElem = 0;
 			// command lists
-			for( var i = 0;)raw_html",R"raw_html( i < drawCommand.gcmdcount; i++ ) {
+			for( var i = 0; i < drawCommand.gcmdcount; i++ ) {
 				var num = stream.readUint32();
 				var x = stream.readFloat32();
 				var y = stream.readFloat32();
 				var w = stream.readFloat32();
-				var h = stream.readFloat32();
-				drawCommand.gclips.push( { start: drawCommand)raw_html",R"raw_html(.curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
+				var h = stream)raw_html",R"raw_html(.readFloat32();
+				drawCommand.gclips.push( { start: drawCommand.curElem, index: 0, count: num, clip: new THREE.Vector4( x, y, w, h ) } );
 				drawCommand.curElem += num;
 			}
 			// all vertices
 			for( var i = 0; i < drawCommand.gvtxcount; i++ ) {
-				addVtx(drawCommand, stream, i );
+				ad)raw_html",R"raw_html(dVtx(drawCommand, stream, i );
 			}
-			for( var i = 0; i < drawCo)raw_html",R"raw_html(mmand.gidxcount; i++ ) {
+			for( var i = 0; i < drawCommand.gidxcount; i++ ) {
 				addIdx(drawCommand, stream, i );
 			}
 			geometry.attributes.position.needsUpdate = true;
 			geometry.attributes.uv.needsUpdate = true;
-			geometry.attributes.color.needsUpdate = true;
-			geometry.attributes.alpha.needsUpdate =)raw_html",R"raw_html( true;
+			geometry.attributes.col)raw_html",R"raw_html(or.needsUpdate = true;
+			geometry.attributes.alpha.needsUpdate = true;
 			geometry.attributes.index.needsUpdate = true;
 
 			newDrawList.push(drawCommand);
@@ -8013,18 +8025,18 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 	}
 
 	function addVtx(drawCommand, stream, idx ) {
-		var vidx = idx*3;
+		var)raw_html",R"raw_html( vidx = idx*3;
 		var uidx = idx*2;
 		var cidx = idx*3;
-		var aidx)raw_html",R"raw_html( = idx;
+		var aidx = idx;
 		drawCommand.gpositions[ vidx+0 ] = stream.readInt16AsFloat32();
 		drawCommand.gpositions[ vidx+1 ] = stream.readInt16AsFloat32();
 		drawCommand.gpositions[ vidx+2 ] = 0;
-		drawCommand.guvs      [ uidx+0 ] = stream.readInt16pAsFloat32();
-		drawCom)raw_html",R"raw_html(mand.guvs      [ uidx+1 ] = 1 - stream.readInt16pAsFloat32();
+		drawComma)raw_html",R"raw_html(nd.guvs      [ uidx+0 ] = stream.readInt16pAsFloat32();
+		drawCommand.guvs      [ uidx+1 ] = 1 - stream.readInt16pAsFloat32();
 		drawCommand.gcolors   [ cidx+0 ] = stream.readUint8AsFloat32();
-		drawCommand.gcolors   [ cidx+1 ] = stream.readUint8AsFloat32();
-		drawCommand.gcolors   [ cidx+2 ] = stream.readUint8AsFloat32)raw_html",R"raw_html(();
+		drawCommand.gcolors   [ cidx+1 ] = stream.readUint8AsFloat32()raw_html",R"raw_html();
+		drawCommand.gcolors   [ cidx+2 ] = stream.readUint8AsFloat32();
 		drawCommand.galphas   [ aidx   ] = stream.readUint8AsFloat32();
 	}
 
@@ -8032,35 +8044,42 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 		drawCommand.gindices [ idx ] = stream.readUint16();
 	}
 
-	function onRender() {
+	function onRe)raw_html",R"raw_html(nder() {
 		if(onRenderBackground()) {
-			for(var l in currentDraw)raw_html",R"raw_html(List) {
+			for(var l in currentDrawList) {
 				var drawCommand = currentDrawList[l];
 				gcmdcount = drawCommand.gcmdcount;
 				gvtxcount = drawCommand.gvtxcount;
 				gidxcount = drawCommand.gidxcount;
-				gindices = drawCommand.gindices;
+				gindices = drawComma)raw_html",R"raw_html(nd.gindices;
 				gpositions = drawCommand.gpositions;
-				guvs = )raw_html",R"raw_html(drawCommand.guvs;
+				guvs = drawCommand.guvs;
 				gcolors = drawCommand.gcolors;
 				galphas = drawCommand.galphas;
 				gclips = drawCommand.gclips;
 				curElem = drawCommand.curElem;
 				geometry = geometries[l];
 
-				onRenderTriangles(scenes[l]);
+				)raw_html",R"raw_html(onRenderTriangles(scenes[l]);
 			}
 		}
-		requestAnimationFrame(on)raw_html",R"raw_html(Render);
+		requestAnimationFrame(onRender);
 	}
 
 	function onRenderBackground() {
-		renderer.enableScissorTest(false);
+		// Render a square to represent the canvas
+		renderer.enableScissorTest(true);
+		renderer.setScissor(
+			-camera.position.x,
+			camera.position)raw_html",R"raw_html(.y + height - displaySize.y,
+			displaySize.x,
+			displaySize.y
+			);
 		// darken background when inactive
 		renderer.setClearColor( serverState == connectionState.Active ? 0x72909A : 0x444444 );
 		renderer.clear( true, true, false );
 
-		if ( )raw_html",R"raw_html(serverState == connectionState.Active ) {
+		if ( serverState =)raw_html",R"raw_html(= connectionState.Active ) {
 			// render background (visual reference of device canvas)
 			renderer.render( scene_background, camera );
 		}
@@ -8070,36 +8089,24 @@ var touchStarted = false, // detect if a touch event is sta)raw_html",R"raw_html
 
 	function onRenderTriangles(scene)
 	{
-		camera.po)raw_html",R"raw_html(sition.x = camera_offset.x;
+		camera.position.x = ca)raw_html",R"raw_html(mera_offset.x;
 		camera.position.y = camera_offset.y;
 		renderer.enableScissorTest(true);
 		// render command lists (or selected one)
 		for( var i = 0; i < gclips.length; i++ )
 		{
 			geometry.offsets[ 0 ].start = gclips[ i ].start;
-			geometr)raw_html",R"raw_html(y.offsets[ 0 ].index = gclips[ i ].index;
+			geometry.offsets[ 0 )raw_html",R"raw_html(].index = gclips[ i ].index;
 			geometry.offsets[ 0 ].count = gclips[ i ].count;
 
 			renderer.setScissor(
-				gclips[ i ].clip.x,
-				(height - gclips[ i ].clip.w),
+				gclips[ i ].clip.x - camera.position.x,
+				(height - gclips[ i ].clip.w) + camera.position.y,
 				(gclips[ i ].clip.z - gclips[ i ].clip.x),
-				(gclips[ i ].clip.w - gclip)raw_html",R"raw_html(s[ i ].clip.y)
+				)raw_html",R"raw_html((gclips[ i ].clip.w - gclips[ i ].clip.y)
 				);
 
 			renderer.render( scene, camera );
-		}
-	}
-
-	function onFocusWindow( value ) {
-		if( value == 'Origin' ) {
-			camera_offset.x = 0;
-			camera_offset.y = 0;
-		}
-		else {
-			var idx = parseInt( value ) - 1;
-			camera_offset.x = Math.ro)raw_html",R"raw_html(und( - 50 + ( gclips[ idx ].clip.x + 1 ) * width / 2.0 );
-			camera_offset.y = Math.round( - 50 + ( gclips[ idx ].clip.y + 1 ) * height / 2.0 );
 		}
 	}
 }
@@ -8113,10 +8120,10 @@ body {
 	margin		: 0;
 
 	color		: #222;
-	backgrou)raw_html",R"raw_html(nd-color: #333;
+	background-color: #333;
 }
 .form-style-6{
-	font: 100% Arial, Helvetica, sans-serif;
+	font: 100% Arial, Helvet)raw_html",R"raw_html(ica, sans-serif;
 	max-width: 300px;
 	margin: 10px auto;
 	padding: 16px;
@@ -8127,27 +8134,27 @@ body {
 	padding: 15px 0;
 	font-size: 100%;
 	font-weight: 100;
-	text-a)raw_html",R"raw_html(lign: center;
+	text-align: center;
 	color: #fff;
-	margin: -16px -16px 16px -16px;
+	margin: -16px -16px 16px -16p)raw_html",R"raw_html(x;
 }
 .form-style-6 input[type="text"],
 .form-style-6 input[type="date"],
 .form-style-6 input[type="datetime"],
 .form-style-6 input[type="email"],
 .form-style-6 input[type="number"],
-.form-style-6 in)raw_html",R"raw_html(put[type="search"],
+.form-style-6 input[type="search"],
 .form-style-6 input[type="time"],
-.form-style-6 input[type="url"],
+.for)raw_html",R"raw_html(m-style-6 input[type="url"],
 .form-style-6 textarea,
 .form-style-6 select
 {
 	-webkit-transition: all 0.30s ease-in-out;
 	-moz-transition: all 0.30s ease-in-out;
-	-ms-transition: all 0.30s ease-in-ou)raw_html",R"raw_html(t;
+	-ms-transition: all 0.30s ease-in-out;
 	-o-transition: all 0.30s ease-in-out;
 	outline: none;
-	box-sizing: border-box;
+)raw_html",R"raw_html(	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	width: 100%;
@@ -8156,27 +8163,27 @@ body {
 	border: 1px solid #ccc;
 	padding: 2%;
 	color: #555;
-	tex)raw_html",R"raw_html(t-align: center;
-	font: 100% Arial, Helvetica, sans-serif;
+	text-align: center;
+	font: 100% Arial, Helvetica, sans-serif;)raw_html",R"raw_html(
 }
 .form-style-6 input[type="text"]:focus,
 .form-style-6 input[type="date"]:focus,
 .form-style-6 input[type="datetime"]:focus,
 .form-style-6 input[type="email"]:focus,
-.form-style-6 input[type="numb)raw_html",R"raw_html(er"]:focus,
+.form-style-6 input[type="number"]:focus,
 .form-style-6 input[type="search"]:focus,
-.form-style-6 input[type="time"]:focus,
+.for)raw_html",R"raw_html(m-style-6 input[type="time"]:focus,
 .form-style-6 input[type="url"]:focus,
 .form-style-6 textarea:focus,
 .form-style-6 select:focus
 {
 	box-shadow: 0 0 5px #409FC1;
 	padding: 3%;
-	border: 1px solid #)raw_html",R"raw_html(409FC1;
+	border: 1px solid #409FC1;
 }
 .button{
 	box-sizing: border-box;
-	-webkit-box-sizing: border-box;
+	-webkit-box-s)raw_html",R"raw_html(izing: border-box;
 	-moz-box-sizing: border-box;
 	width: 100%;
 	padding: 3%;
@@ -8184,10 +8191,10 @@ body {
 	border-bottom: 2px solid #3080AF;
 	border-top-style: none;
 	border-right-style: none;
-	border-left)raw_html",R"raw_html(-style: none;
+	border-left-style: none;
 	color: #fff;
 }
-.form-style-6 input[type="submit"]:hover,
+.form-style-6 input[type="su)raw_html",R"raw_html(bmit"]:hover,
 .form-style-6 input[type="button"]:hover{
 	background: #2EBC99;
 }
@@ -8199,9 +8206,9 @@ body {
 </style>
 
 <style>
-	#imgui_contain)raw_html",R"raw_html(er
+	#imgui_container
 	{
-		touch-action: none; /* Disable touch behaviors, like pan and zoom */
+		touch-action: none; /* Disable touch behaviors, li)raw_html",R"raw_html(ke pan and zoom */
 	}
 	body
 	{
@@ -8215,15 +8222,15 @@ body {
 <body>
 	<div id="imgui_container"></div>
 	<script>
-		document.addEventListener('DOMContent)raw_html",R"raw_html(Loaded', function () {
-			StartImgui( document.getElementById( 'imgui_container' ), "ws://" + window.location.hostname + ":" + window.location.port, 1920, 1080, true );
+		document.addEventListener('DOMContentLoaded', function () {
+			StartImguiInternal( document.get)raw_html",R"raw_html(ElementById( 'imgui_container' ), "ws://" + window.location.hostname + ":" + window.location.port, 1920, 1080, true );
 		});
 
 		document.ontouchmove = function(event)
 		{
 			event.preventDefault();
 		}
-	</s)raw_html",R"raw_html(cript>
+	</script>
 </body>
 </html>
 )raw_html",
