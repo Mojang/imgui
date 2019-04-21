@@ -63,7 +63,7 @@ struct ImDrawDataBuilder;           // Helper to build a ImDrawData instance
 struct ImDrawListSharedData;        // Data shared between all ImDrawList instances
 struct ImGuiColorMod;               // Stacked color modifier, backup of modified data so we can restore it
 struct ImGuiColumnData;             // Storage data for a single column
-struct ImGuiColumnsSet;             // Storage data for a columns set
+struct ImGuiColumns;                // Storage data for a columns set
 struct ImGuiContext;                // Main imgui context
 struct ImGuiDockContext;            // Docking system context
 struct ImGuiDockNode;               // Docking system node (hold a list of Windows OR two child dock nodes)
@@ -120,7 +120,7 @@ namespace ImStb
 #define STB_TEXTEDIT_UNDOCHARCOUNT      999
 #include "imstb_textedit.h"
 
-} // namespace ImGuiStb
+} // namespace ImStb
 
 //-----------------------------------------------------------------------------
 // Context pointer
@@ -167,7 +167,7 @@ IMGUI_API int           ImTextCountUtf8BytesFromStr(const ImWchar* in_text, cons
 
 // Helpers: Misc
 IMGUI_API ImU32         ImHashData(const void* data, size_t data_size, ImU32 seed = 0);
-IMGUI_API ImU32         ImHashStr(const char* data, size_t data_size, ImU32 seed = 0);
+IMGUI_API ImU32         ImHashStr(const char* data, size_t data_size = 0, ImU32 seed = 0);
 IMGUI_API void*         ImFileLoadToMemory(const char* filename, const char* file_open_mode, size_t* out_file_size = NULL, int padding_bytes = 0);
 IMGUI_API FILE*         ImFileOpen(const char* filename, const char* file_open_mode);
 static inline bool      ImCharIsBlankA(char c)          { return c == ' ' || c == '\t'; }
@@ -242,7 +242,8 @@ static inline double ImAtof(const char* s)                                      
 static inline float  ImFloorStd(float x)                                        { return floorf(x); }   // we already uses our own ImFloor() { return (float)(int)v } internally so the standard one wrapper is named differently (it's used by stb_truetype)
 static inline float  ImCeil(float x)                                            { return ceilf(x); }
 #endif
-// - ImMin/ImMax/ImClamp/ImLerp/ImSwap are used by widgets which support for variety of types: signed/unsigned int/long long float/double, using templates here but we could also redefine them 6 times
+// - ImMin/ImMax/ImClamp/ImLerp/ImSwap are used by widgets which support for variety of types: signed/unsigned int/long long float/double
+// (Exceptionally using templates here but we could also redefine them for variety of types)
 template<typename T> static inline T ImMin(T lhs, T rhs)                        { return lhs < rhs ? lhs : rhs; }
 template<typename T> static inline T ImMax(T lhs, T rhs)                        { return lhs >= rhs ? lhs : rhs; }
 template<typename T> static inline T ImClamp(T v, T mn, T mx)                   { return (v < mn) ? mn : (v > mx) ? mx : v; }
@@ -298,7 +299,7 @@ struct IMGUI_API ImPool
     ImPoolIdx   GetIndex(const T* p) const          { IM_ASSERT(p >= Data.Data && p < Data.Data + Data.Size); return (ImPoolIdx)(p - Data.Data); }
     T*          GetOrAddByKey(ImGuiID key)          { int* p_idx = Map.GetIntRef(key, -1); if (*p_idx != -1) return &Data[*p_idx]; *p_idx = FreeIdx; return Add(); }
     bool        Contains(const T* p) const          { return (p >= Data.Data && p < Data.Data + Data.Size); }
-    void        Clear()                             { for (int n = 0; n < Map.Data.Size; n++) { int idx = Map.Data[n].val_i; if (idx != -1) Data[idx].~T(); }  Map.Clear(); Data.clear(); FreeIdx = 0; }
+    void        Clear()                             { for (int n = 0; n < Map.Data.Size; n++) { int idx = Map.Data[n].val_i; if (idx != -1) Data[idx].~T(); } Map.Clear(); Data.clear(); FreeIdx = 0; }
     T*          Add()                               { int idx = FreeIdx; if (idx == Data.Size) { Data.resize(Data.Size + 1); FreeIdx++; } else { FreeIdx = *(int*)&Data[idx]; } IM_PLACEMENT_NEW(&Data[idx]) T(); return &Data[idx]; }
     void        Remove(ImGuiID key, const T* p)     { Remove(key, GetIndex(p)); }
     void        Remove(ImGuiID key, ImPoolIdx idx)  { Data[idx].~T(); *(int*)&Data[idx] = FreeIdx; FreeIdx = idx; Map.SetInt(key, -1); }
@@ -314,7 +315,7 @@ enum ImGuiButtonFlags_
 {
     ImGuiButtonFlags_None                   = 0,
     ImGuiButtonFlags_Repeat                 = 1 << 0,   // hold to repeat
-    ImGuiButtonFlags_PressedOnClickRelease  = 1 << 1,   // return true on click + release on same item [DEFAULT if no PressedOn* flag is set]
+    ImGuiButtonFlags_PressedOnClickRelease  = 1 << 1,   // [Default] return true on click + release on same item
     ImGuiButtonFlags_PressedOnClick         = 1 << 2,   // return true on click (default requires click+release)
     ImGuiButtonFlags_PressedOnRelease       = 1 << 3,   // return true on release (default requires click+release)
     ImGuiButtonFlags_PressedOnDoubleClick   = 1 << 4,   // return true on double-click (default requires click+release)
@@ -406,6 +407,7 @@ enum ImGuiTextFlags_
     ImGuiTextFlags_None = 0,
     ImGuiTextFlags_NoWidthForLargeClippedText = 1 << 0
 };
+
 // FIXME: this is in development, not exposed/functional as a generic feature yet.
 // Horizontal/Vertical enums are fixed to 0/1 so they may be used to index ImVec2
 enum ImGuiLayoutType_
@@ -663,7 +665,7 @@ struct ImGuiWindowSettings
 struct ImGuiSettingsHandler
 {
     const char* TypeName;       // Short description stored in .ini file. Disallowed characters: '[' ']'
-    ImGuiID     TypeHash;       // == ImHashStr(TypeName, 0, 0)
+    ImGuiID     TypeHash;       // == ImHashStr(TypeName)
     void*       (*ReadOpenFn)(ImGuiContext* ctx, ImGuiSettingsHandler* handler, const char* name);              // Read: Called when entering into a new ini entry e.g. "[Window][Name]"
     void        (*ReadLineFn)(ImGuiContext* ctx, ImGuiSettingsHandler* handler, void* entry, const char* line); // Read: Called for every line of text within an ini entry
     void        (*WriteAllFn)(ImGuiContext* ctx, ImGuiSettingsHandler* handler, ImGuiTextBuffer* out_buf);      // Write: Output every entries into 'out_buf'
@@ -691,10 +693,10 @@ struct ImGuiColumnData
     ImGuiColumnsFlags   Flags;              // Not exposed
     ImRect              ClipRect;
 
-    ImGuiColumnData()   { OffsetNorm = OffsetNormBeforeResize = 0.0f; Flags = 0; }
+    ImGuiColumnData()   { OffsetNorm = OffsetNormBeforeResize = 0.0f; Flags = ImGuiColumnsFlags_None; }
 };
 
-struct ImGuiColumnsSet
+struct ImGuiColumns
 {
     ImGuiID             ID;
     ImGuiColumnsFlags   Flags;
@@ -704,23 +706,23 @@ struct ImGuiColumnsSet
     int                 Count;
     float               MinX, MaxX;
     float               LineMinY, LineMaxY;
-    float               StartPosY;          // Copy of CursorPos
-    float               StartMaxPosX;       // Copy of CursorMaxPos
+    float               BackupCursorPosY;       // Backup of CursorPos at the time of BeginColumns()
+    float               BackupCursorMaxPosX;    // Backup of CursorMaxPos at the time of BeginColumns()
     ImVector<ImGuiColumnData> Columns;
 
-    ImGuiColumnsSet()   { Clear(); }
+    ImGuiColumns()      { Clear(); }
     void Clear()
     {
         ID = 0;
-        Flags = 0;
+        Flags = ImGuiColumnsFlags_None;
         IsFirstFrame = false;
         IsBeingResized = false;
         Current = 0;
         Count = 1;
         MinX = MaxX = 0.0f;
         LineMinY = LineMaxY = 0.0f;
-        StartPosY = 0.0f;
-        StartMaxPosX = 0.0f;
+        BackupCursorPosY = 0.0f;
+        BackupCursorMaxPosX = 0.0f;
         Columns.clear();
     }
 };
@@ -847,11 +849,14 @@ struct ImGuiNextWindowData
     }
 };
 
+//-----------------------------------------------------------------------------
+// Docking, Tabs
+//-----------------------------------------------------------------------------
 
 struct ImGuiTabBarSortItem
 {
-    int         Index;
-    float       Width;
+    int             Index;
+    float           Width;
 };
 
 struct ImGuiTabBarRef
@@ -865,6 +870,7 @@ struct ImGuiTabBarRef
 
 enum ImGuiDockNodeFlagsPrivate_
 {
+    // [Internal]
     ImGuiDockNodeFlags_DockSpace                = 1 << 10,  // Local  // A dockspace is a node that occupy space within an existing user window. Otherwise the node is floating and create its own window.
     ImGuiDockNodeFlags_CentralNode              = 1 << 11,  // Local
     ImGuiDockNodeFlags_NoTabBar                 = 1 << 12,  // Local  // Tab bar is completely unavailable. No triangle in the corner to enable it back.
@@ -874,6 +880,7 @@ enum ImGuiDockNodeFlagsPrivate_
     ImGuiDockNodeFlags_LocalFlagsTransferMask_  = ImGuiDockNodeFlags_LocalFlagsMask_ & ~ImGuiDockNodeFlags_DockSpace  // When splitting those flags are moved to the inheriting child, never duplicated
 };
 
+// Store the source authority (dock node vs window) of a field
 enum ImGuiDataAuthority_
 {
     ImGuiDataAuthority_Auto,
@@ -922,16 +929,16 @@ struct ImGuiDockNode
 
     ImGuiDockNode(ImGuiID id);
     ~ImGuiDockNode();
-    bool                    IsRootNode() const  { return ParentNode == NULL; }
+    bool                    IsRootNode() const      { return ParentNode == NULL; }
     bool                    IsDockSpace() const     { return (LocalFlags & ImGuiDockNodeFlags_DockSpace) != 0; }
     bool                    IsCentralNode() const   { return (LocalFlags & ImGuiDockNodeFlags_CentralNode) != 0; }
     bool                    IsHiddenTabBar() const  { return (LocalFlags & ImGuiDockNodeFlags_HiddenTabBar) != 0; } // Hidden tab bar can be shown back by clicking the small triangle
     bool                    IsNoTabBar() const      { return (LocalFlags & ImGuiDockNodeFlags_NoTabBar) != 0; }     // Never show a tab bar
-    bool                    IsSplitNode() const { return ChildNodes[0] != NULL; }
-    bool                    IsLeafNode() const  { return ChildNodes[0] == NULL; }
-    bool                    IsEmpty() const     { return ChildNodes[0] == NULL && Windows.Size == 0; }
+    bool                    IsSplitNode() const     { return ChildNodes[0] != NULL; }
+    bool                    IsLeafNode() const      { return ChildNodes[0] == NULL; }
+    bool                    IsEmpty() const         { return ChildNodes[0] == NULL && Windows.Size == 0; }
     ImGuiDockNodeFlags      GetMergedFlags() const  { return SharedFlags | LocalFlags; }
-    ImRect                  Rect() const        { return ImRect(Pos.x, Pos.y, Pos.x + Size.x, Pos.y + Size.y); }
+    ImRect                  Rect() const            { return ImRect(Pos.x, Pos.y, Pos.x + Size.x, Pos.y + Size.y); }
 };
 
 //-----------------------------------------------------------------------------
@@ -1051,6 +1058,7 @@ struct ImGuiContext
     ImGuiNavMoveResult      NavMoveResultLocalVisibleSet;       // Best move request candidate within NavWindow that are mostly visible (when using ImGuiNavMoveFlags_AlsoScoreVisibleSet flag)
     ImGuiNavMoveResult      NavMoveResultOther;                 // Best move request candidate within NavWindow's flattened hierarchy (when using ImGuiWindowFlags_NavFlattened flag)
 
+    // Tabbing system (older than Nav, active even if Nav is disabled. FIXME-NAV: This needs a redesign!)
     ImGuiWindow*            FocusRequestCurrWindow;             //
     ImGuiWindow*            FocusRequestNextWindow;             //
     int                     FocusRequestCurrCounterAll;         // Any item being requested for focus, stored as an index (we on layout to be stable between the frame pressing TAB and the next frame, semi-ouch)
@@ -1058,6 +1066,7 @@ struct ImGuiContext
     int                     FocusRequestNextCounterAll;         // Stored for next frame
     int                     FocusRequestNextCounterTab;         // "
     bool                    FocusTabPressed;                    //
+
     // Render
     float                   DimBgRatio;                         // 0.0..1.0 animation when fading in a dimming background (for modal window and CTRL+TAB list)
     ImGuiMouseCursor        MouseCursor;
@@ -1080,7 +1089,7 @@ struct ImGuiContext
     unsigned char           DragDropPayloadBufLocal[8];         // Local buffer for small payloads
 
     // Tab bars
-    ImPool<ImGuiTabBar>     TabBars;
+    ImPool<ImGuiTabBar>             TabBars;
     ImGuiTabBar*                    CurrentTabBar;
     ImVector<ImGuiTabBarRef>        CurrentTabBarStack;
     ImVector<ImGuiTabBarSortItem>   TabSortByWidthBuffer;
@@ -1216,6 +1225,7 @@ struct ImGuiContext
         FocusRequestCurrCounterAll = FocusRequestCurrCounterTab = INT_MAX;
         FocusRequestNextCounterAll = FocusRequestNextCounterTab = INT_MAX;
         FocusTabPressed = false;
+
         DimBgRatio = 0.0f;
         MouseCursor = ImGuiMouseCursor_Arrow;
 
@@ -1229,6 +1239,7 @@ struct ImGuiContext
         DragDropAcceptIdPrev = DragDropAcceptIdCurr = 0;
         DragDropAcceptFrameCount = -1;
         memset(DragDropPayloadBufLocal, 0, sizeof(DragDropPayloadBufLocal));
+
         CurrentTabBar = NULL;
 
         ScalarAsInputTextId = 0;
@@ -1311,8 +1322,8 @@ struct IMGUI_API ImGuiWindowTempData
 
 //--------------------------------------------------
 //Feature:  Layout
-    ImGuiLayout*            CurrentLayout;
-    ImGuiLayoutItem*        CurrentLayoutItem;
+    ImGuiLayout*            CurrentLayout = nullptr;
+    ImGuiLayoutItem*        CurrentLayoutItem = nullptr;
     ImVector<ImGuiLayout*>  LayoutStack;
     ImGuiStorage            Layouts;
 //--------------------------------------------------
@@ -1320,6 +1331,7 @@ struct IMGUI_API ImGuiWindowTempData
     // We store the current settings outside of the vectors to increase memory locality (reduce cache misses). The vectors are rarely modified. Also it allows us to not heap allocate for short-lived windows which are not using those settings.
     ImGuiItemFlags          ItemFlags;              // == ItemFlagsStack.back() [empty == ImGuiItemFlags_Default]
     float                   ItemWidth;              // == ItemWidthStack.back(). 0.0: default, >0.0: width in pixels, <0.0: align xx pixels to the right of window
+    float                   NextItemWidth;
     float                   TextWrapPos;            // == TextWrapPosStack.back() [empty == -1.0f]
     ImVector<ImGuiItemFlags>ItemFlagsStack;
     ImVector<float>         ItemWidthStack;
@@ -1327,13 +1339,13 @@ struct IMGUI_API ImGuiWindowTempData
     ImVector<ImGuiGroupData>GroupStack;
 //--------------------------------------------------
 //Feature:  Layout
-    short                   StackSizesBackup[7];    // Store size of various stacks for asserting
+    short                   StackSizesBackup[7];    // One More than original - Store size of various stacks for asserting
 //--------------------------------------------------
 
     ImVec1                  Indent;                 // Indentation / start position from left of window (increased by TreePush/TreePop, etc.)
     ImVec1                  GroupOffset;
     ImVec1                  ColumnsOffset;          // Offset to the current column (if ColumnsCurrent > 0). FIXME: This and the above should be a stack to allow use cases like Tree->Column->Tree. Need revamp columns API.
-    ImGuiColumnsSet*        ColumnsSet;             // Current columns set
+    ImGuiColumns*           CurrentColumns;         // Current columns set
 
     ImGuiWindowTempData()
     {
@@ -1354,21 +1366,18 @@ struct IMGUI_API ImGuiWindowTempData
         MenuBarOffset = ImVec2(0.0f, 0.0f);
         StateStorage = NULL;
         LayoutType = ParentLayoutType = ImGuiLayoutType_Vertical;
-		FocusCounterAll = FocusCounterTab = -1;
-		ItemFlags = ImGuiItemFlags_Default_;
-//--------------------------------------------------
-//Feature:  Layout
-        CurrentLayout = NULL;
-        CurrentLayoutItem = NULL;
-//--------------------------------------------------
+        FocusCounterAll = FocusCounterTab = -1;
+
+        ItemFlags = ImGuiItemFlags_Default_;
         ItemWidth = 0.0f;
+        NextItemWidth = +FLT_MAX;
         TextWrapPos = -1.0f;
         memset(StackSizesBackup, 0, sizeof(StackSizesBackup));
 
         Indent = ImVec1(0.0f);
         GroupOffset = ImVec1(0.0f);
         ColumnsOffset = ImVec1(0.0f);
-        ColumnsSet = NULL;
+        CurrentColumns = NULL;
     }
 };
 
@@ -1408,7 +1417,7 @@ struct IMGUI_API ImGuiWindow
     bool                    WantCollapseToggle;
     bool                    SkipItems;                          // Set when items can safely be all clipped (e.g. window not visible or collapsed)
     bool                    Appearing;                          // Set during the frame where the window is appearing (or re-appearing)
-    bool                    Hidden;                             // Do not display (== (HiddenFramesForResize > 0) ||
+    bool                    Hidden;                             // Do not display (== (HiddenFrames*** > 0))
     bool                    HasCloseButton;                     // Set when the window has a close button (p_open != NULL)
     signed char             ResizeBorderHeld;                   // Current border being held for resize (-1: none, otherwise 0-3)
     short                   BeginCount;                         // Number of Begin() during the current frame (generally 0 or 1, 1+ if appending via multiple Begin/End pairs)
@@ -1440,7 +1449,7 @@ struct IMGUI_API ImGuiWindow
     float                   ItemWidthDefault;
     ImGuiMenuColumns        MenuColumns;                        // Simplified columns storage for menu items
     ImGuiStorage            StateStorage;
-    ImVector<ImGuiColumnsSet> ColumnsStorage;
+    ImVector<ImGuiColumns>  ColumnsStorage;
     float                   FontWindowScale;                    // User scale multiplier per-window
     float                   FontDpiScale;
     int                     SettingsIdx;                        // Index into SettingsWindow[] (indices are always valid as we only grow the array from the back)
@@ -1457,7 +1466,6 @@ struct IMGUI_API ImGuiWindow
     ImGuiID                 NavLastIds[ImGuiNavLayer_COUNT];    // Last known NavId for this window, per layer (0/1)
     ImRect                  NavRectRel[ImGuiNavLayer_COUNT];    // Reference rectangle, in window relative space
 
-  
     // Docking
     ImGuiDockNode*          DockNode;                           // Which node are we docked into
     ImGuiDockNode*          DockNodeAsHost;                     // Which node are we owning (for parent windows)
@@ -1507,7 +1515,7 @@ struct ImGuiItemHoveredDataBackup
 
 enum ImGuiTabBarFlagsPrivate_
 {
-    ImGuiTabBarFlags_DockNode                   = 1 << 20,  // Part of a dock node
+    ImGuiTabBarFlags_DockNode                   = 1 << 20,  // Part of a dock node [we don't use this in the master branch but it facilitate branch syncing to keep this around]
     ImGuiTabBarFlags_IsFocused                  = 1 << 21,
     ImGuiTabBarFlags_SaveSettings               = 1 << 22   // FIXME: Settings are handled by the docking system, this only request the tab bar to mark settings dirty when reordering tabs
 };
@@ -1560,15 +1568,15 @@ struct ImGuiTabBar
     bool                VisibleTabWasSubmitted;
     short               LastTabItemIdx;         // For BeginTabItem()/EndTabItem()
     ImVec2              FramePadding;           // style.FramePadding locked at the time of BeginTabBar()
-    ImGuiTextBuffer     TabsNames;              // For non-docking tab bar we re-append names in a contiguous buffer. 
+    ImGuiTextBuffer     TabsNames;              // For non-docking tab bar we re-append names in a contiguous buffer.
 
     ImGuiTabBar();
     int                 GetTabOrder(const ImGuiTabItem* tab) const  { return Tabs.index_from_ptr(tab); }
-    const char*         GetTabName(const ImGuiTabItem* tab) const 
+    const char*         GetTabName(const ImGuiTabItem* tab) const
     {
         if (tab->Window)
             return tab->Window->Name;
-        IM_ASSERT(tab->NameOffset != -1 && tab->NameOffset < TabsNames.Buf.Size); 
+        IM_ASSERT(tab->NameOffset != -1 && tab->NameOffset < TabsNames.Buf.Size);
         return TabsNames.Buf.Data + tab->NameOffset;
     }
 };
@@ -1653,12 +1661,16 @@ namespace ImGui
     IMGUI_API bool          IsClippedEx(const ImRect& bb, ImGuiID id, bool clip_even_when_logged);
     IMGUI_API bool          FocusableItemRegister(ImGuiWindow* window, ImGuiID id);   // Return true if focus is requested
     IMGUI_API void          FocusableItemUnregister(ImGuiWindow* window);
-    IMGUI_API ImVec2        CalcItemSize(ImVec2 size, float default_x, float default_y);
+    IMGUI_API float         GetNextItemWidth();
+    IMGUI_API ImVec2        CalcItemSize(ImVec2 size, float default_w, float default_h);
     IMGUI_API float         CalcWrapWidthForPos(const ImVec2& pos, float wrap_pos_x);
-    IMGUI_API void          PushMultiItemsWidths(int components, float width_full = 0.0f);
+    IMGUI_API void          PushMultiItemsWidths(int components, float width_full);
     IMGUI_API void          PushItemFlag(ImGuiItemFlags option, bool enabled);
     IMGUI_API void          PopItemFlag();
     IMGUI_API bool          IsItemToggledSelection();                                           // was the last item selection toggled? (after Selectable(), TreeNode() etc. We only returns toggle _event_ in order to handle clipping correctly)
+    IMGUI_API ImVec2        GetContentRegionMaxScreen();
+
+    // Logging/Capture
     IMGUI_API void          LogBegin(ImGuiLogType type, int auto_open_depth);   // -> BeginCapture() when we design v2 api, for now stay under the radar by using the old name.
     IMGUI_API void          LogToBuffer(int auto_open_depth = -1);              // Start logging/capturing to internal buffer
 
@@ -1715,7 +1727,7 @@ namespace ImGui
     IMGUI_API void          DockBuilderDockWindow(const char* window_name, ImGuiID node_id);
     IMGUI_API ImGuiDockNode*DockBuilderGetNode(ImGuiID node_id);                    // Warning: DO NOT HOLD ON ImGuiDockNode* pointer, will be invalided by any split/merge/remove operation.
     inline ImGuiDockNode*   DockBuilderGetCentralNode(ImGuiID node_id)              { ImGuiDockNode* node = DockBuilderGetNode(node_id); if (!node) return NULL; return DockNodeGetRootNode(node)->CentralNode; }
-    IMGUI_API ImGuiID       DockBuilderAddNode(ImGuiID node_id, ImGuiDockNodeFlags flags = 0);
+    IMGUI_API ImGuiID       DockBuilderAddNode(ImGuiID node_id, ImGuiDockNodeFlags flags = 0);  // Use (flags == ImGuiDockNodeFlags_DockSpace) to create a dockspace, otherwise it'll create a floating node.
     IMGUI_API void          DockBuilderRemoveNode(ImGuiID node_id);                 // Remove node and all its child, undock all windows
     IMGUI_API void          DockBuilderRemoveNodeDockedWindows(ImGuiID node_id, bool clear_persistent_docking_references = true);
     IMGUI_API void          DockBuilderRemoveNodeChildNodes(ImGuiID node_id);       // Remove all split/hierarchy. All remaining docked windows will be re-docked to the root.
@@ -1736,6 +1748,8 @@ namespace ImGui
     IMGUI_API void          BeginColumns(const char* str_id, int count, ImGuiColumnsFlags flags = 0); // setup number of columns. use an identifier to distinguish multiple column sets. close with EndColumns().
     IMGUI_API void          EndColumns();                                                             // close columns
     IMGUI_API void          PushColumnClipRect(int column_index = -1);
+    IMGUI_API ImGuiID       GetColumnsID(const char* str_id, int count);
+    IMGUI_API ImGuiColumns* FindOrCreateColumns(ImGuiWindow* window, ImGuiID id);
 
     // Tab Bars
     IMGUI_API bool          BeginTabBarEx(ImGuiTabBar* tab_bar, const ImRect& bb, ImGuiTabBarFlags flags, ImGuiDockNode* dock_node);
@@ -1837,10 +1851,10 @@ extern void                 ImGuiTestEngineHook_PostNewFrame(ImGuiContext* ctx);
 extern void                 ImGuiTestEngineHook_ItemAdd(ImGuiContext* ctx, const ImRect& bb, ImGuiID id);
 extern void                 ImGuiTestEngineHook_ItemInfo(ImGuiContext* ctx, ImGuiID id, const char* label, ImGuiItemStatusFlags flags);
 #define IMGUI_TEST_ENGINE_ITEM_ADD(_BB, _ID)                ImGuiTestEngineHook_ItemAdd(&g, _BB, _ID)               // Register status flags
-#define IMGUI_TEST_ENGINE_ITEM_INFO(_ID, _LABEL, _FLAGS)  ImGuiTestEngineHook_ItemInfo(&g, _ID, _LABEL, _FLAGS)   // Register status flags
+#define IMGUI_TEST_ENGINE_ITEM_INFO(_ID, _LABEL, _FLAGS)    ImGuiTestEngineHook_ItemInfo(&g, _ID, _LABEL, _FLAGS)   // Register status flags
 #else
 #define IMGUI_TEST_ENGINE_ITEM_ADD(_BB, _ID)                do { } while (0)
-#define IMGUI_TEST_ENGINE_ITEM_INFO(_ID, _LABEL, _FLAGS)  do { } while (0)
+#define IMGUI_TEST_ENGINE_ITEM_INFO(_ID, _LABEL, _FLAGS)    do { } while (0)
 #endif
 
 #ifdef __clang__
