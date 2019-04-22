@@ -30,6 +30,8 @@ namespace imgui {
 		if (_getIsActive()) {
 			if (mFrame - mFrameReceived < IMGUI_REMOTE_INPUT_FRAMES) {
 				input = mInput;
+				// Other input should persist from frame to frame, but not delta input
+				mInput.MouseWheelDelta = 0;
 				return true;
 			}
 		}
