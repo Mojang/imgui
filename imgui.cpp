@@ -983,6 +983,7 @@ CODE
 #endif
 
 #include "imgui.h"
+#pragma optimize("", off)
 #ifndef IMGUI_DEFINE_MATH_OPERATORS
 #define IMGUI_DEFINE_MATH_OPERATORS
 #endif
@@ -4482,9 +4483,10 @@ static void FindHoveredWindow()
 bool ImGui::IsMouseHoveringRect(const ImVec2& r_min, const ImVec2& r_max, bool clip)
 {
     ImGuiContext& g = *GImGui;
-
+    //printf("Mouse pos x: %f; Mouse pos y: %f", g.IO.MousePos.x, g.IO.MousePos.y);
     // Clip
     ImRect rect_clipped(r_min, r_max);
+   //printf("Rect clipped x: %f; Rect clipped y: %f", rect_clipped.GetWidth(), rect_clipped.GetHeight());
     if (clip)
         rect_clipped.ClipWith(g.CurrentWindow->ClipRect);
 

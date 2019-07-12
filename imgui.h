@@ -27,7 +27,7 @@ Index of this file:
 */
 
 #pragma once
-
+//#include "Core/include/Core/Debug/Log.h"
 // Configuration file with compile-time options (edit imconfig.h or define IMGUI_USER_CONFIG to your own filename)
 #ifdef IMGUI_USER_CONFIG
 #include IMGUI_USER_CONFIG
