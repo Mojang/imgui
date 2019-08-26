@@ -9289,7 +9289,7 @@ static void ImGui::BeginLayout(ImGuiID id, ImGuiLayoutType type, ImVec2 size, fl
 
 static void ImGui::EndLayout(ImGuiLayoutType type)
 {
-    type; //unused variable
+    (void)(type); // unused parameter
     ImGuiWindow* window = GetCurrentWindow();
     IM_ASSERT(window->DC.CurrentLayout);
     IM_ASSERT(window->DC.CurrentLayout->Type == type);
@@ -9450,7 +9450,7 @@ static void ImGui::PushLayout(ImGuiLayout* layout)
 
 static void ImGui::PopLayout(ImGuiLayout* layout)
 {
-    layout; //unused variable
+    (void)(layout); // unused parameter
     ImGuiWindow* window = GetCurrentWindow();
 
     IM_ASSERT(!window->DC.LayoutStack.empty());
@@ -9890,7 +9890,7 @@ void ImGui::SuspendLayout()
 void ImGui::ResumeLayout()
 {
     ImGuiWindow* window = GetCurrentWindow();
-    window; //unused variable
+    (void)(window); // unused parameter
 
     IM_ASSERT(!window->DC.CurrentLayout);
     IM_ASSERT(!window->DC.LayoutStack.empty());
