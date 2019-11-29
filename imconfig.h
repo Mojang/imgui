@@ -13,6 +13,21 @@
 
 #pragma once
 
+namespace imgui {
+	using AssertHandlerType = void(*)(const char* expr, const char* file, unsigned int line, const char* function);
+	extern AssertHandlerType assertHandler;
+}
+
+#ifndef MCPE_PUBLISH
+#define IM_ASSERT(_EXPR) { if (!(_EXPR)) { \
+		if (imgui::assertHandler != nullptr) { \
+			imgui::assertHandler(#_EXPR, __FILE__, __LINE__, __FUNCTION__); \
+		} \
+	} \
+}
+#endif // MCPE_PUBLISH
+
+
 //---- Define assertion handler. Defaults to calling assert().
 //#define IM_ASSERT(_EXPR)  MyAssert(_EXPR)
 //#define IM_ASSERT(_EXPR)  ((void)(_EXPR))     // Disable asserts

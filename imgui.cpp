@@ -1092,6 +1092,8 @@ static void*  (*GImAllocatorAllocFunc)(size_t size, void* user_data) = MallocWra
 static void   (*GImAllocatorFreeFunc)(void* ptr, void* user_data) = FreeWrapper;
 static void*    GImAllocatorUserData = NULL;
 
+imgui::AssertHandlerType imgui::assertHandler = nullptr;
+
 //-----------------------------------------------------------------------------
 // [SECTION] MAIN USER FACING STRUCTURES (ImGuiStyle, ImGuiIO)
 //-----------------------------------------------------------------------------

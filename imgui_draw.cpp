@@ -486,7 +486,9 @@ void ImDrawList::UpdateTextureID()
 // Render-level scissoring. This is passed down to your render function but not used for CPU-side coarse clipping. Prefer using higher-level ImGui::PushClipRect() to affect logic (hit-testing and widget culling)
 void ImDrawList::PushClipRect(ImVec2 cr_min, ImVec2 cr_max, bool intersect_with_current_clip_rect)
 {
-    ImVec4 cr(cr_min.x, cr_min.y, cr_max.x, cr_max.y);
+	IM_ASSERT(cr_min.x >= -50000 && cr_min.x < 50000 && cr_max.x >= -50000 && cr_max.x <= 50000);
+	IM_ASSERT(cr_min.y >= -50000 && cr_min.y < 50000 && cr_max.y >= -50000 && cr_max.y <= 50000);
+	ImVec4 cr(cr_min.x, cr_min.y, cr_max.x, cr_max.y);
     if (intersect_with_current_clip_rect && _ClipRectStack.Size)
     {
         ImVec4 current = _ClipRectStack.Data[_ClipRectStack.Size-1];
