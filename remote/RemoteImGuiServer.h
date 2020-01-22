@@ -9,6 +9,7 @@
 
 #include "imgui_remote_webby.h"
 #include "RemoteImGui.h"
+#include <inttypes.h>
 
 #ifdef IMGUI_ENABLED
 
@@ -16,7 +17,7 @@ namespace imgui {
 	// Hosts a remote ImGUI interface through http://localhost:7002/
 	class RemoteImGuiServer : public RemoteImGui, public IWebSocketServer {
 	public:
-		RemoteImGuiServer() = default;
+		RemoteImGuiServer(int16_t port = 7002);
 		~RemoteImGuiServer();
 
 		void init() override;
@@ -36,6 +37,7 @@ namespace imgui {
 
 	private:
 		bool mIsClientActive = false;
+		int16_t mPort;
 	};
 }
 

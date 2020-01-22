@@ -9,22 +9,27 @@
 
 #include "RemoteImGuiFrameBuilder.h"
 #include <cstdio>
+#include <iostream> // std::cout
 #include <sstream>
 
 #ifdef IMGUI_ENABLED
 
 namespace imgui {
-	RemoteImGuiServer::~RemoteImGuiServer() {
+
+	RemoteImGuiServer::RemoteImGuiServer(int16_t port) 
+		: mPort(port) {
 	}
+
+	RemoteImGuiServer::~RemoteImGuiServer() = default;
 
 	void RemoteImGuiServer::init() {
 	}
 
 	void RemoteImGuiServer::connect() {
 		const std::string address = "0.0.0.0";
-		const int port = 7002;
 
-		IWebSocketServer::Init(address.c_str(), port);
+		std::cout << "Hosting ImGui server @ http://" << address << ":" << mPort << std::endl;
+		IWebSocketServer::Init(address.c_str(), mPort);
 	}
 
 	void RemoteImGuiServer::disconnect() {
