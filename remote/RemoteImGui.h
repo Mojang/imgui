@@ -22,11 +22,11 @@ namespace imgui {
 	//------------------
 	struct RemoteInput {
 		ImVec2	MousePos;
-		int		MouseButtons;
-		float	MouseWheelDelta;
-		bool	KeyCtrl;
-		bool	KeyShift;
-		bool	KeysDown[256];
+		int		MouseButtons = 0;
+		float	MouseWheelDelta = 0.f;
+		bool	KeyCtrl = false;
+		bool	KeyShift = false;
+		bool	KeysDown[256] = { 0 };
 	};
 
 	// Keys set in KeysDown to represent special keys

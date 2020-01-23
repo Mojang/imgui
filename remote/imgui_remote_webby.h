@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <vector>
+#include <cstring> //memset
 
 #ifdef _WIN32
 #include <winsock2.h>
