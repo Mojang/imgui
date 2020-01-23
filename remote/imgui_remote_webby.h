@@ -51,11 +51,11 @@ public:
 		Pong = 10,
 	};
 
-	void *Memory;
-	int MemorySize;
-	struct WebbyServer *Server;
-	struct WebbyServerConfig ServerConfig;
-	struct WebbyConnection *Client;
+	void *Memory = nullptr;
+	int MemorySize = 0;
+	struct WebbyServer *Server = nullptr;
+	struct WebbyServerConfig ServerConfig {};
+	struct WebbyConnection *Client = nullptr;
 
 	int Init(const char *local_address, int local_port)
 	{
