@@ -18,6 +18,8 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 
+#ifndef IMGUI_DISABLE
+
 namespace ImGui
 {
 	template<int steps>
@@ -198,3 +200,5 @@ namespace ImGui
 		// easeInOutBounce: not a bezier
 	}
 }
+
+#endif // #ifndef IMGUI_DISABLE
