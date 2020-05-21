@@ -54,7 +54,7 @@ namespace imgui {
 		};
 
 		struct Idx {
-			unsigned short idx;
+			unsigned int idx;
 			void set(ImDrawIdx _idx) {
 				idx = _idx;
 			}

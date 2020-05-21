@@ -1070,7 +1070,7 @@ var lz4 = {};
 		return function() {}
 	}
 	var r = {
-			TOTAL_MEMORY: 13656760
+			TOTAL_MEMORY: 13656760 * 2
 		},
 		aa = {},
 		s;
@@ -7541,8 +7541,8 @@ function StartImguiInternal( element, serveruri, targetwidth, targetheight, comp
 		scene = new THREE.Scene();
 		scenes.push(scene);
 		geometry = new THREE.BufferGeometry();
-		var MAX_TRIANGLES = 21844; // *3 ~= 65536
-		geometry.addAttribute( 'index',    new THREE.BufferAttribute( new Uint16Array )raw_html",R"raw_html(( MAX_TRIANGLES * 3 ), 1 ) );
+		var MAX_TRIANGLES = 21844 * 10; // *3 ~= 65536
+		geometry.addAttribute( 'index',    new THREE.BufferAttribute( new Uint32Array )raw_html",R"raw_html(( MAX_TRIANGLES * 3 ), 1 ) );
 		geometry.addAttribute( 'position', new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
 		geometry.addAttribute( 'uv',       new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 2 * 3 ), 2 ) ))raw_html",R"raw_html(;
 		geometry.addAttribute( 'color',    new THREE.BufferAttribute( new Float32Array( MAX_TRIANGLES * 3 * 3 ), 3 ) );
@@ -8041,7 +8041,7 @@ var touchStarted = false, // detect if a touch event is started
 	}
 
 	function addIdx(drawCommand, stream, idx) {
-		drawCommand.gindices [ idx ] = stream.readUint16();
+		drawCommand.gindices [ idx ] = stream.readUint32();
 	}
 
 	function onRe)raw_html",R"raw_html(nder() {

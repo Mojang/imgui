@@ -90,9 +90,9 @@ namespace imgui {
 	}
 
 	void RemoteImGuiFrameBuilder::_buildFrame(Frame& frame) {
-		static int buffer[65536];
+		static int buffer[65536 * 8];
 		int size = (int)mPacket.size();
-		int csize = LZ4_compress_limitedOutput((char *)&mPacket[0], (char *)(buffer + 3), size, 65536 * sizeof(int) - 12);
+		int csize = LZ4_compress_limitedOutput((char *)&mPacket[0], (char *)(buffer + 3), size, (65536 * 16) * sizeof(int) - 12);
 		buffer[0] = 0xBAADFEED; // Our LZ4 header magic number (used in custom lz4.js to decompress)
 		buffer[1] = size;
 		buffer[2] = csize;
