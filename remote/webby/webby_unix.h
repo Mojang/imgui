@@ -19,7 +19,11 @@ static int wb_socket_error(void)
 
 static int wb_valid_socket(webby_socket_t socket)
 {
+#if !defined(__NN_AARCH64__)
   return socket > 0;
+#else
+  return socket >= 0;
+#endif
 }
 
 static void wb_close_socket(webby_socket_t socket)
