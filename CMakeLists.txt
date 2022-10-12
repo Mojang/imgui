@@ -2,6 +2,8 @@
 # User can set it to false to create a custom way of including imgui to their project
 option(USE_NATIVE_IMGUI_INCLUDE_PATHS "Set this to false if you want to define your own target_include_directories function for imgui." true)
 
+option(IMGUI_ENABLE_STDLIB "Enable built-in support for stdlib types, i.e. std::string")
+
 add_library(imgui STATIC)
 
 target_sources(imgui
@@ -15,6 +17,20 @@ PRIVATE
   imgui.cpp
   imgui_tables.cpp
 )
+
+if(IMGUI_ENABLE_STDLIB)
+  target_sources(imgui
+  PRIVATE
+    misc/cpp/imgui_stdlib.h
+    misc/cpp/imgui_stdlib.cpp
+  )
+  target_include_directories(imgui
+  PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}
+  PUBLIC
+    $<$<BOOL:${USE_NATIVE_IMGUI_INCLUDE_PATHS}>:${CMAKE_CURRENT_SOURCE_DIR}/misc/cpp>
+  )
+endif()
 
 if(USE_NATIVE_IMGUI_INCLUDE_PATHS)
   target_include_directories(imgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
