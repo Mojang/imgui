@@ -1460,6 +1460,7 @@ struct ImGuiContext
     ImU64                   ActiveIdUsingKeyInputMask;          // Active widget will want to read those key inputs. When we grow the ImGuiKey enum we'll need to either to order the enum to make useful keys come first, either redesign this into e.g. a small array.
     ImVec2                  ActiveIdClickOffset;                // Clicked offset from upper-left corner, if applicable (currently only set by ButtonBehavior)
     ImGuiWindow*            ActiveIdWindow;
+    bool                    ActiveIdWindowIsJustChanged;
     ImGuiInputSource        ActiveIdSource;                     // Activating with mouse or nav (gamepad/keyboard)
     int                     ActiveIdMouseButton;
     ImGuiID                 ActiveIdPreviousFrame;
@@ -1692,6 +1693,7 @@ struct ImGuiContext
         ActiveIdUsingKeyInputMask = 0x00;
         ActiveIdClickOffset = ImVec2(-1, -1);
         ActiveIdWindow = NULL;
+        ActiveIdWindowIsJustChanged = false;
         ActiveIdSource = ImGuiInputSource_None;
         ActiveIdMouseButton = -1;
         ActiveIdPreviousFrame = 0;

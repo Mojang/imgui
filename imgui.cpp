@@ -3113,6 +3113,7 @@ void ImGui::SetActiveID(ImGuiID id, ImGuiWindow* window)
     g.ActiveId = id;
     g.ActiveIdAllowOverlap = false;
     g.ActiveIdNoClearOnFocusLoss = false;
+    g.ActiveIdWindowIsJustChanged = (g.ActiveIdWindow != window);
     g.ActiveIdWindow = window;
     g.ActiveIdHasBeenEditedThisFrame = false;
     if (id)
@@ -3930,7 +3931,9 @@ void ImGui::UpdateHoveredWindowAndCaptureFlags()
         g.IO.WantCaptureKeyboard = true;
 
     // Update io.WantTextInput flag, this is to allow systems without a keyboard (e.g. mobile, hand-held) to show a software keyboard if possible
+    const bool oldWantTextInput = g.IO.WantTextInput;
     g.IO.WantTextInput = (g.WantTextInputNextFrame != -1) ? (g.WantTextInputNextFrame != 0) : false;
+    g.IO.WantTextInputIsJustChanged = (g.IO.WantTextInput != oldWantTextInput);
 }
 
 ImGuiKeyModFlags ImGui::GetMergedKeyModFlags()
